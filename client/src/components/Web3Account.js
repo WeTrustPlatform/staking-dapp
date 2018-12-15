@@ -94,4 +94,4 @@ const mapStateToProps = state => ({
   web3: state.web3,
 });
 
-export default drizzleConnect(mapStateToProps)(withStyles(styles)(Web3Account));
+export default drizzleConnect(withStyles(styles)(Web3Account), mapStateToProps);

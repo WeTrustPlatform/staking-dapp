@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { drizzleConnect } from 'drizzle-react';
 import { withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import NumberCard from './NumberCard';
@@ -40,11 +40,12 @@ class Dashboard extends React.Component {
   }
 }
 
+// TODO fix me
 const mapStateToProps = state => ({
-  currentStakes: state.overallStats.currentStakes,
-  averageStakes: state.overallStats.averageStakes,
-  averageStakesInUSD: state.overallStats.averageStakesInUSD,
-  currentStakers: state.overallStats.currentStakers,
+  currentStakes: '0' || state.overallStats.currentStakes,
+  averageStakes: '0' || state.overallStats.averageStakes,
+  averageStakesInUSD: '0' || state.overallStats.averageStakesInUSD,
+  currentStakers: '0' || state.overallStats.currentStakers,
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(Dashboard));
+export default drizzleConnect(withStyles(styles)(Dashboard), mapStateToProps);

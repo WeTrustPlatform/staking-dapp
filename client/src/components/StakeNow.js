@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { drizzleConnect } from 'drizzle-react';
 import { HashLink as Link } from 'react-router-hash-link';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -380,4 +380,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(StakeNow));
+export default drizzleConnect(withStyles(styles)(StakeNow), mapStateToProps, mapDispatchToProps);
