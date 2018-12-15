@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Section from './Section';
 import SectionHeader from './SectionHeader';
 import FAQItem from './FAQItem';
-import faq from './faq.json';
+import faq from '../faq.json';
 
 const styles = theme => ({
   container: {

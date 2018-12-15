@@ -19,6 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "lint": "eslint '**/*.js'",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -30,5 +31,16 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "babel-eslint": "9.x",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-config-react-app": "^3.0.5",
+    "eslint-plugin-flowtype": "2.x",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.0",
+    "react-test-renderer": "^16.6.3"
+  }
 }

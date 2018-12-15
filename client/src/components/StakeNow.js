@@ -21,7 +21,7 @@ import { txLink } from './formatter';
 import {
   dispatchAccountActivities,
   dispatchOverallStats,
-} from './dispatch';
+} from '../dispatch';
 
 const styles = theme => ({
   root: {
