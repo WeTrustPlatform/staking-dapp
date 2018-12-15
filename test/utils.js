@@ -2,13 +2,9 @@ const web3 = require('web3');
 
 const { toBN } = web3.utils;
 
-const getTrstBalance = async (contract, address) => {
-  return toBN(await contract.balanceOf(address));
-};
+const getTrstBalance = async (contract, address) => toBN(await contract.balanceOf(address));
 
-const getTotalStakedFor = async (contract, address) => {
-  return toBN(await contract.totalStakedFor(address));
-};
+const getTotalStakedFor = async (contract, address) => toBN(await contract.totalStakedFor(address));
 
 const getTotalStaked = async contract => toBN(
   await contract.totalStaked(),
