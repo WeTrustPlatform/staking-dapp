@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { drizzleConnect } from 'drizzle-react';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -51,7 +51,8 @@ class Web3Account extends React.Component {
   renderAccount(props) {
     const { account, networkId, trstBalance } = props;
 
-    const env = EmbarkJS.environment;
+    // TODO get env
+    const env = '';
     let errorMessage = '';
     if (env === 'livenet' && networkId !== '1') {
       errorMessage = '- Please switch to Mainnet.';
@@ -85,10 +86,12 @@ class Web3Account extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  account: state.account,
+  account: state.accounts[0],
   networkId: state.networkId,
-  hasWeb3: state.hasWeb3,
   trstBalance: state.trstBalance,
+  drizzleStatus: state.drizzleStatus,
+  hasWeb3: state.web3.status !== 'failed',
+  web3: state.web3,
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(Web3Account));
+export default drizzleConnect(mapStateToProps)(withStyles(styles)(Web3Account));

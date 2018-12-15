@@ -10,14 +10,13 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '@material-ui/core/Icon';
-import TimeLockedStaking from 'Embark/contracts/TimeLockedStaking';
 import SearchInput from './SearchInput';
 import StakeAmountInput from './StakeAmountInput';
 import StakeDurationInput from './StakeDurationInput';
 import NPOInfo from './NPOInfo';
-import loadContract, { getStakePayload } from './loadContract';
+import { getStakePayload } from '../utils';
 import stateHelper, { status } from './stateHelper';
-import { txLink } from './formatter';
+import { txLink } from '../formatter';
 import {
   dispatchAccountActivities,
   dispatchOverallStats,
@@ -109,17 +108,18 @@ class StakeNow extends React.Component {
     this.startStaking();
 
     const { amount, npo, durationInDays } = this.state;
-    const { refreshStats, account } = this.props;
+    const {
+      refreshStats, account, web3, TRST, TimeLockedStaking,
+    } = this.props;
     const stakeAmount = web3.utils.toWei(amount.toString(), 'mwei');
-    loadContract('TRST')
-      .methods
+    TRST.methods
       .approve(TimeLockedStaking.address, stakeAmount)
       .send()
       .once('transactionHash', (approveTxHash) => {
         stateHelper.setTriggered(this, stateHelper.tx.approveTRST, approveTxHash);
         stateHelper.setPending(this, stateHelper.tx.stakeTRST);
         const stakePayload = getStakePayload(durationInDays, npo);
-        loadContract('TimeLockedStaking').methods.stake(stakeAmount, stakePayload).send({ gas: '150000' })
+        TimeLockedStaking.methods.stake(stakeAmount, stakePayload).send({ gas: '150000' })
           .once('transactionHash', (stakeTxHash) => {
             stateHelper.setTriggered(this, stateHelper.tx.stakeTRST, stakeTxHash);
           })
@@ -142,7 +142,7 @@ class StakeNow extends React.Component {
 
   validateInput(props, state) {
     const {
-      hasWeb3, account, trstBalance, networkId,
+      hasWeb3, account, trstBalance, web3,
     } = props;
     const { amount, npo, durationInDays } = state;
 
@@ -172,15 +172,16 @@ class StakeNow extends React.Component {
       return 'Please choose your favorite NPO.';
     }
 
-    if (EmbarkJS.environment === 'testnet'
-      && networkId !== '4') {
-      return 'Please use Rinkeby network.';
-    }
+    // TODO validate network
+    // if (EmbarkJS.environment === 'testnet'
+    // && networkId !== '4') {
+    // return 'Please use Rinkeby network.';
+    // }
 
-    if (EmbarkJS.environment === 'livenet'
-      && networkId !== '1') {
-      return 'Please use Main Ethereum network.';
-    }
+    // if (EmbarkJS.environment === 'livenet'
+    // && networkId !== '1') {
+    // return 'Please use Main Ethereum network.';
+    // }
 
     return null;
   }
@@ -361,10 +362,14 @@ class StakeNow extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  account: state.account,
+  account: state.accounts[0],
   networkId: state.networkId,
   trstBalance: state.trstBalance,
-  hasWeb3: state.hasWeb3,
+  drizzleStatus: state.drizzleStatus,
+  hasWeb3: state.web3.status !== 'failed',
+  web3: state.web3,
+  TRST: state.contracts.TRST,
+  TimeLockedStaking: state.contracts.TimeLockedStaking,
 });
 
 const mapDispatchToProps = dispatch => ({

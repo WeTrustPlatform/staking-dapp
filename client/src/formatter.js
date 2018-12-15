@@ -1,5 +1,9 @@
+import web3 from 'web3';
+
 export const txLink = (txHash) => {
-  const subDomain = EmbarkJS.environment === 'livenet' ? '' : 'rinkeby.';
+  // TODO check env
+  // const subDomain = EmbarkJS.environment === 'livenet' ? '' : 'rinkeby.';
+  const subDomain = '';
   return `https://${subDomain}etherscan.io/tx/${txHash}`;
 };
 

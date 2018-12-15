@@ -5,7 +5,7 @@
 
 import assert from 'assert';
 import axios from 'axios';
-import loadContract, { parseStakePayload } from './loadContract';
+import { parseStakePayload } from './utils';
 import {
   findTrstBalance,
   fetchAccountActivities,
@@ -14,10 +14,11 @@ import {
 import {
   trstInBN, trst, numberString, bigNumber, currency,
 } from './formatter';
+import configs from './configs';
 
-export const dispatchAccountActivities = (dispatch, account) => {
+export const dispatchAccountActivities = (dispatch, TimeLockedStaking, account) => {
   // Get all the Staked events related to the current account
-  loadContract('TimeLockedStaking').getPastEvents('Staked', {
+  TimeLockedStaking.getPastEvents('Staked', {
     fromBlock: 0,
     toBlock: 'latest',
     filter: {
@@ -49,7 +50,7 @@ export const dispatchAccountActivities = (dispatch, account) => {
         // just show default name 'Not Found'
         assert(record.ein.length > 0, 'Invalid EIN.');
         res = await axios.get(
-          `${CMS_URL}/charities?search=${record.ein}`,
+          `${configs.CMS_URL}/charities?search=${record.ein}`,
         );
       } catch (e) {
         console.log(e);
@@ -65,16 +66,16 @@ export const dispatchAccountActivities = (dispatch, account) => {
   });
 };
 
-export const dispatchTRSTBalance = (dispatch, account) => {
-  loadContract('TRST').methods.balanceOf(account).call()
+export const dispatchTRSTBalance = (dispatch, TRST, account) => {
+  TRST.methods.balanceOf(account).call()
     .then((trstBalance) => {
       dispatch(findTrstBalance(trstBalance));
     });
 };
 
 // TODO optimize this with dispatchAccountActivites
-export const dispatchOverallStats = async (dispatch) => {
-  loadContract('TimeLockedStaking').getPastEvents('allEvents', {
+export const dispatchOverallStats = async (dispatch, TimeLockedStaking) => {
+  TimeLockedStaking.getPastEvents('allEvents', {
     fromBlock: 0,
     toBlock: 'latest',
   }, (err, events) => {

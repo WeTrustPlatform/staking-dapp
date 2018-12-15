@@ -8,6 +8,7 @@ import Icon from '@material-ui/core/Icon';
 import Downshift from 'downshift';
 import debounce from 'lodash.debounce';
 import axios from 'axios';
+import configs from '../configs';
 
 
 const styles = theme => ({
@@ -41,7 +42,7 @@ class SearchInput extends React.Component {
 
   queryNpo(search) {
     axios.get(
-      `${CMS_URL}/charities?search=${window.encodeURIComponent(search.replace(/ /g, '&'))}`,
+      `${configs.CMS_URL}/charities?search=${window.encodeURIComponent(search.replace(/ /g, '&'))}`,
     ).then((res) => {
       const charities = res.data.records;
       this.setState({ charities });

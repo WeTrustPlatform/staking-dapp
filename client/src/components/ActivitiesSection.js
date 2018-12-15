@@ -11,7 +11,7 @@ import TableBody from '@material-ui/core/TableBody';
 import Paper from '@material-ui/core/Paper';
 import Section from './Section';
 import SectionHeader from './SectionHeader';
-import { txLink } from './formatter';
+import { txLink } from '../formatter';
 
 const styles = theme => ({
   root: {
