@@ -55,7 +55,7 @@ contract TRST is ERC20 {
 
   //// Public functions ////
   constructor(address _migrationInfoSetter) public {
-    if (_migrationInfoSetter == 0) {
+    if (_migrationInfoSetter == address(0)) {
       revert("_migrationInfoSetter cannot be 0.");
     }
     migrationInfoSetter = _migrationInfoSetter;
@@ -134,7 +134,7 @@ contract TRST is ERC20 {
   // to a newer version of the contract. This field provides a kind of 'double-layer' of
   // authentication for any migration announcement, as it can only be set by WeTrust.
   /// @param _migrationInfo The information string to be stored on the contract
-  function setMigrationInfo(string _migrationInfo) public onlyFromMigrationInfoSetter {
+  function setMigrationInfo(string memory _migrationInfo) public onlyFromMigrationInfoSetter {
     migrationInfo = _migrationInfo;
     emit MigrationInfoSet(_migrationInfo);
   }

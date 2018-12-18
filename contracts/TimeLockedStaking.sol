@@ -59,14 +59,14 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
   /// @dev msg.sender stakes for him/her self.
   /// @param amount Number of ERC20 to be staked. Amount must be > 0.
   /// @param data Used for signaling the unlocked time.
-  function stake(uint256 amount, bytes data) external {
+  function stake(uint256 amount, bytes calldata data) external {
     registerStake(msg.sender, amount, data);
   }
 
   /// @dev msg.sender stakes for someone else.
   /// @param amount Number of ERC20 to be staked. Must be > 0.
   /// @param data Used for signaling the unlocked time.
-  function stakeFor(address user, uint256 amount, bytes data) external {
+  function stakeFor(address user, uint256 amount, bytes calldata data) external {
     registerStake(user, amount, data);
   }
 
@@ -74,7 +74,7 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
   /// @notice as a result, the "member since" attribute is reset.
   /// @param amount Number of ERC20 to be unstaked. Must be > 0 and =< staked amount.
   /// @param data Just follow the interface. Don't have a use case for now.
-  function unstake(uint256 amount, bytes data)
+  function unstake(uint256 amount, bytes calldata data)
     external
     greaterThanZero(stakers[msg.sender].effectiveAt) // must be a member
     greaterThanZero(block.timestamp - stakers[msg.sender].unlockedAt) // must be unlocked
@@ -126,7 +126,7 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
   /// Maximum of 365 days from now.
   /// @param data The left-most 256 bits are unix timestamp in seconds.
   /// @return The unlockedAt in the data or 365 days from now whichever is sooner.
-  function getUnlockedAtSignal(bytes data) public view returns (uint256) {
+  function getUnlockedAtSignal(bytes memory data) public view returns (uint256) {
     uint256 unlockedAt;
     assembly {
       let d := add(data, 32)  // first 32 bytes are the padded length of data
@@ -139,7 +139,7 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
     return min(unlockedAt, oneYearFromNow);
   }
 
-  function registerStake(address user, uint256 amount, bytes data) private greaterThanZero(amount) {
+  function registerStake(address user, uint256 amount, bytes memory data) private greaterThanZero(amount) {
     require(erc20Token.transferFrom(msg.sender, address(this), amount));
 
     StakeInfo memory info = stakers[user];
