@@ -1,4 +1,4 @@
-pragma solidity ^0.4.22;
+pragma solidity ^0.5.0;
 
 /// https://eips.ethereum.org/EIPS/eip-900
 /// @notice Interface with external methods

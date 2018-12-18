@@ -1,4 +1,4 @@
-pragma solidity ^0.4.20;
+pragma solidity ^0.5.0;
 
 /// https://eips.ethereum.org/EIPS/eip-165
 interface ERC165 {

@@ -13,7 +13,7 @@
 // https://github.com/ethereum/EIPs/issues/20
 
 // Based on https://github.com/ConsenSys/Tokens/blob/master/Token_Contracts/contracts/Token.sol
-pragma solidity ^0.4.8;
+pragma solidity ^0.5.0;
 
 import "./ERC20.sol";
 
