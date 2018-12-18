@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
-import { drizzleReducers, generateContractsInitialState } from 'drizzle';
-import TRST from './contracts/TRST.json';
-import TimeLockedStaking from './contracts/TimeLockedStaking.json';
+import { drizzleReducers } from 'drizzle';
 import {
   WEB3_NETWORK_ID,
   WEB3_AVAILABLE,
@@ -12,29 +10,8 @@ import {
   OVERALL_STATS,
 } from './actions';
 
-const drizzleOptions = {
-  contracts: [
-    TRST,
-    TimeLockedStaking,
-  ],
-};
 
-const initialState = {
-  networkId: 'unknown',
-  account: null,
-  hasWeb3: false,
-  trstBalance: '0',
-  accountActivities: [],
-  overallStats: {
-    currentStakes: '0',
-    averageStakes: '0',
-    averageStakeInUSD: '0',
-    currentStakers: '0',
-  },
-  contracts: generateContractsInitialState(drizzleOptions),
-};
-
-function appReducers(state = initialState, action) {
+function appReducers(state = {}, action) {
   switch (action.type) {
     case WEB3_NETWORK_ID:
       return Object.assign({}, state, {
