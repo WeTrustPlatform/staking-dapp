@@ -4,30 +4,26 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { DrizzleContext } from 'drizzle-react';
-import { Drizzle, generateStore } from 'drizzle';
+import { DrizzleProvider } from 'drizzle-react';
 import reducers from './reducers';
 import theme from './theme';
-import MyDrizzleApp from './components/MyDrizzleApp';
+import HomePage from './components/HomePage';
 import './index.css';
 import drizzleOptions from './drizzleOptions';
 import * as serviceWorker from './serviceWorker';
 
-const drizzleStore = generateStore(drizzleOptions);
-const drizzle = new Drizzle(drizzleOptions, drizzleStore);
-
 const store = createStore(reducers);
 function App() {
   return (
-    <Provider store={store}>
-      <MuiThemeProvider theme={theme}>
-        <BrowserRouter>
-          <DrizzleContext.Provider drizzle={drizzle}>
-            <MyDrizzleApp />
-          </DrizzleContext.Provider>
-        </BrowserRouter>
-      </MuiThemeProvider>
-    </Provider>
+    <DrizzleProvider options={drizzleOptions}>
+      <Provider store={store}>
+        <MuiThemeProvider theme={theme}>
+          <BrowserRouter>
+            <HomePage />
+          </BrowserRouter>
+        </MuiThemeProvider>
+      </Provider>
+    </DrizzleProvider>
   );
 }
 ReactDOM.render(<App />, document.getElementById('root'));
