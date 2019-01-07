@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "truffle build",
     "lint": "run-p lint:js lint:sol",
     "lint:sol": "solium -d contracts/",
     "lint:js": "eslint test/**/*.js",

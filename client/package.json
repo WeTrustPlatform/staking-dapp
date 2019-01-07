@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "charity-staking-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

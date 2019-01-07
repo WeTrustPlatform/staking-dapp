@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux';
-import { drizzleReducers } from 'drizzle';
 import {
   WEB3_NETWORK_ID,
   WEB3_AVAILABLE,
@@ -11,7 +9,21 @@ import {
 } from './actions';
 
 
-function appReducers(state = {}, action) {
+const initialState = {
+  networkId: 'unknown',
+  account: null,
+  hasWeb3: false,
+  trstBalance: '0',
+  accountActivities: [],
+  overallStats: {
+    currentStakes: '0',
+    averageStakes: '0',
+    averageStakeInUSD: '0',
+    currentStakers: '0',
+  },
+};
+
+function reducers(state = initialState, action) {
   switch (action.type) {
     case WEB3_NETWORK_ID:
       return Object.assign({}, state, {
@@ -45,10 +57,5 @@ function appReducers(state = {}, action) {
       return state;
   }
 }
-
-const reducers = combineReducers({
-  app: appReducers,
-  ...drizzleReducers,
-});
 
 export default reducers;
