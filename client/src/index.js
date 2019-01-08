@@ -8,7 +8,7 @@ import { DrizzleContext } from 'drizzle-react';
 import { Drizzle, generateStore } from 'drizzle';
 import reducers from './reducers';
 import theme from './theme';
-import MyDrizzleApp from './components/MyDrizzleApp';
+import HomePage from './components/HomePage';
 import './index.css';
 import drizzleOptions from './drizzleOptions';
 import * as serviceWorker from './serviceWorker';
@@ -23,7 +23,7 @@ function App() {
       <MuiThemeProvider theme={theme}>
         <BrowserRouter>
           <DrizzleContext.Provider drizzle={drizzle}>
-            <MyDrizzleApp />
+            <HomePage />
           </DrizzleContext.Provider>
         </BrowserRouter>
       </MuiThemeProvider>
