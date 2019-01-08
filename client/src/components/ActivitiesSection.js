@@ -1,5 +1,5 @@
 import React from 'react';
-import { drizzleConnect } from 'drizzle-react';
+import { connect } from 'react-redux';
 import { HashLink as Link } from 'react-router-hash-link';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -150,10 +150,10 @@ class ActivitiesSection extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  account: state.accounts[0],
+  account: state.accounts,
   networkId: state.networkId,
   hasWeb3: state.hasWeb3,
   accountActivities: state.accountActivities || [],
 });
 
-export default drizzleConnect(withStyles(styles)(ActivitiesSection), mapStateToProps);
+export default connect(mapStateToProps)(withStyles(styles)(ActivitiesSection));

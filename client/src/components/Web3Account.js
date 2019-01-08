@@ -1,5 +1,5 @@
 import React from 'react';
-import { drizzleConnect } from 'drizzle-react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -86,12 +86,12 @@ class Web3Account extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  account: state.accounts[0],
+  account: state.account,
   networkId: state.networkId,
   trstBalance: state.trstBalance,
   drizzleStatus: state.drizzleStatus,
-  hasWeb3: state.web3.status !== 'failed',
+  hasWeb3: !!state.web3,
   web3: state.web3,
 });
 
-export default drizzleConnect(withStyles(styles)(Web3Account), mapStateToProps);
+export default connect(mapStateToProps)(withStyles(styles)(Web3Account));

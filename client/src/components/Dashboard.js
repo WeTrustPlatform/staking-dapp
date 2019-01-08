@@ -1,5 +1,5 @@
 import React from 'react';
-import { drizzleConnect } from 'drizzle-react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import NumberCard from './NumberCard';
@@ -48,4 +48,4 @@ const mapStateToProps = state => ({
   currentStakers: '0' || state.overallStats.currentStakers,
 });
 
-export default drizzleConnect(withStyles(styles)(Dashboard), mapStateToProps);
+export default connect(mapStateToProps)(withStyles(styles)(Dashboard));

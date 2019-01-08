@@ -1,5 +1,5 @@
 import React from 'react';
-import { drizzleConnect } from 'drizzle-react';
+import { connect } from 'react-redux';
 import { HashLink as Link } from 'react-router-hash-link';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -362,14 +362,14 @@ class StakeNow extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  account: state.accounts[0],
+  account: state.account,
   networkId: state.networkId,
   trstBalance: state.trstBalance,
   drizzleStatus: state.drizzleStatus,
-  hasWeb3: state.web3.status !== 'failed',
+  hasWeb3: !!state.web3,
   web3: state.web3,
-  TRST: state.contracts.TRST,
-  TimeLockedStaking: state.contracts.TimeLockedStaking,
+  TRST: state.TRST,
+  TimeLockedStaking: state.TimeLockedStaking,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -380,4 +380,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default drizzleConnect(withStyles(styles)(StakeNow), mapStateToProps, mapDispatchToProps);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(StakeNow));
