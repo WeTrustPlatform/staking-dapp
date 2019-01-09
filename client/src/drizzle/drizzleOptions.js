@@ -1,6 +1,6 @@
 // ./contracts is symlink to the <root>/build/contracts/
-import TRST from './contracts/TRST.json';
-import TimeLockedStaking from './contracts/TimeLockedStaking.json';
+import TRST from '../contracts/TRST.json';
+import TimeLockedStaking from '../contracts/TimeLockedStaking.json';
 
 const drizzleOptions = {
   contracts: [

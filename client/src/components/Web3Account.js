@@ -8,7 +8,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Icon from '@material-ui/core/Icon';
 import eth from '../images/eth-icon.png';
-import drizzleConsumer from '../drizzleConsumer';
 
 const styles = {
   warning: {
@@ -87,8 +86,10 @@ class Web3Account extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  hasWeb3: state.hasWeb3,
+  account: state.account,
   networkId: state.networkId,
   trstBalance: state.trstBalance,
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(drizzleConsumer(Web3Account)));
+export default connect(mapStateToProps)(withStyles(styles)(Web3Account));
