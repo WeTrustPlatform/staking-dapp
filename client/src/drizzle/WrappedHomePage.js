@@ -7,6 +7,7 @@ import {
   lockAccount,
   unlockAccount,
   findWeb3,
+  initContracts,
 } from '../actions';
 import HomePage from '../components/HomePage';
 import drizzleConsumer from './drizzleConsumer';
@@ -44,6 +45,7 @@ class WrappedHomePage extends React.Component {
         const account = drizzleState.accounts[0];
         props.dispatch(unlockAccount(account));
         props.dispatch(findWeb3());
+        props.dispatch(initContracts(drizzle.contracts));
         dispatchTRSTBalance(props.dispatch, TRST, account);
       } else {
         props.dispatch(lockAccount());

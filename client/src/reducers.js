@@ -6,6 +6,7 @@ import {
   WEB3_TRST_BALANCE,
   ACCOUNT_ACTIVITIES,
   OVERALL_STATS,
+  INIT_CONTRACTS,
 } from './actions';
 
 
@@ -21,6 +22,7 @@ const initialState = {
     averageStakeInUSD: '0',
     currentStakers: '0',
   },
+  contracts: {},
 };
 
 function reducers(state = initialState, action) {
@@ -52,6 +54,10 @@ function reducers(state = initialState, action) {
     case OVERALL_STATS:
       return Object.assign({}, state, {
         overallStats: action.overallStats,
+      });
+    case INIT_CONTRACTS:
+      return Object.assign({}, state, {
+        contracts: action.contracts,
       });
     default:
       return state;

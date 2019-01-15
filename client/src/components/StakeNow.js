@@ -10,6 +10,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '@material-ui/core/Icon';
+import web3 from 'web3';
 import SearchInput from './SearchInput';
 import StakeAmountInput from './StakeAmountInput';
 import StakeDurationInput from './StakeDurationInput';
@@ -109,7 +110,7 @@ class StakeNow extends React.Component {
 
     const { amount, npo, durationInDays } = this.state;
     const {
-      refreshStats, account, web3, TRST, TimeLockedStaking,
+      refreshStats, account, TRST, TimeLockedStaking,
     } = this.props;
     const stakeAmount = web3.utils.toWei(amount.toString(), 'mwei');
     TRST.methods
@@ -142,7 +143,7 @@ class StakeNow extends React.Component {
 
   validateInput(props, state) {
     const {
-      hasWeb3, account, trstBalance, web3,
+      hasWeb3, account, trstBalance,
     } = props;
     const { amount, npo, durationInDays } = state;
 
@@ -366,10 +367,9 @@ const mapStateToProps = state => ({
   networkId: state.networkId,
   trstBalance: state.trstBalance,
   drizzleStatus: state.drizzleStatus,
-  hasWeb3: !!state.web3,
-  web3: state.web3,
-  TRST: state.TRST,
-  TimeLockedStaking: state.TimeLockedStaking,
+  hasWeb3: state.hasWeb3,
+  TRST: state.contracts.TRST,
+  TimeLockedStaking: state.contracts.TimeLockedStaking,
 });
 
 const mapDispatchToProps = dispatch => ({
