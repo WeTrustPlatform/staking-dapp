@@ -9,11 +9,10 @@ import {
   INIT_CONTRACTS,
 } from './actions';
 
-
 const initialState = {
   networkId: 'unknown',
   account: null,
-  hasWeb3: false,
+  web3: null,
   trstBalance: '0',
   accountActivities: [],
   overallStats: {
@@ -33,7 +32,7 @@ function reducers(state = initialState, action) {
       });
     case WEB3_AVAILABLE:
       return Object.assign({}, state, {
-        hasWeb3: true,
+        web3: action.web3,
       });
     case WEB3_UNLOCK_ACCOUNT:
       return Object.assign({}, state, {
