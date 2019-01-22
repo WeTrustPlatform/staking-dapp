@@ -8,7 +8,7 @@ import reducers from './reducers';
 import theme from './theme';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import MyDrizzleApp from './drizzle/MyDrizzleApp';
+import HomePage from './components/HomePage';
 
 
 const store = createStore(reducers);
@@ -17,7 +17,7 @@ function App() {
     <Provider store={store}>
       <MuiThemeProvider theme={theme}>
         <BrowserRouter>
-          <MyDrizzleApp />
+          <HomePage />
         </BrowserRouter>
       </MuiThemeProvider>
     </Provider>
