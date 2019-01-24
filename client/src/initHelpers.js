@@ -28,9 +28,9 @@ const initAccount = async (web3) => {
   return accounts[0];
 };
 
-const initNetworkId = async (web3) => {
-  const id = await web3.eth.net.getId();
-  if (configs.NETWORK_ID !== 'dev' && id !== configs.NETWORK_ID) {
+const initNetworkId = async (web3, expectedNetwork) => {
+  const id = String(await web3.eth.net.getId());
+  if (expectedNetwork !== 'dev' && id !== expectedNetwork) {
     return 'invalid';
   }
   return id;

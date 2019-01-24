@@ -1,0 +1,888 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests snapshot 1`] = `
+<div>
+  <div>
+    <header
+      className="MuiPaper-root-388 MuiPaper-elevation4-394 MuiAppBar-root-379 MuiAppBar-positionFixed-380 MuiAppBar-colorPrimary-386 mui-fixed"
+    >
+      <div
+        className="MuiToolbar-root-415 MuiToolbar-regular-417 MuiToolbar-gutters-416"
+      >
+        <div
+          className="Navbar-grow-377"
+        >
+          <img
+            alt="WeTrust"
+            className="Navbar-brandImage-378"
+            src="images/logo-trimmed.png"
+          />
+        </div>
+        <ul
+          className="MuiList-root-421 MuiList-padding-422"
+        >
+          <li
+            className="MuiListItem-root-425 MuiListItem-default-428 MuiListItem-dense-429 MuiListItem-gutters-433"
+            disabled={false}
+          >
+            <div
+              className="MuiAvatar-root-440 MuiAvatar-colorDefault-441 Web3Account-error-420"
+            >
+              <span
+                aria-hidden="true"
+                className="material-icons MuiIcon-root-443"
+              >
+                error_outlined
+              </span>
+            </div>
+            <div
+              className="MuiListItemText-root-452"
+            >
+              <span
+                className="MuiTypography-root-458 MuiTypography-subheading-465 MuiListItemText-primary-455"
+              >
+                Please install MetaMask
+              </span>
+            </div>
+          </li>
+        </ul>
+        <a
+          href="/#main-section"
+          onClick={[Function]}
+        >
+          <button
+            className="MuiButtonBase-root-519 MuiButton-root-493 MuiButton-text-495 MuiButton-flat-498"
+            disabled={false}
+            onBlur={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex="0"
+            type="button"
+          >
+            <span
+              className="MuiButton-label-494"
+            >
+              Home
+            </span>
+            <span
+              className="MuiTouchRipple-root-746"
+            />
+          </button>
+        </a>
+        <a
+          href="/#faq-section"
+          onClick={[Function]}
+        >
+          <button
+            className="MuiButtonBase-root-519 MuiButton-root-493 MuiButton-text-495 MuiButton-flat-498"
+            disabled={false}
+            onBlur={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex="0"
+            type="button"
+          >
+            <span
+              className="MuiButton-label-494"
+            >
+              FAQ
+            </span>
+            <span
+              className="MuiTouchRipple-root-746"
+            />
+          </button>
+        </a>
+      </div>
+    </header>
+  </div>
+  <div
+    className="Section-root-523 Section-light-525 MainSection-container-522"
+    id="main-section"
+  >
+    <div
+      className="MuiGrid-container-526 MuiGrid-align-items-xs-flex-start-535 MuiGrid-justify-xs-center-543"
+    >
+      <div
+        className="MuiGrid-item-527 MuiGrid-grid-xs-12-566 MuiGrid-grid-sm-12-580 MuiGrid-grid-md-12-594 MuiGrid-grid-lg-8-604"
+      >
+        <h2
+          className="MuiTypography-root-458 MuiTypography-h2-471 MuiTypography-alignCenter-481"
+        >
+          Stake your TRST
+        </h2>
+        <div
+          className="StakeNow-root-623"
+        >
+          <div
+            className="MuiGrid-container-526 MuiGrid-justify-xs-center-543"
+          >
+            <div
+              className="MuiGrid-item-527 MuiGrid-grid-xs-12-566 MuiGrid-grid-sm-12-580 MuiGrid-grid-md-6-588 StakeNow-input-624"
+            >
+              <div>
+                <div
+                  className="MuiFormControl-root-627 MuiFormControl-marginNormal-628 MuiFormControl-fullWidth-630"
+                >
+                  <label
+                    className="MuiFormLabel-root-642 MuiFormLabel-filled-646 MuiInputLabel-root-631 MuiInputLabel-formControl-636 MuiInputLabel-animated-639 MuiInputLabel-shrink-638"
+                    data-shrink={true}
+                  >
+                    Enter an amount
+                  </label>
+                  <div
+                    className="MuiInputBase-root-662 MuiInput-root-649 MuiInput-underline-653 MuiInputBase-fullWidth-671 MuiInput-fullWidth-656 MuiInputBase-formControl-663 MuiInput-formControl-650 MuiInputBase-adornedStart-666"
+                    onClick={[Function]}
+                  >
+                    <div
+                      className="MuiInputAdornment-root-679 MuiInputAdornment-positionStart-681"
+                    >
+                      <p
+                        className="MuiTypography-root-458 MuiTypography-body1-467 MuiTypography-colorTextSecondary-491"
+                      >
+                        TRST
+                      </p>
+                    </div>
+                    <input
+                      aria-invalid={false}
+                      className="MuiInputBase-input-672 MuiInput-input-657 MuiInputBase-inputType-675 MuiInput-inputType-660 MuiInputBase-inputAdornedStart-677"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      required={false}
+                      type="number"
+                      value={100}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="MuiGrid-item-527 MuiGrid-grid-xs-12-566 MuiGrid-grid-sm-12-580 MuiGrid-grid-md-6-588 StakeNow-input-624"
+            >
+              <div>
+                <div
+                  className="MuiFormControl-root-627 MuiFormControl-marginNormal-628 MuiFormControl-fullWidth-630"
+                >
+                  <label
+                    className="MuiFormLabel-root-642 MuiFormLabel-filled-646 MuiInputLabel-root-631 MuiInputLabel-formControl-636 MuiInputLabel-animated-639 MuiInputLabel-shrink-638"
+                    data-shrink={true}
+                  >
+                    Select a lock-up duration
+                  </label>
+                  <div
+                    className="MuiInputBase-root-662 MuiInput-root-649 MuiInput-underline-653 MuiInputBase-fullWidth-671 MuiInput-fullWidth-656 MuiInputBase-formControl-663 MuiInput-formControl-650 MuiInputBase-adornedStart-666"
+                    onClick={[Function]}
+                  >
+                    <div
+                      className="MuiInputAdornment-root-679 MuiInputAdornment-positionStart-681"
+                    >
+                      <p
+                        className="MuiTypography-root-458 MuiTypography-body1-467 MuiTypography-colorTextSecondary-491"
+                      >
+                        Duration
+                      </p>
+                    </div>
+                    <div
+                      className="MuiSelect-root-683"
+                    >
+                      <select
+                        aria-invalid={false}
+                        className="MuiSelect-select-684 MuiInputBase-input-672 MuiInput-input-657 MuiInputBase-inputAdornedStart-677"
+                        disabled={false}
+                        multiple={false}
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        required={false}
+                        value={30}
+                      >
+                        <option
+                          value={30}
+                        >
+                          30 days
+                        </option>
+                        <option
+                          value={180}
+                        >
+                          180 days
+                        </option>
+                        <option
+                          value={365}
+                        >
+                          365 days
+                        </option>
+                      </select>
+                      <svg
+                        aria-hidden="true"
+                        className="MuiSvgIcon-root-690 MuiSelect-icon-689"
+                        focusable="false"
+                        role="presentation"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M7 10l5 5 5-5z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            aria-expanded={false}
+            aria-haspopup="listbox"
+            aria-labelledby="downshift-1-label"
+            aria-owns={null}
+            className="SearchInput-root-699"
+            role="combobox"
+          >
+            <div
+              aria-activedescendant={null}
+              aria-autocomplete="list"
+              aria-controls={null}
+              aria-labelledby="downshift-1-label"
+              className="MuiFormControl-root-627 MuiFormControl-marginNormal-628 MuiFormControl-fullWidth-630"
+              onKeyDown={[Function]}
+            >
+              <label
+                className="MuiFormLabel-root-642 MuiInputLabel-root-631 MuiInputLabel-formControl-636 MuiInputLabel-animated-639 MuiInputLabel-shrink-638"
+                data-shrink={true}
+                htmlFor="downshift-1-input"
+              >
+                Enter your favorite non-profit's name
+              </label>
+              <div
+                className="MuiInputBase-root-662 MuiInput-root-649 MuiInput-underline-653 MuiInputBase-fullWidth-671 MuiInput-fullWidth-656 MuiInputBase-formControl-663 MuiInput-formControl-650 MuiInputBase-adornedStart-666"
+                onClick={[Function]}
+              >
+                <div
+                  className="MuiInputAdornment-root-679 MuiInputAdornment-positionStart-681"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="material-icons MuiIcon-root-443"
+                  >
+                    search
+                  </span>
+                </div>
+                <input
+                  aria-invalid={false}
+                  autoComplete="off"
+                  className="MuiInputBase-input-672 MuiInput-input-657 MuiInputBase-inputType-675 MuiInput-inputType-660 MuiInputBase-inputTypeSearch-676 MuiInput-inputTypeSearch-661 MuiInputBase-inputAdornedStart-677"
+                  disabled={false}
+                  id="downshift-1-input"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  required={false}
+                  type="search"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            style={
+              Object {
+                "visibility": "hidden",
+              }
+            }
+          >
+            <ul
+              className="MuiList-root-421 MuiList-padding-422"
+            >
+              <li
+                className="MuiListItem-root-425 MuiListItem-default-428 MuiListItem-gutters-433"
+                disabled={false}
+              >
+                <div
+                  className="MuiListItemText-root-452"
+                >
+                  <span
+                    className="MuiTypography-root-458 MuiTypography-subheading-465 MuiListItemText-primary-455"
+                  >
+                    EIN: undefined.
+              Location: undefined, undefined, undefined
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div
+            className="MuiGrid-container-526 MuiGrid-justify-xs-center-543 StakeNow-buttonGrid-626"
+          >
+            <div
+              className="MuiGrid-item-527 MuiGrid-grid-sm-6-574 MuiGrid-grid-md-3-585 StakeNow-button-625"
+            >
+              <button
+                className="MuiButtonBase-root-519 MuiButton-root-493 MuiButton-contained-504 MuiButton-containedPrimary-505 MuiButton-raised-507 MuiButton-raisedPrimary-508 MuiButton-fullWidth-518"
+                disabled={false}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                tabIndex="0"
+                type="button"
+              >
+                <span
+                  className="MuiButton-label-494"
+                >
+                  Stake Now
+                </span>
+                <span
+                  className="MuiTouchRipple-root-746"
+                />
+              </button>
+            </div>
+            <div
+              className="MuiGrid-item-527 MuiGrid-grid-sm-6-574 MuiGrid-grid-md-3-585 StakeNow-button-625"
+            >
+              <a
+                href="/#faq-section"
+                onClick={[Function]}
+              >
+                <button
+                  className="MuiButtonBase-root-519 MuiButton-root-493 MuiButton-text-495 MuiButton-flat-498 MuiButtonBase-root-519 MuiButton-root-493 MuiButton-contained-504 MuiButton-raised-507 MuiButton-fullWidth-518"
+                  disabled={false}
+                  onBlur={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                  onTouchEnd={[Function]}
+                  onTouchMove={[Function]}
+                  onTouchStart={[Function]}
+                  role="button"
+                  tabIndex="0"
+                  type="button"
+                >
+                  <span
+                    className="MuiButton-label-494"
+                  >
+                    <span
+                      className="MuiButton-label-494"
+                    >
+                      Learn more
+                    </span>
+                    <span
+                      className="MuiTouchRipple-root-746"
+                    />
+                  </span>
+                  <span
+                    className="MuiTouchRipple-root-746"
+                  />
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="MuiGrid-item-527 MuiGrid-grid-xs-12-566 MuiGrid-grid-sm-8-576 MuiGrid-grid-md-6-588 MuiGrid-grid-lg-4-600"
+      >
+        <div
+          className="Dashboard-root-701"
+        >
+          <div
+            className="MuiPaper-root-388 MuiPaper-elevation1-391 MuiPaper-rounded-389 MuiCard-root-705 NumberCard-root-702"
+          >
+            <div
+              className="MuiCardContent-root-706"
+            >
+              <h6
+                className="MuiTypography-root-458 MuiTypography-h6-475 MuiTypography-colorSecondary-489 MuiTypography-gutterBottom-485"
+              >
+                Current Stakes
+              </h6>
+              <h5
+                className="MuiTypography-root-458 MuiTypography-h5-474 NumberCard-primaryText-703"
+              >
+                <span
+                  className="NumberCard-span-704"
+                >
+                  0
+                </span>
+                <span
+                  className="NumberCard-span-704"
+                >
+                  <img
+                    alt="TRST"
+                    className="TRSTIcon-icon-707"
+                    src="trst.png"
+                  />
+                </span>
+              </h5>
+            </div>
+          </div>
+          <div
+            className="MuiPaper-root-388 MuiPaper-elevation1-391 MuiPaper-rounded-389 MuiCard-root-705 NumberCard-root-702"
+          >
+            <div
+              className="MuiCardContent-root-706"
+            >
+              <h6
+                className="MuiTypography-root-458 MuiTypography-h6-475 MuiTypography-colorSecondary-489 MuiTypography-gutterBottom-485"
+              >
+                Average stake
+              </h6>
+              <h5
+                className="MuiTypography-root-458 MuiTypography-h5-474 NumberCard-primaryText-703"
+              >
+                <span
+                  className="NumberCard-span-704"
+                >
+                  0
+                </span>
+                <span
+                  className="NumberCard-span-704"
+                >
+                  <img
+                    alt="TRST"
+                    className="TRSTIcon-icon-707"
+                    src="trst.png"
+                  />
+                </span>
+              </h5>
+              <h6
+                className="MuiTypography-root-458 MuiTypography-subtitle1-476 MuiTypography-colorTextSecondary-491"
+              >
+                0
+              </h6>
+            </div>
+          </div>
+          <div
+            className="MuiPaper-root-388 MuiPaper-elevation1-391 MuiPaper-rounded-389 MuiCard-root-705 NumberCard-root-702"
+          >
+            <div
+              className="MuiCardContent-root-706"
+            >
+              <h6
+                className="MuiTypography-root-458 MuiTypography-h6-475 MuiTypography-colorSecondary-489 MuiTypography-gutterBottom-485"
+              >
+                Current stakers
+              </h6>
+              <h5
+                className="MuiTypography-root-458 MuiTypography-h5-474 NumberCard-primaryText-703"
+              >
+                <span
+                  className="NumberCard-span-704"
+                >
+                  0
+                </span>
+                <span
+                  className="NumberCard-span-704"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="material-icons MuiIcon-root-443"
+                  >
+                    people
+                  </span>
+                </span>
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="Section-root-523 Section-dark-524"
+    id="activities-section"
+  >
+    <h3
+      className="MuiTypography-root-458 MuiTypography-h3-472 MuiTypography-colorSecondary-489 MuiTypography-alignCenter-481 SectionHeader-container-713"
+    >
+      Activities
+    </h3>
+    <div
+      className="MuiPaper-root-388 MuiPaper-elevation2-392 MuiPaper-rounded-389 ActivitiesSection-root-708"
+    >
+      <table
+        className="MuiTable-root-714 ActivitiesSection-table-709"
+      >
+        <thead
+          className="MuiTableHead-root-715"
+        >
+          <tr
+            className="MuiTableRow-root-716 MuiTableRow-head-719"
+          >
+            <th
+              aria-sort={null}
+              className="MuiTableCell-root-721 MuiTableCell-head-722"
+              scope="col"
+            >
+              NPO Name
+            </th>
+            <th
+              aria-sort={null}
+              className="MuiTableCell-root-721 MuiTableCell-head-722"
+              scope="col"
+            >
+              Amount (TRST)
+            </th>
+            <th
+              aria-sort={null}
+              className="MuiTableCell-root-721 MuiTableCell-head-722"
+              scope="col"
+            >
+              Locked Until
+            </th>
+            <th
+              aria-sort={null}
+              className="MuiTableCell-root-721 MuiTableCell-head-722"
+              scope="col"
+            >
+              Transaction Hash
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          className="MuiTableBody-root-729"
+        >
+          <tr
+            className="MuiTableRow-root-716"
+          >
+            <td
+              aria-sort={null}
+              className="MuiTableCell-root-721 MuiTableCell-body-723"
+              colSpan={4}
+            >
+              <div
+                className="ActivitiesSection-noActivities-711"
+              >
+                It looks so empty.
+                 
+                <a
+                  href="/#main-section"
+                  onClick={[Function]}
+                >
+                  Please stake!
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div
+    className="Section-root-523 Section-light-525"
+  >
+    <h3
+      className="MuiTypography-root-458 MuiTypography-h3-472 MuiTypography-colorSecondary-489 MuiTypography-alignCenter-481 SectionHeader-container-713"
+    >
+      Don't have TRST?
+    </h3>
+    <div
+      className="BuyTRSTSection-container-730"
+    >
+      <button
+        className="MuiButtonBase-root-519 MuiButton-root-493 MuiButton-contained-504 MuiButton-containedPrimary-505 MuiButton-raised-507 MuiButton-raisedPrimary-508"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex="0"
+        type="button"
+      >
+        <span
+          className="MuiButton-label-494"
+        >
+          Buy TRST with your Credit Card
+        </span>
+        <span
+          className="MuiTouchRipple-root-746"
+        />
+      </button>
+    </div>
+  </div>
+  <div
+    className="Section-root-523 Section-dark-524"
+    id="faq-section"
+  >
+    <h3
+      className="MuiTypography-root-458 MuiTypography-h3-472 MuiTypography-colorSecondary-489 MuiTypography-alignCenter-481 SectionHeader-container-713"
+    >
+      FAQ
+    </h3>
+    <div
+      className="FAQSection-container-731"
+    >
+      <div
+        className="FAQItem-root-732"
+      >
+        <div
+          className="FAQItem-question-735"
+          onClick={[Function]}
+          role="presentation"
+        >
+          <div
+            className="MuiGrid-container-526"
+          >
+            <div
+              className="MuiGrid-item-527 MuiGrid-grid-xs-10-564"
+            >
+              <h6
+                className="MuiTypography-root-458 MuiTypography-h6-475"
+              >
+                What does 'stake' mean?
+              </h6>
+            </div>
+            <div
+              className="MuiGrid-item-527 MuiGrid-grid-xs-2-556 FAQItem-gridIcon-734"
+            >
+              <span
+                aria-hidden="true"
+                className="material-icons MuiIcon-root-443"
+              >
+                add
+              </span>
+            </div>
+          </div>
+        </div>
+        <br />
+        <hr
+          className="MuiDivider-root-737 FAQItem-divider-733"
+        />
+      </div>
+      <div
+        className="FAQItem-root-732"
+      >
+        <div
+          className="FAQItem-question-735"
+          onClick={[Function]}
+          role="presentation"
+        >
+          <div
+            className="MuiGrid-container-526"
+          >
+            <div
+              className="MuiGrid-item-527 MuiGrid-grid-xs-10-564"
+            >
+              <h6
+                className="MuiTypography-root-458 MuiTypography-h6-475"
+              >
+                Why would I stake my TRST?
+              </h6>
+            </div>
+            <div
+              className="MuiGrid-item-527 MuiGrid-grid-xs-2-556 FAQItem-gridIcon-734"
+            >
+              <span
+                aria-hidden="true"
+                className="material-icons MuiIcon-root-443"
+              >
+                add
+              </span>
+            </div>
+          </div>
+        </div>
+        <br />
+        <hr
+          className="MuiDivider-root-737 FAQItem-divider-733"
+        />
+      </div>
+      <div
+        className="FAQItem-root-732"
+      >
+        <div
+          className="FAQItem-question-735"
+          onClick={[Function]}
+          role="presentation"
+        >
+          <div
+            className="MuiGrid-container-526"
+          >
+            <div
+              className="MuiGrid-item-527 MuiGrid-grid-xs-10-564"
+            >
+              <h6
+                className="MuiTypography-root-458 MuiTypography-h6-475"
+              >
+                How does my stake benefit the 501c3 organizations?
+              </h6>
+            </div>
+            <div
+              className="MuiGrid-item-527 MuiGrid-grid-xs-2-556 FAQItem-gridIcon-734"
+            >
+              <span
+                aria-hidden="true"
+                className="material-icons MuiIcon-root-443"
+              >
+                add
+              </span>
+            </div>
+          </div>
+        </div>
+        <br />
+        <hr
+          className="MuiDivider-root-737 FAQItem-divider-733"
+        />
+      </div>
+      <div
+        className="FAQItem-root-732"
+      >
+        <div
+          className="FAQItem-question-735"
+          onClick={[Function]}
+          role="presentation"
+        >
+          <div
+            className="MuiGrid-container-526"
+          >
+            <div
+              className="MuiGrid-item-527 MuiGrid-grid-xs-10-564"
+            >
+              <h6
+                className="MuiTypography-root-458 MuiTypography-h6-475"
+              >
+                When can I unstake?
+              </h6>
+            </div>
+            <div
+              className="MuiGrid-item-527 MuiGrid-grid-xs-2-556 FAQItem-gridIcon-734"
+            >
+              <span
+                aria-hidden="true"
+                className="material-icons MuiIcon-root-443"
+              >
+                add
+              </span>
+            </div>
+          </div>
+        </div>
+        <br />
+        <hr
+          className="MuiDivider-root-737 FAQItem-divider-733"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="Section-root-523 Section-light-525"
+  >
+    <div
+      className="MuiGrid-container-526 MuiGrid-align-items-xs-center-534 MuiGrid-justify-xs-center-543"
+    >
+      <div
+        className="MuiGrid-item-527 SocialMedia-item-743"
+      >
+        <a
+          className="SocialMedia-href-744"
+          href="https://www.facebook.com/wetrustplatform"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span
+            aria-hidden="true"
+            className="material-icons MuiIcon-root-443 SocialMedia-fab-745 fab fa-facebook"
+          />
+        </a>
+      </div>
+      <div
+        className="MuiGrid-item-527 SocialMedia-item-743"
+      >
+        <a
+          className="SocialMedia-href-744"
+          href="https://www.reddit.com/r/WeTrustPlatform"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span
+            aria-hidden="true"
+            className="material-icons MuiIcon-root-443 SocialMedia-fab-745 fab fa-reddit"
+          />
+        </a>
+      </div>
+      <div
+        className="MuiGrid-item-527 SocialMedia-item-743"
+      >
+        <a
+          className="SocialMedia-href-744"
+          href="https://twitter.com/wetrustplatform"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span
+            aria-hidden="true"
+            className="material-icons MuiIcon-root-443 SocialMedia-fab-745 fab fa-twitter"
+          />
+        </a>
+      </div>
+      <div
+        className="MuiGrid-item-527 SocialMedia-item-743"
+      >
+        <a
+          className="SocialMedia-href-744"
+          href="https://github.com/wetrustplatform"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span
+            aria-hidden="true"
+            className="material-icons MuiIcon-root-443 SocialMedia-fab-745 fab fa-github"
+          />
+        </a>
+      </div>
+      <div
+        className="MuiGrid-item-527 SocialMedia-item-743"
+      >
+        <a
+          className="SocialMedia-href-744"
+          href="https://medium.com/wetrust-blog"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span
+            aria-hidden="true"
+            className="material-icons MuiIcon-root-443 SocialMedia-fab-745 fab fa-medium"
+          />
+        </a>
+      </div>
+    </div>
+    <div
+      className="Footer-copyright-742"
+    >
+      <p
+        className="MuiTypography-root-458 MuiTypography-body1-467"
+      >
+        © 2018 WeTrustPlatform. All rights reserved.
+      </p>
+    </div>
+  </div>
+</div>
+`;

@@ -1,5 +1,7 @@
+const TEST_RPC_PORT = process.env.TEST_RPC_PORT || 7545;
+
 export default {
   CMS_URL: process.env.CMS_URL || 'https://tcr.wetrust.info/api/v0',
-  WEB3_FALLBACK_PROVIDER: process.env.WEB3_FALLBACK_PROVIDER || 'ws://localhost:7545',
+  WEB3_FALLBACK_PROVIDER: process.env.WEB3_FALLBACK_PROVIDER || `ws://localhost:${TEST_RPC_PORT}`,
   NETWORK_ID: process.env.NETWORK_ID || 'dev',
 };
