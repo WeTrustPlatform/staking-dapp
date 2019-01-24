@@ -20,23 +20,23 @@ const createServer = () => new Promise((resolve) => {
   server.listen(port, (err) => {
     if (err) throw err;
 
-    const rpc = `ws://localhost:${port}`;
+    const ws = `ws://localhost:${port}`;
 
-    console.log(`Testrpc is running ${rpc}`);
+    console.log(`Testrpc is running ${ws}`);
 
     // expose SERVER for teardown
     global.__SERVER__ = server;
 
-    resolve(rpc);
+    resolve(ws);
   });
 
   server.on('close', () => console.log('Testrpc is closing...'));
 });
 
-let rpc;
+let ws;
 module.exports = async () => {
-  if (!rpc) {
-    rpc = await createServer();
+  if (!ws) {
+    ws = await createServer();
   }
-  return rpc;
+  return ws;
 };
