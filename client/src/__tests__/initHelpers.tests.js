@@ -2,6 +2,7 @@ import {
   initRawContracts,
   initWeb3,
   initNetworkId,
+  initContracts,
 } from '../initHelpers';
 
 it('should return contracts from json', () => {
@@ -12,13 +13,21 @@ it('should return contracts from json', () => {
 
 it('should init web3 with fallback provider', async () => {
   const web3 = initWeb3();
-  const networkId = await initNetworkId(web3, 'dev');
-  // networkId is set up in the setUpTest
-  expect(networkId).toBe('1111');
+  const networkId = await initNetworkId(web3);
+  // networkId is set up in the setUpTest and configs
+  expect(networkId).toBe('5777');
 });
 
 it('should return invalid networkId', async () => {
   const web3 = initWeb3();
   const networkId = await initNetworkId(web3, '1');
   expect(networkId).toBe('invalid');
+});
+
+it('should init web3 contracts', async () => {
+  const rawContracts = initRawContracts();
+  const web3 = initWeb3();
+  const contracts = await initContracts(web3, rawContracts);
+  expect(contracts.TimeLockedStaking)
+    .toHaveProperty(['methods', 'stake'], expect.anything());
 });

@@ -1,7 +1,7 @@
 const createServer = () => new Promise((resolve) => {
   const ganche = require('ganache-cli');
   const server = ganche.server({
-    network_id: 1111,
+    network_id: '5777', // default ganache network
     accounts: [
       {
         secretKey:
