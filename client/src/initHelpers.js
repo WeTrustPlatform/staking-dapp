@@ -7,12 +7,12 @@ import configs from './configs';
 const CONTRACTS = ['TimeLockedStaking.json', 'TRST.json'];
 const initWeb3 = () => new Web3(Web3.givenProvider || configs.WEB3_FALLBACK_PROVIDER);
 
-const initRawContracts = () => {
+const initRawContracts = (required = CONTRACTS) => {
   const contractDir = path.resolve(__dirname, 'contracts');
   const contracts = {};
   fs.readdirSync(contractDir)
     .filter(
-      file => CONTRACTS.indexOf(file) > -1,
+      file => required.indexOf(file) > -1,
     )
     .forEach((file) => {
       const filePath = path.join(contractDir, file);

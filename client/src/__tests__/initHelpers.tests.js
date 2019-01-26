@@ -31,3 +31,14 @@ it('should init web3 contracts', async () => {
   expect(contracts.TimeLockedStaking)
     .toHaveProperty(['methods', 'stake'], expect.anything());
 });
+
+it('should throw if contract cannot be loaded', async () => {
+  const web3 = initWeb3();
+  let exception;
+  try {
+    await initContracts(web3, { EmptyContract: {} });
+  } catch (e) {
+    exception = e;
+  }
+  expect(exception).toBeDefined();
+});
