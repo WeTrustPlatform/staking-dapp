@@ -2,7 +2,7 @@ const web3 = require('web3');
 
 const { toBN } = web3.utils;
 
-const getTrstBalance = async (contract, address) => toBN(await contract.balanceOf(address));
+const getTRSTBalance = async (contract, address) => toBN(await contract.balanceOf(address));
 
 const getTotalStakedFor = async (contract, address) => toBN(await contract.totalStakedFor(address));
 
@@ -28,10 +28,10 @@ const stakeAndVerify = async (staker, amountInWei, data, TRST, StakingContract) 
 
   const stakingContractAddress = StakingContract.address;
 
-  const stakerOriginalTrstBalance = await getTrstBalance(TRST, staker);
+  const stakerOriginalTRSTBalance = await getTRSTBalance(TRST, staker);
   const stakerOriginalStakeAmount = await getTotalStakedFor(StakingContract, staker);
 
-  const contractOriginalTrstBalance = await getTrstBalance(TRST, stakingContractAddress);
+  const contractOriginalTRSTBalance = await getTRSTBalance(TRST, stakingContractAddress);
   const contractOriginalTotalStaked = await getTotalStaked(StakingContract);
 
   // approve TRST transfer before staking
@@ -40,8 +40,8 @@ const stakeAndVerify = async (staker, amountInWei, data, TRST, StakingContract) 
   // make sure all balances are correct at this state
   assert.deepEqual(await getTotalStaked(StakingContract), contractOriginalTotalStaked);
   assert.deepEqual(await getTotalStakedFor(StakingContract, staker), stakerOriginalStakeAmount);
-  assert.deepEqual(await getTrstBalance(TRST, stakingContractAddress), contractOriginalTrstBalance);
-  assert.deepEqual(await getTrstBalance(TRST, staker), stakerOriginalTrstBalance);
+  assert.deepEqual(await getTRSTBalance(TRST, stakingContractAddress), contractOriginalTRSTBalance);
+  assert.deepEqual(await getTRSTBalance(TRST, staker), stakerOriginalTRSTBalance);
 
   await StakingContract.stake(amount.toString(), data, { from: staker });
 
@@ -49,9 +49,9 @@ const stakeAndVerify = async (staker, amountInWei, data, TRST, StakingContract) 
   const amountAfter = calculateAmountAfter(amount);
 
   const contractTotalStaked = amountAfter(contractOriginalTotalStaked, add);
-  const contractTrstBalance = amountAfter(contractOriginalTrstBalance, add);
+  const contractTRSTBalance = amountAfter(contractOriginalTRSTBalance, add);
   const stakerStakeAmount = amountAfter(stakerOriginalStakeAmount, add);
-  const stakerTrstBalance = amountAfter(stakerOriginalTrstBalance, sub);
+  const stakerTRSTBalance = amountAfter(stakerOriginalTRSTBalance, sub);
 
   assert.deepEqual(
     await getTotalStaked(StakingContract),
@@ -62,26 +62,26 @@ const stakeAndVerify = async (staker, amountInWei, data, TRST, StakingContract) 
     stakerStakeAmount,
   );
   assert.deepEqual(
-    await getTrstBalance(TRST, stakingContractAddress),
-    contractTrstBalance,
+    await getTRSTBalance(TRST, stakingContractAddress),
+    contractTRSTBalance,
   );
   assert.deepEqual(
-    await getTrstBalance(TRST, staker),
-    stakerTrstBalance,
+    await getTRSTBalance(TRST, staker),
+    stakerTRSTBalance,
   );
 
   return {
     before: {
       stakerStakeAmount: stakerOriginalStakeAmount,
-      stakerTrstBalance: stakerOriginalTrstBalance,
+      stakerTRSTBalance: stakerOriginalTRSTBalance,
       contractTotalStaked: contractOriginalTotalStaked,
-      contractTrstBalance: contractOriginalTrstBalance,
+      contractTRSTBalance: contractOriginalTRSTBalance,
     },
     after: {
       stakerStakeAmount,
-      stakerTrstBalance,
+      stakerTRSTBalance,
       contractTotalStaked,
-      contractTrstBalance,
+      contractTRSTBalance,
     },
   };
 };
@@ -111,7 +111,7 @@ const buildBytesInput = (timeSignal, voteSignal, padSize = [32, 32]) => {
 };
 
 module.exports = {
-  getTrstBalance,
+  getTRSTBalance,
   getTotalStakedFor,
   getTotalStaked,
   stakeAndVerify,

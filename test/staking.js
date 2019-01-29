@@ -7,7 +7,7 @@ const {
   stakeAndVerify,
   getTotalStakedFor,
   getTotalStaked,
-  getTrstBalance,
+  getTRSTBalance,
 } = require('./utils');
 
 contract('Staking Sanity', (accounts) => {
@@ -46,8 +46,8 @@ contract('Staking Sanity', (accounts) => {
     const {
       contractTotalStaked,
       stakerStakeAmount,
-      contractTrstBalance,
-      stakerTrstBalance,
+      contractTRSTBalance,
+      stakerTRSTBalance,
     } = balances.before;
 
     assert.deepEqual(
@@ -59,12 +59,12 @@ contract('Staking Sanity', (accounts) => {
       stakerStakeAmount,
     );
     assert.deepEqual(
-      await getTrstBalance(TRST, stakingContractAddress),
-      contractTrstBalance,
+      await getTRSTBalance(TRST, stakingContractAddress),
+      contractTRSTBalance,
     );
     assert.deepEqual(
-      await getTrstBalance(TRST, trstHolder),
-      stakerTrstBalance,
+      await getTRSTBalance(TRST, trstHolder),
+      stakerTRSTBalance,
     );
   });
 
