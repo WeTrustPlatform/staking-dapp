@@ -61,12 +61,13 @@ const initBlockchainState = async (dispatch) => {
       const web3Contracts = await initContracts(web3);
       if (web3Contracts) {
         dispatch(findContracts(web3Contracts));
+        await dispatchOverallStats(dispatch, web3Contracts.TimeLockedStaking);
+
         const account = await initAccount(web3);
         if (account) {
           dispatch(unlockAccount(account));
           dispatchAccountActivities(dispatch, web3Contracts.TimeLockedStaking, account);
           dispatchTRSTBalance(dispatch, web3Contracts.TRST, account);
-          await dispatchOverallStats(dispatch, web3Contracts.TimeLockedStaking);
         } else {
           dispatch(lockAccount());
         }
