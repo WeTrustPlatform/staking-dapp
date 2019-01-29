@@ -55,7 +55,11 @@ const initBlockchainState = async (dispatch) => {
   const web3 = initWeb3();
   dispatch(findWeb3(web3));
 
-  if (Web3.givenProvider) {
+  if (window.ethereum && window.ethereum.enable) {
+    window.ethereum.enable();
+  }
+
+  if (web3.givenProvider) {
     const networkId = await initNetworkId(web3);
     dispatch(findNetworkId(networkId));
 
