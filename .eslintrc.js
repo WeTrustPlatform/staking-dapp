@@ -13,5 +13,6 @@ module.exports = {
     "no-await-in-loop": "off",
     "import/no-dynamic-require": "off",
     "global-require": "off",
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
   },
 };
