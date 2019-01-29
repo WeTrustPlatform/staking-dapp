@@ -9,6 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Icon from '@material-ui/core/Icon';
 import eth from '../images/eth-icon.png';
 import configs from '../configs';
+import { trst } from '../formatter';
 
 const styles = {
   warning: {
@@ -65,7 +66,7 @@ class Web3Account extends React.Component {
         </ListItemAvatar>
         <ListItemText
           primary={account}
-          secondary={`Network: ${networkId} - TRST: ${trstBalance}`}
+          secondary={`Network: ${networkId} - TRST: ${trst(trstBalance)}`}
         />
       </ListItem>
     );

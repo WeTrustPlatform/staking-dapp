@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "truffle build",
+    "deploy": "rm -rf build && truffle deploy",
     "lint": "run-p lint:js lint:sol",
     "lint:sol": "solium -d contracts/",
     "lint:js": "eslint test/**/*.js",
