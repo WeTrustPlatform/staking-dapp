@@ -4,9 +4,9 @@ import {
   WEB3_UNLOCK_ACCOUNT,
   WEB3_LOCK_ACCOUNT,
   WEB3_TRST_BALANCE,
-  ACCOUNT_ACTIVITIES,
-  OVERALL_STATS,
-  INIT_CONTRACTS,
+  WEB3_ACCOUNT_ACTIVITIES,
+  WEB3_OVERALL_STATS,
+  WEB3_CONTRACTS,
 } from './actions';
 
 const initialState = {
@@ -46,15 +46,15 @@ function reducers(state = initialState, action) {
       return Object.assign({}, state, {
         trstBalance: action.trstBalance,
       });
-    case ACCOUNT_ACTIVITIES:
+    case WEB3_ACCOUNT_ACTIVITIES:
       return Object.assign({}, state, {
         accountActivities: action.accountActivities,
       });
-    case OVERALL_STATS:
+    case WEB3_OVERALL_STATS:
       return Object.assign({}, state, {
         overallStats: action.overallStats,
       });
-    case INIT_CONTRACTS:
+    case WEB3_CONTRACTS:
       return Object.assign({}, state, {
         contracts: action.contracts,
       });

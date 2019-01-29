@@ -9,9 +9,13 @@ import theme from './theme';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import HomePage from './components/HomePage';
-
+import {
+  initBlockchainState,
+} from './initHelpers';
 
 const store = createStore(reducers);
+initBlockchainState(store.dispatch);
+
 function App() {
   return (
     <Provider store={store}>

@@ -8,8 +8,8 @@ import axios from 'axios';
 import { parseStakePayload } from './utils';
 import {
   findTrstBalance,
-  fetchAccountActivities,
-  fetchOverallStats,
+  findAccountActivities,
+  findOverallStats,
 } from './actions';
 import {
   trstInBN, trst, numberString, bigNumber, currency,
@@ -61,7 +61,7 @@ export const dispatchAccountActivities = (dispatch, TimeLockedStaking, account) 
     });
 
     Promise.all(populatedNPOPromises).then((completed) => {
-      dispatch(fetchAccountActivities(completed));
+      dispatch(findAccountActivities(completed));
     });
   });
 };
@@ -73,7 +73,7 @@ export const dispatchTRSTBalance = (dispatch, TRST, account) => {
     });
 };
 
-// TODO optimize this with dispatchAccountActivites
+// TODO optimize this with dispatchAccountActivities
 export const dispatchOverallStats = async (dispatch, TimeLockedStaking) => {
   TimeLockedStaking.getPastEvents('allEvents', {
     fromBlock: 0,
@@ -133,7 +133,7 @@ export const dispatchOverallStats = async (dispatch, TimeLockedStaking) => {
     const average = total.div(bigNumber(count || 1));
     // TODO fetch TRST price
     const averageInUSD = trstInBN(average).toNumber() * 0.02;
-    dispatch(fetchOverallStats({
+    dispatch(findOverallStats({
       currentStakes: trst(total),
       currentStakers: numberString(count),
       averageStakes: trst(average),
