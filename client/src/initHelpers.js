@@ -54,13 +54,17 @@ const initAccount = async (web3) => {
 const initBlockchainState = async (dispatch) => {
   const web3 = initWeb3();
   dispatch(findWeb3(web3));
+
   if (Web3.givenProvider) {
     const networkId = await initNetworkId(web3);
+    dispatch(findNetworkId(networkId));
+
     if (networkId !== 'invalid') {
-      dispatch(findNetworkId(networkId));
       const web3Contracts = await initContracts(web3);
+
       if (web3Contracts) {
         dispatch(findContracts(web3Contracts));
+
         await dispatchOverallStats(dispatch, web3Contracts.TimeLockedStaking);
 
         const account = await initAccount(web3);

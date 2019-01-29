@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Icon from '@material-ui/core/Icon';
 import eth from '../images/eth-icon.png';
+import configs from '../configs';
 
 const styles = {
   warning: {
@@ -36,6 +37,12 @@ class Web3Account extends React.Component {
   }
 
   renderNoAccount(props) {
+    const { networkId } = props;
+    let errorMessage = 'Please log in Metamask';
+    if (networkId === 'invalid') {
+      errorMessage = `Please switch to network id: ${configs.NETWORK_ID}`;
+    }
+
     return (
       <ListItem>
         <ListItemAvatar>
@@ -43,22 +50,13 @@ class Web3Account extends React.Component {
             <Icon>warning</Icon>
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Please log in MetaMask" />
+        <ListItemText primary={errorMessage} />
       </ListItem>
     );
   }
 
   renderAccount(props) {
     const { account, networkId, trstBalance } = props;
-
-    // TODO get env
-    const env = '';
-    let errorMessage = '';
-    if (env === 'livenet' && networkId !== '1') {
-      errorMessage = '- Please switch to Mainnet.';
-    } else if (env === 'testnet' && networkId !== '4') {
-      errorMessage = '- Please switch to Rinkeby.';
-    }
 
     return (
       <ListItem>
@@ -67,26 +65,27 @@ class Web3Account extends React.Component {
         </ListItemAvatar>
         <ListItemText
           primary={account}
-          secondary={`Network: ${networkId} - TRST: ${trstBalance} ${errorMessage}`}
+          secondary={`Network: ${networkId} - TRST: ${trstBalance}`}
         />
       </ListItem>
     );
   }
 
   render() {
-    const { hasWeb3, account } = this.props;
+    const { web3, account } = this.props;
+    const hasWeb3Browser = web3 && web3.givenProvider;
     return (
       <List>
-        {!hasWeb3 && this.renderNoWeb3(this.props)}
-        {hasWeb3 && !account && this.renderNoAccount(this.props)}
-        {hasWeb3 && account && this.renderAccount(this.props)}
+        {!hasWeb3Browser && this.renderNoWeb3(this.props)}
+        {hasWeb3Browser && !account && this.renderNoAccount(this.props)}
+        {hasWeb3Browser && account && this.renderAccount(this.props)}
       </List>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  hasWeb3: state.hasWeb3,
+  web3: state.web3,
   account: state.account,
   networkId: state.networkId,
   trstBalance: state.trstBalance,
