@@ -150,9 +150,6 @@ class ActivitiesSection extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  account: state.accounts,
-  networkId: state.networkId,
-  hasWeb3: state.hasWeb3,
   accountActivities: state.accountActivities || [],
 });
 

@@ -40,12 +40,11 @@ class Dashboard extends React.Component {
   }
 }
 
-// TODO fix me
 const mapStateToProps = state => ({
-  currentStakes: '0' || state.overallStats.currentStakes,
-  averageStakes: '0' || state.overallStats.averageStakes,
-  averageStakesInUSD: '0' || state.overallStats.averageStakesInUSD,
-  currentStakers: '0' || state.overallStats.currentStakers,
+  currentStakes: state.overallStats.currentStakes,
+  averageStakes: state.overallStats.averageStakes,
+  averageStakesInUSD: state.overallStats.averageStakesInUSD,
+  currentStakers: state.overallStats.currentStakers,
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(Dashboard));
