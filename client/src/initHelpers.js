@@ -90,7 +90,6 @@ const initWeb3OnUpdateListener = async (store) => {
 
   if (publicConfigStore) {
     publicConfigStore.on('update', async (updates) => {
-      console.log(updates);
       const { selectedAddress, networkVersion } = updates;
       if (!selectedAddress) {
         dispatch(lockAccount());
@@ -98,9 +97,13 @@ const initWeb3OnUpdateListener = async (store) => {
       }
 
       if (String(account).toLowerCase() !== String(selectedAddress).toLowerCase()) {
-        onNewAccount(dispatch, account, contracts);
+        onNewAccount(dispatch, selectedAddress, contracts);
       }
 
+      // bug: networkVersion is 1 for ganache
+      // this always triggers when account changes in the dev env
+      // which is fine
+      //
       if (networkId !== networkVersion) {
         await onNewNetworkId(dispatch, web3, networkVersion);
       }

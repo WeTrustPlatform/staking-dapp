@@ -18,3 +18,11 @@ export const bigNumber = s => web3.utils.toBN(s);
 export const trstInBN = s => bigNumber(s).div(bigNumber(1e6));
 
 export const trst = s => numberString(trstInBN(s));
+
+export const networkName = (networkId) => {
+  const nameMapping = {
+    1: 'Mainnet',
+    4: 'Rinkeby',
+  };
+  return nameMapping[networkId] || `Privatenet-${networkId}`;
+};

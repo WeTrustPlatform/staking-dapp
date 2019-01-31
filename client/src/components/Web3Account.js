@@ -8,8 +8,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Icon from '@material-ui/core/Icon';
 import eth from '../images/eth-icon.png';
-import configs from '../configs';
-import { trst } from '../formatter';
+import {
+  trst,
+  networkName,
+} from '../formatter';
+import {
+  validateNetworkId,
+} from '../utils';
 
 const styles = {
   warning: {
@@ -39,11 +44,11 @@ class Web3Account extends React.Component {
 
   renderNoAccount(props) {
     const { networkId } = props;
-    let errorMessage = 'Please log in Metamask';
-    if (networkId === 'invalid') {
-      errorMessage = `Please switch to network id: ${configs.NETWORK_ID}`;
-    }
-
+    const networkError = validateNetworkId(networkId);
+    // we can't find account because
+    // either they're on wrong network
+    // or haven't unlocked account
+    const errorMessage = networkError || 'Please log in Metamask';
     return (
       <ListItem>
         <ListItemAvatar>
@@ -58,6 +63,7 @@ class Web3Account extends React.Component {
 
   renderAccount(props) {
     const { account, networkId, trstBalance } = props;
+    const network = validateNetworkId(networkId) || networkName(networkId);
 
     return (
       <ListItem>
@@ -66,7 +72,7 @@ class Web3Account extends React.Component {
         </ListItemAvatar>
         <ListItemText
           primary={account}
-          secondary={`Network: ${networkId} - TRST: ${trst(trstBalance)}`}
+          secondary={`Network: ${network} - TRST: ${trst(trstBalance)}.`}
         />
       </ListItem>
     );

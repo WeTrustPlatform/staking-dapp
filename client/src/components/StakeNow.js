@@ -14,14 +14,13 @@ import SearchInput from './SearchInput';
 import StakeAmountInput from './StakeAmountInput';
 import StakeDurationInput from './StakeDurationInput';
 import NPOInfo from './NPOInfo';
-import { getStakePayload } from '../utils';
+import { getStakePayload, validateNetworkId } from '../utils';
 import stateHelper, { status } from './stateHelper';
 import { txLink } from '../formatter';
 import {
   dispatchAccountActivities,
   dispatchOverallStats,
 } from '../dispatch';
-import configs from '../configs';
 
 const styles = theme => ({
   root: {
@@ -156,8 +155,9 @@ class StakeNow extends React.Component {
       return 'Please unlock your account.';
     }
 
-    if (networkId === 'invalid') {
-      return `Please change to network id ${configs.NETWORK_ID}`;
+    const networkError = validateNetworkId(networkId);
+    if (networkError) {
+      return networkError;
     }
 
     const { BN } = web3.utils;

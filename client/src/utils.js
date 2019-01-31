@@ -1,6 +1,7 @@
 import assert from 'assert';
 import web3 from 'web3';
-import { prefix0x } from './formatter';
+import { prefix0x, networkName } from './formatter';
+import configs from './configs';
 
 const paddedBytes = (numberString) => {
   const { utils } = web3;
@@ -54,3 +55,11 @@ export function parseStakePayload(payload) {
     lockedUntil,
   };
 }
+
+export const validateNetworkId = (networkId) => {
+  if (networkId === 'invalid') {
+    return `Please switch to ${networkName(configs.NETWORK_ID)}`;
+  }
+
+  return null;
+};
