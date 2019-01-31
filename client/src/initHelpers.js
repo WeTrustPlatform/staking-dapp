@@ -51,7 +51,65 @@ const initAccount = async (web3) => {
   return accounts[0];
 };
 
-const initBlockchainState = async (dispatch) => {
+const onNewAccount = (dispatch, account, contracts) => {
+  dispatch(unlockAccount(account));
+  dispatchAccountActivities(dispatch, contracts.TimeLockedStaking, account);
+  dispatchTRSTBalance(dispatch, contracts.TRST, account);
+};
+
+const onNewNetworkId = async (dispatch, web3, networkId) => {
+  if (networkId !== 'invalid') {
+    const web3Contracts = await initContracts(web3);
+
+    if (web3Contracts) {
+      dispatch(findContracts(web3Contracts));
+
+      await dispatchOverallStats(dispatch, web3Contracts.TimeLockedStaking);
+
+      const account = await initAccount(web3);
+      if (account) {
+        onNewAccount(dispatch, account, web3Contracts);
+      } else {
+        dispatch(lockAccount());
+      }
+    } else {
+      console.log('cannot load contracts');
+    }
+  } else {
+    console.log('wrong network id');
+  }
+};
+
+const initWeb3OnUpdateListener = async (store) => {
+  const { dispatch } = store;
+  const {
+    web3, account, networkId, contracts,
+  } = store.getState();
+
+  const { publicConfigStore } = web3.currentProvider;
+
+  if (publicConfigStore) {
+    publicConfigStore.on('update', async (updates) => {
+      console.log(updates);
+      const { selectedAddress, networkVersion } = updates;
+      if (!selectedAddress) {
+        dispatch(lockAccount());
+        return;
+      }
+
+      if (String(account).toLowerCase() !== String(selectedAddress).toLowerCase()) {
+        onNewAccount(dispatch, account, contracts);
+      }
+
+      if (networkId !== networkVersion) {
+        await onNewNetworkId(dispatch, web3, networkVersion);
+      }
+    });
+  }
+};
+
+const initBlockchainState = async (store) => {
+  const { dispatch } = store;
   const web3 = initWeb3();
   dispatch(findWeb3(web3));
 
@@ -62,32 +120,12 @@ const initBlockchainState = async (dispatch) => {
   if (web3.givenProvider) {
     const networkId = await initNetworkId(web3);
     dispatch(findNetworkId(networkId));
-
-    if (networkId !== 'invalid') {
-      const web3Contracts = await initContracts(web3);
-
-      if (web3Contracts) {
-        dispatch(findContracts(web3Contracts));
-
-        await dispatchOverallStats(dispatch, web3Contracts.TimeLockedStaking);
-
-        const account = await initAccount(web3);
-        if (account) {
-          dispatch(unlockAccount(account));
-          dispatchAccountActivities(dispatch, web3Contracts.TimeLockedStaking, account);
-          dispatchTRSTBalance(dispatch, web3Contracts.TRST, account);
-        } else {
-          dispatch(lockAccount());
-        }
-      } else {
-        console.log('cannot load contracts');
-      }
-    } else {
-      console.log('wrong network id');
-    }
+    await onNewNetworkId(dispatch, web3, networkId);
   } else {
     console.log('no provider');
   }
+
+  await initWeb3OnUpdateListener(store);
 };
 
 export {
@@ -96,4 +134,5 @@ export {
   initAccount,
   initNetworkId,
   initBlockchainState,
+  initWeb3OnUpdateListener,
 };

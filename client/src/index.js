@@ -13,7 +13,7 @@ import {
 } from './initHelpers';
 
 const store = createStore(reducers);
-initBlockchainState(store.dispatch);
+initBlockchainState(store);
 
 function App() {
   return (
