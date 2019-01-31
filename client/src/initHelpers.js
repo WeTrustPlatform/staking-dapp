@@ -117,13 +117,9 @@ const initBlockchainState = async (store) => {
     window.ethereum.enable();
   }
 
-  if (web3.givenProvider) {
-    const networkId = await initNetworkId(web3);
-    dispatch(findNetworkId(networkId));
-    await onNewNetworkId(dispatch, web3, networkId);
-  } else {
-    console.log('no provider');
-  }
+  const networkId = await initNetworkId(web3);
+  dispatch(findNetworkId(networkId));
+  await onNewNetworkId(dispatch, web3, networkId);
 
   await initWeb3OnUpdateListener(store);
 };
