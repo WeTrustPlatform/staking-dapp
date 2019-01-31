@@ -25,24 +25,7 @@ const initNetworkId = async (web3, expectedNetwork = configs.NETWORK_ID) => {
   return id;
 };
 
-const buildRawContracts = () => {
-  const { NETWORK_ID, TRST_ADDRESS, TIME_LOCKED_STAKING_ADDRESS } = configs;
-  if (NETWORK_ID !== '5777') {
-    if (TRST_ADDRESS) {
-      TRST.networks[NETWORK_ID] = { address: TRST_ADDRESS };
-    }
-
-    if (TIME_LOCKED_STAKING_ADDRESS) {
-      TimeLockedStaking.networks[NETWORK_ID] = { address: TIME_LOCKED_STAKING_ADDRESS };
-    }
-  }
-
-  return { TimeLockedStaking, TRST };
-};
-
-const initContracts = async (web3, contractsJSON) => {
-  const rawContracts = contractsJSON || buildRawContracts();
-
+const initContracts = async (web3, rawContracts = { TimeLockedStaking, TRST }) => {
   // assume the networkId is valid
   const networkId = await initNetworkId(web3);
   const web3Contracts = {};
