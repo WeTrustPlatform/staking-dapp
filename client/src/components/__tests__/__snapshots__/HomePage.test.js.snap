@@ -468,11 +468,6 @@ exports[`tests snapshot 1`] = `
                   />
                 </span>
               </h5>
-              <h6
-                className="MuiTypography-root-458 MuiTypography-subtitle1-476 MuiTypography-colorTextSecondary-491"
-              >
-                0
-              </h6>
             </div>
           </div>
           <div
