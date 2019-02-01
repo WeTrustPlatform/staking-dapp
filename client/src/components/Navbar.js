@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Web3Account from './Web3Account';
+import logo from '../images/logo-trimmed.png';
 
 const styles = {
   grow: {
@@ -36,7 +37,7 @@ class Navbar extends React.Component {
         <AppBar>
           <Toolbar>
             <div className={classes.grow}>
-              <img src="images/logo-trimmed.png" alt="WeTrust" className={classes.brandImage} />
+              <img src={logo} alt="WeTrust" className={classes.brandImage} />
             </div>
             <Web3Account />
             {this.renderLink('#main-section', 'Home')}
