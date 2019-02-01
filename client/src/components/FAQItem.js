@@ -63,7 +63,7 @@ class FAQItem extends React.Component {
         && (
         <div className={classes.answer}>
           <Typography variant="subtitle1">
-            {answer}
+            <span dangerouslySetInnerHTML={{ __html: answer }} />
           </Typography>
         </div>
         )

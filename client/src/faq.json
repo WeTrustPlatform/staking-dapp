@@ -1,18 +1,18 @@
 [
   {
-    "question": "What does 'stake' mean?",
-    "answer": "steak? lol."
+    "question": "What does 'staking TRST' mean?",
+    "answer": "To stake TRST means to lock up TRST coin for a certain period of time, for the benefit of a cause that you support. After that period of time has passed, you can retrieve the token using the original ethereum address used to lock up the TRST."
   },
   {
-    "question": "Why would I stake my TRST?",
-    "answer": "good question! idk :("
+    "question": "Why would I stake TRST?",
+    "answer": "By staking TRST on Spring platform to a cause, you are signalling your appreciation for that particular organization, thereby increasing their visibility on Spring. All organizations on the platform must have a minimum of 5,000 TRST staked to their name in order to activate their profile on the platform. Activation allows for editing of their profile, making community updates, beyond the generic information found online. Any TRST holder can sponsor an organization to reach the threshold. In the initial period, organization's will communicate directly with the team to build out their profile. As new organizations are openly added to the platform, anyone can stake TRST to sponsor this new organization. However, if an added organization has an invalid receiving ETH address, or is in violation of the WeTrust ToS, the initial staking amount can be challenged."
   },
   {
-    "question": "How does my stake benefit the 501c3 organizations?",
-    "answer": "positively!"
+    "question": "How does my stake benefit the organization or the crypto ecosystem?",
+    "answer": "For organizations on the platform, they will have improved visibilty. There is a \"People's Choice\" ranking of organizations, which is determined by the amount of TRST staked to their name. <br/>For organizations that are not yet familiar with cryptocurrency, staking will also likely increase their curiousity and awareness of this technology, thereby helping to spur further interest and adoption."
   },
   {
     "question": "When can I unstake?",
-    "answer": "as soon as we figure out the tokenomics of the TCR."
+    "answer": "When you stake TRST, it will be locked for a specified period of time. Once that time period has elapsed, you will be able to unstake and withdraw the coins."
   }
 ]
