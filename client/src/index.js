@@ -12,6 +12,10 @@ import {
   initBlockchainState,
 } from './initHelpers';
 
+if (window.ethereum && window.ethereum.enable) {
+  window.ethereum.enable();
+}
+
 const store = createStore(reducers);
 initBlockchainState(store);
 
