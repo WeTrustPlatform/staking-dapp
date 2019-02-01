@@ -16,6 +16,12 @@ const theme = createMuiTheme({
   },
   typography: {
     useNextVariants: true,
+    fontFamily: [
+      'proxima-nova',
+      'Arial',
+      'Helvectica',
+      'sans-serif',
+    ],
   },
   overrides: {
     MuiButton: {
