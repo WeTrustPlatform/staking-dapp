@@ -62,9 +62,7 @@ class FAQItem extends React.Component {
         { isAnswerShown
         && (
         <div className={classes.answer}>
-          <Typography variant="subtitle1">
-            <span dangerouslySetInnerHTML={{ __html: answer }} />
-          </Typography>
+          <Typography variant="subtitle1" dangerouslySetInnerHTML={{ __html: answer }} />
         </div>
         )
         }
