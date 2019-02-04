@@ -6,42 +6,66 @@ export const status = {
   FAILURE: 'FAILURE',
 };
 
+
+// Wrapper arround this.setState for blockchain transactions
+// Goal: To avoid calling this.setState for each tx
+// Usage: this.state = { blockchainTx: init(this, 'name of this tx') }
+//
 const stateHelper = {
   tx: {
-    approveTRST: 'approve TRST',
-    stakeTRST: 'stake TRST',
+    approveTRST: 'approve TRST state',
+    stakeTRST: 'stake TRST state',
   },
-  initialState: () => ({
-    txStatus: status.NOT_STARTED,
-    txHash: null,
-  }),
-  setTriggered: (context, name, txHash) => {
-    context.setState({
-      [name]: {
-        txStatus: status.TRIGGERED,
-        txHash,
-      },
+  init: (context, name) => {
+    const getTxStatus = () => context.state[name].txStatus;
+    const getTxHash = () => context.state[name].txHash;
+
+    const getInitialState = () => ({
+      txStatus: status.NOT_STARTED,
+      txHash: null,
     });
-  },
-  setFailure: (context, name, message) => {
-    stateHelper.setStatus(context, name, status.FAILURE);
-    context.setErrorMessage(message || `Error while executing ${name} transaction.`);
-  },
-  setSuccess: (context, name) => {
-    stateHelper.setStatus(context, name, status.SUCCESS);
-  },
-  setPending: (context, name) => {
-    stateHelper.setStatus(context, name, status.PENDING);
-  },
-  setNotStarted: (context, name) => {
-    context.setState({
-      [name]: stateHelper.initialState(),
-    });
-  },
-  setStatus: (context, name, txStatus) => {
-    const currentState = context.state[name];
-    context.setState({
-      [name]: Object.assign({}, currentState, { txStatus }),
+
+    const setStatus = (txStatus) => {
+      const currentState = context.state[name];
+      context.setState({
+        [name]: Object.assign({}, currentState, { txStatus }),
+      });
+    };
+
+    const setNotStarted = () => {
+      context.setState({
+        [name]: getInitialState(),
+      });
+    };
+    const setTriggered = (txHash) => {
+      context.setState({
+        [name]: {
+          txStatus: status.TRIGGERED,
+          txHash,
+        },
+      });
+    };
+    const setPending = () => {
+      setStatus(status.PENDING);
+    };
+    const setFailure = (message) => {
+      setStatus(status.FAILURE);
+      context.setErrorMessage(message || `Error while executing ${name} transaction.`);
+    };
+    const setSuccess = () => {
+      setStatus(status.SUCCESS);
+    };
+
+    return ({
+      getTxStatus,
+      getTxHash,
+      getInitialState,
+      setStatus,
+      setNotStarted,
+      setTriggered,
+      setPending,
+      setFailure,
+      setSuccess,
     });
   },
 };

@@ -48,8 +48,8 @@ class StakeNow extends React.Component {
       amount: 100,
       errorMessage: null,
       isStaking: false,
-      [stateHelper.tx.approveTRST]: stateHelper.initialState(),
-      [stateHelper.tx.stakeTRST]: stateHelper.initialState(),
+      approveTRST: stateHelper.init(this, stateHelper.tx.approveTRST),
+      stakeTRST: stateHelper.init(this, stateHelper.tx.stakeTRST),
     };
 
     this.onSelectedNpo = this.onSelectedNpo.bind(this);
@@ -92,8 +92,9 @@ class StakeNow extends React.Component {
     this.setState({
       isStaking: true,
     });
-    stateHelper.setPending(this, stateHelper.tx.approveTRST);
-    stateHelper.setNotStarted(this, stateHelper.tx.stakeTRST);
+    const { approveTRST, stakeTRST } = this.state;
+    approveTRST.setPending();
+    stakeTRST.setNotStarted();
   }
 
   handleStakeNow(e) {
@@ -107,35 +108,40 @@ class StakeNow extends React.Component {
 
     this.startStaking();
 
-    const { amount, npo, durationInDays } = this.state;
+    const {
+      amount, npo, durationInDays, approveTRST, stakeTRST,
+    } = this.state;
+
     const {
       web3, refreshStats, account, TRST, TimeLockedStaking,
     } = this.props;
+
     const stakeAmount = web3.utils.toWei(amount.toString(), 'mwei');
+
     TRST.methods
       .approve(TimeLockedStaking.options.address, stakeAmount)
       .send({ from: account })
       .once('transactionHash', (approveTxHash) => {
-        stateHelper.setTriggered(this, stateHelper.tx.approveTRST, approveTxHash);
-        stateHelper.setPending(this, stateHelper.tx.stakeTRST);
+        approveTRST.setTriggered(approveTxHash);
+        stakeTRST.setPending();
         const stakePayload = getStakePayload(durationInDays, npo);
         TimeLockedStaking.methods.stake(stakeAmount, stakePayload).send({ from: account, gas: '150000' })
           .once('transactionHash', (stakeTxHash) => {
-            stateHelper.setTriggered(this, stateHelper.tx.stakeTRST, stakeTxHash);
+            stakeTRST.setTriggered(stakeTxHash);
           })
           .then(() => {
-            stateHelper.setSuccess(this, stateHelper.tx.stakeTRST);
+            stakeTRST.setSuccess();
             refreshStats(account, TimeLockedStaking);
           })
           .catch((err) => {
-            stateHelper.setFailure(this, stateHelper.tx.stakeTRST, err);
+            stakeTRST.setFailure(err);
           });
       })
       .then(() => {
-        stateHelper.setSuccess(this, stateHelper.tx.approveTRST);
+        approveTRST.setSuccess();
       })
       .catch((err) => {
-        stateHelper.setFailure(this, stateHelper.tx.approveTRST, err);
+        approveTRST.setFailure(err);
       });
   }
 
@@ -286,8 +292,8 @@ class StakeNow extends React.Component {
 
   renderStakingSteps() {
     const {
-      [stateHelper.tx.approveTRST]: approveTx,
-      [stateHelper.tx.stakeTRST]: stakeTx,
+      approveTRST,
+      stakeTRST,
     } = this.state;
     return (
       <Grid
@@ -295,8 +301,8 @@ class StakeNow extends React.Component {
         justify="center"
       >
         <List>
-          {this.renderStep(1, 'Approve TRST transfer.', approveTx.txStatus, approveTx.txHash)}
-          {this.renderStep(2, 'Calling Stake contract.', stakeTx.txStatus, stakeTx.txHash)}
+          {this.renderStep(1, 'Approving TRST transfer.', approveTRST.getTxStatus(), approveTRST.getTxHash())}
+          {this.renderStep(2, 'Calling Stake contract.', stakeTRST.getTxStatus(), stakeTRST.getTxHash())}
         </List>
       </Grid>
     );
