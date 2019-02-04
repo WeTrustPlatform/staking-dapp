@@ -659,7 +659,7 @@ exports[`tests snapshot 1`] = `
               <h6
                 className="MuiTypography-root-464 MuiTypography-h6-481"
               >
-                What does 'stake' mean?
+                What does 'staking TRST' mean?
               </h6>
             </div>
             <div
@@ -696,7 +696,7 @@ exports[`tests snapshot 1`] = `
               <h6
                 className="MuiTypography-root-464 MuiTypography-h6-481"
               >
-                Why would I stake my TRST?
+                Why would I stake TRST?
               </h6>
             </div>
             <div
@@ -733,7 +733,7 @@ exports[`tests snapshot 1`] = `
               <h6
                 className="MuiTypography-root-464 MuiTypography-h6-481"
               >
-                How does my stake benefit the 501c3 organizations?
+                How does my stake benefit the organization or the crypto ecosystem?
               </h6>
             </div>
             <div
