@@ -104,7 +104,7 @@ const paddedBytes = (numberString, padSize = 32) => {
  */
 const buildBytesInput = (timeSignal, voteSignal, padSize = [32, 32]) => {
   const paddedTimeSignal = paddedBytes(timeSignal, padSize[0]);
-  const paddedVoteSignal = paddedBytes(voteSignal, padSize[1]);
+  const paddedVoteSignal = voteSignal ? paddedBytes(voteSignal, padSize[1]) : undefined;
   const data = paddedBytes('0').concat(paddedTimeSignal, paddedVoteSignal);
   const hex = web3.utils.bytesToHex(data);
   return hex;

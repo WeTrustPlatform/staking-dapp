@@ -11,6 +11,7 @@ module.exports = {
     "no-console": "off",
     "no-restricted-syntax": "off",
     "no-await-in-loop": "off",
+    "no-loop-func": "off",
     "import/no-dynamic-require": "off",
     "global-require": "off",
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
