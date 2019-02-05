@@ -4,8 +4,9 @@ const TimeLockedStaking = artifacts.require('TimeLockedStaking');
 const TRSTArtifact = artifacts.require('lib/TRST');
 
 const {
-  stakeAndVerify,
+  stakeAndVerifyBalances,
   verifyBalances,
+  verifyUnlockedAt,
   buildBytesInput,
   sub,
   calculateBalances,
@@ -27,14 +28,18 @@ const runSanityMatrix = (matrix) => {
     it(`Test stake/unstake with payload ${payload[0]}`, async () => {
       const amount = toWei('1', 'gwei'); // 1000 TRST
 
-      const balances = await stakeAndVerify(staker, amount, payload[0], TRST, StakingContract);
-      const unlockedAt = await StakingContract.getStakeRecordUnlockedAt(staker, payload[0]);
-      assert.equal(unlockedAt.toNumber(), payload[1]);
+      const balances = await stakeAndVerifyBalances(
+        staker, amount, payload[0], TRST, StakingContract,
+      );
+
+      await verifyUnlockedAt(staker, payload[0], payload[1], StakingContract);
 
       await StakingContract.unstake(amount, payload[0], { from: staker });
 
       // verify all the balances are the same as the very beginning
       await verifyBalances(balances.before, staker, TRST, StakingContract);
+
+      await verifyUnlockedAt(staker, payload[0], payload[1], StakingContract);
     });
 
 
@@ -43,13 +48,17 @@ const runSanityMatrix = (matrix) => {
       const amount2 = toWei('2', 'gwei');
 
       // stake the same payload twice with different amount
-      const balances1 = await stakeAndVerify(staker, amount1, payload[0], TRST, StakingContract);
-      let unlockedAt = await StakingContract.getStakeRecordUnlockedAt(staker, payload[0]);
-      assert.equal(unlockedAt.toNumber(), payload[1]);
+      const balances1 = await stakeAndVerifyBalances(
+        staker, amount1, payload[0], TRST, StakingContract,
+      );
 
-      const balances2 = await stakeAndVerify(staker, amount2, payload[0], TRST, StakingContract);
-      unlockedAt = await StakingContract.getStakeRecordUnlockedAt(staker, payload[0]);
-      assert.equal(unlockedAt.toNumber(), payload[1]);
+      await verifyUnlockedAt(staker, payload[0], payload[1], StakingContract);
+
+      const balances2 = await stakeAndVerifyBalances(
+        staker, amount2, payload[0], TRST, StakingContract,
+      );
+
+      await verifyUnlockedAt(staker, payload[0], payload[1], StakingContract);
 
       // unstake
       // sum(amoount1, amount2) = sum(amount3, amount4)
@@ -64,6 +73,8 @@ const runSanityMatrix = (matrix) => {
       // verify all the balances are the same as the very beginning
       await StakingContract.unstake(amount4, payload[0], { from: staker });
       await verifyBalances(balances1.before, staker, TRST, StakingContract);
+
+      await verifyUnlockedAt(staker, payload[0], payload[1], StakingContract);
     });
   }
 };

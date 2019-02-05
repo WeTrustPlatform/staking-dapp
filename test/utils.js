@@ -66,7 +66,7 @@ const calculateBalances = (balances, op, amount) => {
 // 4. stake
 // 5. verify all balances
 // 6. return balances info before and after
-const stakeAndVerify = async (staker, amountInWei, data, TRST, StakingContract) => {
+const stakeAndVerifyBalances = async (staker, amountInWei, data, TRST, StakingContract) => {
   const amount = toBN(amountInWei);
 
   const stakingContractAddress = StakingContract.address;
@@ -106,6 +106,11 @@ const stakeAndVerify = async (staker, amountInWei, data, TRST, StakingContract) 
   };
 };
 
+const verifyUnlockedAt = async (staker, data, expectedUnlockedAt, StakingContract) => {
+  const unlockedAt = await StakingContract.getStakeRecordUnlockedAt(staker, data);
+  assert.equal(unlockedAt.toNumber(), expectedUnlockedAt);
+};
+
 /**
  * Pad 0 to a numberString
  * @param numberString Positive integer number in string format
@@ -140,11 +145,12 @@ module.exports = {
   getTRSTBalance,
   getTotalStakedFor,
   getTotalStaked,
-  stakeAndVerify,
+  stakeAndVerifyBalances,
   add,
   sub,
   calculateBalances,
   paddedBytes,
   buildBytesInput,
   verifyBalances,
+  verifyUnlockedAt,
 };
