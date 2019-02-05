@@ -27,27 +27,18 @@ const styles = theme => ({
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    maxWidth: theme.breakpoints.values.lg / 4,
+    maxWidth: theme.breakpoints.values.lg / 5,
   },
   noActivities: {
     padding: theme.mixins.toolbar.minHeight,
     textAlign: 'center',
   },
   unstake: {
-    margin: `${theme.mixins.toolbar.minHeight}px auto`,
-    textAlign: 'center',
   },
 });
 
 
 class ActivitiesSection extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      canUnstake: false,
-    };
-  }
-
   renderNoActivities() {
     const { classes } = this.props;
     return (
@@ -82,6 +73,9 @@ class ActivitiesSection extends React.Component {
           <TableCell>
             {event.lockedUntil}
           </TableCell>
+          <TableCell>
+            {this.renderUnstake(event.amount, event.lockedUntil, event.stakeData)}
+          </TableCell>
           <TableCell className={classes.txHashCell}>
             <a
               href={txLink(event.transactionHash)}
@@ -97,14 +91,16 @@ class ActivitiesSection extends React.Component {
 
   renderUnstake() {
     const { classes } = this.props;
+    const isEnabled = true;
+    const color = isEnabled ? 'primary' : 'disabled';
     return (
       <div className={classes.unstake}>
         <Button
           variant="contained"
-          color="disabled"
-          disabled
+          color={color}
+          disabled={!isEnabled}
         >
-            Unstake
+          Unstake
         </Button>
       </div>
     );
@@ -114,7 +110,6 @@ class ActivitiesSection extends React.Component {
     const {
       classes, color, accountActivities: activities,
     } = this.props;
-    const { canUnstake } = this.state;
 
     return (
       <Section id="activities-section" color={color}>
@@ -133,6 +128,9 @@ class ActivitiesSection extends React.Component {
                   Locked Until
                 </TableCell>
                 <TableCell>
+                  Action
+                </TableCell>
+                <TableCell>
                   Transaction Hash
                 </TableCell>
               </TableRow>
@@ -143,7 +141,6 @@ class ActivitiesSection extends React.Component {
             </TableBody>
           </Table>
         </Paper>
-        { canUnstake && this.renderUnstake() }
       </Section>
     );
   }
