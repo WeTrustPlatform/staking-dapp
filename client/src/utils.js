@@ -27,7 +27,9 @@ const buildBytesInput = (timeSignal, voteSignal) => {
 export function getStakePayload(durationInDays, npo) {
   assert(npo.ein.length > 0, 'EIN not found.');
   // blockchain uses timestamp in seconds
-  const durationInSeconds = durationInDays * 24 * 60 * 60;
+  // for manual testing on dev
+  const durationInSeconds = configs.NODE_ENV === 'development'
+    ? durationInDays : durationInDays * 24 * 60 * 60;
   const lockedUntil = Math.floor(Date.now() / 1000) + durationInSeconds;
   const payload = buildBytesInput(lockedUntil, npo.ein);
   return payload;

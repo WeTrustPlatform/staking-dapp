@@ -2,6 +2,7 @@ from node:10.15.1 as build-static-files
 
 WORKDIR /app
 
+ARG NODE_ENV=production
 ARG REACT_APP_CMS_URL=https://tcr.wetrust.info/api/v0
 ARG REACT_APP_WEB3_FALLBACK_PROVIDER=https://rinkeby.infura.io/metamask
 ARG REACT_APP_NETWORK_ID=4
@@ -15,6 +16,7 @@ COPY . .
 RUN REACT_APP_NETWORK_ID=$REACT_APP_NETWORK_ID \
   REACT_APP_WEB3_FALLBACK_PROVIDER=$REACT_APP_WEB3_FALLBACK_PROVIDER \
   REACT_APP_CMS_URL=$REACT_APP_CMS_URL \
+  NODE_ENV=$NODE_ENV \
   yarn build
 
 FROM nginx:1-alpine
