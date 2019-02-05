@@ -44,6 +44,8 @@ const runGetUnlockedAtSignalMatrix = (matrix) => {
 const now = Math.floor(Date.now() / 1000);
 const oneDay = 24 * 60 * 60;
 const tomorrow = now + oneDay;
+
+// These are not exact because it relies on block.timestamp + 365 days
 const oneYearFromNow = now + 365 * oneDay;
 const moreThanAYearFromNow = oneYearFromNow + oneDay;
 
@@ -54,12 +56,12 @@ contract('Test getUnlockedAtSignal matrix of happy cases', () => {
     ['payload has only time signal = 0', '0', null, 1, true],
     ['payload has only time signal != 0', '2', null, 2, true],
     ['payload has both time and vote signals', '3', '2', 3, true],
-    ['payload has time signal now', String(now), '0', now],
-    ['payload has time signal tomorrow', String(tomorrow), '0', tomorrow],
-    ['payload has time signal one year from now', String(oneYearFromNow), '0', oneYearFromNow],
-    ['payload has time signal now without vote', String(now), null, now],
-    ['payload has time signal tomorrow without vote', String(tomorrow), null, tomorrow],
-    ['payload has time signal one year from now without vote', String(oneYearFromNow), null, oneYearFromNow],
+    ['payload has time signal now', String(now), '0', now, true],
+    ['payload has time signal tomorrow', String(tomorrow), '0', tomorrow, true],
+    ['payload has time signal one year from now', String(oneYearFromNow), '0', oneYearFromNow, false],
+    ['payload has time signal now without vote', String(now), null, now, true],
+    ['payload has time signal tomorrow without vote', String(tomorrow), null, tomorrow, true],
+    ['payload has time signal one year from now without vote', String(oneYearFromNow), null, oneYearFromNow, false],
   ]);
 });
 
