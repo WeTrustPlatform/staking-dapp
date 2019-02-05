@@ -20,18 +20,22 @@ const TOLERANCE_IN_SECS = 60 * 5;
 
 // Matrix:
 // [
-// [testName1, timeSignal1, voteSignal1, expectedOutput1],
-// [testName2, timeSignal2, voteSignal2, expectedOutput2],
+// [testName1, timeSignal1, voteSignal1, expectedOutput1, isExact],
+// [testName2, timeSignal2, voteSignal2, expectedOutput2, isExact],
 // ]
 const runMatrix = (matrix) => {
   for (const testCase of matrix) {
     it(testCase[0], async () => {
-      const input = buildBytesInput(testCase[1], testCase[2]);
+      const input = buildBytesInput(testCase[1], testCase[2], [64, 64]);
       const timeLocked = await StakingContract.getUnlockedAtSignal(input);
-      assert.ok(
-        Math.abs(timeLocked - testCase[3]) < TOLERANCE_IN_SECS,
-        `Expected ${testCase[3]} vs. Actual ${timeLocked}`,
-      );
+      if (testCase[4]) {
+        assert.equal(timeLocked.toNumber(), testCase[3]);
+      } else {
+        assert.ok(
+          Math.abs(timeLocked.toNumber() - testCase[3] < TOLERANCE_IN_SECS,
+            `Expected ${testCase[3]} vs. Actual ${timeLocked}`),
+        );
+      }
     });
   }
 };
@@ -45,42 +49,56 @@ const moreThanAYearFromNow = oneYearFromNow + oneDay;
 
 contract('Test getUnlockedAtSignal matrix of happy cases', async () => {
   runMatrix([
-    ['payload has all 0s', '0', '0', '0'],
-    ['payload has only vote signal', '0', '1', '0'],
-    ['payload only time signal', '1', '0', '1'],
-    ['payload has both time and vote signals', '1', '2', '1'],
-    ['payload has time signal now', now, '0', now],
-    ['payload has time signal tomorrow', tomorrow, '0', tomorrow],
-    ['payload has time signal one year from now', oneYearFromNow, '0', oneYearFromNow],
-    ['payload has time signal now without vote', now, null, now],
-    ['payload has time signal tomorrow without vote', tomorrow, null, tomorrow],
-    ['payload has time signal one year from now without vote', oneYearFromNow, null, oneYearFromNow],
+    ['payload has all 0s', '0', '0', 1, true],
+    ['payload has only vote signal', '0', '1', 1, true],
+    ['payload only time signal', '2', null, 2, true],
+    ['payload has both time and vote signals', '3', '2', 3, true],
+    ['payload has time signal now', String(now), '0', now],
+    ['payload has time signal tomorrow', String(tomorrow), '0', tomorrow],
+    ['payload has time signal one year from now', String(oneYearFromNow), '0', oneYearFromNow],
+    ['payload has time signal now without vote', String(now), null, now],
+    ['payload has time signal tomorrow without vote', String(tomorrow), null, tomorrow],
+    ['payload has time signal one year from now without vote', String(oneYearFromNow), null, oneYearFromNow],
   ]);
 });
 
 contract('Test getUnlockedAtSignal edge cases', () => {
-  it('should return 0 when input is empty', async () => {
+  it('should return 1 when input is empty', async () => {
     const timeLocked = await StakingContract.getUnlockedAtSignal('0x');
-    assert.equal(timeLocked, 0);
+    assert.equal(timeLocked, 1);
   });
 
-  it('should work when vote signal is empty', async () => {
-    const dataBytes = paddedBytes('0').concat(paddedBytes('1'));
+  it('should return 1 when data.length < 32', async () => {
+    const dataBytes = paddedBytes('0', 62); // padSize(64) == data.length(32)
     const input = web3.utils.bytesToHex(dataBytes);
     const timeLocked = await StakingContract.getUnlockedAtSignal(input);
     assert.equal(timeLocked, 1);
   });
 
-  it('should work when vote signal is padded overflow', async () => {
-    const input = buildBytesInput('1', '1', [32, 64]);
+  it('should return 1 when time signal is 0', async () => {
+    const dataBytes = paddedBytes('0');
+    const input = web3.utils.bytesToHex(dataBytes);
     const timeLocked = await StakingContract.getUnlockedAtSignal(input);
     assert.equal(timeLocked, 1);
   });
 
-  it('should work when vote signal is a huge number > uint256', async () => {
-    const input = buildBytesInput('1', web3.utils.padRight('1', 64), [32, 128]);
+  it('should work when vote signal is empty', async () => {
+    const dataBytes = paddedBytes('2');
+    const input = web3.utils.bytesToHex(dataBytes);
     const timeLocked = await StakingContract.getUnlockedAtSignal(input);
-    assert.equal(timeLocked, 1);
+    assert.equal(timeLocked, 2);
+  });
+
+  it('should work when vote signal is over padded', async () => {
+    const input = buildBytesInput('2', '1', [64, 128]);
+    const timeLocked = await StakingContract.getUnlockedAtSignal(input);
+    assert.equal(timeLocked, 2);
+  });
+
+  it('should work when vote signal is a huge number > uint256', async () => {
+    const input = buildBytesInput('2', web3.utils.padRight('1', 128), [64, 0]);
+    const timeLocked = await StakingContract.getUnlockedAtSignal(input);
+    assert.equal(timeLocked, 2);
   });
 
   it('should return 1 year max', async () => {

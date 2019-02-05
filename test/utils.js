@@ -86,7 +86,12 @@ const stakeAndVerify = async (staker, amountInWei, data, TRST, StakingContract) 
   };
 };
 
-const paddedBytes = (numberString, padSize = 32) => {
+/**
+ * Pad 0 to a numberString
+ * @param numberString Positive integer number in string format
+ * @param padSize Number of characters. Default: 64 characters = 32 bytes
+ */
+const paddedBytes = (numberString, padSize = 64) => {
   const { utils } = web3;
   const hex = utils.toHex(numberString);
   const padded = utils.padLeft(hex, padSize);
@@ -100,12 +105,12 @@ const paddedBytes = (numberString, padSize = 32) => {
  * but not stored
  * @param padSize Array of 2 which determine the size of timeSignal and voteSignal
  * respectively. This is used for testing only. Otherwise, leave it as defaul.
- * Default [32, 32]
+ * Default [64, 64]
  */
-const buildBytesInput = (timeSignal, voteSignal, padSize = [32, 32]) => {
+const buildBytesInput = (timeSignal, voteSignal, padSize = [64, 64]) => {
   const paddedTimeSignal = paddedBytes(timeSignal, padSize[0]);
   const paddedVoteSignal = voteSignal ? paddedBytes(voteSignal, padSize[1]) : undefined;
-  const data = paddedBytes('0').concat(paddedTimeSignal, paddedVoteSignal);
+  const data = paddedVoteSignal ? paddedTimeSignal.concat(paddedVoteSignal) : paddedTimeSignal;
   const hex = web3.utils.bytesToHex(data);
   return hex;
 };

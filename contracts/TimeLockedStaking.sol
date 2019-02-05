@@ -20,13 +20,18 @@ import "./lib/ERC20.sol";
 contract TimeLockedStaking is ERC165, ISimpleStaking {
   using SafeMath for uint256;
 
-  struct StakeInfo {
-    /// total tokens this user stakes
+  struct StakeRecord {
     uint256 amount;
+    uint256 unlockedAt;
+  }
+
+  struct StakeInfo {
+    /// total tokens this user stakes.
+    uint256 totalAmount;
     /// "member since" in unix timestamp. Reset when user unstakes.
     uint256 effectiveAt;
-    /// unix timestamp when user can unstake
-    uint256 unlockedAt;
+    /// storing staking data for unstaking later.
+    mapping (bytes => StakeRecord) stakeRecords;
   }
 
   /// @dev Address of the ERC20 token contract used for staking
@@ -73,26 +78,33 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
   /// @dev msg.sender can unstake full amount or partial if unlockedAt =< now
   /// @notice as a result, the "member since" attribute is reset.
   /// @param amount Number of ERC20 to be unstaked. Must be > 0 and =< staked amount.
-  /// @param data Just follow the interface. Don't have a use case for now.
+  /// @param data The payload that was used when staking.
   function unstake(uint256 amount, bytes calldata data)
     external
     greaterThanZero(stakers[msg.sender].effectiveAt) // must be a member
-    greaterThanZero(block.timestamp - stakers[msg.sender].unlockedAt) // must be unlocked
     greaterThanZero(amount)
   {
     address user = msg.sender;
-    stakers[user].amount = stakers[user].amount.sub(amount);
+
+    StakeRecord storage record = stakers[user].stakeRecords[data];
+
+    require(amount <= record.amount, "Amount must be equal or smaller than the record.");
+    require(block.timestamp >= record.unlockedAt, "This stake is still locked.");
+
+    record.amount = record.amount.sub(amount);
+
+    stakers[user].totalAmount = stakers[user].totalAmount.sub(amount);
     stakers[user].effectiveAt = block.timestamp;
 
     totalStaked_ = totalStaked_.sub(amount);
 
     require(erc20Token.transfer(user, amount));
-    emit Unstaked(user, amount, stakers[user].amount, data);
+    emit Unstaked(user, amount, stakers[user].totalAmount, data);
   }
 
   /// @return The staked amount of an address.
   function totalStakedFor(address addr) external view returns (uint256) {
-    return stakers[addr].amount;
+    return stakers[addr].totalAmount;
   }
 
   /// @return Total number of tokens this smart contract hold.
@@ -122,36 +134,54 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
     return a > b ? b : a;
   }
 
-  /// @dev Get the unlockedAt (if any) in the data field.
+  function getStakeRecordUnlockedAt(address user, bytes memory data) public view returns (uint256) {
+    return stakers[user].stakeRecords[data].unlockedAt;
+  }
+
+  function getStakeRecordAmount(address user, bytes memory data) public view returns (uint256) {
+    return stakers[user].stakeRecords[data].amount;
+  }
+
+  /// @dev Get the unlockedAt in the data field.
   /// Maximum of 365 days from now.
+  /// Minimum of 1. Default value if data.length < 32.
   /// @param data The left-most 256 bits are unix timestamp in seconds.
-  /// @return The unlockedAt in the data or 365 days from now whichever is sooner.
+  /// @return The unlockedAt in the data. Range [1, 365 days from now].
   function getUnlockedAtSignal(bytes memory data) public view returns (uint256) {
     uint256 unlockedAt;
-    assembly {
-      let d := add(data, 32)  // first 32 bytes are the padded length of data
-      unlockedAt := mload(d)
+
+    if (data.length >= 32) {
+      assembly {
+        let d := add(data, 32) // first 32 bytes are the padded length of data
+        unlockedAt := mload(d)
+      }
     }
 
     // Maximum 365 days from now
     uint256 oneYearFromNow = block.timestamp + 365 days;
+    uint256 capped = min(unlockedAt, oneYearFromNow);
 
-    return min(unlockedAt, oneYearFromNow);
+    return max(1, capped);
   }
 
+  /// @dev Register stake by updating the StakeInfo struct
   function registerStake(address user, uint256 amount, bytes memory data) private greaterThanZero(amount) {
     require(erc20Token.transferFrom(msg.sender, address(this), amount));
 
-    StakeInfo memory info = stakers[user];
+    StakeInfo storage info = stakers[user];
 
-    uint256 effectiveAt = info.effectiveAt == 0 ? block.timestamp : info.effectiveAt;
-    uint256 unlockedAt = max(info.unlockedAt, getUnlockedAtSignal(data));
+    // Update effective at
+    info.effectiveAt = info.effectiveAt == 0 ? block.timestamp : info.effectiveAt;
 
-    stakers[user] = StakeInfo(amount.add(stakers[user].amount), effectiveAt, unlockedAt);
+    // Update stake record
+    StakeRecord storage record = info.stakeRecords[data];
+    record.amount = amount.add(record.amount);
+    record.unlockedAt = record.unlockedAt == 0 ? getUnlockedAtSignal(data) : record.unlockedAt;
 
+    // Update total amounts
+    info.totalAmount = amount.add(info.totalAmount);
     totalStaked_ = totalStaked_.add(amount);
 
-    emit Staked(user, amount, stakers[user].amount, data);
+    emit Staked(user, amount, stakers[user].totalAmount, data);
   }
-
 }
