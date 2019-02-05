@@ -11,15 +11,11 @@
       "name": "stakers",
       "outputs": [
         {
-          "name": "amount",
+          "name": "totalAmount",
           "type": "uint256"
         },
         {
           "name": "effectiveAt",
-          "type": "uint256"
-        },
-        {
-          "name": "unlockedAt",
           "type": "uint256"
         }
       ],
@@ -294,6 +290,54 @@
       "constant": true,
       "inputs": [
         {
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "getStakeRecordUnlockedAt",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xbe98dae7"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "getStakeRecordAmount",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xe122549e"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
           "name": "data",
           "type": "bytes"
         }
@@ -320,6 +364,9 @@
     },
     "5777": {
       "address": "0xef30a68266c462B87F455EcAb5e3fa8F733d184d"
+    },
+    "4777": {
+      "address": "0x6451d7AaFF5B343638D53328df5898e4AbD13633"
     }
   }
 }

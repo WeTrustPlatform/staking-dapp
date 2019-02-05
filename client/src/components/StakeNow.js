@@ -125,7 +125,7 @@ class StakeNow extends React.Component {
         approveTRST.setTriggered(approveTxHash);
         stakeTRST.setPending();
         const stakePayload = getStakePayload(durationInDays, npo);
-        TimeLockedStaking.methods.stake(stakeAmount, stakePayload).send({ from: account, gas: '150000' })
+        TimeLockedStaking.methods.stake(stakeAmount, stakePayload).send({ from: account })
           .once('transactionHash', (stakeTxHash) => {
             stakeTRST.setTriggered(stakeTxHash);
           })

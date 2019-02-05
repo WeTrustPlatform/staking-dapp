@@ -6,7 +6,7 @@ import configs from './configs';
 const paddedBytes = (numberString) => {
   const { utils } = web3;
   const hex = utils.toHex(numberString);
-  const padded = utils.padLeft(hex, 32);
+  const padded = utils.padLeft(hex, 64);
   return utils.hexToBytes(padded);
 };
 
@@ -17,9 +17,9 @@ const paddedBytes = (numberString) => {
  * but not stored
  */
 const buildBytesInput = (timeSignal, voteSignal) => {
-  const paddedTimeSignal = paddedBytes(timeSignal, 32);
-  const paddedVoteSignal = paddedBytes(voteSignal, 32);
-  const data = paddedBytes('0').concat(paddedTimeSignal, paddedVoteSignal);
+  const paddedTimeSignal = paddedBytes(timeSignal);
+  const paddedVoteSignal = paddedBytes(voteSignal);
+  const data = paddedTimeSignal.concat(paddedVoteSignal);
   const hex = web3.utils.bytesToHex(data);
   return hex;
 };
@@ -34,18 +34,18 @@ export function getStakePayload(durationInDays, npo) {
 }
 
 // Given a stake payload
-// @param payload 0x<32bytes length><32bytes until in seconds><32bytes ein>
-// Normal payload string should have length of 2(0x) + 32(length) + 32(until) + 32(ein) = 98
+// @param payload 0x<32bytes until in seconds><32bytes ein>
+// Normal payload string should have length of 2(0x) + 64(until) + 64(ein) = 130
 // @return { lockedUntil: <Date>, ein: <NPO ein> }
 export function parseStakePayload(payload) {
   const { toBN, padRight } = web3.utils;
-  // padded to 0x<96 bytes>
-  const paddedPayload = padRight(payload, 96);
+  // padded to 0x<128 bytes>
+  const paddedPayload = padRight(payload, 128);
 
-  const ein = toBN(prefix0x(paddedPayload.substring(66, 98))).toString();
+  const ein = toBN(prefix0x(paddedPayload.substring(66, 130))).toString();
 
   // convert seconds to milliseconds
-  const timestampInMilliseconds = toBN(prefix0x(paddedPayload.substring(34, 66)))
+  const timestampInMilliseconds = toBN(prefix0x(paddedPayload.substring(2, 66)))
     .mul(toBN(1000))
     .toNumber();
   const lockedUntil = new Date(timestampInMilliseconds).toLocaleString();
