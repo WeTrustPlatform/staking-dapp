@@ -5,20 +5,52 @@ const TRSTArtifact = artifacts.require('lib/TRST');
 
 const {
   stakeAndVerify,
-  getTotalStakedFor,
-  getTotalStaked,
-  getTRSTBalance,
+  verifyBalances,
+  buildBytesInput,
 } = require('./utils');
 
-contract('Staking Sanity', (accounts) => {
-  const trstHolder = accounts[0];
-  let StakingContract;
-  let TRST;
 
-  before(async () => {
-    StakingContract = await TimeLockedStaking.deployed();
-    TRST = await TRSTArtifact.deployed();
-  });
+let staker;
+let StakingContract;
+let TRST;
+
+const runSanityMatrix = (matrix) => {
+  for (const payload of matrix) {
+    it(`Test stake/unstake with payload ${payload}`, async () => {
+      const amount = web3.utils.toWei('1', 'gwei'); // 1000 TRST
+
+      const balances = await stakeAndVerify(staker, amount, payload, TRST, StakingContract);
+
+      await StakingContract.unstake(amount, payload, { from: staker });
+
+      // verify all the balances are the same as the very beginning
+      await verifyBalances(balances.before, staker, TRST, StakingContract);
+    });
+  }
+};
+
+before(async () => {
+  StakingContract = await TimeLockedStaking.deployed();
+  TRST = await TRSTArtifact.deployed();
+});
+
+contract('should be able to stake and unstake and balance is transfered correctly', (accounts) => {
+  [staker] = accounts;
+
+  runSanityMatrix([
+    '0x',
+    '0x0',
+    buildBytesInput('0'),
+    buildBytesInput('1'),
+    buildBytesInput('2'),
+    buildBytesInput('2', '0'),
+    buildBytesInput('2', '1'),
+    buildBytesInput('2', '1', [64, 128]),
+  ]);
+});
+
+contract('Staking Sanity', (accounts) => {
+  [staker] = accounts;
 
   it('should accept an address in the constructor', async () => {
     const erc20 = await StakingContract.token();
@@ -32,40 +64,6 @@ contract('Staking Sanity', (accounts) => {
     assert.ok(eip900);
     const invalid = await StakingContract.supportsInterface('0xffffffff');
     assert.ok(!invalid);
-  });
-
-  it('should be able to stake and unstake and balance is transfered correctly', async () => {
-    const amount = web3.utils.toWei('1', 'gwei'); // 1000 TRST
-    const stakingContractAddress = StakingContract.address;
-
-    const balances = await stakeAndVerify(trstHolder, amount, '0x', TRST, StakingContract);
-
-    await StakingContract.unstake(amount, '0x', { from: trstHolder });
-
-    // verify all the balances are the same as the very beginning
-    const {
-      contractTotalStaked,
-      stakerStakeAmount,
-      contractTRSTBalance,
-      stakerTRSTBalance,
-    } = balances.before;
-
-    assert.deepEqual(
-      await getTotalStaked(StakingContract),
-      contractTotalStaked,
-    );
-    assert.deepEqual(
-      await getTotalStakedFor(StakingContract, trstHolder),
-      stakerStakeAmount,
-    );
-    assert.deepEqual(
-      await getTRSTBalance(TRST, stakingContractAddress),
-      contractTRSTBalance,
-    );
-    assert.deepEqual(
-      await getTRSTBalance(TRST, trstHolder),
-      stakerTRSTBalance,
-    );
   });
 
   it('should return supportsHistory false', async () => {

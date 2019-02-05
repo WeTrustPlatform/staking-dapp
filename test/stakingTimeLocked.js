@@ -23,7 +23,7 @@ const TOLERANCE_IN_SECS = 60 * 5;
 // [testName1, timeSignal1, voteSignal1, expectedOutput1, isExact],
 // [testName2, timeSignal2, voteSignal2, expectedOutput2, isExact],
 // ]
-const runMatrix = (matrix) => {
+const runGetUnlockedAtSignalMatrix = (matrix) => {
   for (const testCase of matrix) {
     it(testCase[0], async () => {
       const input = buildBytesInput(testCase[1], testCase[2], [64, 64]);
@@ -47,8 +47,8 @@ const tomorrow = now + oneDay;
 const oneYearFromNow = now + 365 * oneDay;
 const moreThanAYearFromNow = oneYearFromNow + oneDay;
 
-contract('Test getUnlockedAtSignal matrix of happy cases', async () => {
-  runMatrix([
+contract('Test getUnlockedAtSignal matrix of happy cases', () => {
+  runGetUnlockedAtSignalMatrix([
     ['payload has all 0s', '0', '0', 1, true],
     ['payload has only vote signal', '0', '1', 1, true],
     ['payload has only time signal = 0', '0', null, 1, true],

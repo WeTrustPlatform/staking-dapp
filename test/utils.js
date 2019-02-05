@@ -15,6 +15,34 @@ const sub = (a, b) => toBN(a).sub(toBN(b));
 
 const calculateAmountAfter = amount => (subject, op) => op(subject, amount);
 
+const verifyBalances = async (expectedBalances, staker, TRST, StakingContract) => {
+  const {
+    contractTotalStaked,
+    stakerStakeAmount,
+    contractTRSTBalance,
+    stakerTRSTBalance,
+  } = expectedBalances;
+
+  const stakingContractAddress = StakingContract.address;
+
+  assert.deepEqual(
+    await getTotalStaked(StakingContract),
+    contractTotalStaked,
+  );
+  assert.deepEqual(
+    await getTotalStakedFor(StakingContract, staker),
+    stakerStakeAmount,
+  );
+  assert.deepEqual(
+    await getTRSTBalance(TRST, stakingContractAddress),
+    contractTRSTBalance,
+  );
+  assert.deepEqual(
+    await getTRSTBalance(TRST, staker),
+    stakerTRSTBalance,
+  );
+};
+
 // Every staking should re-use this method
 // verify all the balances at each step
 // 1. get initial balances
@@ -53,24 +81,7 @@ const stakeAndVerify = async (staker, amountInWei, data, TRST, StakingContract) 
   const stakerStakeAmount = amountAfter(stakerOriginalStakeAmount, add);
   const stakerTRSTBalance = amountAfter(stakerOriginalTRSTBalance, sub);
 
-  assert.deepEqual(
-    await getTotalStaked(StakingContract),
-    contractTotalStaked,
-  );
-  assert.deepEqual(
-    await getTotalStakedFor(StakingContract, staker),
-    stakerStakeAmount,
-  );
-  assert.deepEqual(
-    await getTRSTBalance(TRST, stakingContractAddress),
-    contractTRSTBalance,
-  );
-  assert.deepEqual(
-    await getTRSTBalance(TRST, staker),
-    stakerTRSTBalance,
-  );
-
-  return {
+  const balances = {
     before: {
       stakerStakeAmount: stakerOriginalStakeAmount,
       stakerTRSTBalance: stakerOriginalTRSTBalance,
@@ -84,6 +95,10 @@ const stakeAndVerify = async (staker, amountInWei, data, TRST, StakingContract) 
       contractTRSTBalance,
     },
   };
+
+  await verifyBalances(balances.after, staker, TRST, StakingContract);
+
+  return balances;
 };
 
 /**
@@ -126,4 +141,5 @@ module.exports = {
   calculateAmountAfter,
   paddedBytes,
   buildBytesInput,
+  verifyBalances,
 };
