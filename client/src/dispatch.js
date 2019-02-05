@@ -18,54 +18,103 @@ import configs from './configs';
 
 export const dispatchAccountActivities = (dispatch, TimeLockedStaking, account) => {
   // Get all the Staked events related to the current account
-  TimeLockedStaking.getPastEvents('Staked', {
+  TimeLockedStaking.getPastEvents('allEvents', {
     fromBlock: 0,
     toBlock: 'latest',
     filter: {
       user: account,
     },
   }, (err, events) => {
-    // Massage the results
-    const transformed = events.map((event) => {
+    // Reducer to consolidate multiple staked and unstaked events
+    // per stake data.
+    // @returns
+    // {
+    //   <stake's data field as key>: {
+    //     id, ein, amount, rawAmount, lockedUntil, transactionHash, canUnstake
+    //   }
+    // }
+    //
+    // Note transactionHash, id:
+    // There might be multiple transactionHash if users stake
+    // with the same payloads multiple times
+    // This is edge case and only happens if users purposely interact
+    // with our contract manually.
+    // To make it easy, we show the latest.
+    //
+    // Note amount: Localized formatted number in TRST
+    // add if it's a stake event
+    // sub if it's an unstake event
+    //
+    // Note: Use Object.assign on accumulator. Hence, no nested fields.
+    const eventsReducer = (accumulator, currentEvent) => {
       const {
-        id, transactionHash, returnValues,
-      } = event;
+        id, transactionHash, returnValues, event,
+      } = currentEvent;
       const { amount, data } = returnValues;
-      const { ein, lockedUntil } = parseStakePayload(data);
 
-      // determine canUnstake
-      const lockedUntilDate = new Date(lockedUntil);
-      const canUnstake = Date.now() > lockedUntilDate.getTime()
-        && trstInBN(amount).gt(bigNumber(0));
-
-      return {
-        id,
-        ein,
-        amount: trst(amount),
-        lockedUntil,
-        transactionHash,
-        stakeData: data, // required to unstake
-        canUnstake,
+      const updatedValue = {
+        id, transactionHash,
       };
-    });
+
+      if (accumulator[data]) {
+        // data exist
+        const { rawAmount } = accumulator[data];
+        updatedValue.rawAmount = event === 'Staked'
+          ? rawAmount.add(bigNumber(amount)) : rawAmount.sub(bigNumber(amount));
+      } else {
+        const { ein, lockedUntil } = parseStakePayload(data);
+        const rawAmount = event === 'Staked'
+          ? bigNumber(amount) : bigNumber(amount).neg();
+
+        accumulator[data] = {
+          ein,
+          rawAmount,
+          lockedUntil,
+        };
+      }
+
+      Object.assign(accumulator[data], updatedValue);
+
+      const { rawAmount, lockedUntil } = accumulator[data];
+
+      // update the amount
+      accumulator[data].amount = trst(rawAmount);
+
+      // update canUnstake
+      const lockedUntilDate = new Date(lockedUntil);
+      accumulator[data].canUnstake = Date.now() > lockedUntilDate.getTime()
+        && rawAmount.gt(bigNumber(0));
+
+
+      return accumulator;
+    };
+
+
+    const aggregatedEvents = events.reduce(eventsReducer, {});
 
     // Call CMS to get NPO details
-    const populatedNPOPromises = transformed.map(async (record) => {
+    const populatedNPOPromises = Object.keys(aggregatedEvents).map(async (key) => {
+      const data = aggregatedEvents[key];
       let res;
       try {
         // Users can pass in any EIN when they stake.
         // If ein is invalid or not found,
         // just show default name 'Not Found'
-        assert(record.ein.length > 0, 'Invalid EIN.');
+        assert(data.ein.length > 0, 'Invalid EIN.');
         res = await axios.get(
-          `${configs.CMS_URL}/charities?search=${record.ein}`,
+          `${configs.CMS_URL}/charities?search=${data.ein}`,
         );
       } catch (e) {
         console.log(e);
       }
 
       const npo = res && res.data && res.data.records && res.data.records[0];
-      return Object.assign({ name: 'Not Found' }, npo, record);
+      return Object.assign(
+        { name: 'Not Found' },
+        npo,
+        data,
+        { stakeData: key }, // required to unstake
+      );
     });
 
     Promise.all(populatedNPOPromises).then((completed) => {
