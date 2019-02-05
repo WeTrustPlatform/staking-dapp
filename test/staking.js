@@ -44,10 +44,12 @@ const runSanityMatrix = (matrix) => {
       const amount3 = toWei('1.3', 'gwei');
       const amount4 = toWei('1.7', 'gwei');
       await StakingContract.unstake(amount3, payload, { from: staker });
-      // calulate intermediary balances
+
+      // verify intermediary balances
       const balances3 = calculateBalances(balances2.after, sub, amount3);
       await verifyBalances(balances3, staker, TRST, StakingContract);
 
+      // verify all the balances are the same as the very beginning
       await StakingContract.unstake(amount4, payload, { from: staker });
       await verifyBalances(balances1.before, staker, TRST, StakingContract);
     });
@@ -61,6 +63,7 @@ before(async () => {
 
 contract('should be able to stake and unstake and balance is transfered correctly', (accounts) => {
   [staker] = accounts;
+  const now = Math.floor(Date.now() / 1000);
 
   runSanityMatrix([
     '0x',
@@ -68,9 +71,13 @@ contract('should be able to stake and unstake and balance is transfered correctl
     buildBytesInput('0'),
     buildBytesInput('1'),
     buildBytesInput('2'),
+    buildBytesInput(String(now)),
     buildBytesInput('2', '0'),
+    buildBytesInput(String(now), '0'),
     buildBytesInput('2', '1'),
+    buildBytesInput(String(now), '1'),
     buildBytesInput('2', '1', [64, 128]),
+    buildBytesInput(String(now), '1', [64, 128]),
   ]);
 });
 
