@@ -37,7 +37,7 @@ const runSanityMatrix = (matrix) => {
       await StakingContract.unstake(amount, payload[0], { from: staker });
 
       // verify all the balances are the same as the very beginning
-      await verifyBalances(balances.before, staker, TRST, StakingContract);
+      await verifyBalances(balances.before, staker, payload[0], TRST, StakingContract);
 
       await verifyUnlockedAt(staker, payload[0], payload[1], StakingContract);
     });
@@ -68,11 +68,11 @@ const runSanityMatrix = (matrix) => {
 
       // verify intermediary balances
       const balances3 = calculateBalances(balances2.after, sub, amount3);
-      await verifyBalances(balances3, staker, TRST, StakingContract);
+      await verifyBalances(balances3, staker, payload[0], TRST, StakingContract);
 
       // verify all the balances are the same as the very beginning
       await StakingContract.unstake(amount4, payload[0], { from: staker });
-      await verifyBalances(balances1.before, staker, TRST, StakingContract);
+      await verifyBalances(balances1.before, staker, payload[0], TRST, StakingContract);
 
       await verifyUnlockedAt(staker, payload[0], payload[1], StakingContract);
     });
