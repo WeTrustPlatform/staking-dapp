@@ -32,6 +32,12 @@ export const dispatchAccountActivities = (dispatch, TimeLockedStaking, account) 
       } = event;
       const { amount, data } = returnValues;
       const { ein, lockedUntil } = parseStakePayload(data);
+
+      // determine canUnstake
+      const lockedUntilDate = new Date(lockedUntil);
+      const canUnstake = Date.now() > lockedUntilDate.getTime()
+        && trstInBN(amount).gt(bigNumber(0));
+
       return {
         id,
         ein,
@@ -39,6 +45,7 @@ export const dispatchAccountActivities = (dispatch, TimeLockedStaking, account) 
         lockedUntil,
         transactionHash,
         stakeData: data, // required to unstake
+        canUnstake,
       };
     });
 

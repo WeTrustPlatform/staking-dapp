@@ -74,7 +74,7 @@ class ActivitiesSection extends React.Component {
             {event.lockedUntil}
           </TableCell>
           <TableCell>
-            {this.renderUnstake(event.amount, event.lockedUntil, event.stakeData)}
+            {this.renderUnstake(event.canUnstake)}
           </TableCell>
           <TableCell className={classes.txHashCell}>
             <a
@@ -89,9 +89,8 @@ class ActivitiesSection extends React.Component {
       )));
   }
 
-  renderUnstake() {
+  renderUnstake(isEnabled) {
     const { classes } = this.props;
-    const isEnabled = true;
     const color = isEnabled ? 'primary' : 'disabled';
     return (
       <div className={classes.unstake}>
