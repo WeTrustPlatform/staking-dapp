@@ -38,6 +38,7 @@ export const dispatchAccountActivities = (dispatch, TimeLockedStaking, account) 
         amount: trst(amount),
         lockedUntil,
         transactionHash,
+        stakeData: data, // required to unstake
       };
     });
 
@@ -84,11 +85,12 @@ export const dispatchOverallStats = async (dispatch, TimeLockedStaking) => {
       return;
     }
 
-    // don't rely on the events being sorted chronologically.
-    // keep track of block number to see what total is the latest.
+    // each event contains the user address and user total stake amount
+    // however, don't rely on the events being sorted chronologically.
+    // keep track of block number to see what total stake amount is the latest.
     // trying to construct the userStats map:
     // {
-    //   "0x01": { total, blockNumber },
+    //   "<user address i.e 0x>": { total, blockNumber },
     //   ...
     // }
     const userStatsReducer = (accumulator, currentEvent) => {
