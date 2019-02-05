@@ -51,7 +51,8 @@ contract('Test getUnlockedAtSignal matrix of happy cases', async () => {
   runMatrix([
     ['payload has all 0s', '0', '0', 1, true],
     ['payload has only vote signal', '0', '1', 1, true],
-    ['payload only time signal', '2', null, 2, true],
+    ['payload has only time signal = 0', '0', null, 1, true],
+    ['payload has only time signal != 0', '2', null, 2, true],
     ['payload has both time and vote signals', '3', '2', 3, true],
     ['payload has time signal now', String(now), '0', now],
     ['payload has time signal tomorrow', String(tomorrow), '0', tomorrow],
@@ -69,34 +70,20 @@ contract('Test getUnlockedAtSignal edge cases', () => {
   });
 
   it('should return 1 when data.length < 32', async () => {
-    const dataBytes = paddedBytes('0', 62); // padSize(64) == data.length(32)
+    const dataBytes = paddedBytes('2', 62); // padSize(62) == data.length(31)
     const input = web3.utils.bytesToHex(dataBytes);
     const timeLocked = await StakingContract.getUnlockedAtSignal(input);
     assert.equal(timeLocked, 1);
   });
 
-  it('should return 1 when time signal is 0', async () => {
-    const dataBytes = paddedBytes('0');
-    const input = web3.utils.bytesToHex(dataBytes);
-    const timeLocked = await StakingContract.getUnlockedAtSignal(input);
-    assert.equal(timeLocked, 1);
-  });
-
-  it('should work when vote signal is empty', async () => {
-    const dataBytes = paddedBytes('2');
-    const input = web3.utils.bytesToHex(dataBytes);
-    const timeLocked = await StakingContract.getUnlockedAtSignal(input);
-    assert.equal(timeLocked, 2);
-  });
-
-  it('should work when vote signal is over padded', async () => {
+  it('should work when vote signal is over left padded', async () => {
     const input = buildBytesInput('2', '1', [64, 128]);
     const timeLocked = await StakingContract.getUnlockedAtSignal(input);
     assert.equal(timeLocked, 2);
   });
 
   it('should work when vote signal is a huge number > uint256', async () => {
-    const input = buildBytesInput('2', web3.utils.padRight('1', 128), [64, 0]);
+    const input = buildBytesInput('2', web3.utils.padRight('1', 128), [64, 128]);
     const timeLocked = await StakingContract.getUnlockedAtSignal(input);
     assert.equal(timeLocked, 2);
   });
