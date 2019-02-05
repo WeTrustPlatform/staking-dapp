@@ -12,8 +12,7 @@ const getTotalStaked = async contract => toBN(
 
 const add = (a, b) => toBN(a).add(toBN(b));
 const sub = (a, b) => toBN(a).sub(toBN(b));
-
-const calculateAmountAfter = amount => (subject, op) => op(subject, amount);
+const inv = op => (op.toString() === add.toString() ? sub : add);
 
 const verifyBalances = async (expectedBalances, staker, TRST, StakingContract) => {
   const {
@@ -41,6 +40,22 @@ const verifyBalances = async (expectedBalances, staker, TRST, StakingContract) =
     await getTRSTBalance(TRST, staker),
     stakerTRSTBalance,
   );
+};
+
+const calculateBalances = (balances, op, amount) => {
+  const calculateAmountAfter = (subject, fn) => fn(subject, amount);
+
+  const contractTotalStaked = calculateAmountAfter(balances.contractTotalStaked, op);
+  const contractTRSTBalance = calculateAmountAfter(balances.contractTRSTBalance, op);
+  const stakerStakeAmount = calculateAmountAfter(balances.stakerStakeAmount, op);
+  const stakerTRSTBalance = calculateAmountAfter(balances.stakerTRSTBalance, inv(op));
+
+  return {
+    contractTotalStaked,
+    contractTRSTBalance,
+    stakerStakeAmount,
+    stakerTRSTBalance,
+  };
 };
 
 // Every staking should re-use this method
@@ -73,32 +88,22 @@ const stakeAndVerify = async (staker, amountInWei, data, TRST, StakingContract) 
 
   await StakingContract.stake(amount.toString(), data, { from: staker });
 
-  // verify all the new balances
-  const amountAfter = calculateAmountAfter(amount);
 
-  const contractTotalStaked = amountAfter(contractOriginalTotalStaked, add);
-  const contractTRSTBalance = amountAfter(contractOriginalTRSTBalance, add);
-  const stakerStakeAmount = amountAfter(stakerOriginalStakeAmount, add);
-  const stakerTRSTBalance = amountAfter(stakerOriginalTRSTBalance, sub);
-
-  const balances = {
-    before: {
-      stakerStakeAmount: stakerOriginalStakeAmount,
-      stakerTRSTBalance: stakerOriginalTRSTBalance,
-      contractTotalStaked: contractOriginalTotalStaked,
-      contractTRSTBalance: contractOriginalTRSTBalance,
-    },
-    after: {
-      stakerStakeAmount,
-      stakerTRSTBalance,
-      contractTotalStaked,
-      contractTRSTBalance,
-    },
+  const balancesBefore = {
+    stakerStakeAmount: stakerOriginalStakeAmount,
+    stakerTRSTBalance: stakerOriginalTRSTBalance,
+    contractTotalStaked: contractOriginalTotalStaked,
+    contractTRSTBalance: contractOriginalTRSTBalance,
   };
 
-  await verifyBalances(balances.after, staker, TRST, StakingContract);
+  // verify all the new balances
+  const balancesAfter = calculateBalances(balancesBefore, add, amount);
+  await verifyBalances(balancesAfter, staker, TRST, StakingContract);
 
-  return balances;
+  return {
+    before: balancesBefore,
+    after: balancesAfter,
+  };
 };
 
 /**
@@ -138,7 +143,7 @@ module.exports = {
   stakeAndVerify,
   add,
   sub,
-  calculateAmountAfter,
+  calculateBalances,
   paddedBytes,
   buildBytesInput,
   verifyBalances,

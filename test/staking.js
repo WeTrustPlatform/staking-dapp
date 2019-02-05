@@ -7,8 +7,11 @@ const {
   stakeAndVerify,
   verifyBalances,
   buildBytesInput,
+  sub,
+  calculateBalances,
 } = require('./utils');
 
+const { toWei } = web3.utils;
 
 let staker;
 let StakingContract;
@@ -17,7 +20,7 @@ let TRST;
 const runSanityMatrix = (matrix) => {
   for (const payload of matrix) {
     it(`Test stake/unstake with payload ${payload}`, async () => {
-      const amount = web3.utils.toWei('1', 'gwei'); // 1000 TRST
+      const amount = toWei('1', 'gwei'); // 1000 TRST
 
       const balances = await stakeAndVerify(staker, amount, payload, TRST, StakingContract);
 
@@ -25,6 +28,28 @@ const runSanityMatrix = (matrix) => {
 
       // verify all the balances are the same as the very beginning
       await verifyBalances(balances.before, staker, TRST, StakingContract);
+    });
+
+
+    it(`Test stake/unstake with payload ${payload} twice`, async () => {
+      const amount1 = toWei('1', 'gwei'); // 1000 TRST
+      const amount2 = toWei('2', 'gwei');
+
+      // stake the same payload twice with different amount
+      const balances1 = await stakeAndVerify(staker, amount1, payload, TRST, StakingContract);
+      const balances2 = await stakeAndVerify(staker, amount2, payload, TRST, StakingContract);
+
+      // unstake
+      // sum(amoount1, amount2) = sum(amount3, amount4)
+      const amount3 = toWei('1.3', 'gwei');
+      const amount4 = toWei('1.7', 'gwei');
+      await StakingContract.unstake(amount3, payload, { from: staker });
+      // calulate intermediary balances
+      const balances3 = calculateBalances(balances2.after, sub, amount3);
+      await verifyBalances(balances3, staker, TRST, StakingContract);
+
+      await StakingContract.unstake(amount4, payload, { from: staker });
+      await verifyBalances(balances1.before, staker, TRST, StakingContract);
     });
   }
 };
