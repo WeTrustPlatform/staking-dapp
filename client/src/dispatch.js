@@ -26,9 +26,6 @@ export const dispatchAccountActivities = (dispatch, TimeLockedStaking, account) 
   TimeLockedStaking.getPastEvents('allEvents', {
     fromBlock: 0,
     toBlock: 'latest',
-    filter: {
-      user: account,
-    },
     // topics: TOPICS,
   }, (err, events) => {
     // Reducer to consolidate multiple staked and unstaked events
@@ -58,8 +55,10 @@ export const dispatchAccountActivities = (dispatch, TimeLockedStaking, account) 
       } = currentEvent;
       const { amount, data, user } = returnValues;
 
-      // TODO check why filter does not work
-      if (user.toLowerCase() !== account.toLowerCase()) {
+      // filter { user: account } does not work because we use 'allEvents'
+      // TODO use TOPIC
+      if ((user.toLowerCase() !== account.toLowerCase())
+        || (event !== 'Staked' && event !== 'Unstaked')) {
         return accumulator;
       }
 
