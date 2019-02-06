@@ -31,8 +31,8 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
     /// "member since" in unix timestamp. Reset when user unstakes.
     uint256 effectiveAt;
     /// storing staking data for unstaking later.
-    /// the key is the 'data' parameter in the stake method.
-    mapping (bytes => StakeRecord) stakeRecords;
+    /// recordId i.e. key of mapping is the keccak256 of the 'data' parameter in the stake method.
+    mapping (bytes32 => StakeRecord) stakeRecords;
   }
 
   /// @dev When emergency is true,
@@ -97,7 +97,9 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
   {
     address user = msg.sender;
 
-    StakeRecord storage record = stakers[user].stakeRecords[data];
+    bytes32 recordId = keccak256(data);
+
+    StakeRecord storage record = stakers[user].stakeRecords[recordId];
 
     require(amount <= record.amount, "Amount must be equal or smaller than the record.");
 
@@ -158,11 +160,11 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
   }
 
   function getStakeRecordUnlockedAt(address user, bytes memory data) public view returns (uint256) {
-    return stakers[user].stakeRecords[data].unlockedAt;
+    return stakers[user].stakeRecords[keccak256(data)].unlockedAt;
   }
 
   function getStakeRecordAmount(address user, bytes memory data) public view returns (uint256) {
-    return stakers[user].stakeRecords[data].amount;
+    return stakers[user].stakeRecords[keccak256(data)].amount;
   }
 
   /// @dev Get the unlockedAt in the data field.
@@ -198,7 +200,8 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
     info.effectiveAt = info.effectiveAt == 0 ? block.timestamp : info.effectiveAt;
 
     // Update stake record
-    StakeRecord storage record = info.stakeRecords[data];
+    bytes32 recordId = keccak256(data);
+    StakeRecord storage record = info.stakeRecords[recordId];
     record.amount = amount.add(record.amount);
     record.unlockedAt = record.unlockedAt == 0 ? getUnlockedAtSignal(data) : record.unlockedAt;
 
