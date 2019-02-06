@@ -16,6 +16,11 @@ import {
 } from './formatter';
 import configs from './configs';
 
+// TODO pull events signature from abi
+// const STAKE_TOPIC = '0xc65e53b88159e7d2c0fc12a0600072e28ae53ff73b4c1715369c30f160935142';
+// const UNSTAKE_TOPIC = '0xaf01bfc8475df280aca00b578c4a948e6d95700f0db8c13365240f7f973c8754';
+// const TOPICS = [STAKE_TOPIC, UNSTAKE_TOPIC];
+
 export const dispatchAccountActivities = (dispatch, TimeLockedStaking, account) => {
   // Get all the Staked events related to the current account
   TimeLockedStaking.getPastEvents('allEvents', {
@@ -24,6 +29,7 @@ export const dispatchAccountActivities = (dispatch, TimeLockedStaking, account) 
     filter: {
       user: account,
     },
+    // topics: TOPICS,
   }, (err, events) => {
     // Reducer to consolidate multiple staked and unstaked events
     // per stake data.
@@ -50,7 +56,12 @@ export const dispatchAccountActivities = (dispatch, TimeLockedStaking, account) 
       const {
         id, transactionHash, returnValues, event,
       } = currentEvent;
-      const { amount, data } = returnValues;
+      const { amount, data, user } = returnValues;
+
+      // TODO check why filter does not work
+      if (user.toLowerCase() !== account.toLowerCase()) {
+        return accumulator;
+      }
 
       const updatedValue = {
         id, transactionHash,
@@ -135,6 +146,7 @@ export const dispatchOverallStats = async (dispatch, TimeLockedStaking) => {
   TimeLockedStaking.getPastEvents('allEvents', {
     fromBlock: 0,
     toBlock: 'latest',
+    // topics: TOPICS,
   }, (err, events) => {
     if (err || !events) {
       // TODO send log
@@ -155,7 +167,7 @@ export const dispatchOverallStats = async (dispatch, TimeLockedStaking) => {
 
       if (event !== 'Staked' && event !== 'Unstaked') {
         // maybe we're on wrong network
-        // or customed events were added outside of the EIP 900 scopes
+        // or the topics is wrong
         return accumulator;
       }
 
