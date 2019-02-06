@@ -72,12 +72,11 @@ class ActivitiesSection extends React.Component {
     const { isUnstaking } = this.state;
     const { canUnstake, rawAmount, stakeData } = event;
     const isEnabled = canUnstake && !isUnstaking && !validateNetworkId(networkId);
-    const color = isEnabled ? 'primary' : 'disabled';
     return (
       <div className={classes.unstake}>
         <Button
           variant="contained"
-          color={color}
+          color="primary"
           disabled={!isEnabled}
           onClick={() => this.handleUnstake(rawAmount.toString(), stakeData)}
         >
@@ -91,7 +90,7 @@ class ActivitiesSection extends React.Component {
     const { classes } = this.props;
     return (
       <TableRow>
-        <TableCell colSpan={4}>
+        <TableCell colSpan={5}>
           <div className={classes.noActivities}>
             It looks so empty.
             {' '}
