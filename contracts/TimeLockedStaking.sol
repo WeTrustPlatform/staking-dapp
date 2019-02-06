@@ -31,10 +31,19 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
     /// "member since" in unix timestamp. Reset when user unstakes.
     uint256 effectiveAt;
     /// storing staking data for unstaking later.
+    /// the key is the 'data' parameter in the stake method.
     mapping (bytes => StakeRecord) stakeRecords;
   }
 
-  /// @dev Address of the ERC20 token contract used for staking
+  /// @dev When emergency is true,
+  /// block stake
+  /// allow unstake without verifying the record.unlockedAt
+  bool emergency;
+
+  /// @dev Owner of this contract, who can activate the emergency.
+  address owner;
+
+  /// @dev Address of the ERC20 token contract used for staking.
   ERC20 internal erc20Token;
 
   /// @dev https://solidity.readthedocs.io/en/v0.4.25/style-guide.html#avoiding-naming-collisions
@@ -50,6 +59,8 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
 
   constructor(address token) public {
     erc20Token = ERC20(token);
+    owner = msg.sender;
+    emergency = false;
   }
 
   /// @dev Implement ERC165
@@ -89,7 +100,12 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
     StakeRecord storage record = stakers[user].stakeRecords[data];
 
     require(amount <= record.amount, "Amount must be equal or smaller than the record.");
-    require(block.timestamp >= record.unlockedAt, "This stake is still locked.");
+
+    // Validate unlockedAt if there's no emergency.
+    // Otherwise, ignore the lockdown period.
+    if (!emergency) {
+      require(block.timestamp >= record.unlockedAt, "This stake is still locked.");
+    }
 
     record.amount = record.amount.sub(amount);
 
@@ -98,7 +114,7 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
 
     totalStaked_ = totalStaked_.sub(amount);
 
-    require(erc20Token.transfer(user, amount));
+    require(erc20Token.transfer(user, amount), "Transfer failed.");
     emit Unstaked(user, amount, stakers[user].totalAmount, data);
   }
 
@@ -121,6 +137,13 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
   /// @return false History is processed off-chain via event logs.
   function supportsHistory() external pure returns (bool) {
     return false;
+  }
+
+
+  /// Escape hatch
+  function setEmergency(bool status) external {
+    require(msg.sender == owner, "msg.sender must be owner.");
+    emergency = status;
   }
 
   /// Helpers
@@ -166,7 +189,8 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
 
   /// @dev Register stake by updating the StakeInfo struct
   function registerStake(address user, uint256 amount, bytes memory data) private greaterThanZero(amount) {
-    require(erc20Token.transferFrom(msg.sender, address(this), amount));
+    require(!emergency, "Cannot stake due to emergency.");
+    require(erc20Token.transferFrom(msg.sender, address(this), amount), "Transfer failed.");
 
     StakeInfo storage info = stakers[user];
 
