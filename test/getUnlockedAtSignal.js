@@ -99,9 +99,3 @@ contract('Test getUnlockedAtSignal edge cases', () => {
     );
   });
 });
-
-contract('Test unstake when there is timelocked', async () => {
-  it('should throw when unstake', async () => {
-    // TODO
-  });
-});
