@@ -12,6 +12,11 @@ import Paper from '@material-ui/core/Paper';
 import Section from './Section';
 import SectionHeader from './SectionHeader';
 import { txLink } from '../formatter';
+import { validateNetworkId } from '../utils';
+import {
+  dispatchAccountActivities,
+  dispatchOverallStats,
+} from '../dispatch';
 
 const styles = theme => ({
   root: {
@@ -39,6 +44,49 @@ const styles = theme => ({
 
 
 class ActivitiesSection extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isUnstaking: false,
+    };
+  }
+
+  handleUnstake(amount, stakeData) {
+    const { TimeLockedStaking, account, refreshStats } = this.props;
+    this.setState({
+      isUnstaking: true,
+    });
+
+    TimeLockedStaking.methods
+      .unstake(amount, stakeData).send({ from: account })
+      .finally(() => {
+        this.setState({
+          isUnstaking: false,
+        });
+        refreshStats(account, TimeLockedStaking);
+      });
+  }
+
+  renderUnstake(event) {
+    const { classes, networkId } = this.props;
+    const { isUnstaking } = this.state;
+    const { canUnstake, rawAmount, stakeData } = event;
+    const isEnabled = canUnstake && !isUnstaking && !validateNetworkId(networkId);
+    const color = isEnabled ? 'primary' : 'disabled';
+    return (
+      <div className={classes.unstake}>
+        <Button
+          variant="contained"
+          color={color}
+          disabled={!isEnabled}
+          onClick={() => this.handleUnstake(rawAmount.toString(), stakeData)}
+        >
+          Unstake
+        </Button>
+      </div>
+    );
+  }
+
   renderNoActivities() {
     const { classes } = this.props;
     return (
@@ -62,47 +110,36 @@ class ActivitiesSection extends React.Component {
   renderActivities() {
     const { classes, accountActivities } = this.props;
     return (
-      accountActivities.map(event => (
-        <TableRow key={event.id}>
-          <TableCell>
-            {event.name}
-          </TableCell>
-          <TableCell>
-            {event.amount}
-          </TableCell>
-          <TableCell>
-            {event.lockedUntil}
-          </TableCell>
-          <TableCell>
-            {this.renderUnstake(event.canUnstake)}
-          </TableCell>
-          <TableCell className={classes.txHashCell}>
-            <a
-              href={txLink(event.transactionHash)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {event.transactionHash}
-            </a>
-          </TableCell>
-        </TableRow>
-      )));
-  }
-
-  renderUnstake(isEnabled) {
-    const { classes } = this.props;
-    const color = isEnabled ? 'primary' : 'disabled';
-    return (
-      <div className={classes.unstake}>
-        <Button
-          variant="contained"
-          color={color}
-          disabled={!isEnabled}
-        >
-          Unstake
-        </Button>
-      </div>
-    );
+      accountActivities.map((event) => {
+        const {
+          id, name, amount, lockedUntil, transactionHash,
+        } = event;
+        return (
+          <TableRow key={id}>
+            <TableCell>
+              {name}
+            </TableCell>
+            <TableCell>
+              {amount}
+            </TableCell>
+            <TableCell>
+              {lockedUntil}
+            </TableCell>
+            <TableCell>
+              {this.renderUnstake(event)}
+            </TableCell>
+            <TableCell className={classes.txHashCell}>
+              <a
+                href={txLink(transactionHash)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {transactionHash}
+              </a>
+            </TableCell>
+          </TableRow>
+        );
+      }));
   }
 
   render() {
@@ -146,7 +183,18 @@ class ActivitiesSection extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  account: state.account,
+  networkId: state.networkId,
   accountActivities: state.accountActivities || [],
+  TimeLockedStaking: state.contracts.TimeLockedStaking,
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(ActivitiesSection));
+const mapDispatchToProps = dispatch => ({
+  refreshStats: (account, TimeLockedStaking) => {
+    // call helper
+    dispatchAccountActivities(dispatch, TimeLockedStaking, account);
+    dispatchOverallStats(dispatch, TimeLockedStaking);
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ActivitiesSection));
