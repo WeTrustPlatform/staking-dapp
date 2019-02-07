@@ -8,6 +8,7 @@ const {
 
 const TimeLockedStaking = artifacts.require('TimeLockedStaking');
 
+// read only
 let StakingContract;
 before(async () => {
   StakingContract = await TimeLockedStaking.deployed();

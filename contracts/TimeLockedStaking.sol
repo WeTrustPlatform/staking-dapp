@@ -57,9 +57,12 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
     _;
   }
 
-  constructor(address token) public {
-    erc20Token = ERC20(token);
-    owner = msg.sender;
+  /// @dev Better to manually validate these params after deployment.
+  /// @param token_ ERC0 token's address. Required.
+  /// @param owner_ Who can set emergency status. Default: msg.sender.
+  constructor(address token_, address owner_) public {
+    erc20Token = ERC20(token_);
+    owner = owner_;
     emergency = false;
   }
 

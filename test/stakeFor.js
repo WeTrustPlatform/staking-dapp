@@ -10,19 +10,19 @@ const {
 const TimeLockedStaking = artifacts.require('TimeLockedStaking');
 const TRSTArtifact = artifacts.require('lib/TRST');
 
-let StakingContract;
-let TRST;
-
-before(async () => {
-  TRST = await TRSTArtifact.deployed();
-  StakingContract = await TimeLockedStaking.deployed();
-});
-
 contract('Stake for other and the beneficiary can unstake', (accounts) => {
   // from the StakingContract perspective, both are stakers
   const [donor, beneficiary] = accounts;
   const amount = '1';
   const data = '0x';
+
+  let StakingContract;
+  let TRST;
+
+  before(async () => {
+    TRST = await TRSTArtifact.new(donor);
+    StakingContract = await TimeLockedStaking.new(TRST.address, donor);
+  });
 
   it('should stake and beneficiary should be able to unstake', async () => {
     await TRST.approve(StakingContract.address, amount, { from: donor });

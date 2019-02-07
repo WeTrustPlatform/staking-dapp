@@ -13,21 +13,14 @@ const {
 
 const { toWei } = web3.utils;
 
-let staker;
 let StakingContract;
 let TRST;
-
-before(async () => {
-  StakingContract = await TimeLockedStaking.deployed();
-  TRST = await TRSTArtifact.deployed();
-});
-
 
 // Matrix:
 // [
 // [data, expectedUnlockedAt]
 // ]
-const runSanityMatrix = (matrix) => {
+const runSanityMatrix = (matrix, staker) => {
   for (const payload of matrix) {
     it(`should stake and unstake. Payload ${payload[0]}`, async () => {
       const amount = toWei('1', 'gwei'); // 1000 TRST
@@ -88,8 +81,13 @@ const runSanityMatrix = (matrix) => {
   }
 };
 
-contract('Test stake and unstake. Check balance is transfered correctly', (accounts) => {
-  [staker] = accounts;
+contract('Test stake and unstake. Check balance is transfered correctly', ([staker]) => {
+  before(async () => {
+    // deploy new TRST to make sure staker has balance and it's not affected by other tests
+    TRST = await TRSTArtifact.new(staker);
+    // new staking contract with new TRST address
+    StakingContract = await TimeLockedStaking.new(TRST.address, staker);
+  });
 
   // Matrix:
   // [
@@ -112,5 +110,5 @@ contract('Test stake and unstake. Check balance is transfered correctly', (accou
     [buildBytesInput(String(now), '1'), now],
     [buildBytesInput('2', '1', [64, 128]), 2],
     [buildBytesInput(String(now), '1', [64, 128]), now],
-  ]);
+  ], staker);
 });

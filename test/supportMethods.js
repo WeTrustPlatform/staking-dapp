@@ -4,6 +4,7 @@ const TRSTArtifact = artifacts.require('lib/TRST');
 let StakingContract;
 let TRST;
 
+// read only, no need to deploy new set of contracts
 before(async () => {
   StakingContract = await TimeLockedStaking.deployed();
   TRST = await TRSTArtifact.deployed();
