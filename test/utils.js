@@ -14,9 +14,12 @@ const getStakerRecordAmount = async (
   contract, staker, data,
 ) => toBN(await contract.getStakeRecordAmount(staker, data));
 
-const add = (a, b) => toBN(a).add(toBN(b));
-const sub = (a, b) => toBN(a).sub(toBN(b));
-const inv = op => (op.toString() === add.toString() ? sub : add);
+// i.e. operation to the balance when stake
+const deposit = (a, b) => toBN(a).add(toBN(b));
+// i.e. operation to the balance when unstake
+const withdraw = (a, b) => toBN(a).sub(toBN(b));
+const reverse = operation => (operation.toString() === deposit.toString()
+  ? withdraw : deposit);
 
 // get all the posible balances from smart contracts
 // i.e.
@@ -68,14 +71,33 @@ const verifyBalances = async (expectedBalances, staker, data, TRST, StakingContr
   }
 };
 
-const calculateBalances = (balances, op, amount) => {
-  const calculateAmountAfter = (subject, fn) => fn(subject, amount);
+// there are 2^2 cases: operation x hasBeneficary
+// operation: either deposit (stake) or withdraw (unstake) to/from Staking contract
+// hasBeneficiary: either true or false that indicate stakeFor vs. stake
+const calculateBalances = (balances, operation, amount, hasBeneficiary) => {
+  // independent of hasBeneficary
+  const contractTotalStaked = operation(balances.contractTotalStaked, amount);
+  const contractTRSTBalance = operation(balances.contractTRSTBalance, amount);
 
-  const contractTotalStaked = calculateAmountAfter(balances.contractTotalStaked, op);
-  const contractTRSTBalance = calculateAmountAfter(balances.contractTRSTBalance, op);
-  const stakerStakeAmount = calculateAmountAfter(balances.stakerStakeAmount, op);
-  const stakerTRSTBalance = calculateAmountAfter(balances.stakerTRSTBalance, inv(op));
-  const stakerRecordAmount = calculateAmountAfter(balances.stakerRecordAmount, op);
+  // staking for other has no effect
+  const stakerStakeAmount = hasBeneficiary
+    ? toBN(balances.stakerStakeAmount)
+    : operation(balances.stakerStakeAmount, amount);
+
+  const stakerRecordAmount = hasBeneficiary
+    ? toBN(balances.stakerRecordAmount)
+    : operation(balances.stakerRecordAmount, amount);
+
+  let stakerTRSTBalance;
+
+  if (hasBeneficiary && operation.toString() === withdraw.toString()) {
+    // unstaking by other has no effect
+    stakerTRSTBalance = toBN(balances.stakerTRSTBalance);
+  } else {
+    // staking for either self or other means withdraw self's TRST
+    // unstaking for self means getting back more TRST i.e deposit
+    stakerTRSTBalance = reverse(operation)(balances.stakerTRSTBalance, amount);
+  }
 
   return {
     contractTotalStaked,
@@ -85,6 +107,7 @@ const calculateBalances = (balances, op, amount) => {
     stakerRecordAmount,
   };
 };
+
 
 /**
  * Verify the event log for 'Staked' and 'Unstaked' only
@@ -135,7 +158,7 @@ const stakeAndVerifyBalances = async (staker, amountInWei, data, TRST, StakingCo
   const res = await StakingContract.stake(amount.toString(), data, { from: staker });
 
   // add the amount to balancesBefore
-  const balancesAfter = calculateBalances(balancesBefore, add, amount);
+  const balancesAfter = calculateBalances(balancesBefore, deposit, amount, false);
 
   // verify all the new balances
   await verifyBalances(balancesAfter, staker, data, TRST, StakingContract);
@@ -165,8 +188,8 @@ const unstakeAndVerifyBalances = async (staker, amountInWei, data, TRST, Staking
 
   const res = await StakingContract.unstake(amount.toString(), data, { from: staker });
 
-  // sub the amount from before
-  const balancesAfter = calculateBalances(balancesBefore, sub, amount);
+  // subtract the amount from before
+  const balancesAfter = calculateBalances(balancesBefore, withdraw, amount, false);
 
   await verifyBalances(balancesAfter, staker, data, TRST, StakingContract);
 
@@ -226,10 +249,11 @@ module.exports = {
   getTRSTBalance,
   getTotalStakedFor,
   getTotalStaked,
+  getCurrentBalances,
   stakeAndVerifyBalances,
   unstakeAndVerifyBalances,
-  add,
-  sub,
+  deposit,
+  withdraw,
   calculateBalances,
   paddedBytes,
   buildBytesInput,
