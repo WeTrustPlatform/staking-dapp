@@ -21,7 +21,7 @@ const sleep = seconds => new Promise(resolve => setTimeout(resolve, seconds * 10
 const amount = '1';
 const now = Math.floor(Date.now() / 1000);
 
-contract('Unstake with time locked', (accounts) => {
+contract('Stake with time locked', (accounts) => {
   const [staker] = accounts;
 
   it('should fail to unstake. Then succeed in emergency', async () => {

@@ -87,7 +87,7 @@ const runSanityMatrix = (matrix) => {
   }
 };
 
-contract('Test stake and unstake and balance is transfered correctly', (accounts) => {
+contract('Test stake and unstake. Check balance is transfered correctly', (accounts) => {
   [staker] = accounts;
   const now = Math.floor(Date.now() / 1000);
 
@@ -113,27 +113,4 @@ contract('Test stake and unstake and balance is transfered correctly', (accounts
     [buildBytesInput('2', '1', [64, 128]), 2],
     [buildBytesInput(String(now), '1', [64, 128]), now],
   ]);
-});
-
-contract('Support methods', (accounts) => {
-  [staker] = accounts;
-
-  it('should accept an address in the constructor', async () => {
-    const erc20 = await StakingContract.token();
-    assert.strictEqual(erc20, TRST.address);
-  });
-
-  it('should return correct supportsInterface', async () => {
-    const eip165 = await StakingContract.supportsInterface('0x01ffc9a7');
-    assert.ok(eip165);
-    const eip900 = await StakingContract.supportsInterface('0x8efdf8ee');
-    assert.ok(eip900);
-    const invalid = await StakingContract.supportsInterface('0xffffffff');
-    assert.ok(!invalid);
-  });
-
-  it('should return supportsHistory false', async () => {
-    const isSupportsHistory = await StakingContract.supportsHistory();
-    assert.equal(isSupportsHistory, false);
-  });
 });
