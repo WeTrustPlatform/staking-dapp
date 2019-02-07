@@ -70,3 +70,35 @@ contract('Stake with emergency', (accounts) => {
     }
   });
 });
+
+contract('Only owner can change emergency status', (accounts) => {
+  const [owner, nonOwner, nonDefault] = accounts;
+
+  // deploy new contract to explicitly specify the contract's owner
+  //
+  it('should throw if nonOwner calls setEmergency', async () => {
+    const contract = await TimeLockedStaking.new(TRST.address, { from: owner });
+    const actualOwner = await contract.owner();
+    assert.notEqual(actualOwner, nonOwner);
+    assert.equal(actualOwner, owner);
+    try {
+      await contract.setEmergency(true, { from: nonOwner });
+      assert.fail('Not supposed to reach here');
+    } catch (e) {
+      assert(e.toString().includes('msg.sender must be owner.'));
+    }
+  });
+
+  it('should change the emergency', async () => {
+    const contract = await TimeLockedStaking.new(TRST.address, { from: nonDefault });
+    // turn on
+    await contract.setEmergency(true, { from: nonDefault });
+    let emergency = await contract.emergency();
+    assert(emergency);
+
+    // turn off
+    await contract.setEmergency(false, { from: nonDefault });
+    emergency = await contract.emergency();
+    assert(!emergency);
+  });
+});

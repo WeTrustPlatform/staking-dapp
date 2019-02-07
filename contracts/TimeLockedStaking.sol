@@ -38,10 +38,10 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
   /// @dev When emergency is true,
   /// block stake
   /// allow unstake without verifying the record.unlockedAt
-  bool emergency;
+  bool public emergency;
 
   /// @dev Owner of this contract, who can activate the emergency.
-  address owner;
+  address public owner;
 
   /// @dev Address of the ERC20 token contract used for staking.
   ERC20 internal erc20Token;
