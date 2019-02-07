@@ -1,6 +1,6 @@
 const web3 = require('web3');
 
-const { toBN } = web3.utils;
+const { toBN, hexToNumberString } = web3.utils;
 
 const getTRSTBalance = async (contract, address) => toBN(await contract.balanceOf(address));
 
@@ -10,7 +10,7 @@ const getTotalStaked = async contract => toBN(
   await contract.totalStaked(),
 );
 
-const getStakeRecordAmount = async (
+const getStakerRecordAmount = async (
   contract, staker, data,
 ) => toBN(await contract.getStakeRecordAmount(staker, data));
 
@@ -24,7 +24,7 @@ const verifyBalances = async (expectedBalances, staker, data, TRST, StakingContr
     stakerStakeAmount,
     contractTRSTBalance,
     stakerTRSTBalance,
-    stakeRecordAmount,
+    stakerRecordAmount,
   } = expectedBalances;
 
   const stakingContractAddress = StakingContract.address;
@@ -46,8 +46,8 @@ const verifyBalances = async (expectedBalances, staker, data, TRST, StakingContr
     stakerTRSTBalance,
   );
   assert.deepEqual(
-    await getStakeRecordAmount(StakingContract, staker, data),
-    stakeRecordAmount,
+    await getStakerRecordAmount(StakingContract, staker, data),
+    stakerRecordAmount,
   );
 };
 
@@ -58,15 +58,38 @@ const calculateBalances = (balances, op, amount) => {
   const contractTRSTBalance = calculateAmountAfter(balances.contractTRSTBalance, op);
   const stakerStakeAmount = calculateAmountAfter(balances.stakerStakeAmount, op);
   const stakerTRSTBalance = calculateAmountAfter(balances.stakerTRSTBalance, inv(op));
-  const stakeRecordAmount = calculateAmountAfter(balances.stakeRecordAmount, op);
+  const stakerRecordAmount = calculateAmountAfter(balances.stakerRecordAmount, op);
 
   return {
     contractTotalStaked,
     contractTRSTBalance,
     stakerStakeAmount,
     stakerTRSTBalance,
-    stakeRecordAmount,
+    stakerRecordAmount,
   };
+};
+
+/**
+ * Verify the event log for 'Staked' and 'Unstaked' only
+ * @param res Response from contract call i.e. const res = await Contract.method()
+ * @param logEvent Name of the event i.e. 'Staked'
+ * @param logArgs Expected value of user, amount, totalAmount, data in an Array
+ */
+const verifyEventLog = (res, logEvent, logArgs) => {
+  const { event, args } = res.logs[0];
+  // cannot do this because args is not iterable
+  // const [user, amount, totalAmount, data] = args;
+  assert.equal(event, logEvent);
+  assert.equal(args[0], logArgs[0]);
+  assert.equal(args[1].toString(), logArgs[1].toString());
+  assert.equal(args[2].toString(), logArgs[2].toString());
+  assert.equal(
+    // data || '0x' because when input payload is 0x, data is null
+    // use hexToNumberString to solve the issue when
+    // input is 0x1, data becomes 0x01
+    hexToNumberString(args[3] || '0x'),
+    hexToNumberString(logArgs[3]),
+  );
 };
 
 // Every staking should re-use this method
@@ -75,6 +98,7 @@ const calculateBalances = (balances, op, amount) => {
 // 2. approve TRST transfer
 // 3. verify all balances
 // 4. stake
+// 5. verify event log
 // 5. verify all balances
 // 6. return balances info before and after
 const stakeAndVerifyBalances = async (staker, amountInWei, data, TRST, StakingContract) => {
@@ -88,7 +112,9 @@ const stakeAndVerifyBalances = async (staker, amountInWei, data, TRST, StakingCo
   const contractOriginalTRSTBalance = await getTRSTBalance(TRST, stakingContractAddress);
   const contractOriginalTotalStaked = await getTotalStaked(StakingContract);
 
-  const stakerOriginalStakeRecordAmount = await getStakeRecordAmount(StakingContract, staker, data);
+  const stakerOriginalStakerRecordAmount = await getStakerRecordAmount(
+    StakingContract, staker, data,
+  );
 
   // approve TRST transfer before staking
   await TRST.approve(stakingContractAddress, amount.toString(), { from: staker });
@@ -99,14 +125,27 @@ const stakeAndVerifyBalances = async (staker, amountInWei, data, TRST, StakingCo
     stakerTRSTBalance: stakerOriginalTRSTBalance,
     contractTotalStaked: contractOriginalTotalStaked,
     contractTRSTBalance: contractOriginalTRSTBalance,
-    stakeRecordAmount: stakerOriginalStakeRecordAmount,
+    stakerRecordAmount: stakerOriginalStakerRecordAmount,
   };
   await verifyBalances(balancesBefore, staker, data, TRST, StakingContract);
 
-  await StakingContract.stake(amount.toString(), data, { from: staker });
+  const res = await StakingContract.stake(amount.toString(), data, { from: staker });
 
   // verify all the new balances
   const balancesAfter = calculateBalances(balancesBefore, add, amount);
+
+  // verify log event
+  verifyEventLog(
+    res,
+    'Staked',
+    [
+      staker,
+      amount,
+      balancesAfter.stakerStakeAmount,
+      data,
+    ],
+  );
+
   await verifyBalances(balancesAfter, staker, data, TRST, StakingContract);
 
   return {
@@ -162,4 +201,5 @@ module.exports = {
   buildBytesInput,
   verifyBalances,
   verifyUnlockedAt,
+  verifyEventLog,
 };
