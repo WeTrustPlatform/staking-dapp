@@ -28,7 +28,7 @@ before(async () => {
 // ]
 const runSanityMatrix = (matrix) => {
   for (const payload of matrix) {
-    it(`Test stake/unstake with payload ${payload[0]}`, async () => {
+    it(`should stake and unstake. Payload ${payload[0]}`, async () => {
       const amount = toWei('1', 'gwei'); // 1000 TRST
 
       await stakeAndVerifyBalances(
@@ -44,7 +44,7 @@ const runSanityMatrix = (matrix) => {
       await verifyUnlockedAt(staker, payload[0], payload[1], StakingContract);
     });
 
-    it(`Test stake/unstake with payload ${payload[0]} twice`, async () => {
+    it(`should stake and unstake twice. Payload ${payload[0]}`, async () => {
       const amount1 = toWei('1', 'gwei'); // 1000 TRST
       const amount2 = toWei('2', 'gwei');
 
@@ -75,20 +75,19 @@ const runSanityMatrix = (matrix) => {
       await verifyUnlockedAt(staker, payload[0], payload[1], StakingContract);
     });
 
-    it(`Test if no stake, then the unstake fails with payload ${payload[0]}`, async () => {
+    it(`should fail to unstake when no stake. Payload ${payload[0]}`, async () => {
       const amount = toWei('0.1', 'gwei');
       try {
         await StakingContract.unstake(amount, payload[0], { from: staker });
+        assert.fail('Not supposed to reach here');
       } catch (e) {
         assert(e.toString().includes('Amount must be equal or smaller than the record.'));
-        return;
       }
-      assert.fail('Not supposed to reach here');
     });
   }
 };
 
-contract('should be able to stake and unstake and balance is transfered correctly', (accounts) => {
+contract('Test stake and unstake and balance is transfered correctly', (accounts) => {
   [staker] = accounts;
   const now = Math.floor(Date.now() / 1000);
 
@@ -116,7 +115,7 @@ contract('should be able to stake and unstake and balance is transfered correctl
   ]);
 });
 
-contract('Staking Sanity', (accounts) => {
+contract('Support methods', (accounts) => {
   [staker] = accounts;
 
   it('should accept an address in the constructor', async () => {
