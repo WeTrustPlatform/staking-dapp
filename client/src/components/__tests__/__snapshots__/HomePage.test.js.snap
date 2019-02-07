@@ -557,6 +557,13 @@ exports[`tests snapshot 1`] = `
               className="MuiTableCell-root-729 MuiTableCell-head-730"
               scope="col"
             >
+              Action
+            </th>
+            <th
+              aria-sort={null}
+              className="MuiTableCell-root-729 MuiTableCell-head-730"
+              scope="col"
+            >
               Transaction Hash
             </th>
           </tr>
@@ -570,7 +577,7 @@ exports[`tests snapshot 1`] = `
             <td
               aria-sort={null}
               className="MuiTableCell-root-729 MuiTableCell-body-731"
-              colSpan={4}
+              colSpan={5}
             >
               <div
                 className="ActivitiesSection-noActivities-719"

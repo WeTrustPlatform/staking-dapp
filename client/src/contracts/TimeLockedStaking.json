@@ -2,6 +2,21 @@
   "abi": [
     {
       "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x8da5cb5b"
+    },
+    {
+      "constant": true,
       "inputs": [
         {
           "name": "",
@@ -25,9 +40,28 @@
       "signature": "0x9168ae72"
     },
     {
+      "constant": true,
+      "inputs": [],
+      "name": "emergency",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xcaa6fea4"
+    },
+    {
       "inputs": [
         {
-          "name": "token",
+          "name": "token_",
+          "type": "address"
+        },
+        {
+          "name": "owner_",
           "type": "address"
         }
       ],
@@ -239,6 +273,21 @@
       "signature": "0x7033e4a6"
     },
     {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "status",
+          "type": "bool"
+        }
+      ],
+      "name": "setEmergency",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0x0501d556"
+    },
+    {
       "constant": true,
       "inputs": [
         {
@@ -364,9 +413,6 @@
     },
     "5777": {
       "address": "0xef30a68266c462B87F455EcAb5e3fa8F733d184d"
-    },
-    "4777": {
-      "address": "0x6451d7AaFF5B343638D53328df5898e4AbD13633"
     }
   }
 }
