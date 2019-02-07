@@ -5,12 +5,9 @@ const TRSTArtifact = artifacts.require('lib/TRST');
 
 const {
   stakeAndVerifyBalances,
-  verifyBalances,
+  unstakeAndVerifyBalances,
   verifyUnlockedAt,
   buildBytesInput,
-  sub,
-  calculateBalances,
-  verifyEventLog,
 } = require('./utils');
 
 const { toWei } = web3.utils;
@@ -18,6 +15,11 @@ const { toWei } = web3.utils;
 let staker;
 let StakingContract;
 let TRST;
+
+before(async () => {
+  StakingContract = await TimeLockedStaking.deployed();
+  TRST = await TRSTArtifact.deployed();
+});
 
 
 // Matrix:
@@ -29,21 +31,15 @@ const runSanityMatrix = (matrix) => {
     it(`Test stake/unstake with payload ${payload[0]}`, async () => {
       const amount = toWei('1', 'gwei'); // 1000 TRST
 
-      const balances = await stakeAndVerifyBalances(
+      await stakeAndVerifyBalances(
         staker, amount, payload[0], TRST, StakingContract,
       );
 
       await verifyUnlockedAt(staker, payload[0], payload[1], StakingContract);
 
-      const res = await StakingContract.unstake(amount, payload[0], { from: staker });
-
-      // verify amounts in log event
-      verifyEventLog(
-        res, 'Unstaked', [staker, amount, 0, payload[0]],
+      await unstakeAndVerifyBalances(
+        staker, amount, payload[0], TRST, StakingContract,
       );
-
-      // verify all the balances are the same as the very beginning
-      await verifyBalances(balances.before, staker, payload[0], TRST, StakingContract);
 
       await verifyUnlockedAt(staker, payload[0], payload[1], StakingContract);
     });
@@ -53,49 +49,33 @@ const runSanityMatrix = (matrix) => {
       const amount2 = toWei('2', 'gwei');
 
       // stake the same payload twice with different amount
-      const balances1 = await stakeAndVerifyBalances(
+      await stakeAndVerifyBalances(
         staker, amount1, payload[0], TRST, StakingContract,
       );
 
-      await verifyUnlockedAt(staker, payload[0], payload[1], StakingContract);
-
-      const balances2 = await stakeAndVerifyBalances(
+      await stakeAndVerifyBalances(
         staker, amount2, payload[0], TRST, StakingContract,
       );
 
       await verifyUnlockedAt(staker, payload[0], payload[1], StakingContract);
 
-      // unstake once
+      // unstake twice
       // sum(amoount1, amount2) = sum(amount3, amount4)
       const amount3 = toWei('1.3', 'gwei');
       const amount4 = toWei('1.7', 'gwei');
-      let res = await StakingContract.unstake(amount3, payload[0], { from: staker });
 
-      // verify amounts in log event
-      // amount4 is what they have left
-      verifyEventLog(
-        res, 'Unstaked', [staker, amount3, amount4, payload[0]],
+      await unstakeAndVerifyBalances(
+        staker, amount3, payload[0], TRST, StakingContract,
       );
 
-      // verify intermediary balances
-      const balances3 = calculateBalances(balances2.after, sub, amount3);
-      await verifyBalances(balances3, staker, payload[0], TRST, StakingContract);
-
-      // unstake twice
-      res = await StakingContract.unstake(amount4, payload[0], { from: staker });
-
-      // verify amounts in log event
-      verifyEventLog(
-        res, 'Unstaked', [staker, amount4, 0, payload[0]],
+      await unstakeAndVerifyBalances(
+        staker, amount4, payload[0], TRST, StakingContract,
       );
-
-      // verify all the balances are the same as the very beginning
-      await verifyBalances(balances1.before, staker, payload[0], TRST, StakingContract);
 
       await verifyUnlockedAt(staker, payload[0], payload[1], StakingContract);
     });
 
-    it(`Test if no stake, the unstake fails with payload ${payload[0]}`, async () => {
+    it(`Test if no stake, then the unstake fails with payload ${payload[0]}`, async () => {
       const amount = toWei('0.1', 'gwei');
       try {
         await StakingContract.unstake(amount, payload[0], { from: staker });
@@ -107,11 +87,6 @@ const runSanityMatrix = (matrix) => {
     });
   }
 };
-
-before(async () => {
-  StakingContract = await TimeLockedStaking.deployed();
-  TRST = await TRSTArtifact.deployed();
-});
 
 contract('should be able to stake and unstake and balance is transfered correctly', (accounts) => {
   [staker] = accounts;
