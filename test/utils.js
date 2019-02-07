@@ -10,6 +10,9 @@ const getTotalStaked = async contract => toBN(
   await contract.totalStaked(),
 );
 
+// in seconds as block.timestamp
+const now = Math.floor(Date.now() / 1000);
+
 const getStakerRecordAmount = async (
   contract, staker, data,
 ) => toBN(await contract.getStakeRecordAmount(staker, data));
@@ -260,4 +263,5 @@ module.exports = {
   verifyBalances,
   verifyUnlockedAt,
   verifyEventLog,
+  now,
 };

@@ -3,6 +3,7 @@ const web3 = require('web3');
 const {
   paddedBytes,
   buildBytesInput,
+  now,
 } = require('./utils');
 
 const TimeLockedStaking = artifacts.require('TimeLockedStaking');
@@ -41,7 +42,6 @@ const runGetUnlockedAtSignalMatrix = (matrix) => {
 };
 
 // all in seconds
-const now = Math.floor(Date.now() / 1000);
 const oneDay = 24 * 60 * 60;
 const tomorrow = now + oneDay;
 

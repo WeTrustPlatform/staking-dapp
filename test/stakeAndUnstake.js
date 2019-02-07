@@ -8,6 +8,7 @@ const {
   unstakeAndVerifyBalances,
   verifyUnlockedAt,
   buildBytesInput,
+  now,
 } = require('./utils');
 
 const { toWei } = web3.utils;
@@ -89,7 +90,6 @@ const runSanityMatrix = (matrix) => {
 
 contract('Test stake and unstake. Check balance is transfered correctly', (accounts) => {
   [staker] = accounts;
-  const now = Math.floor(Date.now() / 1000);
 
   // Matrix:
   // [

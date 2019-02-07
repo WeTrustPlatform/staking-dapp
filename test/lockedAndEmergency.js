@@ -2,6 +2,7 @@ const {
   stakeAndVerifyBalances,
   unstakeAndVerifyBalances,
   buildBytesInput,
+  now,
 } = require('./utils');
 
 const TimeLockedStaking = artifacts.require('TimeLockedStaking');
@@ -17,9 +18,7 @@ beforeEach(async () => {
 });
 
 const sleep = seconds => new Promise(resolve => setTimeout(resolve, seconds * 1000));
-
 const amount = '1';
-const now = Math.floor(Date.now() / 1000);
 
 contract('Stake with time locked', (accounts) => {
   const [staker] = accounts;
