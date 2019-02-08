@@ -29,7 +29,7 @@ export function getStakePayload(durationInDays, npo) {
   // blockchain uses timestamp in seconds
   // for manual testing on dev
   const durationInSeconds = configs.NODE_ENV === 'development'
-    ? durationInDays : durationInDays * 24 * 60 * 60;
+    ? Number(durationInDays) : Number(durationInDays) * 24 * 60 * 60;
   const lockedUntil = Math.floor(Date.now() / 1000) + durationInSeconds;
   const payload = buildBytesInput(lockedUntil, npo.ein);
   return payload;

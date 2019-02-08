@@ -74,7 +74,7 @@ class StakeNow extends React.Component {
 
   onChangeDuration(event) {
     this.setState({
-      durationInDays: event.target.value,
+      durationInDays: Number(event.target.value),
     });
   }
 
