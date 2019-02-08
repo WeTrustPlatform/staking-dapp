@@ -3,9 +3,12 @@
 // Some dispatch functions require multiple async steps
 // in preparation.
 
-import assert from 'assert';
-import axios from 'axios';
-import { parseStakePayload } from './utils';
+import {
+  parseStakePayload,
+  getNameFromCMS,
+  getUnlockedAtFromBlockchain,
+  determineCanUnstake,
+} from './utils';
 import {
   findTrstBalance,
   findAccountActivities,
@@ -14,7 +17,6 @@ import {
 import {
   trstInBN, trst, numberString, bigNumber, currency,
 } from './formatter';
-import configs from './configs';
 
 // TODO pull events signature from abi
 // const STAKE_TOPIC = '0xc65e53b88159e7d2c0fc12a0600072e28ae53ff73b4c1715369c30f160935142';
@@ -24,125 +26,84 @@ import configs from './configs';
 export const dispatchAccountActivities = (
   dispatch, TimeLockedStaking, account,
 ) => {
+  // Reducer to consolidate multiple staked and unstaked events
+  // per stake data.
+  // @returns
+  // {
+  //   <stake's data field as key>: {
+  //     id, ein, amount, rawAmount, lockedUntil, transactionHash, canUnstake
+  //   }
+  // }
+  //
+  // Note transactionHash, id:
+  // There might be multiple transactionHash if users stake
+  // with the same payloads multiple times
+  // This is edge case and only happens if users purposely interact
+  // with our contract manually.
+  // To make it easy, we show the latest.
+  //
+  // Note amount: Localized formatted number in TRST
+  // add if it's a stake event
+  // sub if it's an unstake event
+  //
+  // Note: Use Object.assign on accumulator. Hence, no nested fields.
+  const eventsReducer = (accumulator, currentEvent) => {
+    const {
+      id, transactionHash, returnValues, event,
+    } = currentEvent;
+    const { amount, data, user } = returnValues;
+
+    // filter { user: account } does not work because we use 'allEvents'
+    // TODO use TOPIC
+    if ((user.toLowerCase() !== account.toLowerCase())
+        || (event !== 'Staked' && event !== 'Unstaked')) {
+      return accumulator;
+    }
+
+    const updatedValue = {
+      id, transactionHash,
+    };
+
+    if (accumulator[data]) {
+      // data exist
+      const { rawAmount } = accumulator[data];
+      updatedValue.rawAmount = event === 'Staked'
+        ? rawAmount.add(bigNumber(amount)) : rawAmount.sub(bigNumber(amount));
+    } else {
+      const { ein, unlockedAtInPayload } = parseStakePayload(data);
+      const rawAmount = event === 'Staked'
+        ? bigNumber(amount) : bigNumber(amount).neg();
+
+      accumulator[data] = {
+        ein,
+        rawAmount,
+        unlockedAtInPayload,
+      };
+    }
+
+    Object.assign(accumulator[data], updatedValue);
+
+    const { rawAmount } = accumulator[data];
+
+    // update the amount
+    accumulator[data].amount = trst(rawAmount);
+
+    return accumulator;
+  };
+
   // Get all the Staked events related to the current account
   TimeLockedStaking.getPastEvents('allEvents', {
     fromBlock: 0,
     toBlock: 'latest',
     // topics: TOPICS,
   }, (err, events) => {
-    // Reducer to consolidate multiple staked and unstaked events
-    // per stake data.
-    // @returns
-    // {
-    //   <stake's data field as key>: {
-    //     id, ein, amount, rawAmount, lockedUntil, transactionHash, canUnstake
-    //   }
-    // }
-    //
-    // Note transactionHash, id:
-    // There might be multiple transactionHash if users stake
-    // with the same payloads multiple times
-    // This is edge case and only happens if users purposely interact
-    // with our contract manually.
-    // To make it easy, we show the latest.
-    //
-    // Note amount: Localized formatted number in TRST
-    // add if it's a stake event
-    // sub if it's an unstake event
-    //
-    // Note: Use Object.assign on accumulator. Hence, no nested fields.
-    const eventsReducer = (accumulator, currentEvent) => {
-      const {
-        id, transactionHash, returnValues, event,
-      } = currentEvent;
-      const { amount, data, user } = returnValues;
-
-      // filter { user: account } does not work because we use 'allEvents'
-      // TODO use TOPIC
-      if ((user.toLowerCase() !== account.toLowerCase())
-        || (event !== 'Staked' && event !== 'Unstaked')) {
-        return accumulator;
-      }
-
-      const updatedValue = {
-        id, transactionHash,
-      };
-
-      if (accumulator[data]) {
-        // data exist
-        const { rawAmount } = accumulator[data];
-        updatedValue.rawAmount = event === 'Staked'
-          ? rawAmount.add(bigNumber(amount)) : rawAmount.sub(bigNumber(amount));
-      } else {
-        const { ein, unlockedAtInPayload } = parseStakePayload(data);
-        const rawAmount = event === 'Staked'
-          ? bigNumber(amount) : bigNumber(amount).neg();
-
-        accumulator[data] = {
-          ein,
-          rawAmount,
-          unlockedAtInPayload,
-        };
-      }
-
-      Object.assign(accumulator[data], updatedValue);
-
-      const { rawAmount } = accumulator[data];
-
-      // update the amount
-      accumulator[data].amount = trst(rawAmount);
-
-      return accumulator;
-    };
-
-
     const aggregatedEvents = events.reduce(eventsReducer, {});
-
-    // Call CMS to get NPO details like name and address
-    //
-    const getNameFromCMS = async (ein) => {
-      let res;
-      try {
-        // Users can pass in any EIN when they stake.
-        // If ein is invalid or not found,
-        // just show default name 'Not Found'
-        assert(ein, 'Invalid EIN.');
-        // TODO make sure this return exactly 1 record
-        res = await axios.get(
-          `${configs.CMS_URL}/charities?search=${ein}`,
-        );
-      } catch (e) {
-        console.log(e);
-      }
-
-      const npo = res && res.data && res.data.records && res.data.records[0];
-
-      return (npo && npo.name) || 'Unknown';
-    };
-
-    // Call staking contract to get the unlockedAt
-    const getUnlockedAtFromBlockchain = async (user, stakeData) => {
-      // get the real unlockedAt in seconds
-      // set by the contract
-      const realUnlockedAt = await TimeLockedStaking.methods.getStakeRecordUnlockedAt(
-        user, stakeData,
-      ).call();
-      const realUnlockedAtDate = new Date(realUnlockedAt * 1000);
-      return realUnlockedAtDate;
-    };
-
-    // determine canUnstake after getting the correct unlockedAt
-    const determineCanUnstake = (unlockedAt, rawAmount) => {
-      const isBeforeNow = Date.now() > unlockedAt.getTime();
-      const hasBalance = rawAmount.gt(bigNumber(0));
-      return isBeforeNow && hasBalance;
-    };
 
     // key is the original stake's payload data field
     const populatedStakeRecordTasks = Object.keys(aggregatedEvents).map(async (key) => {
       const data = aggregatedEvents[key];
       const name = await getNameFromCMS(data.ein);
-      const unlockedAt = await getUnlockedAtFromBlockchain(account, key);
+      const unlockedAt = await getUnlockedAtFromBlockchain(account, key, TimeLockedStaking);
 
       const canUnstake = determineCanUnstake(
         unlockedAt,
@@ -168,7 +129,59 @@ export const dispatchTRSTBalance = (dispatch, TRST, account) => {
 };
 
 // TODO optimize this with dispatchAccountActivities
+// Get all events and pass the array to 2 reducers
+// even though we can do in 1 reducer
+//
+// First reducer: Construct the user's total amount map
+// This takes care of both events staked and unstaked
+// by getting the latest total amount of the latest block in the array
+//
+// Second reducer: Sum the user's total amount if > 0
+// By doing this, the final stats
+// are only counting the current active stakes i.e amount > 0
+// Those who have staked and then unstaked all won't be counted
+//
 export const dispatchOverallStats = (dispatch, TimeLockedStaking) => {
+  const userStatsReducer = (accumulator, currentEvent) => {
+    // each event contains the user address and user total stake amount
+    // however, don't rely on the events being sorted chronologically.
+    // check for block number to see what total stake amount is the latest.
+    // trying to construct the userStats map:
+    // {
+    //   "<user address i.e 0x>": { total, blockNumber },
+    //   ...
+    // }
+    const { blockNumber, returnValues, event } = currentEvent;
+    const { user, total } = returnValues;
+
+    if (event !== 'Staked' && event !== 'Unstaked') {
+      // maybe we're on wrong network
+      // or the topics is wrong
+      return accumulator;
+    }
+
+    // first record or found a later blocknumber
+    if (!accumulator[user]
+        || bigNumber(blockNumber).gt(accumulator[user].blockNumber)) {
+      accumulator[user] = {
+        total: bigNumber(total),
+        blockNumber: bigNumber(blockNumber),
+      };
+    }
+    return accumulator;
+  };
+
+  const overallStatsReducer = (accumulator, userStat) => {
+    const { total: userTotal } = userStat;
+    if (userTotal && userTotal.gt(bigNumber(0))) {
+      return {
+        total: accumulator.total.add(userTotal),
+        count: accumulator.count + 1,
+      };
+    }
+    return accumulator;
+  };
+
   TimeLockedStaking.getPastEvents('allEvents', {
     fromBlock: 0,
     toBlock: 'latest',
@@ -179,46 +192,7 @@ export const dispatchOverallStats = (dispatch, TimeLockedStaking) => {
       return;
     }
 
-    // each event contains the user address and user total stake amount
-    // however, don't rely on the events being sorted chronologically.
-    // keep track of block number to see what total stake amount is the latest.
-    // trying to construct the userStats map:
-    // {
-    //   "<user address i.e 0x>": { total, blockNumber },
-    //   ...
-    // }
-    const userStatsReducer = (accumulator, currentEvent) => {
-      const { blockNumber, returnValues, event } = currentEvent;
-      const { user, total } = returnValues;
-
-      if (event !== 'Staked' && event !== 'Unstaked') {
-        // maybe we're on wrong network
-        // or the topics is wrong
-        return accumulator;
-      }
-
-      if (!accumulator[user]
-        || bigNumber(blockNumber).gt(accumulator[user].blockNumber)) {
-        accumulator[user] = {
-          total: bigNumber(total),
-          blockNumber: bigNumber(blockNumber),
-        };
-      }
-      return accumulator;
-    };
-
     const userStats = events.reduce(userStatsReducer, {});
-
-    const overallStatsReducer = (accumulator, userStat) => {
-      const { total: userTotal } = userStat;
-      if (userTotal && userTotal.gt(bigNumber(0))) {
-        return {
-          total: accumulator.total.add(userTotal),
-          count: accumulator.count + 1,
-        };
-      }
-      return accumulator;
-    };
 
     const overallStats = Object.values(userStats).reduce(overallStatsReducer, {
       total: bigNumber(0),
@@ -229,6 +203,7 @@ export const dispatchOverallStats = (dispatch, TimeLockedStaking) => {
     const average = total.div(bigNumber(count || 1));
     // TODO fetch TRST price
     const averageInUSD = trstInBN(average).toNumber() * 0.02;
+
     dispatch(findOverallStats({
       currentStakes: trst(total),
       currentStakers: numberString(count),

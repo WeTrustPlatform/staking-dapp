@@ -1,13 +1,17 @@
 import assert from 'assert';
 import web3 from 'web3';
+import axios from 'axios';
 import { prefix0x, networkName } from './formatter';
 import configs from './configs';
 
+const {
+  toBN, padRight, toHex, padLeft, hexToBytes, bytesToHex,
+} = web3.utils;
+
 const paddedBytes = (numberString) => {
-  const { utils } = web3;
-  const hex = utils.toHex(numberString);
-  const padded = utils.padLeft(hex, 64);
-  return utils.hexToBytes(padded);
+  const hex = toHex(numberString);
+  const padded = padLeft(hex, 64);
+  return hexToBytes(padded);
 };
 
 /**
@@ -20,7 +24,7 @@ const buildBytesInput = (timeSignal, voteSignal) => {
   const paddedTimeSignal = paddedBytes(timeSignal);
   const paddedVoteSignal = paddedBytes(voteSignal);
   const data = paddedTimeSignal.concat(paddedVoteSignal);
-  const hex = web3.utils.bytesToHex(data);
+  const hex = bytesToHex(data);
   return hex;
 };
 
@@ -40,7 +44,6 @@ export function getStakePayload(durationInDays, npo) {
 // Normal payload string should have length of 2(0x) + 64(until) + 64(ein) = 130
 // @return { lockedUntil: <Date>, ein: <NPO ein> }
 export function parseStakePayload(payload) {
-  const { toBN, padRight } = web3.utils;
   // padded to 0x<128 bytes>
   const paddedPayload = padRight(payload, 128);
 
@@ -69,4 +72,47 @@ export const validateNetworkId = (networkId) => {
   }
 
   return null;
+};
+
+
+// TODO get other info as well, maybe cacheing
+// Call CMS to get NPO details like name and address
+export const getNameFromCMS = async (ein) => {
+  let res;
+  try {
+    // Users can pass in any EIN when they stake.
+    // If ein is invalid or not found,
+    // just show default name 'Not Found'
+    assert(ein, 'Invalid EIN.');
+    // TODO make sure this return exactly 1 record
+    res = await axios.get(
+      `${configs.CMS_URL}/charities?search=${ein}`,
+    );
+  } catch (e) {
+    console.log(e);
+  }
+
+  const npo = res && res.data && res.data.records && res.data.records[0];
+
+  return (npo && npo.name) || 'Unknown';
+};
+
+// Call staking contract to get the unlockedAt
+export const getUnlockedAtFromBlockchain = async (user, stakeData, TimeLockedStaking) => {
+  // get the real unlockedAt in seconds
+  // set by the contract
+  const realUnlockedAt = await TimeLockedStaking.methods.getStakeRecordUnlockedAt(
+    user, stakeData,
+  ).call();
+  const realUnlockedAtDate = new Date(realUnlockedAt * 1000);
+  return realUnlockedAtDate;
+};
+
+// determine canUnstake after getting the correct unlockedAt
+// @param unlockedAt Date object of the unlockedAt got from blockchain
+// @param rawAmount BN object of the amount got from event log
+export const determineCanUnstake = (unlockedAt, rawAmount) => {
+  const isBeforeNow = Date.now() > unlockedAt.getTime();
+  const hasBalance = rawAmount.gt(toBN(0));
+  return isBeforeNow && hasBalance;
 };
