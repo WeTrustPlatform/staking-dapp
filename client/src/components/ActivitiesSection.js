@@ -111,7 +111,7 @@ class ActivitiesSection extends React.Component {
     return (
       accountActivities.map((event) => {
         const {
-          id, name, amount, lockedUntil, transactionHash,
+          id, name, amount, unlockedAt, transactionHash,
         } = event;
         return (
           <TableRow key={id}>
@@ -122,7 +122,7 @@ class ActivitiesSection extends React.Component {
               {amount}
             </TableCell>
             <TableCell>
-              {lockedUntil}
+              {unlockedAt.toLocaleString()}
             </TableCell>
             <TableCell>
               {this.renderUnstake(event)}
@@ -190,7 +190,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   refreshStats: (account, TimeLockedStaking) => {
-    // call helper
     dispatchAccountActivities(dispatch, TimeLockedStaking, account);
     dispatchOverallStats(dispatch, TimeLockedStaking);
   },

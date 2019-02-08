@@ -50,11 +50,16 @@ export function parseStakePayload(payload) {
   const timestampInMilliseconds = toBN(prefix0x(paddedPayload.substring(2, 66)))
     .mul(toBN(1000))
     .toNumber();
-  const lockedUntil = new Date(timestampInMilliseconds).toLocaleString();
+
+  // this unlockedAt is from the stake input payload
+  // it is not necessary the same as the contract's unLockedAt
+  // smart contract's unlockedAt maximum value is 365 days
+  // from the stake's block.timestamp
+  const unlockedAtInPayload = new Date(timestampInMilliseconds);
 
   return {
     ein,
-    lockedUntil,
+    unlockedAtInPayload,
   };
 }
 

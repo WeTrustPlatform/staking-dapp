@@ -21,7 +21,9 @@ import configs from './configs';
 // const UNSTAKE_TOPIC = '0xaf01bfc8475df280aca00b578c4a948e6d95700f0db8c13365240f7f973c8754';
 // const TOPICS = [STAKE_TOPIC, UNSTAKE_TOPIC];
 
-export const dispatchAccountActivities = (dispatch, TimeLockedStaking, account) => {
+export const dispatchAccountActivities = (
+  dispatch, TimeLockedStaking, account,
+) => {
   // Get all the Staked events related to the current account
   TimeLockedStaking.getPastEvents('allEvents', {
     fromBlock: 0,
@@ -72,29 +74,23 @@ export const dispatchAccountActivities = (dispatch, TimeLockedStaking, account) 
         updatedValue.rawAmount = event === 'Staked'
           ? rawAmount.add(bigNumber(amount)) : rawAmount.sub(bigNumber(amount));
       } else {
-        const { ein, lockedUntil } = parseStakePayload(data);
+        const { ein, unlockedAtInPayload } = parseStakePayload(data);
         const rawAmount = event === 'Staked'
           ? bigNumber(amount) : bigNumber(amount).neg();
 
         accumulator[data] = {
           ein,
           rawAmount,
-          lockedUntil,
+          unlockedAtInPayload,
         };
       }
 
       Object.assign(accumulator[data], updatedValue);
 
-      const { rawAmount, lockedUntil } = accumulator[data];
+      const { rawAmount } = accumulator[data];
 
       // update the amount
       accumulator[data].amount = trst(rawAmount);
-
-      // update canUnstake
-      const lockedUntilDate = new Date(lockedUntil);
-      accumulator[data].canUnstake = Date.now() > lockedUntilDate.getTime()
-        && rawAmount.gt(bigNumber(0));
-
 
       return accumulator;
     };
@@ -102,32 +98,63 @@ export const dispatchAccountActivities = (dispatch, TimeLockedStaking, account) 
 
     const aggregatedEvents = events.reduce(eventsReducer, {});
 
-    // Call CMS to get NPO details
-    const populatedNPOPromises = Object.keys(aggregatedEvents).map(async (key) => {
-      const data = aggregatedEvents[key];
+    // Call CMS to get NPO details like name and address
+    //
+    const getNameFromCMS = async (ein) => {
       let res;
       try {
         // Users can pass in any EIN when they stake.
         // If ein is invalid or not found,
         // just show default name 'Not Found'
-        assert(data.ein.length > 0, 'Invalid EIN.');
+        assert(ein, 'Invalid EIN.');
+        // TODO make sure this return exactly 1 record
         res = await axios.get(
-          `${configs.CMS_URL}/charities?search=${data.ein}`,
+          `${configs.CMS_URL}/charities?search=${ein}`,
         );
       } catch (e) {
         console.log(e);
       }
 
       const npo = res && res.data && res.data.records && res.data.records[0];
-      return Object.assign(
-        { name: 'Not Found' },
-        npo,
-        data,
-        { stakeData: key }, // required to unstake
+
+      return (npo && npo.name) || 'Unknown';
+    };
+
+    // Call staking contract to get the unlockedAt
+    const getUnlockedAtFromBlockchain = async (user, stakeData) => {
+      // get the real unlockedAt in seconds
+      // set by the contract
+      const realUnlockedAt = await TimeLockedStaking.methods.getStakeRecordUnlockedAt(
+        user, stakeData,
+      ).call();
+      const realUnlockedAtDate = new Date(realUnlockedAt * 1000);
+      return realUnlockedAtDate;
+    };
+
+    // determine canUnstake after getting the correct unlockedAt
+    const determineCanUnstake = (unlockedAt, rawAmount) => {
+      const isBeforeNow = Date.now() > unlockedAt.getTime();
+      const hasBalance = rawAmount.gt(bigNumber(0));
+      return isBeforeNow && hasBalance;
+    };
+
+    // key is the original stake's payload data field
+    const populatedStakeRecordTasks = Object.keys(aggregatedEvents).map(async (key) => {
+      const data = aggregatedEvents[key];
+      const name = await getNameFromCMS(data.ein);
+      const unlockedAt = await getUnlockedAtFromBlockchain(account, key);
+
+      const canUnstake = determineCanUnstake(
+        unlockedAt,
+        data.rawAmount,
       );
+
+      return Object.assign(data, {
+        name, unlockedAt, canUnstake, stakeData: key,
+      });
     });
 
-    Promise.all(populatedNPOPromises).then((completed) => {
+    Promise.all(populatedStakeRecordTasks).then((completed) => {
       dispatch(findAccountActivities(completed));
     });
   });
@@ -141,7 +168,7 @@ export const dispatchTRSTBalance = (dispatch, TRST, account) => {
 };
 
 // TODO optimize this with dispatchAccountActivities
-export const dispatchOverallStats = async (dispatch, TimeLockedStaking) => {
+export const dispatchOverallStats = (dispatch, TimeLockedStaking) => {
   TimeLockedStaking.getPastEvents('allEvents', {
     fromBlock: 0,
     toBlock: 'latest',
