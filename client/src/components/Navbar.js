@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Web3Account from './Web3Account';
-import logo from '../images/logo-trimmed.png';
+import logo from '../images/wetrust-logo.svg';
 
 const styles = {
   grow: {
