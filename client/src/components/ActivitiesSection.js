@@ -157,7 +157,7 @@ class ActivitiesSection extends React.Component {
                   NPO Name
                 </TableCell>
                 <TableCell>
-                  Amount (TRST)
+                  Amount
                 </TableCell>
                 <TableCell>
                   Locked Until

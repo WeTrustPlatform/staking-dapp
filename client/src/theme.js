@@ -53,11 +53,12 @@ const theme = createMuiTheme({
     },
     MuiTableCell: {
       head: {
-        fontSize: '1rem',
+        fontSize: '1.25rem',
+        fontFamily: jubilat,
         fontWeight: 'bold',
       },
       body: {
-        fontSize: '1rem',
+        fontSize: '1.125rem',
       },
     },
     MuiInputLabel: {

@@ -49,7 +49,7 @@ class FAQItem extends React.Component {
         <div className={classes.question} onClick={this.toggleAnswer} role="presentation">
           <Grid container>
             <Grid item xs={10}>
-              <Typography variant="h6">
+              <Typography variant="h5">
                 <strong>{question}</strong>
               </Typography>
             </Grid>
