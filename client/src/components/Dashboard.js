@@ -20,7 +20,7 @@ class Dashboard extends React.Component {
     return (
       <div className={classes.root}>
         <NumberCard
-          title="Current Stakes"
+          title="Current stakes"
           mainNumber={currentStakes}
           mainUnit={<TRSTIcon />}
         />
