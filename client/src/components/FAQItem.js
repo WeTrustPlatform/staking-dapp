@@ -50,7 +50,7 @@ class FAQItem extends React.Component {
           <Grid container>
             <Grid item xs={10}>
               <Typography variant="h6">
-                {question}
+                <strong>{question}</strong>
               </Typography>
             </Grid>
             <Grid item xs={2} className={classes.gridIcon}>
@@ -62,7 +62,7 @@ class FAQItem extends React.Component {
         { isAnswerShown
         && (
         <div className={classes.answer}>
-          <Typography variant="subtitle1" dangerouslySetInnerHTML={{ __html: answer }} />
+          <Typography variant="h6" dangerouslySetInnerHTML={{ __html: answer }} />
         </div>
         )
         }
