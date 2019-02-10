@@ -5,6 +5,25 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 const teal = '#3FA296';
 const grey = '#FAFAFA';
+const brownGrey = '#7E7E7E';
+
+const proximaNova = [
+  'proxima-nova',
+  'Arial',
+  'Helvectica',
+  'sans-serif',
+].join(',');
+const jubilat = [
+  'jubilat',
+  'Arial',
+  'Helvectica',
+  'serif',
+].join(',');
+
+const titleFont = {
+  fontFamily: jubilat,
+  fontWeight: 600,
+};
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -14,22 +33,16 @@ const theme = createMuiTheme({
       main: teal, light: '#73D4C7', dark: '#007368', contrastText: grey,
     },
     text: {
-      primary: '#7E7E7E',
+      primary: brownGrey,
+      secondary: teal,
     },
   },
   typography: {
     useNextVariants: true,
-    fontFamily: [
-      'proxima-nova',
-      'Arial',
-      'Helvectica',
-      'sans-serif',
-    ].join(','),
-    h3: {
-      fontFamily: ['jubilat'],
-      fontWeight: 600,
-      color: teal,
-    },
+    fontFamily: proximaNova,
+    h4: titleFont,
+    h3: titleFont,
+    h5: titleFont,
   },
   overrides: {
     MuiButton: {

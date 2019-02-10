@@ -35,7 +35,7 @@ class MainSection extends React.Component {
           alignItems="flex-start"
         >
           <Grid item xs={12} sm={12} md={12} lg={8}>
-            <Typography align="center" variant="h3">Curate the SPRING directory</Typography>
+            <Typography align="center" color="secondary" variant="h3">Curate the SPRING directory</Typography>
             <StakeNow />
           </Grid>
           <Grid item xs={12} sm={8} md={6} lg={4}>
