@@ -3,7 +3,6 @@ import Navbar from './Navbar';
 import MainSection from './MainSection';
 import FAQSection from './FAQSection';
 import Footer from './Footer';
-import BuyTRSTSection from './BuyTRSTSection';
 import ActivitiesSection from './ActivitiesSection';
 import HeaderSection from './HeaderSection';
 
@@ -14,8 +13,7 @@ class HomePage extends React.Component {
         <Navbar />
         <HeaderSection color="light" />
         <MainSection color="dark" />
-        <ActivitiesSection color="dark" />
-        <BuyTRSTSection color="light" />
+        <ActivitiesSection color="light" />
         <FAQSection color="dark" />
         <Footer color="light" />
       </div>
