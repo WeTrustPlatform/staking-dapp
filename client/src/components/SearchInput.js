@@ -3,8 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Icon from '@material-ui/core/Icon';
 import Downshift from 'downshift';
 import debounce from 'lodash.debounce';
 import axios from 'axios';
@@ -17,8 +15,6 @@ const styles = theme => ({
   },
   results: {
     marginTop: theme.spacing.unit,
-    position: 'absolute',
-    zIndex: 1,
   },
 });
 
@@ -92,20 +88,16 @@ class SearchInput extends React.Component {
             <div className={classes.root}>
               <TextField
                 fullWidth
-                label="Enter your favorite non-profit's name"
+                label="1. Enter your favorite non-profit's name"
                 type="search"
                 margin="normal"
                 InputLabelProps={{
                   shrink: true,
                 }}
                 InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Icon>search</Icon>
-                    </InputAdornment>
-                  ),
+                  ...getInputProps(),
+                  disableUnderline: true,
                 }}
-                {...getInputProps()}
               />
               {isOpen ? (
                 <Paper square className={classes.results}>

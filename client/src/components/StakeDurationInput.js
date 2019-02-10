@@ -27,7 +27,7 @@ class StakeDurationInput extends React.Component {
           select
           value={duration}
           onChange={onChange}
-          label="Select a lock-up duration"
+          label="3. Select a lock-up duration"
           margin="normal"
           SelectProps={{
             native: true,
@@ -36,6 +36,7 @@ class StakeDurationInput extends React.Component {
             shrink: true,
           }}
           InputProps={{
+            disableUnderline: true,
             startAdornment: <InputAdornment position="start">Duration</InputAdornment>,
           }}
         >

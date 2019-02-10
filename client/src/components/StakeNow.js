@@ -31,11 +31,12 @@ const styles = theme => ({
   },
   button: {
     padding: theme.spacing.unit * 2,
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 2,
   },
   link: {
     color: theme.palette.secondary.main,
+  },
+  row: {
+    marginTop: theme.mixins.toolbar.minHeight,
   },
 });
 
@@ -350,10 +351,14 @@ class StakeNow extends React.Component {
     } = this.state;
     return (
       <div className={classes.root}>
+
+        <SearchInput onSelected={this.onSelectedNpo} />
+        {npo.name && <NPOInfo data={npo} />}
+
         <Grid
           container
-          direction="row"
           justify="center"
+          className={classes.row}
         >
           {this.renderGridItem(
             this.props,
@@ -371,14 +376,10 @@ class StakeNow extends React.Component {
           )}
         </Grid>
 
-        <SearchInput onSelected={this.onSelectedNpo} />
-        <NPOInfo data={npo} />
-
         <Grid
           container
-          direction="row"
           justify="center"
-          className={classes.buttonGrid}
+          className={classes.row}
         >
           {isStaking && this.renderStakingSteps()}
           {errorMessage && this.renderErrorMessage(errorMessage)}
@@ -387,9 +388,13 @@ class StakeNow extends React.Component {
             onClick: this.handleStakeNow,
             color: 'primary',
           }, 'Stake Now')}
+        </Grid>
 
+        <Grid
+          container
+          className={classes.row}
+        >
           {this.renderSpringLinks(this.props)}
-
         </Grid>
       </div>
     );

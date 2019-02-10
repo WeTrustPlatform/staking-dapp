@@ -6,6 +6,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 const teal = '#3FA296';
 const grey = '#FAFAFA';
 const brownGrey = '#7E7E7E';
+const greyBlue = '#67C6BB';
 
 const proximaNova = [
   'proxima-nova',
@@ -24,13 +25,14 @@ const titleFont = {
   fontFamily: jubilat,
   fontWeight: 600,
 };
+
 const theme = createMuiTheme({
   palette: {
     primary: {
       main: grey, light: '#FFFFFF', dark: '#C7C7C7', contrastText: '#FFFFFF',
     },
     secondary: {
-      main: teal, light: '#73D4C7', dark: '#007368', contrastText: grey,
+      main: teal, light: greyBlue, dark: '#007368', contrastText: grey,
     },
     text: {
       primary: brownGrey,
@@ -71,12 +73,19 @@ const theme = createMuiTheme({
     },
     MuiInputLabel: {
       root: {
-        fontSize: '1.125rem',
+        fontWeight: 'bold',
+        fontSize: '1.25rem',
+      },
+      shrink: {
+        transform: 'translate(0, -1rem)',
       },
     },
     MuiInputBase: {
       root: {
+        paddingLeft: '1rem',
         fontSize: '1.25rem',
+        border: '1px solid #CCCCCC',
+        borderRadius: 3,
       },
     },
   },
