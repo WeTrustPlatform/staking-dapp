@@ -48,8 +48,7 @@ class HeaderSection extends React.Component {
                 To help a cause become featured,
                 simply stake TRST tokens in their favor.
               </strong>
-              &nbsp;
-              The causes with the most staked in their name,
+              &nbsp;The causes with the most staked in their name,
               will be rank highest in the SPRING directory.
               After the lock up period, you can take your tokens back,
               but their rankings will drop accordingly.
@@ -59,9 +58,8 @@ class HeaderSection extends React.Component {
               <strong>
                 Staking TRST to an organization that is not currently on SPRING
               </strong>
-              &nbsp;
-              will let them know how much support there is in the ETH community
-              and encourage them to accept ETH as donations.
+              &nbsp;will let them know how much support there is in the
+              ETH community and encourage them to accept ETH as donations.
             </Typography>
           </Grid>
         </Grid>

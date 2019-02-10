@@ -22,7 +22,7 @@ class Footer extends React.Component {
       >
         <SocialMedia />
         <div className={classes.copyright}>
-          <Typography>© 2018 WeTrustPlatform. All rights reserved.</Typography>
+          <Typography variant="h6">© 2019 WeTrustPlatform. All rights reserved.</Typography>
         </div>
       </Section>
     );
