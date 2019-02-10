@@ -148,7 +148,7 @@ class ActivitiesSection extends React.Component {
 
     return (
       <Section id="activities-section" color={color}>
-        <SectionHeader>Activities</SectionHeader>
+        <SectionHeader>Your Stakes</SectionHeader>
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
