@@ -9,8 +9,6 @@ const styles = (theme) => {
   const navHeight = theme.mixins.toolbar.minHeight;
   return {
     container: {
-      minHeight: '70vh',
-      marginTop: navHeight,
       [theme.breakpoints.up('lg')]: {
         padding: `${navHeight * 2}px ${navHeight * 4}px`,
       },
