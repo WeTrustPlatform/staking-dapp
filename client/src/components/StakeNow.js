@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { HashLink as Link } from 'react-router-hash-link';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -32,9 +31,11 @@ const styles = theme => ({
   },
   button: {
     padding: theme.spacing.unit * 2,
+    marginTop: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 2,
   },
-  buttonGrid: {
-    marginTop: theme.mixins.toolbar.minHeight / 2,
+  link: {
+    color: theme.palette.secondary.main,
   },
 });
 
@@ -227,6 +228,40 @@ class StakeNow extends React.Component {
     );
   }
 
+  renderSpringLinks(props) {
+    const { classes } = props;
+    return (
+      <Grid
+        container
+        justify="center"
+      >
+        <Typography variant="h6">
+            View the list of&nbsp;
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://spring.wetrust.io/causes"
+            className={classes.link}
+          >
+            SPRING Causes
+
+          </a>
+        </Typography>
+        <Typography variant="h6">
+          &nbsp;or&nbsp;
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://airtable.com/shr1OLs5qiOloUceT"
+            className={classes.link}
+          >
+            nominate a NPO.
+          </a>
+        </Typography>
+      </Grid>
+    );
+  }
+
   renderErrorMessage(errorMessage) {
     return (
       <Grid
@@ -353,10 +388,8 @@ class StakeNow extends React.Component {
             color: 'primary',
           }, 'Stake Now')}
 
-          {this.renderButton({
-            ...this.props,
-            component: props => <Link smooth to="#faq-section"><Button {...props} /></Link>,
-          }, 'Learn more')}
+          {this.renderSpringLinks(this.props)}
+
         </Grid>
       </div>
     );

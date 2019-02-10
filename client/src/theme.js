@@ -46,9 +46,17 @@ const theme = createMuiTheme({
   },
   overrides: {
     MuiButton: {
+      root: {
+        borderRadius: 4,
+      },
+      contained: {
+        fontSize: '1rem',
+        fontWeight: 'bold',
+        height: '3rem',
+        color: grey,
+      },
       containedPrimary: {
-        backgroundColor: '#F6A623',
-        color: '#FAFAFA',
+        backgroundColor: '#F3B058',
       },
     },
     MuiTableCell: {
