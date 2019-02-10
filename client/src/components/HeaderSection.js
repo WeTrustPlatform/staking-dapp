@@ -8,9 +8,11 @@ import SectionHeader from './SectionHeader';
 const styles = (theme) => {
   const navHeight = theme.mixins.toolbar.minHeight;
   return {
+    root: {
+      marginTop: navHeight,
+    },
     container: {
       margin: 'auto',
-      marginTop: navHeight,
       maxWidth: theme.breakpoints.values.lg,
     },
   };
@@ -23,7 +25,7 @@ class HeaderSection extends React.Component {
       <Section
         id="header-section"
         color={color}
-        className={classes.container}
+        className={classes.root}
       >
         <SectionHeader>
           <Typography align="center" color="secondary" variant="h3">Curate the SPRING directory</Typography>
@@ -32,6 +34,7 @@ class HeaderSection extends React.Component {
           container
           direction="row"
           justify="center"
+          className={classes.container}
         >
           <Grid item xs={10} sm={10} md={8} lg={4}>
             <Typography variant="h6">
