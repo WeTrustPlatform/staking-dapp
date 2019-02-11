@@ -18,17 +18,17 @@ const styles = (theme) => {
   };
 };
 
-class HeaderSection extends React.Component {
+class TopSection extends React.Component {
   render() {
     const { color, classes } = this.props;
     return (
       <Section
-        id="header-section"
+        id="top-section"
         color={color}
         className={classes.root}
       >
         <SectionHeader>
-          <Typography align="center" color="secondary" variant="h3">Curate the SPRING directory</Typography>
+          Curate the SPRING directory
         </SectionHeader>
         <Grid
           container
@@ -44,7 +44,7 @@ class HeaderSection extends React.Component {
             </Typography>
             <br />
           </Grid>
-          <Grid lg={1} />
+          <Grid item lg={1} />
           <Grid item xs={10} sm={10} md={8} lg={7}>
             <Typography variant="h6">
               <strong>
@@ -71,4 +71,4 @@ class HeaderSection extends React.Component {
   }
 }
 
-export default withStyles(styles)(HeaderSection);
+export default withStyles(styles)(TopSection);

@@ -4,42 +4,42 @@ exports[`tests snapshot 1`] = `
 <div>
   <div>
     <header
-      className="MuiPaper-root-394 MuiPaper-elevation4-400 MuiAppBar-root-385 MuiAppBar-positionFixed-386 MuiAppBar-colorPrimary-392 mui-fixed"
+      className="MuiPaper-root-396 MuiPaper-elevation4-402 MuiAppBar-root-387 MuiAppBar-positionFixed-388 MuiAppBar-colorPrimary-394 mui-fixed"
     >
       <div
-        className="MuiToolbar-root-421 MuiToolbar-regular-423 MuiToolbar-gutters-422"
+        className="MuiToolbar-root-423 MuiToolbar-regular-425 MuiToolbar-gutters-424"
       >
         <div
-          className="Navbar-grow-383"
+          className="Navbar-grow-385"
         >
           <img
             alt="WeTrust"
-            className="Navbar-brandImage-384"
-            src="logo-trimmed.png"
+            className="Navbar-brandImage-386"
+            src="wetrust-logo.svg"
           />
         </div>
         <ul
-          className="MuiList-root-427 MuiList-padding-428"
+          className="MuiList-root-429 MuiList-padding-430"
         >
           <li
-            className="MuiListItem-root-431 MuiListItem-default-434 MuiListItem-dense-435 MuiListItem-gutters-439"
+            className="MuiListItem-root-433 MuiListItem-default-436 MuiListItem-dense-437 MuiListItem-gutters-441"
             disabled={false}
           >
             <div
-              className="MuiAvatar-root-446 MuiAvatar-colorDefault-447 Web3Account-error-426"
+              className="MuiAvatar-root-448 MuiAvatar-colorDefault-449 Web3Account-error-428"
             >
               <span
                 aria-hidden="true"
-                className="material-icons MuiIcon-root-449"
+                className="material-icons MuiIcon-root-451"
               >
                 error_outlined
               </span>
             </div>
             <div
-              className="MuiListItemText-root-458"
+              className="MuiListItemText-root-460"
             >
               <span
-                className="MuiTypography-root-464 MuiTypography-subheading-471 MuiListItemText-primary-461"
+                className="MuiTypography-root-466 MuiTypography-subheading-473 MuiListItemText-primary-463"
               >
                 Please install MetaMask
               </span>
@@ -51,7 +51,7 @@ exports[`tests snapshot 1`] = `
           onClick={[Function]}
         >
           <button
-            className="MuiButtonBase-root-526 MuiButton-root-500 MuiButton-text-502 MuiButton-flat-505"
+            className="MuiButtonBase-root-528 MuiButton-root-502 MuiButton-text-504 MuiButton-flat-507"
             disabled={false}
             onBlur={[Function]}
             onContextMenu={[Function]}
@@ -68,12 +68,12 @@ exports[`tests snapshot 1`] = `
             type="button"
           >
             <span
-              className="MuiButton-label-501"
+              className="MuiButton-label-503"
             >
               Home
             </span>
             <span
-              className="MuiTouchRipple-root-758"
+              className="MuiTouchRipple-root-762"
             />
           </button>
         </a>
@@ -82,7 +82,7 @@ exports[`tests snapshot 1`] = `
           onClick={[Function]}
         >
           <button
-            className="MuiButtonBase-root-526 MuiButton-root-500 MuiButton-text-502 MuiButton-flat-505"
+            className="MuiButtonBase-root-528 MuiButton-root-502 MuiButton-text-504 MuiButton-flat-507"
             disabled={false}
             onBlur={[Function]}
             onContextMenu={[Function]}
@@ -99,12 +99,12 @@ exports[`tests snapshot 1`] = `
             type="button"
           >
             <span
-              className="MuiButton-label-501"
+              className="MuiButton-label-503"
             >
               FAQ
             </span>
             <span
-              className="MuiTouchRipple-root-758"
+              className="MuiTouchRipple-root-762"
             />
           </button>
         </a>
@@ -112,55 +112,140 @@ exports[`tests snapshot 1`] = `
     </header>
   </div>
   <div
-    className="Section-root-530 Section-light-532 MainSection-container-529"
+    className="Section-root-533 Section-light-535 TopSection-root-531"
+    id="top-section"
+  >
+    <h3
+      className="MuiTypography-root-466 MuiTypography-h3-480 MuiTypography-colorSecondary-497 MuiTypography-alignCenter-489 SectionHeader-container-536"
+    >
+      Curate the SPRING directory
+    </h3>
+    <div
+      className="MuiGrid-container-537 MuiGrid-justify-xs-center-554 TopSection-container-532"
+    >
+      <div
+        className="MuiGrid-item-538 MuiGrid-grid-xs-10-575 MuiGrid-grid-sm-10-589 MuiGrid-grid-md-8-601 MuiGrid-grid-lg-4-611"
+      >
+        <h6
+          className="MuiTypography-root-466 MuiTypography-h6-483"
+        >
+          As a decentralized donation platform, SPRING allows TRST token holders to decide which causes are featured, and a way to add new causes to the platform.
+        </h6>
+        <br />
+      </div>
+      <div
+        className="MuiGrid-item-538 MuiGrid-grid-lg-1-608"
+      />
+      <div
+        className="MuiGrid-item-538 MuiGrid-grid-xs-10-575 MuiGrid-grid-sm-10-589 MuiGrid-grid-md-8-601 MuiGrid-grid-lg-7-614"
+      >
+        <h6
+          className="MuiTypography-root-466 MuiTypography-h6-483"
+        >
+          <strong>
+            To help a cause become featured, simply stake TRST tokens in their favor.
+          </strong>
+           The causes with the most staked in their name, will be rank highest in the SPRING directory. After the lock up period, you can take your tokens back, but their rankings will drop accordingly.
+        </h6>
+        <br />
+        <h6
+          className="MuiTypography-root-466 MuiTypography-h6-483"
+        >
+          <strong>
+            Staking TRST to an organization that is not currently on SPRING
+          </strong>
+           will let them know how much support there is in the ETH community and encourage them to accept ETH as donations.
+        </h6>
+      </div>
+    </div>
+  </div>
+  <div
+    className="Section-root-533 Section-dark-534 MainSection-container-634"
     id="main-section"
   >
     <div
-      className="MuiGrid-container-533 MuiGrid-align-items-xs-flex-start-542 MuiGrid-justify-xs-center-550"
+      className="MuiGrid-container-537 MuiGrid-align-items-xs-flex-start-546 MuiGrid-justify-xs-center-554"
     >
       <div
-        className="MuiGrid-item-534 MuiGrid-grid-xs-12-573 MuiGrid-grid-sm-12-587 MuiGrid-grid-md-12-601 MuiGrid-grid-lg-8-611"
+        className="MuiGrid-item-538 MuiGrid-grid-xs-12-577 MuiGrid-grid-sm-12-591 MuiGrid-grid-md-12-605 MuiGrid-grid-lg-8-615"
       >
-        <h2
-          className="MuiTypography-root-464 MuiTypography-h2-477 MuiTypography-alignCenter-487"
-        >
-          Stake your TRST
-        </h2>
         <div
-          className="StakeNow-root-630"
+          className="StakeNow-root-635"
         >
           <div
-            className="MuiGrid-container-533 MuiGrid-justify-xs-center-550"
+            aria-expanded={false}
+            aria-haspopup="listbox"
+            aria-labelledby="downshift-1-label"
+            aria-owns={null}
+            className="SearchInput-container-639"
+            role="combobox"
           >
             <div
-              className="MuiGrid-item-534 MuiGrid-grid-xs-12-573 MuiGrid-grid-sm-12-587 MuiGrid-grid-md-6-595 StakeNow-input-631"
+              className="MuiFormControl-root-641 MuiFormControl-marginNormal-642 MuiFormControl-fullWidth-644"
+            >
+              <label
+                className="MuiFormLabel-root-656 MuiInputLabel-root-645 MuiInputLabel-formControl-650 MuiInputLabel-animated-653 MuiInputLabel-shrink-652"
+                data-shrink={true}
+              >
+                1. Enter your favorite non-profit's name
+              </label>
+              <div
+                aria-activedescendant={null}
+                aria-autocomplete="list"
+                aria-controls={null}
+                aria-labelledby="downshift-1-label"
+                className="MuiInputBase-root-676 MuiInput-root-663 MuiInputBase-fullWidth-685 MuiInput-fullWidth-670 MuiInputBase-formControl-677 MuiInput-formControl-664"
+                onClick={[Function]}
+              >
+                <input
+                  aria-invalid={false}
+                  autoComplete="off"
+                  className="MuiInputBase-input-686 MuiInput-input-671 MuiInputBase-inputType-689 MuiInput-inputType-674 MuiInputBase-inputTypeSearch-690 MuiInput-inputTypeSearch-675"
+                  disabled={false}
+                  id="downshift-1-input"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  required={false}
+                  type="search"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="MuiGrid-container-537 MuiGrid-justify-xs-center-554"
+          >
+            <div
+              className="MuiGrid-item-538 MuiGrid-grid-xs-12-577 MuiGrid-grid-sm-12-591 MuiGrid-grid-md-6-599 StakeNow-gridRowItems-636"
             >
               <div>
                 <div
-                  className="MuiFormControl-root-634 MuiFormControl-marginNormal-635 MuiFormControl-fullWidth-637"
+                  className="MuiFormControl-root-641 MuiFormControl-marginNormal-642 MuiFormControl-fullWidth-644"
                 >
                   <label
-                    className="MuiFormLabel-root-649 MuiFormLabel-filled-653 MuiInputLabel-root-638 MuiInputLabel-formControl-643 MuiInputLabel-animated-646 MuiInputLabel-shrink-645"
+                    className="MuiFormLabel-root-656 MuiFormLabel-filled-660 MuiInputLabel-root-645 MuiInputLabel-formControl-650 MuiInputLabel-animated-653 MuiInputLabel-shrink-652"
                     data-shrink={true}
                   >
-                    Enter an amount
+                    2. Enter an amount
                   </label>
                   <div
-                    className="MuiInputBase-root-669 MuiInput-root-656 MuiInput-underline-660 MuiInputBase-fullWidth-678 MuiInput-fullWidth-663 MuiInputBase-formControl-670 MuiInput-formControl-657 MuiInputBase-adornedStart-673"
+                    className="MuiInputBase-root-676 MuiInput-root-663 MuiInputBase-fullWidth-685 MuiInput-fullWidth-670 MuiInputBase-formControl-677 MuiInput-formControl-664 MuiInputBase-adornedStart-680"
                     onClick={[Function]}
                   >
                     <div
-                      className="MuiInputAdornment-root-686 MuiInputAdornment-positionStart-688"
+                      className="MuiInputAdornment-root-693 MuiInputAdornment-positionStart-695"
                     >
                       <p
-                        className="MuiTypography-root-464 MuiTypography-body1-473 MuiTypography-colorTextSecondary-497"
+                        className="MuiTypography-root-466 MuiTypography-body1-475 MuiTypography-colorTextSecondary-499"
                       >
                         TRST
                       </p>
                     </div>
                     <input
                       aria-invalid={false}
-                      className="MuiInputBase-input-679 MuiInput-input-664 MuiInputBase-inputType-682 MuiInput-inputType-667 MuiInputBase-inputAdornedStart-684"
+                      className="MuiInputBase-input-686 MuiInput-input-671 MuiInputBase-inputType-689 MuiInput-inputType-674 MuiInputBase-inputAdornedStart-691"
                       disabled={false}
                       onBlur={[Function]}
                       onChange={[Function]}
@@ -174,37 +259,37 @@ exports[`tests snapshot 1`] = `
               </div>
             </div>
             <div
-              className="MuiGrid-item-534 MuiGrid-grid-xs-12-573 MuiGrid-grid-sm-12-587 MuiGrid-grid-md-6-595 StakeNow-input-631"
+              className="MuiGrid-item-538 MuiGrid-grid-xs-12-577 MuiGrid-grid-sm-12-591 MuiGrid-grid-md-6-599 StakeNow-gridRowItems-636"
             >
               <div>
                 <div
-                  className="MuiFormControl-root-634 MuiFormControl-marginNormal-635 MuiFormControl-fullWidth-637"
+                  className="MuiFormControl-root-641 MuiFormControl-marginNormal-642 MuiFormControl-fullWidth-644"
                 >
                   <label
-                    className="MuiFormLabel-root-649 MuiFormLabel-filled-653 MuiInputLabel-root-638 MuiInputLabel-formControl-643 MuiInputLabel-animated-646 MuiInputLabel-shrink-645"
+                    className="MuiFormLabel-root-656 MuiFormLabel-filled-660 MuiInputLabel-root-645 MuiInputLabel-formControl-650 MuiInputLabel-animated-653 MuiInputLabel-shrink-652"
                     data-shrink={true}
                   >
-                    Select a lock-up duration
+                    3. Select a lock-up duration
                   </label>
                   <div
-                    className="MuiInputBase-root-669 MuiInput-root-656 MuiInput-underline-660 MuiInputBase-fullWidth-678 MuiInput-fullWidth-663 MuiInputBase-formControl-670 MuiInput-formControl-657 MuiInputBase-adornedStart-673"
+                    className="MuiInputBase-root-676 MuiInput-root-663 MuiInputBase-fullWidth-685 MuiInput-fullWidth-670 MuiInputBase-formControl-677 MuiInput-formControl-664 MuiInputBase-adornedStart-680"
                     onClick={[Function]}
                   >
                     <div
-                      className="MuiInputAdornment-root-686 MuiInputAdornment-positionStart-688"
+                      className="MuiInputAdornment-root-693 MuiInputAdornment-positionStart-695"
                     >
                       <p
-                        className="MuiTypography-root-464 MuiTypography-body1-473 MuiTypography-colorTextSecondary-497"
+                        className="MuiTypography-root-466 MuiTypography-body1-475 MuiTypography-colorTextSecondary-499"
                       >
                         Duration
                       </p>
                     </div>
                     <div
-                      className="MuiSelect-root-691"
+                      className="MuiSelect-root-698"
                     >
                       <select
                         aria-invalid={false}
-                        className="MuiSelect-select-692 MuiInputBase-input-679 MuiInput-input-664 MuiInputBase-inputAdornedStart-684"
+                        className="MuiSelect-select-699 MuiInputBase-input-686 MuiInput-input-671 MuiInputBase-inputAdornedStart-691"
                         disabled={false}
                         multiple={false}
                         onBlur={[Function]}
@@ -231,7 +316,7 @@ exports[`tests snapshot 1`] = `
                       </select>
                       <svg
                         aria-hidden="true"
-                        className="MuiSvgIcon-root-698 MuiSelect-icon-697"
+                        className="MuiSvgIcon-root-705 MuiSelect-icon-704"
                         focusable="false"
                         role="presentation"
                         viewBox="0 0 24 24"
@@ -247,93 +332,13 @@ exports[`tests snapshot 1`] = `
             </div>
           </div>
           <div
-            aria-expanded={false}
-            aria-haspopup="listbox"
-            aria-labelledby="downshift-1-label"
-            aria-owns={null}
-            className="SearchInput-root-707"
-            role="combobox"
+            className="MuiGrid-container-537 MuiGrid-justify-xs-center-554 StakeNow-gridRowButton-638"
           >
             <div
-              aria-activedescendant={null}
-              aria-autocomplete="list"
-              aria-controls={null}
-              aria-labelledby="downshift-1-label"
-              className="MuiFormControl-root-634 MuiFormControl-marginNormal-635 MuiFormControl-fullWidth-637"
-              onKeyDown={[Function]}
-            >
-              <label
-                className="MuiFormLabel-root-649 MuiInputLabel-root-638 MuiInputLabel-formControl-643 MuiInputLabel-animated-646 MuiInputLabel-shrink-645"
-                data-shrink={true}
-                htmlFor="downshift-1-input"
-              >
-                Enter your favorite non-profit's name
-              </label>
-              <div
-                className="MuiInputBase-root-669 MuiInput-root-656 MuiInput-underline-660 MuiInputBase-fullWidth-678 MuiInput-fullWidth-663 MuiInputBase-formControl-670 MuiInput-formControl-657 MuiInputBase-adornedStart-673"
-                onClick={[Function]}
-              >
-                <div
-                  className="MuiInputAdornment-root-686 MuiInputAdornment-positionStart-688"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="material-icons MuiIcon-root-449"
-                  >
-                    search
-                  </span>
-                </div>
-                <input
-                  aria-invalid={false}
-                  autoComplete="off"
-                  className="MuiInputBase-input-679 MuiInput-input-664 MuiInputBase-inputType-682 MuiInput-inputType-667 MuiInputBase-inputTypeSearch-683 MuiInput-inputTypeSearch-668 MuiInputBase-inputAdornedStart-684"
-                  disabled={false}
-                  id="downshift-1-input"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  required={false}
-                  type="search"
-                  value=""
-                />
-              </div>
-            </div>
-          </div>
-          <div
-            style={
-              Object {
-                "visibility": "hidden",
-              }
-            }
-          >
-            <ul
-              className="MuiList-root-427 MuiList-padding-428"
-            >
-              <li
-                className="MuiListItem-root-431 MuiListItem-default-434 MuiListItem-gutters-439"
-                disabled={false}
-              >
-                <div
-                  className="MuiListItemText-root-458"
-                >
-                  <span
-                    className="MuiTypography-root-464 MuiTypography-subheading-471 MuiListItemText-primary-461"
-                  >
-                    EIN: undefined.
-              Location: undefined, undefined, undefined
-                  </span>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div
-            className="MuiGrid-container-533 MuiGrid-justify-xs-center-550 StakeNow-buttonGrid-633"
-          >
-            <div
-              className="MuiGrid-item-534 MuiGrid-grid-sm-6-581 MuiGrid-grid-md-3-592 StakeNow-button-632"
+              className="MuiGrid-item-538 MuiGrid-grid-sm-6-585 MuiGrid-grid-md-3-596"
             >
               <button
-                className="MuiButtonBase-root-526 MuiButton-root-500 MuiButton-contained-511 MuiButton-containedPrimary-512 MuiButton-raised-514 MuiButton-raisedPrimary-515 MuiButton-fullWidth-525"
+                className="MuiButtonBase-root-528 MuiButton-root-502 MuiButton-contained-513 MuiButton-containedPrimary-514 MuiButton-raised-516 MuiButton-raisedPrimary-517 MuiButton-fullWidth-527"
                 disabled={false}
                 onBlur={[Function]}
                 onClick={[Function]}
@@ -351,159 +356,162 @@ exports[`tests snapshot 1`] = `
                 type="button"
               >
                 <span
-                  className="MuiButton-label-501"
+                  className="MuiButton-label-503"
                 >
                   Stake Now
                 </span>
                 <span
-                  className="MuiTouchRipple-root-758"
+                  className="MuiTouchRipple-root-762"
                 />
               </button>
             </div>
+          </div>
+          <div
+            className="MuiGrid-container-537"
+          >
             <div
-              className="MuiGrid-item-534 MuiGrid-grid-sm-6-581 MuiGrid-grid-md-3-592 StakeNow-button-632"
+              className="MuiGrid-container-537 MuiGrid-justify-xs-center-554"
             >
-              <a
-                href="/#faq-section"
-                onClick={[Function]}
+              <h6
+                className="MuiTypography-root-466 MuiTypography-h6-483"
               >
-                <button
-                  className="MuiButtonBase-root-526 MuiButton-root-500 MuiButton-text-502 MuiButton-flat-505 MuiButtonBase-root-526 MuiButton-root-500 MuiButton-contained-511 MuiButton-raised-514 MuiButton-fullWidth-525"
-                  disabled={false}
-                  onBlur={[Function]}
-                  onContextMenu={[Function]}
-                  onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  onKeyUp={[Function]}
-                  onMouseDown={[Function]}
-                  onMouseLeave={[Function]}
-                  onMouseUp={[Function]}
-                  onTouchEnd={[Function]}
-                  onTouchMove={[Function]}
-                  onTouchStart={[Function]}
-                  role="button"
-                  tabIndex="0"
-                  type="button"
+                View the list of 
+                <a
+                  className="StakeNow-link-637"
+                  href="https://spring.wetrust.io/causes"
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
-                  <span
-                    className="MuiButton-label-501"
-                  >
-                    <span
-                      className="MuiButton-label-501"
-                    >
-                      Learn more
-                    </span>
-                    <span
-                      className="MuiTouchRipple-root-758"
-                    />
-                  </span>
-                  <span
-                    className="MuiTouchRipple-root-758"
-                  />
-                </button>
-              </a>
+                  SPRING Causes
+                </a>
+              </h6>
+              <h6
+                className="MuiTypography-root-466 MuiTypography-h6-483"
+              >
+                 or 
+                <a
+                  className="StakeNow-link-637"
+                  href="https://airtable.com/shr1OLs5qiOloUceT"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  nominate a NPO.
+                </a>
+              </h6>
             </div>
           </div>
         </div>
       </div>
       <div
-        className="MuiGrid-item-534 MuiGrid-grid-xs-12-573 MuiGrid-grid-sm-8-583 MuiGrid-grid-md-6-595 MuiGrid-grid-lg-4-607"
+        className="MuiGrid-item-538 MuiGrid-grid-xs-12-577 MuiGrid-grid-sm-8-587 MuiGrid-grid-md-6-599 MuiGrid-grid-lg-4-611"
       >
         <div
-          className="Dashboard-root-709"
+          className="Dashboard-root-714"
         >
           <div
-            className="MuiPaper-root-394 MuiPaper-elevation1-397 MuiPaper-rounded-395 MuiCard-root-713 NumberCard-root-710"
+            className="MuiPaper-root-396 MuiPaper-elevation1-399 MuiPaper-rounded-397 MuiCard-root-719 NumberCard-root-715"
           >
             <div
-              className="MuiCardContent-root-714"
+              className="MuiCardContent-root-720"
             >
-              <h6
-                className="MuiTypography-root-464 MuiTypography-h6-481 MuiTypography-colorSecondary-495 MuiTypography-gutterBottom-491"
+              <h4
+                className="MuiTypography-root-466 MuiTypography-h4-481 MuiTypography-gutterBottom-493"
               >
-                Current Stakes
-              </h6>
-              <h5
-                className="MuiTypography-root-464 MuiTypography-h5-480 NumberCard-primaryText-711"
+                Current stakes
+              </h4>
+              <div
+                className="NumberCard-primary-716"
               >
-                <span
-                  className="NumberCard-span-712"
+                <div
+                  className="NumberCard-primaryText-717"
                 >
-                  0
-                </span>
-                <span
-                  className="NumberCard-span-712"
+                  <h5
+                    className="MuiTypography-root-466 MuiTypography-h5-482 MuiTypography-colorSecondary-497"
+                  >
+                    0
+                  </h5>
+                </div>
+                <div
+                  className="NumberCard-primaryUnit-718"
                 >
                   <img
                     alt="TRST"
-                    className="TRSTIcon-icon-715"
+                    className="TRSTIcon-icon-721"
                     src="trst.png"
                   />
-                </span>
-              </h5>
+                </div>
+              </div>
             </div>
           </div>
           <div
-            className="MuiPaper-root-394 MuiPaper-elevation1-397 MuiPaper-rounded-395 MuiCard-root-713 NumberCard-root-710"
+            className="MuiPaper-root-396 MuiPaper-elevation1-399 MuiPaper-rounded-397 MuiCard-root-719 NumberCard-root-715"
           >
             <div
-              className="MuiCardContent-root-714"
+              className="MuiCardContent-root-720"
             >
-              <h6
-                className="MuiTypography-root-464 MuiTypography-h6-481 MuiTypography-colorSecondary-495 MuiTypography-gutterBottom-491"
+              <h4
+                className="MuiTypography-root-466 MuiTypography-h4-481 MuiTypography-gutterBottom-493"
               >
                 Average stake
-              </h6>
-              <h5
-                className="MuiTypography-root-464 MuiTypography-h5-480 NumberCard-primaryText-711"
+              </h4>
+              <div
+                className="NumberCard-primary-716"
               >
-                <span
-                  className="NumberCard-span-712"
+                <div
+                  className="NumberCard-primaryText-717"
                 >
-                  0
-                </span>
-                <span
-                  className="NumberCard-span-712"
+                  <h5
+                    className="MuiTypography-root-466 MuiTypography-h5-482 MuiTypography-colorSecondary-497"
+                  >
+                    0
+                  </h5>
+                </div>
+                <div
+                  className="NumberCard-primaryUnit-718"
                 >
                   <img
                     alt="TRST"
-                    className="TRSTIcon-icon-715"
+                    className="TRSTIcon-icon-721"
                     src="trst.png"
                   />
-                </span>
-              </h5>
+                </div>
+              </div>
             </div>
           </div>
           <div
-            className="MuiPaper-root-394 MuiPaper-elevation1-397 MuiPaper-rounded-395 MuiCard-root-713 NumberCard-root-710"
+            className="MuiPaper-root-396 MuiPaper-elevation1-399 MuiPaper-rounded-397 MuiCard-root-719 NumberCard-root-715"
           >
             <div
-              className="MuiCardContent-root-714"
+              className="MuiCardContent-root-720"
             >
-              <h6
-                className="MuiTypography-root-464 MuiTypography-h6-481 MuiTypography-colorSecondary-495 MuiTypography-gutterBottom-491"
+              <h4
+                className="MuiTypography-root-466 MuiTypography-h4-481 MuiTypography-gutterBottom-493"
               >
                 Current stakers
-              </h6>
-              <h5
-                className="MuiTypography-root-464 MuiTypography-h5-480 NumberCard-primaryText-711"
+              </h4>
+              <div
+                className="NumberCard-primary-716"
               >
-                <span
-                  className="NumberCard-span-712"
+                <div
+                  className="NumberCard-primaryText-717"
                 >
-                  0
-                </span>
-                <span
-                  className="NumberCard-span-712"
+                  <h5
+                    className="MuiTypography-root-466 MuiTypography-h5-482 MuiTypography-colorSecondary-497"
+                  >
+                    0
+                  </h5>
+                </div>
+                <div
+                  className="NumberCard-primaryUnit-718"
                 >
                   <span
                     aria-hidden="true"
-                    className="material-icons MuiIcon-root-449"
+                    className="material-icons MuiIcon-root-451"
                   >
                     people
                   </span>
-                </span>
-              </h5>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -511,57 +519,57 @@ exports[`tests snapshot 1`] = `
     </div>
   </div>
   <div
-    className="Section-root-530 Section-dark-531"
+    className="Section-root-533 Section-light-535"
     id="activities-section"
   >
     <h3
-      className="MuiTypography-root-464 MuiTypography-h3-478 MuiTypography-colorSecondary-495 MuiTypography-alignCenter-487 SectionHeader-container-721"
+      className="MuiTypography-root-466 MuiTypography-h3-480 MuiTypography-colorSecondary-497 MuiTypography-alignCenter-489 SectionHeader-container-536"
     >
-      Activities
+      Your Stakes
     </h3>
     <div
-      className="MuiPaper-root-394 MuiPaper-elevation2-398 MuiPaper-rounded-395 ActivitiesSection-root-716"
+      className="MuiPaper-root-396 MuiPaper-elevation2-400 MuiPaper-rounded-397 ActivitiesSection-root-722"
     >
       <table
-        className="MuiTable-root-722 ActivitiesSection-table-717"
+        className="MuiTable-root-727 ActivitiesSection-table-723"
       >
         <thead
-          className="MuiTableHead-root-723"
+          className="MuiTableHead-root-728"
         >
           <tr
-            className="MuiTableRow-root-724 MuiTableRow-head-727"
+            className="MuiTableRow-root-729 MuiTableRow-head-732"
           >
             <th
               aria-sort={null}
-              className="MuiTableCell-root-729 MuiTableCell-head-730"
+              className="MuiTableCell-root-734 MuiTableCell-head-735"
               scope="col"
             >
               NPO Name
             </th>
             <th
               aria-sort={null}
-              className="MuiTableCell-root-729 MuiTableCell-head-730"
+              className="MuiTableCell-root-734 MuiTableCell-head-735"
               scope="col"
             >
-              Amount (TRST)
+              Amount
             </th>
             <th
               aria-sort={null}
-              className="MuiTableCell-root-729 MuiTableCell-head-730"
+              className="MuiTableCell-root-734 MuiTableCell-head-735"
               scope="col"
             >
               Locked Until
             </th>
             <th
               aria-sort={null}
-              className="MuiTableCell-root-729 MuiTableCell-head-730"
+              className="MuiTableCell-root-734 MuiTableCell-head-735"
               scope="col"
             >
               Action
             </th>
             <th
               aria-sort={null}
-              className="MuiTableCell-root-729 MuiTableCell-head-730"
+              className="MuiTableCell-root-734 MuiTableCell-head-735"
               scope="col"
             >
               Transaction Hash
@@ -569,18 +577,18 @@ exports[`tests snapshot 1`] = `
           </tr>
         </thead>
         <tbody
-          className="MuiTableBody-root-741"
+          className="MuiTableBody-root-746"
         >
           <tr
-            className="MuiTableRow-root-724"
+            className="MuiTableRow-root-729"
           >
             <td
               aria-sort={null}
-              className="MuiTableCell-root-729 MuiTableCell-body-731"
+              className="MuiTableCell-root-734 MuiTableCell-body-736"
               colSpan={5}
             >
               <div
-                className="ActivitiesSection-noActivities-719"
+                className="ActivitiesSection-noActivities-725"
               >
                 It looks so empty.
                  
@@ -598,83 +606,45 @@ exports[`tests snapshot 1`] = `
     </div>
   </div>
   <div
-    className="Section-root-530 Section-light-532"
-  >
-    <h3
-      className="MuiTypography-root-464 MuiTypography-h3-478 MuiTypography-colorSecondary-495 MuiTypography-alignCenter-487 SectionHeader-container-721"
-    >
-      Don't have TRST?
-    </h3>
-    <div
-      className="BuyTRSTSection-container-742"
-    >
-      <button
-        className="MuiButtonBase-root-526 MuiButton-root-500 MuiButton-contained-511 MuiButton-containedPrimary-512 MuiButton-raised-514 MuiButton-raisedPrimary-515"
-        disabled={false}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onContextMenu={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseLeave={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        onTouchMove={[Function]}
-        onTouchStart={[Function]}
-        tabIndex="0"
-        type="button"
-      >
-        <span
-          className="MuiButton-label-501"
-        >
-          Buy TRST with your Credit Card
-        </span>
-        <span
-          className="MuiTouchRipple-root-758"
-        />
-      </button>
-    </div>
-  </div>
-  <div
-    className="Section-root-530 Section-dark-531"
+    className="Section-root-533 Section-dark-534"
     id="faq-section"
   >
     <h3
-      className="MuiTypography-root-464 MuiTypography-h3-478 MuiTypography-colorSecondary-495 MuiTypography-alignCenter-487 SectionHeader-container-721"
+      className="MuiTypography-root-466 MuiTypography-h3-480 MuiTypography-colorSecondary-497 MuiTypography-alignCenter-489 SectionHeader-container-536"
     >
       FAQ
     </h3>
     <div
-      className="FAQSection-container-743"
+      className="FAQSection-container-747"
     >
       <div
-        className="FAQItem-root-744"
+        className="FAQItem-root-748"
       >
         <div
-          className="FAQItem-question-747"
+          className="FAQItem-question-751"
           onClick={[Function]}
           role="presentation"
         >
           <div
-            className="MuiGrid-container-533"
+            className="MuiGrid-container-537"
           >
             <div
-              className="MuiGrid-item-534 MuiGrid-grid-xs-10-571"
+              className="MuiGrid-item-538 MuiGrid-grid-xs-10-575"
             >
-              <h6
-                className="MuiTypography-root-464 MuiTypography-h6-481"
+              <h5
+                className="MuiTypography-root-466 MuiTypography-h5-482"
               >
-                What does 'staking TRST' mean?
-              </h6>
+                <strong>
+                  What does 'staking TRST' mean?
+                </strong>
+              </h5>
             </div>
             <div
-              className="MuiGrid-item-534 MuiGrid-grid-xs-2-563 FAQItem-gridIcon-746"
+              className="MuiGrid-item-538 MuiGrid-grid-xs-2-567 FAQItem-gridIcon-750"
             >
               <span
                 aria-hidden="true"
-                className="material-icons MuiIcon-root-449"
+                className="material-icons MuiIcon-root-451"
               >
                 add
               </span>
@@ -683,35 +653,37 @@ exports[`tests snapshot 1`] = `
         </div>
         <br />
         <hr
-          className="MuiDivider-root-749 FAQItem-divider-745"
+          className="MuiDivider-root-753 FAQItem-divider-749"
         />
       </div>
       <div
-        className="FAQItem-root-744"
+        className="FAQItem-root-748"
       >
         <div
-          className="FAQItem-question-747"
+          className="FAQItem-question-751"
           onClick={[Function]}
           role="presentation"
         >
           <div
-            className="MuiGrid-container-533"
+            className="MuiGrid-container-537"
           >
             <div
-              className="MuiGrid-item-534 MuiGrid-grid-xs-10-571"
+              className="MuiGrid-item-538 MuiGrid-grid-xs-10-575"
             >
-              <h6
-                className="MuiTypography-root-464 MuiTypography-h6-481"
+              <h5
+                className="MuiTypography-root-466 MuiTypography-h5-482"
               >
-                Why would I stake TRST?
-              </h6>
+                <strong>
+                  Why would I stake TRST?
+                </strong>
+              </h5>
             </div>
             <div
-              className="MuiGrid-item-534 MuiGrid-grid-xs-2-563 FAQItem-gridIcon-746"
+              className="MuiGrid-item-538 MuiGrid-grid-xs-2-567 FAQItem-gridIcon-750"
             >
               <span
                 aria-hidden="true"
-                className="material-icons MuiIcon-root-449"
+                className="material-icons MuiIcon-root-451"
               >
                 add
               </span>
@@ -720,35 +692,37 @@ exports[`tests snapshot 1`] = `
         </div>
         <br />
         <hr
-          className="MuiDivider-root-749 FAQItem-divider-745"
+          className="MuiDivider-root-753 FAQItem-divider-749"
         />
       </div>
       <div
-        className="FAQItem-root-744"
+        className="FAQItem-root-748"
       >
         <div
-          className="FAQItem-question-747"
+          className="FAQItem-question-751"
           onClick={[Function]}
           role="presentation"
         >
           <div
-            className="MuiGrid-container-533"
+            className="MuiGrid-container-537"
           >
             <div
-              className="MuiGrid-item-534 MuiGrid-grid-xs-10-571"
+              className="MuiGrid-item-538 MuiGrid-grid-xs-10-575"
             >
-              <h6
-                className="MuiTypography-root-464 MuiTypography-h6-481"
+              <h5
+                className="MuiTypography-root-466 MuiTypography-h5-482"
               >
-                How does my stake benefit the organization or the crypto ecosystem?
-              </h6>
+                <strong>
+                  How does my stake benefit the organization or the crypto ecosystem?
+                </strong>
+              </h5>
             </div>
             <div
-              className="MuiGrid-item-534 MuiGrid-grid-xs-2-563 FAQItem-gridIcon-746"
+              className="MuiGrid-item-538 MuiGrid-grid-xs-2-567 FAQItem-gridIcon-750"
             >
               <span
                 aria-hidden="true"
-                className="material-icons MuiIcon-root-449"
+                className="material-icons MuiIcon-root-451"
               >
                 add
               </span>
@@ -757,35 +731,37 @@ exports[`tests snapshot 1`] = `
         </div>
         <br />
         <hr
-          className="MuiDivider-root-749 FAQItem-divider-745"
+          className="MuiDivider-root-753 FAQItem-divider-749"
         />
       </div>
       <div
-        className="FAQItem-root-744"
+        className="FAQItem-root-748"
       >
         <div
-          className="FAQItem-question-747"
+          className="FAQItem-question-751"
           onClick={[Function]}
           role="presentation"
         >
           <div
-            className="MuiGrid-container-533"
+            className="MuiGrid-container-537"
           >
             <div
-              className="MuiGrid-item-534 MuiGrid-grid-xs-10-571"
+              className="MuiGrid-item-538 MuiGrid-grid-xs-10-575"
             >
-              <h6
-                className="MuiTypography-root-464 MuiTypography-h6-481"
+              <h5
+                className="MuiTypography-root-466 MuiTypography-h5-482"
               >
-                When can I unstake?
-              </h6>
+                <strong>
+                  When can I unstake?
+                </strong>
+              </h5>
             </div>
             <div
-              className="MuiGrid-item-534 MuiGrid-grid-xs-2-563 FAQItem-gridIcon-746"
+              className="MuiGrid-item-538 MuiGrid-grid-xs-2-567 FAQItem-gridIcon-750"
             >
               <span
                 aria-hidden="true"
-                className="material-icons MuiIcon-root-449"
+                className="material-icons MuiIcon-root-451"
               >
                 add
               </span>
@@ -794,101 +770,101 @@ exports[`tests snapshot 1`] = `
         </div>
         <br />
         <hr
-          className="MuiDivider-root-749 FAQItem-divider-745"
+          className="MuiDivider-root-753 FAQItem-divider-749"
         />
       </div>
     </div>
   </div>
   <div
-    className="Section-root-530 Section-light-532"
+    className="Section-root-533 Section-light-535"
   >
     <div
-      className="MuiGrid-container-533 MuiGrid-align-items-xs-center-541 MuiGrid-justify-xs-center-550"
+      className="MuiGrid-container-537 MuiGrid-align-items-xs-center-545 MuiGrid-justify-xs-center-554"
     >
       <div
-        className="MuiGrid-item-534 SocialMedia-item-755"
+        className="MuiGrid-item-538 SocialMedia-item-759"
       >
         <a
-          className="SocialMedia-href-756"
+          className="SocialMedia-href-760"
           href="https://www.facebook.com/wetrustplatform"
           rel="noopener noreferrer"
           target="_blank"
         >
           <span
             aria-hidden="true"
-            className="material-icons MuiIcon-root-449 SocialMedia-fab-757 fab fa-facebook"
+            className="material-icons MuiIcon-root-451 SocialMedia-fab-761 fab fa-facebook"
           />
         </a>
       </div>
       <div
-        className="MuiGrid-item-534 SocialMedia-item-755"
+        className="MuiGrid-item-538 SocialMedia-item-759"
       >
         <a
-          className="SocialMedia-href-756"
+          className="SocialMedia-href-760"
           href="https://www.reddit.com/r/WeTrustPlatform"
           rel="noopener noreferrer"
           target="_blank"
         >
           <span
             aria-hidden="true"
-            className="material-icons MuiIcon-root-449 SocialMedia-fab-757 fab fa-reddit"
+            className="material-icons MuiIcon-root-451 SocialMedia-fab-761 fab fa-reddit"
           />
         </a>
       </div>
       <div
-        className="MuiGrid-item-534 SocialMedia-item-755"
+        className="MuiGrid-item-538 SocialMedia-item-759"
       >
         <a
-          className="SocialMedia-href-756"
+          className="SocialMedia-href-760"
           href="https://twitter.com/wetrustplatform"
           rel="noopener noreferrer"
           target="_blank"
         >
           <span
             aria-hidden="true"
-            className="material-icons MuiIcon-root-449 SocialMedia-fab-757 fab fa-twitter"
+            className="material-icons MuiIcon-root-451 SocialMedia-fab-761 fab fa-twitter"
           />
         </a>
       </div>
       <div
-        className="MuiGrid-item-534 SocialMedia-item-755"
+        className="MuiGrid-item-538 SocialMedia-item-759"
       >
         <a
-          className="SocialMedia-href-756"
+          className="SocialMedia-href-760"
           href="https://github.com/wetrustplatform"
           rel="noopener noreferrer"
           target="_blank"
         >
           <span
             aria-hidden="true"
-            className="material-icons MuiIcon-root-449 SocialMedia-fab-757 fab fa-github"
+            className="material-icons MuiIcon-root-451 SocialMedia-fab-761 fab fa-github"
           />
         </a>
       </div>
       <div
-        className="MuiGrid-item-534 SocialMedia-item-755"
+        className="MuiGrid-item-538 SocialMedia-item-759"
       >
         <a
-          className="SocialMedia-href-756"
+          className="SocialMedia-href-760"
           href="https://medium.com/wetrust-blog"
           rel="noopener noreferrer"
           target="_blank"
         >
           <span
             aria-hidden="true"
-            className="material-icons MuiIcon-root-449 SocialMedia-fab-757 fab fa-medium"
+            className="material-icons MuiIcon-root-451 SocialMedia-fab-761 fab fa-medium"
           />
         </a>
       </div>
     </div>
     <div
-      className="Footer-copyright-754"
+      className="Footer-copyright-758"
     >
-      <p
-        className="MuiTypography-root-464 MuiTypography-body1-473"
+      <h6
+        className="MuiTypography-root-466 MuiTypography-h6-483"
       >
-        © 2018 WeTrustPlatform. All rights reserved.
-      </p>
+        © 2019 WeTrustPlatform. All rights reserved.
+      </h6>
     </div>
   </div>
 </div>
