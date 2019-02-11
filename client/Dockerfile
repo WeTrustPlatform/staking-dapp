@@ -3,7 +3,7 @@ from node:10.15.1 as build-static-files
 WORKDIR /app
 
 ARG NODE_ENV=production
-ARG REACT_APP_CMS_URL=https://tcr.wetrust.info/api/v0
+ARG REACT_APP_CMS_URL=https://staking-staging.wetrust.io/api/v0
 ARG REACT_APP_WEB3_FALLBACK_PROVIDER=https://rinkeby.infura.io/metamask
 ARG REACT_APP_NETWORK_ID=4
 
