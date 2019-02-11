@@ -27,6 +27,8 @@ const titleFont = {
   fontWeight: 600,
 };
 
+const fontSize = '1.25rem';
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -53,7 +55,7 @@ const theme = createMuiTheme({
         borderRadius: 4,
       },
       contained: {
-        fontSize: '1rem',
+        fontSize,
         fontWeight: 'bold',
         height: '3rem',
         color: grey,
@@ -64,7 +66,7 @@ const theme = createMuiTheme({
     },
     MuiTableCell: {
       head: {
-        fontSize: '1.25rem',
+        fontSize,
         fontFamily: jubilat,
         fontWeight: 'bold',
       },
@@ -75,7 +77,7 @@ const theme = createMuiTheme({
     MuiInputLabel: {
       root: {
         fontWeight: 'bold',
-        fontSize: '1.25rem',
+        fontSize,
       },
       shrink: {
         transform: 'translate(0, -1rem)',
@@ -85,7 +87,7 @@ const theme = createMuiTheme({
       root: {
         paddingLeft: '1rem',
         height: '3.25rem',
-        fontSize: '1.25rem',
+        fontSize,
         border: '1px solid #CCCCCC',
         borderRadius: 3,
       },
@@ -96,13 +98,22 @@ const theme = createMuiTheme({
         borderColor: greyBlue,
       },
     },
+    MuiListItem: {
+      selected: {
+        // the framework selector is more specific than a single
+        // MuiListItem-selected
+        color: `${white} !important`,
+        backgroundColor: `${greyBlue} !important`,
+      },
+    },
+    MuiListItemText: {
+      primary: {
+        fontSize,
+      },
+    },
     MuiMenuItem: {
       root: {
         borderColor: greyBlue,
-      },
-      selected: {
-        color: white,
-        backgroundColor: teal,
       },
     },
     MuiPaper: {
