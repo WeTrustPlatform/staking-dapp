@@ -10,7 +10,7 @@ import configs from '../configs';
 
 
 const styles = theme => ({
-  root: {
+  container: {
     padding: theme.spacing.unit * 2,
   },
   results: {
@@ -85,7 +85,7 @@ class SearchInput extends React.Component {
             highlightedIndex,
             selectedItem,
           }) => (
-            <div className={classes.root}>
+            <div className={classes.container}>
               <TextField
                 fullWidth
                 label="1. Enter your favorite non-profit's name"
@@ -100,7 +100,7 @@ class SearchInput extends React.Component {
                 }}
               />
               {isOpen ? (
-                <Paper square className={classes.results}>
+                <Paper elevation={3} square className={classes.results}>
                   {
                     charities
                       .map((item, index) => this.renderSuggestion({

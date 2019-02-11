@@ -26,17 +26,15 @@ const styles = theme => ({
     margin: `${theme.mixins.toolbar.minHeight}px auto`,
     maxWidth: theme.breakpoints.values.md,
   },
-  input: {
-    padding: theme.spacing.unit * 2,
-  },
-  button: {
+  gridRowItems: {
     padding: theme.spacing.unit * 2,
   },
   link: {
     color: theme.palette.secondary.main,
   },
-  row: {
+  gridRowButton: {
     marginTop: theme.mixins.toolbar.minHeight,
+    marginBottom: theme.mixins.toolbar.minHeight,
   },
 });
 
@@ -136,14 +134,14 @@ class StakeNow extends React.Component {
             refreshStats(account, TimeLockedStaking);
           })
           .catch((err) => {
-            stakeTRST.setFailure(err);
+            stakeTRST.setFailure(err.message);
           });
       })
       .then(() => {
         approveTRST.setSuccess();
       })
       .catch((err) => {
-        approveTRST.setFailure(err);
+        approveTRST.setFailure(err.message);
       });
   }
 
@@ -195,7 +193,7 @@ class StakeNow extends React.Component {
     return (
       <Grid
         item
-        className={classes.input}
+        className={classes.gridRowItems}
         xs={12}
         sm={12}
         md={6}
@@ -207,14 +205,13 @@ class StakeNow extends React.Component {
 
   renderButton(props, text) {
     const {
-      classes, color, component, onClick,
+      color, component, onClick,
     } = props;
     return (
       <Grid
         item
         sm={6}
         md={3}
-        className={classes.button}
       >
         <Button
           fullWidth
@@ -358,7 +355,6 @@ class StakeNow extends React.Component {
         <Grid
           container
           justify="center"
-          className={classes.row}
         >
           {this.renderGridItem(
             this.props,
@@ -379,7 +375,7 @@ class StakeNow extends React.Component {
         <Grid
           container
           justify="center"
-          className={classes.row}
+          className={classes.gridRowButton}
         >
           {isStaking && this.renderStakingSteps()}
           {errorMessage && this.renderErrorMessage(errorMessage)}
@@ -392,7 +388,6 @@ class StakeNow extends React.Component {
 
         <Grid
           container
-          className={classes.row}
         >
           {this.renderSpringLinks(this.props)}
         </Grid>

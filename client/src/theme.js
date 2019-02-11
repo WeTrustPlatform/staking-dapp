@@ -7,6 +7,7 @@ const teal = '#3FA296';
 const grey = '#FAFAFA';
 const brownGrey = '#7E7E7E';
 const greyBlue = '#67C6BB';
+const white = '#FFFFFF';
 
 const proximaNova = [
   'proxima-nova',
@@ -29,7 +30,7 @@ const titleFont = {
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: grey, light: '#FFFFFF', dark: '#C7C7C7', contrastText: '#FFFFFF',
+      main: grey, light: white, dark: '#C7C7C7', contrastText: white,
     },
     secondary: {
       main: teal, light: greyBlue, dark: '#007368', contrastText: grey,
@@ -85,6 +86,29 @@ const theme = createMuiTheme({
         paddingLeft: '1rem',
         fontSize: '1.25rem',
         border: '1px solid #CCCCCC',
+        borderRadius: 3,
+      },
+      fullWidth: {
+        width: 'auto',
+      },
+      focused: {
+        borderColor: greyBlue,
+      },
+    },
+    MuiMenuItem: {
+      root: {
+        borderColor: greyBlue,
+      },
+      selected: {
+        color: white,
+        backgroundColor: teal,
+      },
+    },
+    MuiPaper: {
+      // same key as the prop elevation={3} in search input
+      elevation3: {
+        boxShadow: undefined,
+        border: `1px solid ${greyBlue}`,
         borderRadius: 3,
       },
     },
