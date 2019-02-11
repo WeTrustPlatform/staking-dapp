@@ -1,5 +1,5 @@
 {
-  "name": "charity-staking-client",
+  "name": "staking-dapp-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

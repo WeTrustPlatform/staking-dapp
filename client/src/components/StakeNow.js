@@ -219,6 +219,7 @@ class StakeNow extends React.Component {
           onClick={onClick}
           component={component}
           variant="contained"
+          size="large"
         >
           {text}
         </Button>
@@ -303,7 +304,7 @@ class StakeNow extends React.Component {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <ListItemText primary="(view tx)" />
+        <ListItemText secondary="view transaction hash" />
       </a>
     );
   }

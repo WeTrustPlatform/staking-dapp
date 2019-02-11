@@ -75,8 +75,8 @@ class ActivitiesSection extends React.Component {
     return (
       <div className={classes.unstake}>
         <Button
-          variant="contained"
           color="primary"
+          variant="contained"
           disabled={!isEnabled}
           onClick={() => this.handleUnstake(rawAmount.toString(), stakeData)}
         >

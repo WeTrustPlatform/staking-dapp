@@ -54,7 +54,7 @@ const theme = createMuiTheme({
       root: {
         borderRadius: 4,
       },
-      contained: {
+      sizeLarge: {
         fontSize,
         fontWeight: 'bold',
         height: '3rem',
