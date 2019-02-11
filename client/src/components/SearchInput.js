@@ -88,7 +88,7 @@ class SearchInput extends React.Component {
             <div className={classes.container}>
               <TextField
                 fullWidth
-                label="1. Enter your favorite non-profit's name"
+                label="1. Enter non-profit's name"
                 type="search"
                 margin="normal"
                 InputLabelProps={{

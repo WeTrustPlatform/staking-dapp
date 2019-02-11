@@ -5,16 +5,13 @@ import Dashboard from './Dashboard';
 import Section from './Section';
 import StakeNow from './StakeNow';
 
-const styles = (theme) => {
-  const navHeight = theme.mixins.toolbar.minHeight;
-  return {
-    container: {
-      [theme.breakpoints.up('lg')]: {
-        padding: `${navHeight * 2}px ${navHeight * 4}px`,
-      },
-    },
-  };
-};
+const styles = theme => ({
+  container: {
+    width: 'auto',
+    margin: 'auto',
+    maxWidth: theme.breakpoints.values.lg,
+  },
+});
 
 class MainSection extends React.Component {
   render() {
@@ -23,13 +20,11 @@ class MainSection extends React.Component {
       <Section
         id="main-section"
         color={color}
-        className={classes.container}
       >
         <Grid
           container
-          direction="row"
+          className={classes.container}
           justify="center"
-          alignItems="flex-start"
         >
           <Grid item xs={12} sm={12} md={12} lg={8}>
             <StakeNow />

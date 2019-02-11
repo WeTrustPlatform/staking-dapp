@@ -221,8 +221,9 @@ class StakeNow extends React.Component {
     return (
       <Grid
         item
-        sm={6}
-        md={3}
+        xs={10}
+        sm={8}
+        md={4}
       >
         <Button
           fullWidth
