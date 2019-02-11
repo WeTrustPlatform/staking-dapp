@@ -16,14 +16,17 @@ import {
   validateNetworkId,
 } from '../utils';
 
-const styles = {
+const styles = theme => ({
   warning: {
     backgroundColor: '#F6A623',
   },
   error: {
     backgroundColor: '#F6A623',
   },
-};
+  accountText: {
+    color: theme.palette.text.primary,
+  },
+});
 
 
 class Web3Account extends React.Component {
@@ -36,7 +39,7 @@ class Web3Account extends React.Component {
           </Avatar>
         </ListItemAvatar>
         <ListItemText
-          primary="Please install MetaMask"
+          secondary="Please install MetaMask"
         />
       </ListItem>
     );
@@ -56,13 +59,17 @@ class Web3Account extends React.Component {
             <Icon>warning</Icon>
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={errorMessage} />
+        <ListItemText
+          secondary={errorMessage}
+        />
       </ListItem>
     );
   }
 
   renderAccount(props) {
-    const { account, networkId, trstBalance } = props;
+    const {
+      account, networkId, trstBalance, classes,
+    } = props;
     const network = validateNetworkId(networkId) || networkName(networkId);
 
     return (
@@ -71,8 +78,21 @@ class Web3Account extends React.Component {
           <Avatar src={eth} />
         </ListItemAvatar>
         <ListItemText
-          primary={account}
-          secondary={`Network: ${network} - TRST: ${trst(trstBalance)}.`}
+          secondary={(
+            <div>
+              <span className={classes.accountText}>
+                {account}
+              </span>
+              <br />
+              Network:
+              {' '}
+              {network}
+              {' '}
+              - TRST:
+              {' '}
+              {trst(trstBalance)}
+            </div>
+)}
         />
       </ListItem>
     );
