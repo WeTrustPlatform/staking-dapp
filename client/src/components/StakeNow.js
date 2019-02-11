@@ -13,7 +13,11 @@ import SearchInput from './SearchInput';
 import StakeAmountInput from './StakeAmountInput';
 import StakeDurationInput from './StakeDurationInput';
 import NPOInfo from './NPOInfo';
-import { getStakePayload, validateNetworkId } from '../utils';
+import {
+  getStakePayload,
+  validateNetworkId,
+  delay,
+} from '../utils';
 import stateHelper, { status } from './stateHelper';
 import { txLink } from '../formatter';
 import {
@@ -121,16 +125,23 @@ class StakeNow extends React.Component {
     TRST.methods
       .approve(TimeLockedStaking.options.address, stakeAmount)
       .send({ from: account })
-      .once('transactionHash', (approveTxHash) => {
+      .once('transactionHash', async (approveTxHash) => {
         approveTRST.setTriggered(approveTxHash);
         stakeTRST.setPending();
         const stakePayload = getStakePayload(durationInDays, npo);
+        // On testnet and mainnet, wait a second to
+        // prevent metamask showing error as it's slow to approve ERC20
+        await delay(1000);
         TimeLockedStaking.methods.stake(stakeAmount, stakePayload).send({ from: account })
           .once('transactionHash', (stakeTxHash) => {
             stakeTRST.setTriggered(stakeTxHash);
           })
-          .then(() => {
+          .then(async () => {
             stakeTRST.setSuccess();
+            // Delay X seconds (arbitrary number) so that that state is updated
+            // infura is slow!!!
+            // Otherwise, the realUnlockedAt is 0
+            await delay(1000);
             refreshStats(account, TimeLockedStaking);
           })
           .catch((err) => {

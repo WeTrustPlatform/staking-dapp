@@ -116,3 +116,7 @@ export const determineCanUnstake = (unlockedAt, rawAmount) => {
   const hasBalance = rawAmount.gt(toBN(0));
   return isBeforeNow && hasBalance;
 };
+
+export const delay = milliseconds => new Promise((resolve) => {
+  setTimeout(resolve, milliseconds);
+});

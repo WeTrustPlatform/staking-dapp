@@ -103,7 +103,12 @@ export const dispatchAccountActivities = (
     const populatedStakeRecordTasks = Object.keys(aggregatedEvents).map(async (key) => {
       const data = aggregatedEvents[key];
       const name = await getNameFromCMS(data.ein);
-      const unlockedAt = await getUnlockedAtFromBlockchain(account, key, TimeLockedStaking);
+      let unlockedAt = await getUnlockedAtFromBlockchain(account, key, TimeLockedStaking);
+      // Infura is too slow on rinkeby and mainnet
+      // if blockchain.unlockedAt = 0, then it means infura has not seen the new contract state
+      if (unlockedAt.getTime() === new Date(0).getTime()) {
+        unlockedAt = data.unlockedAtInPayload;
+      }
 
       const canUnstake = determineCanUnstake(
         unlockedAt,
