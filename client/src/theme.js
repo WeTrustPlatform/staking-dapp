@@ -90,6 +90,7 @@ const theme = createMuiTheme({
         fontSize,
         border: '1px solid #CCCCCC',
         borderRadius: 3,
+        backgroundColor: white,
       },
       fullWidth: {
         width: 'auto',
