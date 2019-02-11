@@ -30,7 +30,7 @@ contract('Stake with future unlockedAt and emergency', ([staker]) => {
       await StakingContract.unstake(amount, data, { from: staker });
       assert.fail('Not supposed to reach here');
     } catch (e) {
-      assert(e.toString().includes('This stake is still locked.'));
+      assert(e.toString().includes('This stake is still locked.'), `Error message does not match ${e}`);
       await StakingContract.setEmergency(true);
       await unstakeAndVerifyBalances(staker, amount, data, TRST, StakingContract);
       return;
@@ -39,7 +39,7 @@ contract('Stake with future unlockedAt and emergency', ([staker]) => {
   });
 
   it('should fail to unstake due to unlockedAt. Then succeed after passing the unlockedAt', async () => {
-    const lockedDuration = 3; // seconds
+    const lockedDuration = 5; // seconds
     const data = buildBytesInput(now + lockedDuration);
 
     await stakeAndVerifyBalances(staker, amount, data, TRST, StakingContract);
@@ -47,7 +47,7 @@ contract('Stake with future unlockedAt and emergency', ([staker]) => {
       await StakingContract.unstake(amount, data, { from: staker });
       assert.fail('Not supposed to reach here');
     } catch (e) {
-      assert(e.toString().includes('This stake is still locked.'));
+      assert(e.toString().includes('This stake is still locked.'), `Error message does not match ${e}`);
       await sleep(lockedDuration);
       await unstakeAndVerifyBalances(staker, amount, data, TRST, StakingContract);
     }
