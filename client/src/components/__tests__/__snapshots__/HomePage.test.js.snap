@@ -46,85 +46,23 @@ exports[`tests snapshot 1`] = `
             </div>
           </li>
         </ul>
-        <a
-          href="/#main-section"
-          onClick={[Function]}
-        >
-          <button
-            className="MuiButtonBase-root-528 MuiButton-root-502 MuiButton-text-504 MuiButton-flat-507"
-            disabled={false}
-            onBlur={[Function]}
-            onContextMenu={[Function]}
-            onFocus={[Function]}
-            onKeyDown={[Function]}
-            onKeyUp={[Function]}
-            onMouseDown={[Function]}
-            onMouseLeave={[Function]}
-            onMouseUp={[Function]}
-            onTouchEnd={[Function]}
-            onTouchMove={[Function]}
-            onTouchStart={[Function]}
-            tabIndex="0"
-            type="button"
-          >
-            <span
-              className="MuiButton-label-503"
-            >
-              Home
-            </span>
-            <span
-              className="MuiTouchRipple-root-762"
-            />
-          </button>
-        </a>
-        <a
-          href="/#faq-section"
-          onClick={[Function]}
-        >
-          <button
-            className="MuiButtonBase-root-528 MuiButton-root-502 MuiButton-text-504 MuiButton-flat-507"
-            disabled={false}
-            onBlur={[Function]}
-            onContextMenu={[Function]}
-            onFocus={[Function]}
-            onKeyDown={[Function]}
-            onKeyUp={[Function]}
-            onMouseDown={[Function]}
-            onMouseLeave={[Function]}
-            onMouseUp={[Function]}
-            onTouchEnd={[Function]}
-            onTouchMove={[Function]}
-            onTouchStart={[Function]}
-            tabIndex="0"
-            type="button"
-          >
-            <span
-              className="MuiButton-label-503"
-            >
-              FAQ
-            </span>
-            <span
-              className="MuiTouchRipple-root-762"
-            />
-          </button>
-        </a>
       </div>
     </header>
   </div>
   <div
-    className="Section-root-533 Section-light-535 TopSection-root-531"
+    className="Section-root-504 Section-light-506 TopSection-root-502"
     id="top-section"
   >
     <h3
-      className="MuiTypography-root-466 MuiTypography-h3-480 MuiTypography-colorSecondary-497 MuiTypography-alignCenter-489 SectionHeader-container-536"
+      className="MuiTypography-root-466 MuiTypography-h3-480 MuiTypography-colorSecondary-497 MuiTypography-alignCenter-489 SectionHeader-container-507"
     >
       Curate the SPRING directory
     </h3>
     <div
-      className="MuiGrid-container-537 MuiGrid-justify-xs-center-554 TopSection-container-532"
+      className="MuiGrid-container-508 MuiGrid-justify-xs-center-525 TopSection-container-503"
     >
       <div
-        className="MuiGrid-item-538 MuiGrid-grid-xs-10-575 MuiGrid-grid-sm-10-589 MuiGrid-grid-md-8-601 MuiGrid-grid-lg-4-611"
+        className="MuiGrid-item-509 MuiGrid-grid-xs-10-546 MuiGrid-grid-sm-10-560 MuiGrid-grid-md-8-572 MuiGrid-grid-lg-4-582"
       >
         <h6
           className="MuiTypography-root-466 MuiTypography-h6-483"
@@ -134,10 +72,10 @@ exports[`tests snapshot 1`] = `
         <br />
       </div>
       <div
-        className="MuiGrid-item-538 MuiGrid-grid-lg-1-608"
+        className="MuiGrid-item-509 MuiGrid-grid-lg-1-579"
       />
       <div
-        className="MuiGrid-item-538 MuiGrid-grid-xs-10-575 MuiGrid-grid-sm-10-589 MuiGrid-grid-md-8-601 MuiGrid-grid-lg-7-614"
+        className="MuiGrid-item-509 MuiGrid-grid-xs-10-546 MuiGrid-grid-sm-10-560 MuiGrid-grid-md-8-572 MuiGrid-grid-lg-7-585"
       >
         <h6
           className="MuiTypography-root-466 MuiTypography-h6-483"
@@ -160,31 +98,31 @@ exports[`tests snapshot 1`] = `
     </div>
   </div>
   <div
-    className="Section-root-533 Section-dark-534 MainSection-container-634"
+    className="Section-root-504 Section-dark-505 MainSection-container-605"
     id="main-section"
   >
     <div
-      className="MuiGrid-container-537 MuiGrid-align-items-xs-flex-start-546 MuiGrid-justify-xs-center-554"
+      className="MuiGrid-container-508 MuiGrid-align-items-xs-flex-start-517 MuiGrid-justify-xs-center-525"
     >
       <div
-        className="MuiGrid-item-538 MuiGrid-grid-xs-12-577 MuiGrid-grid-sm-12-591 MuiGrid-grid-md-12-605 MuiGrid-grid-lg-8-615"
+        className="MuiGrid-item-509 MuiGrid-grid-xs-12-548 MuiGrid-grid-sm-12-562 MuiGrid-grid-md-12-576 MuiGrid-grid-lg-8-586"
       >
         <div
-          className="StakeNow-root-635"
+          className="StakeNow-root-606"
         >
           <div
             aria-expanded={false}
             aria-haspopup="listbox"
             aria-labelledby="downshift-1-label"
             aria-owns={null}
-            className="SearchInput-container-639"
+            className="SearchInput-container-610"
             role="combobox"
           >
             <div
-              className="MuiFormControl-root-641 MuiFormControl-marginNormal-642 MuiFormControl-fullWidth-644"
+              className="MuiFormControl-root-612 MuiFormControl-marginNormal-613 MuiFormControl-fullWidth-615"
             >
               <label
-                className="MuiFormLabel-root-656 MuiInputLabel-root-645 MuiInputLabel-formControl-650 MuiInputLabel-animated-653 MuiInputLabel-shrink-652"
+                className="MuiFormLabel-root-627 MuiInputLabel-root-616 MuiInputLabel-formControl-621 MuiInputLabel-animated-624 MuiInputLabel-shrink-623"
                 data-shrink={true}
               >
                 1. Enter your favorite non-profit's name
@@ -194,13 +132,13 @@ exports[`tests snapshot 1`] = `
                 aria-autocomplete="list"
                 aria-controls={null}
                 aria-labelledby="downshift-1-label"
-                className="MuiInputBase-root-676 MuiInput-root-663 MuiInputBase-fullWidth-685 MuiInput-fullWidth-670 MuiInputBase-formControl-677 MuiInput-formControl-664"
+                className="MuiInputBase-root-647 MuiInput-root-634 MuiInputBase-fullWidth-656 MuiInput-fullWidth-641 MuiInputBase-formControl-648 MuiInput-formControl-635"
                 onClick={[Function]}
               >
                 <input
                   aria-invalid={false}
                   autoComplete="off"
-                  className="MuiInputBase-input-686 MuiInput-input-671 MuiInputBase-inputType-689 MuiInput-inputType-674 MuiInputBase-inputTypeSearch-690 MuiInput-inputTypeSearch-675"
+                  className="MuiInputBase-input-657 MuiInput-input-642 MuiInputBase-inputType-660 MuiInput-inputType-645 MuiInputBase-inputTypeSearch-661 MuiInput-inputTypeSearch-646"
                   disabled={false}
                   id="downshift-1-input"
                   onBlur={[Function]}
@@ -215,27 +153,27 @@ exports[`tests snapshot 1`] = `
             </div>
           </div>
           <div
-            className="MuiGrid-container-537 MuiGrid-justify-xs-center-554"
+            className="MuiGrid-container-508 MuiGrid-justify-xs-center-525"
           >
             <div
-              className="MuiGrid-item-538 MuiGrid-grid-xs-12-577 MuiGrid-grid-sm-12-591 MuiGrid-grid-md-6-599 StakeNow-gridRowItems-636"
+              className="MuiGrid-item-509 MuiGrid-grid-xs-12-548 MuiGrid-grid-sm-12-562 MuiGrid-grid-md-6-570 StakeNow-gridRowItems-607"
             >
               <div>
                 <div
-                  className="MuiFormControl-root-641 MuiFormControl-marginNormal-642 MuiFormControl-fullWidth-644"
+                  className="MuiFormControl-root-612 MuiFormControl-marginNormal-613 MuiFormControl-fullWidth-615"
                 >
                   <label
-                    className="MuiFormLabel-root-656 MuiFormLabel-filled-660 MuiInputLabel-root-645 MuiInputLabel-formControl-650 MuiInputLabel-animated-653 MuiInputLabel-shrink-652"
+                    className="MuiFormLabel-root-627 MuiFormLabel-filled-631 MuiInputLabel-root-616 MuiInputLabel-formControl-621 MuiInputLabel-animated-624 MuiInputLabel-shrink-623"
                     data-shrink={true}
                   >
                     2. Enter an amount
                   </label>
                   <div
-                    className="MuiInputBase-root-676 MuiInput-root-663 MuiInputBase-fullWidth-685 MuiInput-fullWidth-670 MuiInputBase-formControl-677 MuiInput-formControl-664 MuiInputBase-adornedStart-680"
+                    className="MuiInputBase-root-647 MuiInput-root-634 MuiInputBase-fullWidth-656 MuiInput-fullWidth-641 MuiInputBase-formControl-648 MuiInput-formControl-635 MuiInputBase-adornedStart-651"
                     onClick={[Function]}
                   >
                     <div
-                      className="MuiInputAdornment-root-693 MuiInputAdornment-positionStart-695"
+                      className="MuiInputAdornment-root-664 MuiInputAdornment-positionStart-666"
                     >
                       <p
                         className="MuiTypography-root-466 MuiTypography-body1-475 MuiTypography-colorTextSecondary-499"
@@ -245,7 +183,7 @@ exports[`tests snapshot 1`] = `
                     </div>
                     <input
                       aria-invalid={false}
-                      className="MuiInputBase-input-686 MuiInput-input-671 MuiInputBase-inputType-689 MuiInput-inputType-674 MuiInputBase-inputAdornedStart-691"
+                      className="MuiInputBase-input-657 MuiInput-input-642 MuiInputBase-inputType-660 MuiInput-inputType-645 MuiInputBase-inputAdornedStart-662"
                       disabled={false}
                       onBlur={[Function]}
                       onChange={[Function]}
@@ -259,24 +197,24 @@ exports[`tests snapshot 1`] = `
               </div>
             </div>
             <div
-              className="MuiGrid-item-538 MuiGrid-grid-xs-12-577 MuiGrid-grid-sm-12-591 MuiGrid-grid-md-6-599 StakeNow-gridRowItems-636"
+              className="MuiGrid-item-509 MuiGrid-grid-xs-12-548 MuiGrid-grid-sm-12-562 MuiGrid-grid-md-6-570 StakeNow-gridRowItems-607"
             >
               <div>
                 <div
-                  className="MuiFormControl-root-641 MuiFormControl-marginNormal-642 MuiFormControl-fullWidth-644"
+                  className="MuiFormControl-root-612 MuiFormControl-marginNormal-613 MuiFormControl-fullWidth-615"
                 >
                   <label
-                    className="MuiFormLabel-root-656 MuiFormLabel-filled-660 MuiInputLabel-root-645 MuiInputLabel-formControl-650 MuiInputLabel-animated-653 MuiInputLabel-shrink-652"
+                    className="MuiFormLabel-root-627 MuiFormLabel-filled-631 MuiInputLabel-root-616 MuiInputLabel-formControl-621 MuiInputLabel-animated-624 MuiInputLabel-shrink-623"
                     data-shrink={true}
                   >
                     3. Select a lock-up duration
                   </label>
                   <div
-                    className="MuiInputBase-root-676 MuiInput-root-663 MuiInputBase-fullWidth-685 MuiInput-fullWidth-670 MuiInputBase-formControl-677 MuiInput-formControl-664 MuiInputBase-adornedStart-680"
+                    className="MuiInputBase-root-647 MuiInput-root-634 MuiInputBase-fullWidth-656 MuiInput-fullWidth-641 MuiInputBase-formControl-648 MuiInput-formControl-635 MuiInputBase-adornedStart-651"
                     onClick={[Function]}
                   >
                     <div
-                      className="MuiInputAdornment-root-693 MuiInputAdornment-positionStart-695"
+                      className="MuiInputAdornment-root-664 MuiInputAdornment-positionStart-666"
                     >
                       <p
                         className="MuiTypography-root-466 MuiTypography-body1-475 MuiTypography-colorTextSecondary-499"
@@ -285,11 +223,11 @@ exports[`tests snapshot 1`] = `
                       </p>
                     </div>
                     <div
-                      className="MuiSelect-root-698"
+                      className="MuiSelect-root-669"
                     >
                       <select
                         aria-invalid={false}
-                        className="MuiSelect-select-699 MuiInputBase-input-686 MuiInput-input-671 MuiInputBase-inputAdornedStart-691"
+                        className="MuiSelect-select-670 MuiInputBase-input-657 MuiInput-input-642 MuiInputBase-inputAdornedStart-662"
                         disabled={false}
                         multiple={false}
                         onBlur={[Function]}
@@ -316,7 +254,7 @@ exports[`tests snapshot 1`] = `
                       </select>
                       <svg
                         aria-hidden="true"
-                        className="MuiSvgIcon-root-705 MuiSelect-icon-704"
+                        className="MuiSvgIcon-root-676 MuiSelect-icon-675"
                         focusable="false"
                         role="presentation"
                         viewBox="0 0 24 24"
@@ -332,13 +270,13 @@ exports[`tests snapshot 1`] = `
             </div>
           </div>
           <div
-            className="MuiGrid-container-537 MuiGrid-justify-xs-center-554 StakeNow-gridRowButton-638"
+            className="MuiGrid-container-508 MuiGrid-justify-xs-center-525 StakeNow-gridRowButton-609"
           >
             <div
-              className="MuiGrid-item-538 MuiGrid-grid-sm-6-585 MuiGrid-grid-md-3-596"
+              className="MuiGrid-item-509 MuiGrid-grid-sm-6-556 MuiGrid-grid-md-3-567"
             >
               <button
-                className="MuiButtonBase-root-528 MuiButton-root-502 MuiButton-contained-513 MuiButton-containedPrimary-514 MuiButton-raised-516 MuiButton-raisedPrimary-517 MuiButton-fullWidth-527"
+                className="MuiButtonBase-root-711 MuiButton-root-685 MuiButton-contained-696 MuiButton-containedPrimary-697 MuiButton-raised-699 MuiButton-raisedPrimary-700 MuiButton-sizeLarge-709 MuiButton-fullWidth-710"
                 disabled={false}
                 onBlur={[Function]}
                 onClick={[Function]}
@@ -356,7 +294,7 @@ exports[`tests snapshot 1`] = `
                 type="button"
               >
                 <span
-                  className="MuiButton-label-503"
+                  className="MuiButton-label-686"
                 >
                   Stake Now
                 </span>
@@ -367,17 +305,17 @@ exports[`tests snapshot 1`] = `
             </div>
           </div>
           <div
-            className="MuiGrid-container-537"
+            className="MuiGrid-container-508"
           >
             <div
-              className="MuiGrid-container-537 MuiGrid-justify-xs-center-554"
+              className="MuiGrid-container-508 MuiGrid-justify-xs-center-525"
             >
               <h6
                 className="MuiTypography-root-466 MuiTypography-h6-483"
               >
                 View the list of 
                 <a
-                  className="StakeNow-link-637"
+                  className="StakeNow-link-608"
                   href="https://spring.wetrust.io/causes"
                   rel="noopener noreferrer"
                   target="_blank"
@@ -390,7 +328,7 @@ exports[`tests snapshot 1`] = `
               >
                  or 
                 <a
-                  className="StakeNow-link-637"
+                  className="StakeNow-link-608"
                   href="https://airtable.com/shr1OLs5qiOloUceT"
                   rel="noopener noreferrer"
                   target="_blank"
@@ -403,7 +341,7 @@ exports[`tests snapshot 1`] = `
         </div>
       </div>
       <div
-        className="MuiGrid-item-538 MuiGrid-grid-xs-12-577 MuiGrid-grid-sm-8-587 MuiGrid-grid-md-6-599 MuiGrid-grid-lg-4-611"
+        className="MuiGrid-item-509 MuiGrid-grid-xs-12-548 MuiGrid-grid-sm-8-558 MuiGrid-grid-md-6-570 MuiGrid-grid-lg-4-582"
       >
         <div
           className="Dashboard-root-714"
@@ -519,11 +457,11 @@ exports[`tests snapshot 1`] = `
     </div>
   </div>
   <div
-    className="Section-root-533 Section-light-535"
+    className="Section-root-504 Section-light-506"
     id="activities-section"
   >
     <h3
-      className="MuiTypography-root-466 MuiTypography-h3-480 MuiTypography-colorSecondary-497 MuiTypography-alignCenter-489 SectionHeader-container-536"
+      className="MuiTypography-root-466 MuiTypography-h3-480 MuiTypography-colorSecondary-497 MuiTypography-alignCenter-489 SectionHeader-container-507"
     >
       Your Stakes
     </h3>
@@ -606,11 +544,11 @@ exports[`tests snapshot 1`] = `
     </div>
   </div>
   <div
-    className="Section-root-533 Section-dark-534"
+    className="Section-root-504 Section-dark-505"
     id="faq-section"
   >
     <h3
-      className="MuiTypography-root-466 MuiTypography-h3-480 MuiTypography-colorSecondary-497 MuiTypography-alignCenter-489 SectionHeader-container-536"
+      className="MuiTypography-root-466 MuiTypography-h3-480 MuiTypography-colorSecondary-497 MuiTypography-alignCenter-489 SectionHeader-container-507"
     >
       FAQ
     </h3>
@@ -626,10 +564,10 @@ exports[`tests snapshot 1`] = `
           role="presentation"
         >
           <div
-            className="MuiGrid-container-537"
+            className="MuiGrid-container-508"
           >
             <div
-              className="MuiGrid-item-538 MuiGrid-grid-xs-10-575"
+              className="MuiGrid-item-509 MuiGrid-grid-xs-10-546"
             >
               <h5
                 className="MuiTypography-root-466 MuiTypography-h5-482"
@@ -640,7 +578,7 @@ exports[`tests snapshot 1`] = `
               </h5>
             </div>
             <div
-              className="MuiGrid-item-538 MuiGrid-grid-xs-2-567 FAQItem-gridIcon-750"
+              className="MuiGrid-item-509 MuiGrid-grid-xs-2-538 FAQItem-gridIcon-750"
             >
               <span
                 aria-hidden="true"
@@ -665,10 +603,10 @@ exports[`tests snapshot 1`] = `
           role="presentation"
         >
           <div
-            className="MuiGrid-container-537"
+            className="MuiGrid-container-508"
           >
             <div
-              className="MuiGrid-item-538 MuiGrid-grid-xs-10-575"
+              className="MuiGrid-item-509 MuiGrid-grid-xs-10-546"
             >
               <h5
                 className="MuiTypography-root-466 MuiTypography-h5-482"
@@ -679,7 +617,7 @@ exports[`tests snapshot 1`] = `
               </h5>
             </div>
             <div
-              className="MuiGrid-item-538 MuiGrid-grid-xs-2-567 FAQItem-gridIcon-750"
+              className="MuiGrid-item-509 MuiGrid-grid-xs-2-538 FAQItem-gridIcon-750"
             >
               <span
                 aria-hidden="true"
@@ -704,10 +642,10 @@ exports[`tests snapshot 1`] = `
           role="presentation"
         >
           <div
-            className="MuiGrid-container-537"
+            className="MuiGrid-container-508"
           >
             <div
-              className="MuiGrid-item-538 MuiGrid-grid-xs-10-575"
+              className="MuiGrid-item-509 MuiGrid-grid-xs-10-546"
             >
               <h5
                 className="MuiTypography-root-466 MuiTypography-h5-482"
@@ -718,7 +656,7 @@ exports[`tests snapshot 1`] = `
               </h5>
             </div>
             <div
-              className="MuiGrid-item-538 MuiGrid-grid-xs-2-567 FAQItem-gridIcon-750"
+              className="MuiGrid-item-509 MuiGrid-grid-xs-2-538 FAQItem-gridIcon-750"
             >
               <span
                 aria-hidden="true"
@@ -743,10 +681,10 @@ exports[`tests snapshot 1`] = `
           role="presentation"
         >
           <div
-            className="MuiGrid-container-537"
+            className="MuiGrid-container-508"
           >
             <div
-              className="MuiGrid-item-538 MuiGrid-grid-xs-10-575"
+              className="MuiGrid-item-509 MuiGrid-grid-xs-10-546"
             >
               <h5
                 className="MuiTypography-root-466 MuiTypography-h5-482"
@@ -757,7 +695,7 @@ exports[`tests snapshot 1`] = `
               </h5>
             </div>
             <div
-              className="MuiGrid-item-538 MuiGrid-grid-xs-2-567 FAQItem-gridIcon-750"
+              className="MuiGrid-item-509 MuiGrid-grid-xs-2-538 FAQItem-gridIcon-750"
             >
               <span
                 aria-hidden="true"
@@ -776,13 +714,13 @@ exports[`tests snapshot 1`] = `
     </div>
   </div>
   <div
-    className="Section-root-533 Section-light-535"
+    className="Section-root-504 Section-light-506"
   >
     <div
-      className="MuiGrid-container-537 MuiGrid-align-items-xs-center-545 MuiGrid-justify-xs-center-554"
+      className="MuiGrid-container-508 MuiGrid-align-items-xs-center-516 MuiGrid-justify-xs-center-525"
     >
       <div
-        className="MuiGrid-item-538 SocialMedia-item-759"
+        className="MuiGrid-item-509 SocialMedia-item-759"
       >
         <a
           className="SocialMedia-href-760"
@@ -797,7 +735,7 @@ exports[`tests snapshot 1`] = `
         </a>
       </div>
       <div
-        className="MuiGrid-item-538 SocialMedia-item-759"
+        className="MuiGrid-item-509 SocialMedia-item-759"
       >
         <a
           className="SocialMedia-href-760"
@@ -812,7 +750,7 @@ exports[`tests snapshot 1`] = `
         </a>
       </div>
       <div
-        className="MuiGrid-item-538 SocialMedia-item-759"
+        className="MuiGrid-item-509 SocialMedia-item-759"
       >
         <a
           className="SocialMedia-href-760"
@@ -827,7 +765,7 @@ exports[`tests snapshot 1`] = `
         </a>
       </div>
       <div
-        className="MuiGrid-item-538 SocialMedia-item-759"
+        className="MuiGrid-item-509 SocialMedia-item-759"
       >
         <a
           className="SocialMedia-href-760"
@@ -842,7 +780,7 @@ exports[`tests snapshot 1`] = `
         </a>
       </div>
       <div
-        className="MuiGrid-item-538 SocialMedia-item-759"
+        className="MuiGrid-item-509 SocialMedia-item-759"
       >
         <a
           className="SocialMedia-href-760"
