@@ -93,7 +93,7 @@ export const dispatchAccountActivities = (
 
   // Get all the Staked events related to the current account
   TimeLockedStaking.getPastEvents('allEvents', {
-    fromBlock: 0,
+    fromBlock: TimeLockedStaking.deployedAt || 0,
     toBlock: 'latest',
     // topics: TOPICS,
   }, (err, events) => {
@@ -188,7 +188,7 @@ export const dispatchOverallStats = (dispatch, TimeLockedStaking) => {
   };
 
   TimeLockedStaking.getPastEvents('allEvents', {
-    fromBlock: 0,
+    fromBlock: TimeLockedStaking.deployedAt || 0,
     toBlock: 'latest',
     // topics: TOPICS,
   }, (err, events) => {

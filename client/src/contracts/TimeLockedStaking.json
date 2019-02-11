@@ -406,10 +406,12 @@
   ],
   "networks": {
     "4": {
-      "address": "0xe6114fbfAc111c4B7D51de21b418d36bcc9F692B"
+      "address": "0xe6114fbfAc111c4B7D51de21b418d36bcc9F692B",
+      "deployedAt": 3491836
     },
     "1": {
-      "address": "0xEf64c6B4f189D2053b8A00A23c725475FC509884"
+      "address": "0xEf64c6B4f189D2053b8A00A23c725475FC509884",
+      "deployedAt": 7205903
     },
     "5777": {
       "address": "0xef30a68266c462B87F455EcAb5e3fa8F733d184d"

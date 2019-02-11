@@ -38,6 +38,8 @@ const initContracts = async (web3, rawContracts = { TimeLockedStaking, TRST }) =
         rawContract.abi,
         deployInfo.address,
       );
+      // Store deployedAt to make the filter events faster
+      web3Contracts[contractName].deployedAt = deployInfo.deployedAt ? deployInfo.deployedAt : 0;
     } else {
       hasError = true;
     }
