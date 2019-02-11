@@ -8,8 +8,7 @@ import "./lib/ERC20.sol";
 
 /**
 * Smart contract to stake ERC20 and optionally lock it in for a period of time.
-* Users can add more stake any time
-* and whether to extend the current locked-in period or not.
+* Users can add stake any time as long as the emergency status is false
 * Maximum locked-in time is 365 days from now.
 *
 * It also keeps track of the effective start time which is recorded on the very
@@ -36,8 +35,8 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
   }
 
   /// @dev When emergency is true,
-  /// block stake
-  /// allow unstake without verifying the record.unlockedAt
+  /// block staking action and
+  /// allow to unstake without verifying the record.unlockedAt
   bool public emergency;
 
   /// @dev Owner of this contract, who can activate the emergency.
@@ -192,7 +191,7 @@ contract TimeLockedStaking is ERC165, ISimpleStaking {
     return max(1, capped);
   }
 
-  /// @dev Register stake by updating the StakeInfo struct
+  /// @dev Register a stake by updating the StakeInfo struct
   function registerStake(address user, uint256 amount, bytes memory data) private greaterThanZero(amount) {
     require(!emergency, "Cannot stake due to emergency.");
     require(erc20Token.transferFrom(msg.sender, address(this), amount), "Transfer failed.");
