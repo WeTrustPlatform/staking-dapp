@@ -84,6 +84,7 @@ const theme = createMuiTheme({
     MuiInputBase: {
       root: {
         paddingLeft: '1rem',
+        height: '3.25rem',
         fontSize: '1.25rem',
         border: '1px solid #CCCCCC',
         borderRadius: 3,
