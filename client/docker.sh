@@ -1,6 +1,7 @@
 #! /bin/bash
 
 # This script builds and publish docker images
+# Usage: ./docker.sh mainnet|testnet [tagname]
 
 DOCKER_REPO="sihoang/staking-dapp"
 DOCKER_IMAGE="$DOCKER_REPO:$1-latest"
@@ -21,5 +22,16 @@ else
   exit 1
 fi
 
-echo ">> Pushing to docker registry"
+echo ">> Pushing image $DOCKER_IMAGE to registry"
 docker push $DOCKER_IMAGE
+
+if [ -z "$2" ]; then
+  echo ">> No tag specified"
+  exit 0
+else
+  echo ">> Tag $2"
+  DOCKER_TAG="$DOCKER_REPO:$1-$2"
+  docker tag $DOCKER_IMAGE $DOCKER_TAG
+  echo ">> Pushing tag $DOCKER_TAG to registry"
+  docker push $DOCKER_TAG
+fi
