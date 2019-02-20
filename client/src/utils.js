@@ -29,25 +29,25 @@ const buildBytesInput = (timeSignal, voteSignal) => {
 };
 
 export function getStakePayload(durationInDays, npo) {
-  assert(npo.ein.length > 0, 'EIN not found.');
+  assert(npo.stakingId.length > 0, 'stakingId not found.');
   // blockchain uses timestamp in seconds
   // for manual testing on dev
   const durationInSeconds = configs.NODE_ENV === 'development'
     ? Number(durationInDays) : Number(durationInDays) * 24 * 60 * 60;
   const lockedUntil = Math.floor(Date.now() / 1000) + durationInSeconds;
-  const payload = buildBytesInput(lockedUntil, npo.ein);
+  const payload = buildBytesInput(lockedUntil, npo.stakingId);
   return payload;
 }
 
 // Given a stake payload
-// @param payload 0x<32bytes until in seconds><32bytes ein>
-// Normal payload string should have length of 2(0x) + 64(until) + 64(ein) = 130
-// @return { lockedUntil: <Date>, ein: <NPO ein> }
+// @param payload 0x<32bytes until in seconds><32bytes stakingId>
+// Normal payload string should have length of 2(0x) + 64(until) + 64(stakingId) = 130
+// @return { lockedUntil: <Date>, stakingId: <Project stakingId> }
 export function parseStakePayload(payload) {
   // padded to 0x<128 bytes>
   const paddedPayload = padRight(payload, 128);
 
-  const ein = toBN(prefix0x(paddedPayload.substring(66, 130))).toString();
+  const stakingId = toBN(prefix0x(paddedPayload.substring(66, 130))).toString();
 
   // convert seconds to milliseconds
   const timestampInMilliseconds = toBN(prefix0x(paddedPayload.substring(2, 66)))
@@ -61,7 +61,7 @@ export function parseStakePayload(payload) {
   const unlockedAtInPayload = new Date(timestampInMilliseconds);
 
   return {
-    ein,
+    stakingId,
     unlockedAtInPayload,
   };
 }
@@ -76,23 +76,23 @@ export const validateNetworkId = (networkId) => {
 
 
 // TODO get other info as well, maybe cacheing
-// Call CMS to get NPO details like name and address
-export const getNameFromCMS = async (ein) => {
+// Call CMS to get organization details like name and address
+export const getNameFromCMS = async (stakingId) => {
   let res;
   try {
-    // Users can pass in any EIN when they stake.
-    // If ein is invalid or not found,
-    // just show default name 'Not Found'
-    assert(ein, 'Invalid EIN.');
-    // TODO make sure this return exactly 1 record
+    // Users may pass in any stakingId when they stake via
+    // other methods i.e. using MyEtherWallet
+    // If stakingId is invalid or not found,
+    // just show default name 'Unknown'
+    assert(stakingId, 'Invalid stakingId.');
     res = await axios.get(
-      `${configs.CMS_URL}/charities?search=${ein}`,
+      `${configs.CMS_URL}/charities?staking_id=${stakingId}`,
     );
   } catch (e) {
     console.log(e);
   }
 
-  const npo = res && res.data && res.data.records && res.data.records[0];
+  const npo = res && res.data;
 
   return (npo && npo.name) || 'Unknown';
 };

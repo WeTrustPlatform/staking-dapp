@@ -25,22 +25,30 @@ class SearchInput extends React.Component {
       charities: [],
     };
 
-    this.queryNpo = this.queryNpo.bind(this);
+    this.queryOrg = this.queryOrg.bind(this);
   }
 
   onStateChange() {
     return debounce(({ inputValue }) => {
       if (typeof inputValue !== 'undefined') {
-        this.queryNpo(inputValue);
+        this.queryOrg(inputValue);
       }
     }, 500);
   }
 
-  queryNpo(search) {
+  queryOrg(search) {
     axios.get(
       `${configs.CMS_URL}/charities?search=${window.encodeURIComponent(search.replace(/ /g, '&'))}`,
     ).then((res) => {
-      const charities = res.data.records;
+      const charities = res.data.records.map(r => ({
+        name: r.name,
+        stakingId: r.staking_id,
+        isOnSpring: r.is_on_spring,
+        is501c3: r.is_501c3,
+        city: r.city,
+        state: r.state,
+        country: r.country,
+      }));
       this.setState({ charities });
     });
   }

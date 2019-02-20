@@ -3,7 +3,20 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-class NPOInfo extends React.Component {
+class OrgInfo extends React.Component {
+  renderDetails(data) {
+    return (
+      <div>
+        <p>
+          {`EIN: ${data.stakingId}`}
+        </p>
+        <p>
+          {`Location: ${data.city}, ${data.state}, ${data.country}`}
+        </p>
+      </div>
+    );
+  }
+
   render() {
     const { data } = this.props;
     return (
@@ -11,8 +24,7 @@ class NPOInfo extends React.Component {
         <List>
           <ListItem>
             <ListItemText primary={
-              `EIN: ${data.ein}.
-              Location: ${data.city}, ${data.state}, ${data.country}`
+              this.renderDetails(data)
             }
             />
           </ListItem>
@@ -22,4 +34,4 @@ class NPOInfo extends React.Component {
   }
 }
 
-export default NPOInfo;
+export default OrgInfo;

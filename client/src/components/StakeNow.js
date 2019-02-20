@@ -12,7 +12,7 @@ import Icon from '@material-ui/core/Icon';
 import SearchInput from './SearchInput';
 import StakeAmountInput from './StakeAmountInput';
 import StakeDurationInput from './StakeDurationInput';
-import NPOInfo from './NPOInfo';
+import OrgInfo from './OrgInfo';
 import {
   getStakePayload,
   validateNetworkId,
@@ -192,8 +192,8 @@ class StakeNow extends React.Component {
       return 'Please select a lock-up duration.';
     }
 
-    if (!npo.ein) {
-      return 'Please choose your favorite NPO.';
+    if (!npo.stakingId) {
+      return 'Please choose your favorite organization.';
     }
 
     return null;
@@ -363,7 +363,7 @@ class StakeNow extends React.Component {
       <div className={classes.root}>
 
         <SearchInput onSelected={this.onSelectedNpo} />
-        {npo.name && <NPOInfo data={npo} />}
+        {npo.name && <OrgInfo data={npo} />}
 
         <Grid
           container

@@ -31,7 +31,7 @@ export const dispatchAccountActivities = (
   // @returns
   // {
   //   <stake's data field as key>: {
-  //     id, ein, amount, rawAmount, lockedUntil, transactionHash, canUnstake
+  //     id, stakingId, amount, rawAmount, lockedUntil, transactionHash, canUnstake
   //   }
   // }
   //
@@ -70,12 +70,12 @@ export const dispatchAccountActivities = (
       updatedValue.rawAmount = event === 'Staked'
         ? rawAmount.add(bigNumber(amount)) : rawAmount.sub(bigNumber(amount));
     } else {
-      const { ein, unlockedAtInPayload } = parseStakePayload(data);
+      const { stakingId, unlockedAtInPayload } = parseStakePayload(data);
       const rawAmount = event === 'Staked'
         ? bigNumber(amount) : bigNumber(amount).neg();
 
       accumulator[data] = {
-        ein,
+        stakingId,
         rawAmount,
         unlockedAtInPayload,
       };
@@ -102,7 +102,7 @@ export const dispatchAccountActivities = (
     // key is the original stake's payload data field
     const populatedStakeRecordTasks = Object.keys(aggregatedEvents).map(async (key) => {
       const data = aggregatedEvents[key];
-      const name = await getNameFromCMS(data.ein);
+      const name = await getNameFromCMS(data.stakingId);
       let unlockedAt = await getUnlockedAtFromBlockchain(account, key, TimeLockedStaking);
       // Infura is too slow on rinkeby and mainnet
       // if blockchain.unlockedAt = 0, then it means infura has not seen the new contract state
