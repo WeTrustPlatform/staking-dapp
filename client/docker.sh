@@ -7,6 +7,7 @@
 # and publish 1 image with 2 tags:
 # sihoang/staking-dapp:testnet-latest
 # sihoang/staking-dapp:testnet-v1.1.0
+# it also creates `git tag <tagname>`
 
 DOCKER_REPO="sihoang/staking-dapp"
 DOCKER_IMAGE="$DOCKER_REPO:$1-latest"
@@ -35,6 +36,7 @@ if [ -z "$2" ]; then
   exit 0
 else
   echo ">> Tag $2"
+  git tag $2
   DOCKER_TAG="$DOCKER_REPO:$1-$2"
   docker tag $DOCKER_IMAGE $DOCKER_TAG
   echo ">> Pushing tag $DOCKER_TAG to registry"
