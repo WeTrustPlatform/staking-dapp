@@ -2,6 +2,11 @@
 
 # This script builds and publish docker images
 # Usage: ./docker.sh mainnet|testnet [tagname]
+# For example: ./docker.sh testnet v1.1.0
+# will build the app for testnet
+# and publish 1 image with 2 tags:
+# sihoang/staking-dapp:testnet-latest
+# sihoang/staking-dapp:testnet-v1.1.0
 
 DOCKER_REPO="sihoang/staking-dapp"
 DOCKER_IMAGE="$DOCKER_REPO:$1-latest"
