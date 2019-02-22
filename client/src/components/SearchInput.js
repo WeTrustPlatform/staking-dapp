@@ -107,7 +107,7 @@ class SearchInput extends React.Component {
                   disableUnderline: true,
                 }}
               />
-              {isOpen ? (
+              {isOpen && charities.length > 0 ? (
                 <Paper elevation={3} square className={classes.results}>
                   {
                     charities
