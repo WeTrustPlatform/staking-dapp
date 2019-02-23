@@ -37,8 +37,12 @@ class SearchInput extends React.Component {
   }
 
   queryOrg(search) {
+    const einRegex = /^\d{2}-?\d{7}$/;
+    // if users are searching by EIN, remove '-' as CMS format has all digits
+    // else replace ' ' with & to be url friendly
+    const s = einRegex.test(search) ? search.replace(/-/g, '') : search.replace(/ /g, '&');
     axios.get(
-      `${configs.CMS_URL}/charities?search=${window.encodeURIComponent(search.replace(/ /g, '&'))}`,
+      `${configs.CMS_URL}/charities?search=${window.encodeURIComponent(s)}`,
     ).then((res) => {
       const charities = res.data.records.map(r => ({
         name: r.name,
