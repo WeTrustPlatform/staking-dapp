@@ -85,8 +85,11 @@ export const getNameFromCMS = async (stakingId) => {
     // If stakingId is invalid or not found,
     // just show default name 'Unknown'
     assert(stakingId, 'Invalid stakingId.');
+    // Some EIN starts with 0, make sure staking_id has at least 9 digits
+    //
+    const padded = padLeft(stakingId, 9);
     res = await axios.get(
-      `${configs.CMS_URL}/charities?staking_id=${stakingId}`,
+      `${configs.CMS_URL}/charities?staking_id=${padded}`,
     );
   } catch (e) {
     console.log(e);
