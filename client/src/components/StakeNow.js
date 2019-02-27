@@ -120,39 +120,67 @@ class StakeNow extends React.Component {
       web3, refreshStats, account, TRST, TimeLockedStaking,
     } = this.props;
 
-    const stakeAmount = web3.utils.toWei(amount.toString(), 'mwei');
+    const { toBN, toWei } = web3.utils;
+    const stakeAmount = toWei(amount.toString(), 'mwei');
 
-    TRST.methods
-      .approve(TimeLockedStaking.options.address, stakeAmount)
-      .send({ from: account })
-      .once('transactionHash', async (approveTxHash) => {
-        approveTRST.setTriggered(approveTxHash);
+    // TODO HN get gasPrice from third party
+    // This 'approve' tx needs to be fast so that
+    // metammask does not display error message for
+    // the next staking tx
+    const gasPrice = toWei('40', 'gwei');
+
+    const stakingAddress = TimeLockedStaking.options.address;
+    TRST.methods.allowance(account, stakingAddress).call()
+      .then(spendableAmount => new Promise((resolve, reject) => {
+        if (toBN(spendableAmount).lt(toBN(stakeAmount))) {
+          TRST.methods
+            .approve(TimeLockedStaking.options.address, stakeAmount)
+            .send({ from: account, gasPrice, gas: 100000 })
+            .once('transactionHash', (h) => {
+              approveTRST.setTriggered(h);
+              resolve();
+            })
+            .on('receipt', () => {
+              approveTRST.setSuccess();
+            })
+            .on('error', (err) => {
+              approveTRST.setFailure(err.message);
+              reject();
+            });
+        } else {
+          resolve();
+        }
+      }))
+      .then(() => delay(5000))
+      .then(() => {
+        // if approveTRST tx has not gone through
+        // metamask will display error
+        // even though the error message
+        // can be ignored
         stakeTRST.setPending();
         const stakePayload = getStakePayload(durationInDays, npo);
-        // On testnet and mainnet, wait a second to
-        // prevent metamask showing error as it's slow to approve ERC20
-        await delay(1000);
-        TimeLockedStaking.methods.stake(stakeAmount, stakePayload).send({ from: account })
+        return TimeLockedStaking.methods
+          .stake(stakeAmount, stakePayload)
+          .send({ from: account, gasPrice, gas: 150000 })
           .once('transactionHash', (stakeTxHash) => {
             stakeTRST.setTriggered(stakeTxHash);
           })
-          .then(async () => {
-            stakeTRST.setSuccess();
-            // Delay X seconds (arbitrary number) so that that state is updated
-            // infura is slow!!!
-            // Otherwise, the realUnlockedAt is 0
-            await delay(1000);
-            refreshStats(account, TimeLockedStaking);
-          })
-          .catch((err) => {
+          .on('error', (err) => {
             stakeTRST.setFailure(err.message);
           });
       })
       .then(() => {
-        approveTRST.setSuccess();
+        stakeTRST.setSuccess();
+        // Delay X seconds (arbitrary number) so that state is updated
+        // infura is slow!!!
+        // Otherwise, the realUnlockedAt is 0
+        return delay(1000);
+      })
+      .then(() => {
+        refreshStats(account, TimeLockedStaking);
       })
       .catch((err) => {
-        approveTRST.setFailure(err.message);
+        this.setErrorMessage(err.message);
       });
   }
 
@@ -330,8 +358,8 @@ class StakeNow extends React.Component {
             variant: 'subtitle1',
           }}
         />
-        {this.renderStatusIcon(currentStatus)}
         {txHash && this.renderTxLink(txHash)}
+        {this.renderStatusIcon(currentStatus)}
       </ListItem>
     );
   }
