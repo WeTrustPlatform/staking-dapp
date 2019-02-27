@@ -148,6 +148,7 @@ class StakeNow extends React.Component {
               reject();
             });
         } else {
+          approveTRST.setSuccess();
           resolve();
         }
       }))
@@ -170,8 +171,6 @@ class StakeNow extends React.Component {
           });
       })
       .then(() => {
-        // Both txs are successful
-        approveTRST.setSuccess();
         stakeTRST.setSuccess();
         // Delay X seconds (arbitrary number) so that state is updated
         // infura is slow!!!
