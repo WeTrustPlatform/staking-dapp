@@ -42,5 +42,10 @@ The app is served at http://localhost:3000.
 
 - Configure Metamask to use the local blockchain at http://localhost:7545.  If you restart the local blochain, make sure to reset the account's nonce in Metamask.
 
+- (Optional) To interact with contracts on rinkeby:
+```
+REACT_APP_NETWORK_ID=4 yarn start
+```
+
 ### License
 [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.txt) &copy; WeTrustPlatform
