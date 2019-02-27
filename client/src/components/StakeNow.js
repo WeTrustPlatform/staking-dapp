@@ -138,7 +138,11 @@ class StakeNow extends React.Component {
             .send({ from: account, gasPrice, gas: 100000 })
             .once('transactionHash', (h) => {
               approveTRST.setTriggered(h);
-              resolve();
+              // if approveTRST tx has not gone through
+              // metamask will display error
+              // even though the error message
+              // can be ignored
+              delay(5000).then(resolve);
             })
             .on('receipt', () => {
               approveTRST.setSuccess();
@@ -152,12 +156,7 @@ class StakeNow extends React.Component {
           resolve();
         }
       }))
-      .then(() => delay(5000))
       .then(() => {
-        // if approveTRST tx has not gone through
-        // metamask will display error
-        // even though the error message
-        // can be ignored
         stakeTRST.setPending();
         const stakePayload = getStakePayload(durationInDays, npo);
         return TimeLockedStaking.methods
