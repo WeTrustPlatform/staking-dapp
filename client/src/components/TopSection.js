@@ -52,7 +52,7 @@ class TopSection extends React.Component {
                 simply stake TRST tokens in their favor.
               </strong>
               &nbsp;The causes with the most staked in their name,
-              will be rank highest in the SPRING directory.
+              will be ranked highest in the SPRING directory.
               After the lock up period, you can take your tokens back,
               but their rankings will drop accordingly.
             </Typography>
