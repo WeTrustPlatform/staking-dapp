@@ -1,6 +1,8 @@
 #! /bin/bash
 
-# This script builds and publish docker images
+# This script builds and publish docker images.
+# If tag is specified, it will create both docker and git tags.
+#
 # Usage: ./docker.sh mainnet|testnet [tagname]
 # For example: ./docker.sh testnet v1.1.0
 # will build the app for testnet
@@ -8,18 +10,18 @@
 # sihoang/staking-dapp:testnet-latest
 # sihoang/staking-dapp:testnet-v1.1.0
 # it also creates `git tag <tagname>`
+#
+# To specify docker repo
+# DOCKER_REPO="sihoang/staking-dapp" ./docker.sh
 
-DOCKER_REPO="sihoang/staking-dapp"
+DOCKER_REPO=${DOCKER_REPO:-"wetrustplatform/staking-dapp"}
 DOCKER_IMAGE="$DOCKER_REPO:$1-latest"
 
-if [ "$1" == "testnet" ]; then
+if [ "$1" == "testnet" -o "$1" == "mainnet" ]; then
   docker build \
     -t $DOCKER_IMAGE \
-    Dockerfile.testnet
-elif [ "$1" == "mainnet" ]; then
-  docker build \
-    -t $DOCKER_IMAGE \
-    Dockerfile.mainnet
+    -f Dockerfile.$1 \
+    .
 else
   echo "Please specify either testnet or mainnet!"
   exit 1
