@@ -19,7 +19,7 @@ const titleFont = {
   fontWeight: 600,
 };
 
-const fontSize = 18;
+const fontSize = 16;
 
 const theme = createMuiTheme({
   palette: {
@@ -45,14 +45,23 @@ const theme = createMuiTheme({
     useNextVariants: true,
     fontFamily: proximaNova,
     fontSize,
-    lineHeight: '24px',
+    h3: titleFont,
     h4: {
       fontSize: 36,
       lineHeight: '32px',
       ...titleFont,
     },
-    h3: titleFont,
-    h5: titleFont,
+    h5: {
+      fontSize: 24,
+      lineHeight: '32px',
+      fontStyle: 'normal',
+      ...titleFont,
+    },
+    h6: {
+      fontSize: 18,
+      lineHeight: '24px',
+      fontWeight: 400,
+    },
   },
   overrides: {
     MuiButton: {
