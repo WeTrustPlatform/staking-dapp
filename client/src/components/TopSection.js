@@ -30,7 +30,7 @@ class TopSection extends React.Component {
           justify="center"
           className={classes.container}
         >
-          <Typography align="center">
+          <Typography variant="h6" align="center">
             As a decentralized donation platform, Spring allows Trustcoin token
             holders to decide which causes are highly ranked, and a way to add
             new causes to the platform

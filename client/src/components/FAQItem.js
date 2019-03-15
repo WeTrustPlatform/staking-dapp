@@ -53,9 +53,7 @@ class FAQItem extends React.Component {
         >
           <Grid container>
             <Grid item xs={10}>
-              <Typography variant="h5">
-                <strong>{question}</strong>
-              </Typography>
+              <Typography variant="h5">{question}</Typography>
             </Grid>
             <Grid item xs={2} className={classes.gridIcon}>
               <Icon>{isAnswerShown ? 'remove' : 'add'}</Icon>
