@@ -22,49 +22,19 @@ class TopSection extends React.Component {
   render() {
     const { color, classes } = this.props;
     return (
-      <Section
-        id="top-section"
-        color={color}
-        className={classes.root}
-      >
-        <SectionHeader>
-          Curate the SPRING directory
-        </SectionHeader>
+      <Section id="top-section" color={color} className={classes.root}>
+        <SectionHeader>Help curate the SPRING directory</SectionHeader>
         <Grid
           container
           direction="row"
           justify="center"
           className={classes.container}
         >
-          <Grid item xs={10} sm={10} md={8} lg={4}>
-            <Typography variant="h6">
-              As a decentralized donation platform,
-              SPRING allows TRST token holders to decide which causes are featured,
-              and a way to add new causes to the platform.
-            </Typography>
-            <br />
-          </Grid>
-          <Grid item lg={1} />
-          <Grid item xs={10} sm={10} md={8} lg={7}>
-            <Typography variant="h6">
-              <strong>
-                To help a cause become featured,
-                simply stake TRST tokens in their favor.
-              </strong>
-              &nbsp;The causes with the most staked in their name,
-              will be ranked highest in the SPRING directory.
-              After the lock up period, you can take your tokens back,
-              but their rankings will drop accordingly.
-            </Typography>
-            <br />
-            <Typography variant="h6">
-              <strong>
-                Staking TRST to an organization that is not currently on SPRING
-              </strong>
-              &nbsp;will let them know how much support there is in the
-              ETH community and encourage them to accept ETH as donations.
-            </Typography>
-          </Grid>
+          <Typography align="center" variant="h6">
+            As a decentralized donation platform, Spring allows Trustcoin token
+            holders to decide which causes are highly ranked, and a way to add
+            new causes to the platform
+          </Typography>
         </Grid>
       </Section>
     );
