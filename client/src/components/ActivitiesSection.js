@@ -89,7 +89,7 @@ class ActivitiesSection extends React.Component {
       <TableRow>
         <TableCell colSpan={5}>
           <div className={classes.noActivities}>
-            {'It looks so empty. '}
+            {'You have 0 transaction in Your Stakes history. '}
             <Link
               scroll={(el) =>
                 el.scrollIntoView({ behavior: 'smooth', block: 'end' })
