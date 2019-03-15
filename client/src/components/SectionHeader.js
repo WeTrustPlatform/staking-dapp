@@ -15,7 +15,7 @@ class SectionHeader extends React.Component {
       <Typography
         className={classes.container}
         color="secondary"
-        variant="h3"
+        variant="h4"
         align="center"
       >
         {children}

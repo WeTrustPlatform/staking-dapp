@@ -19,7 +19,7 @@ const titleFont = {
   fontWeight: 600,
 };
 
-const fontSize = '1.25rem';
+const fontSize = 18;
 
 const theme = createMuiTheme({
   palette: {
@@ -38,12 +38,19 @@ const theme = createMuiTheme({
     text: {
       primary: brownGrey,
       secondary: teal,
+      fontSize,
     },
   },
   typography: {
     useNextVariants: true,
     fontFamily: proximaNova,
-    h4: titleFont,
+    fontSize,
+    lineHeight: '24px',
+    h4: {
+      fontSize: 36,
+      lineHeight: '32px',
+      ...titleFont,
+    },
     h3: titleFont,
     h5: titleFont,
   },
