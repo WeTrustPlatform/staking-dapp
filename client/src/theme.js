@@ -5,6 +5,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 const teal = '#3FA296';
 const grey = '#FAFAFA';
+const darkGrey = '#D8D8D8';
 const brownGrey = '#7E7E7E';
 const greyBlue = '#67C6BB';
 const white = '#FFFFFF';
@@ -26,7 +27,7 @@ const theme = createMuiTheme({
     primary: {
       main: grey,
       light: white,
-      dark: '#C7C7C7',
+      dark: darkGrey,
       contrastText: white,
     },
     secondary: {
@@ -86,6 +87,7 @@ const theme = createMuiTheme({
       },
       body: {
         fontSize: '1.125rem',
+        borderBottom: 'none',
       },
     },
     MuiInputLabel: {
@@ -136,6 +138,11 @@ const theme = createMuiTheme({
       elevation3: {
         boxShadow: undefined,
         border: `1px solid ${greyBlue}`,
+        borderRadius: 3,
+      },
+      elevation2: {
+        boxShadow: undefined,
+        border: `1px solid ${darkGrey}`,
         borderRadius: 3,
       },
     },
