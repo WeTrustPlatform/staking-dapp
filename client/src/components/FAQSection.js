@@ -5,7 +5,7 @@ import SectionHeader from './SectionHeader';
 import FAQItem from './FAQItem';
 import faq from '../faq.json';
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     margin: 'auto',
     maxWidth: theme.breakpoints.values.md,
@@ -14,7 +14,7 @@ const styles = theme => ({
 
 class FAQSection extends React.Component {
   renderFAQItems() {
-    return faq.map(item => (
+    return faq.map((item) => (
       <FAQItem
         key={item.question}
         question={item.question}
@@ -28,9 +28,7 @@ class FAQSection extends React.Component {
     return (
       <Section id="faq-section" color={color}>
         <SectionHeader>FAQ</SectionHeader>
-        <div className={classes.container}>
-          {this.renderFAQItems()}
-        </div>
+        <div className={classes.container}>{this.renderFAQItems()}</div>
       </Section>
     );
   }

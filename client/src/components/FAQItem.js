@@ -5,7 +5,7 @@ import Icon from '@material-ui/core/Icon';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     textAlign: 'left',
     padding: theme.spacing.unit * 2,
@@ -36,7 +36,7 @@ class FAQItem extends React.Component {
   }
 
   toggleAnswer() {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       isAnswerShown: !prevState.isAnswerShown,
     }));
   }
@@ -46,7 +46,11 @@ class FAQItem extends React.Component {
     const { isAnswerShown } = this.state;
     return (
       <div className={classes.root}>
-        <div className={classes.question} onClick={this.toggleAnswer} role="presentation">
+        <div
+          className={classes.question}
+          onClick={this.toggleAnswer}
+          role="presentation"
+        >
           <Grid container>
             <Grid item xs={10}>
               <Typography variant="h5">
@@ -59,13 +63,14 @@ class FAQItem extends React.Component {
           </Grid>
         </div>
         <br />
-        { isAnswerShown
-        && (
-        <div className={classes.answer}>
-          <Typography variant="h6" dangerouslySetInnerHTML={{ __html: answer }} />
-        </div>
-        )
-        }
+        {isAnswerShown && (
+          <div className={classes.answer}>
+            <Typography
+              variant="h6"
+              dangerouslySetInnerHTML={{ __html: answer }}
+            />
+          </div>
+        )}
         <Divider className={classes.divider} />
       </div>
     );

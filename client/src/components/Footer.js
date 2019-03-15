@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Section from './Section';
 import SocialMedia from './SocialMedia';
 
-const styles = theme => ({
+const styles = (theme) => ({
   copyright: {
     minHeight: theme.mixins.toolbar.minHeight,
     display: 'flex',
@@ -17,12 +17,12 @@ class Footer extends React.Component {
   render() {
     const { classes, color } = this.props;
     return (
-      <Section
-        color={color}
-      >
+      <Section color={color}>
         <SocialMedia />
         <div className={classes.copyright}>
-          <Typography variant="h6">© 2019 WeTrustPlatform. All rights reserved.</Typography>
+          <Typography variant="h6">
+            © 2019 WeTrustPlatform. All rights reserved.
+          </Typography>
         </div>
       </Section>
     );

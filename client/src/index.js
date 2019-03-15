@@ -8,9 +8,7 @@ import reducers from './reducers';
 import theme from './theme';
 import './index.css';
 import HomePage from './components/HomePage';
-import {
-  initBlockchainState,
-} from './initHelpers';
+import { initBlockchainState } from './initHelpers';
 
 if (window.ethereum && window.ethereum.enable) {
   window.ethereum.enable();

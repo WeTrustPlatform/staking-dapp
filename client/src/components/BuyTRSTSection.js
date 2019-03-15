@@ -29,9 +29,13 @@ class BuyTRSTSection extends React.Component {
       isMsgShown: true,
     });
 
-    this.timeOut = window.setTimeout(() => this.setState({
-      isMsgShown: false,
-    }), 1000);
+    this.timeOut = window.setTimeout(
+      () =>
+        this.setState({
+          isMsgShown: false,
+        }),
+      1000,
+    );
   }
 
   render() {
@@ -39,18 +43,13 @@ class BuyTRSTSection extends React.Component {
     const { isMsgShown } = this.state;
     return (
       <Section color={color}>
-        <SectionHeader>
-          {"Don't have TRST?"}
-        </SectionHeader>
+        <SectionHeader>Don&rsquo;t have TRST?</SectionHeader>
         <div className={classes.container}>
-          {isMsgShown
-            && (
-            <Typography
-              color="error"
-            >
-                Hold on! Let us consult with our lawyers.
+          {isMsgShown && (
+            <Typography color="error">
+              Hold on! Let us consult with our lawyers.
             </Typography>
-            )}
+          )}
           <Button
             variant="contained"
             color="primary"

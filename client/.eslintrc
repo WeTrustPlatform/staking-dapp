@@ -1,5 +1,5 @@
 {
-  "extends": ["react-app", "airbnb"],
+  "extends": ["airbnb", "react-app", "prettier"],
   "plugins": ["prettier"],
   "env": {
     "browser": true,
@@ -11,11 +11,7 @@
     },
   },
   "rules": {
-    "prettier/prettier": ["error", {
-      "trailingComma": "all",
-      "singleQuote": true,
-      "arrowParens": "always"
-    }],
+    "prettier/prettier": "error",
     "no-console": "off",
     "no-restricted-syntax": "off",
     "no-await-in-loop": "off",

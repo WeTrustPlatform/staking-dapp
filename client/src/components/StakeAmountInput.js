@@ -19,7 +19,9 @@ class StakeAmountInput extends React.Component {
           }}
           InputProps={{
             disableUnderline: true,
-            startAdornment: <InputAdornment position="start">TRST</InputAdornment>,
+            startAdornment: (
+              <InputAdornment position="start">TRST</InputAdornment>
+            ),
           }}
         />
       </div>

@@ -9,18 +9,10 @@ const brownGrey = '#7E7E7E';
 const greyBlue = '#67C6BB';
 const white = '#FFFFFF';
 
-const proximaNova = [
-  'proxima-nova',
-  'Arial',
-  'Helvectica',
-  'sans-serif',
-].join(',');
-const jubilat = [
-  'jubilat',
-  'Arial',
-  'Helvectica',
-  'serif',
-].join(',');
+const proximaNova = ['proxima-nova', 'Arial', 'Helvectica', 'sans-serif'].join(
+  ',',
+);
+const jubilat = ['jubilat', 'Arial', 'Helvectica', 'serif'].join(',');
 
 const titleFont = {
   fontFamily: jubilat,
@@ -32,10 +24,16 @@ const fontSize = '1.25rem';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: grey, light: white, dark: '#C7C7C7', contrastText: white,
+      main: grey,
+      light: white,
+      dark: '#C7C7C7',
+      contrastText: white,
     },
     secondary: {
-      main: teal, light: greyBlue, dark: '#007368', contrastText: grey,
+      main: teal,
+      light: greyBlue,
+      dark: '#007368',
+      contrastText: grey,
     },
     text: {
       primary: brownGrey,

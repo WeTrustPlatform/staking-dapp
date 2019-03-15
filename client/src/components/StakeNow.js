@@ -13,19 +13,12 @@ import SearchInput from './SearchInput';
 import StakeAmountInput from './StakeAmountInput';
 import StakeDurationInput from './StakeDurationInput';
 import OrgInfo from './OrgInfo';
-import {
-  getStakePayload,
-  validateNetworkId,
-  delay,
-} from '../utils';
+import { getStakePayload, validateNetworkId, delay } from '../utils';
 import stateHelper, { status } from './stateHelper';
 import { txLink } from '../formatter';
-import {
-  dispatchAccountActivities,
-  dispatchOverallStats,
-} from '../dispatch';
+import { dispatchAccountActivities, dispatchOverallStats } from '../dispatch';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     margin: `${theme.mixins.toolbar.minHeight}px auto`,
     maxWidth: theme.breakpoints.values.md,
@@ -41,7 +34,6 @@ const styles = theme => ({
     marginBottom: theme.mixins.toolbar.minHeight,
   },
 });
-
 
 class StakeNow extends React.Component {
   constructor(props) {
@@ -87,9 +79,13 @@ class StakeNow extends React.Component {
     this.setState({
       errorMessage: err,
     });
-    this.timeOut = window.setTimeout(() => this.setState({
-      errorMessage: null,
-    }), 5000);
+    this.timeOut = window.setTimeout(
+      () =>
+        this.setState({
+          errorMessage: null,
+        }),
+      5000,
+    );
   }
 
   startStaking() {
@@ -112,13 +108,9 @@ class StakeNow extends React.Component {
 
     this.startStaking();
 
-    const {
-      amount, npo, durationInDays, approveTRST, stakeTRST,
-    } = this.state;
+    const { amount, npo, durationInDays, approveTRST, stakeTRST } = this.state;
 
-    const {
-      web3, refreshStats, account, TRST, TimeLockedStaking,
-    } = this.props;
+    const { web3, refreshStats, account, TRST, TimeLockedStaking } = this.props;
 
     const { toBN, toWei } = web3.utils;
     const stakeAmount = toWei(amount.toString(), 'mwei');
@@ -130,32 +122,37 @@ class StakeNow extends React.Component {
     const gasPrice = toWei('40', 'gwei');
 
     const stakingAddress = TimeLockedStaking.options.address;
-    TRST.methods.allowance(account, stakingAddress).call()
-      .then(spendableAmount => new Promise((resolve, reject) => {
-        if (toBN(spendableAmount).lt(toBN(stakeAmount))) {
-          TRST.methods
-            .approve(TimeLockedStaking.options.address, stakeAmount)
-            .send({ from: account, gasPrice, gas: 100000 })
-            .once('transactionHash', (h) => {
-              approveTRST.setTriggered(h);
-              // if approveTRST tx has not gone through
-              // metamask will display error
-              // even though the error message
-              // can be ignored
-              delay(5000).then(resolve);
-            })
-            .on('receipt', () => {
+    TRST.methods
+      .allowance(account, stakingAddress)
+      .call()
+      .then(
+        (spendableAmount) =>
+          new Promise((resolve, reject) => {
+            if (toBN(spendableAmount).lt(toBN(stakeAmount))) {
+              TRST.methods
+                .approve(TimeLockedStaking.options.address, stakeAmount)
+                .send({ from: account, gasPrice, gas: 100000 })
+                .once('transactionHash', (h) => {
+                  approveTRST.setTriggered(h);
+                  // if approveTRST tx has not gone through
+                  // metamask will display error
+                  // even though the error message
+                  // can be ignored
+                  delay(5000).then(resolve);
+                })
+                .on('receipt', () => {
+                  approveTRST.setSuccess();
+                })
+                .on('error', (err) => {
+                  approveTRST.setFailure(err.message);
+                  reject();
+                });
+            } else {
               approveTRST.setSuccess();
-            })
-            .on('error', (err) => {
-              approveTRST.setFailure(err.message);
-              reject();
-            });
-        } else {
-          approveTRST.setSuccess();
-          resolve();
-        }
-      }))
+              resolve();
+            }
+          }),
+      )
       .then(() => {
         stakeTRST.setPending();
         const stakePayload = getStakePayload(durationInDays, npo);
@@ -184,12 +181,8 @@ class StakeNow extends React.Component {
       });
   }
 
-
   validateInput(props, state) {
-    const {
-      web3, account, trstBalance, networkId,
-    } = props;
-
+    const { web3, account, trstBalance, networkId } = props;
 
     const hasProvider = web3 && web3.givenProvider;
     if (!hasProvider) {
@@ -230,29 +223,16 @@ class StakeNow extends React.Component {
   renderGridItem(props, child) {
     const { classes } = props;
     return (
-      <Grid
-        item
-        className={classes.gridRowItems}
-        xs={12}
-        sm={12}
-        md={6}
-      >
+      <Grid item className={classes.gridRowItems} xs={12} sm={12} md={6}>
         {child}
       </Grid>
     );
   }
 
   renderButton(props, text) {
-    const {
-      color, component, onClick,
-    } = props;
+    const { color, component, onClick } = props;
     return (
-      <Grid
-        item
-        xs={10}
-        sm={8}
-        md={4}
-      >
+      <Grid item xs={10} sm={8} md={4}>
         <Button
           fullWidth
           color={color}
@@ -270,12 +250,9 @@ class StakeNow extends React.Component {
   renderSpringLinks(props) {
     const { classes } = props;
     return (
-      <Grid
-        container
-        justify="center"
-      >
+      <Grid container justify="center">
         <Typography variant="h6">
-            View the list of&nbsp;
+          View the list of&nbsp;
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -283,7 +260,6 @@ class StakeNow extends React.Component {
             className={classes.link}
           >
             SPRING Causes
-
           </a>
         </Typography>
         <Typography variant="h6">
@@ -303,10 +279,7 @@ class StakeNow extends React.Component {
 
   renderErrorMessage(errorMessage) {
     return (
-      <Grid
-        container
-        justify="center"
-      >
+      <Grid container justify="center">
         <Typography color="error" noWrap>
           {errorMessage}
         </Typography>
@@ -339,11 +312,7 @@ class StakeNow extends React.Component {
 
   renderTxLink(txHash) {
     return (
-      <a
-        href={txLink(txHash)}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href={txLink(txHash)} target="_blank" rel="noopener noreferrer">
         <ListItemText secondary="view transaction hash" />
       </a>
     );
@@ -365,18 +334,22 @@ class StakeNow extends React.Component {
   }
 
   renderStakingSteps() {
-    const {
-      approveTRST,
-      stakeTRST,
-    } = this.state;
+    const { approveTRST, stakeTRST } = this.state;
     return (
-      <Grid
-        container
-        justify="center"
-      >
+      <Grid container justify="center">
         <List>
-          {this.renderStep(1, 'Approving TRST transfer.', approveTRST.getTxStatus(), approveTRST.getTxHash())}
-          {this.renderStep(2, 'Calling Stake contract.', stakeTRST.getTxStatus(), stakeTRST.getTxHash())}
+          {this.renderStep(
+            1,
+            'Approving TRST transfer.',
+            approveTRST.getTxStatus(),
+            approveTRST.getTxHash(),
+          )}
+          {this.renderStep(
+            2,
+            'Calling Stake contract.',
+            stakeTRST.getTxStatus(),
+            stakeTRST.getTxHash(),
+          )}
         </List>
       </Grid>
     );
@@ -384,25 +357,16 @@ class StakeNow extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const {
-      npo, amount, durationInDays, errorMessage, isStaking,
-    } = this.state;
+    const { npo, amount, durationInDays, errorMessage, isStaking } = this.state;
     return (
       <div className={classes.root}>
-
         <SearchInput onSelected={this.onSelectedNpo} />
         {npo.name && <OrgInfo data={npo} />}
 
-        <Grid
-          container
-          justify="center"
-        >
+        <Grid container justify="center">
           {this.renderGridItem(
             this.props,
-            <StakeAmountInput
-              amount={amount}
-              onChange={this.onChangeAmount}
-            />,
+            <StakeAmountInput amount={amount} onChange={this.onChangeAmount} />,
           )}
           {this.renderGridItem(
             this.props,
@@ -413,31 +377,26 @@ class StakeNow extends React.Component {
           )}
         </Grid>
 
-        <Grid
-          container
-          justify="center"
-          className={classes.gridRowButton}
-        >
+        <Grid container justify="center" className={classes.gridRowButton}>
           {isStaking && this.renderStakingSteps()}
           {errorMessage && this.renderErrorMessage(errorMessage)}
-          {this.renderButton({
-            ...this.props,
-            onClick: this.handleStakeNow,
-            color: 'primary',
-          }, 'Stake Now')}
+          {this.renderButton(
+            {
+              ...this.props,
+              onClick: this.handleStakeNow,
+              color: 'primary',
+            },
+            'Stake Now',
+          )}
         </Grid>
 
-        <Grid
-          container
-        >
-          {this.renderSpringLinks(this.props)}
-        </Grid>
+        <Grid container>{this.renderSpringLinks(this.props)}</Grid>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   account: state.account,
   networkId: state.networkId,
   trstBalance: state.trstBalance,
@@ -446,7 +405,7 @@ const mapStateToProps = state => ({
   TimeLockedStaking: state.contracts.TimeLockedStaking,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   refreshStats: (account, TimeLockedStaking) => {
     // call helper
     dispatchAccountActivities(dispatch, TimeLockedStaking, account);
@@ -454,4 +413,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(StakeNow));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withStyles(styles)(StakeNow));

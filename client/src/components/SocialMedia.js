@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 
-const styles = theme => ({
+const styles = (theme) => ({
   item: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
@@ -33,9 +33,7 @@ class SocialMedia extends React.Component {
           rel="noopener noreferrer"
           href={href}
         >
-          <Icon
-            className={classnames(classes.fab, `fab fa-${faName}`)}
-          />
+          <Icon className={classnames(classes.fab, `fab fa-${faName}`)} />
         </a>
       </Grid>
     );
@@ -43,14 +41,19 @@ class SocialMedia extends React.Component {
 
   render() {
     return (
-      <Grid
-        container
-        justify="center"
-        alignItems="center"
-      >
-        {this.renderSocialItem('facebook', 'https://www.facebook.com/wetrustplatform')}
-        {this.renderSocialItem('reddit', 'https://www.reddit.com/r/WeTrustPlatform')}
-        {this.renderSocialItem('twitter', 'https://twitter.com/wetrustplatform')}
+      <Grid container justify="center" alignItems="center">
+        {this.renderSocialItem(
+          'facebook',
+          'https://www.facebook.com/wetrustplatform',
+        )}
+        {this.renderSocialItem(
+          'reddit',
+          'https://www.reddit.com/r/WeTrustPlatform',
+        )}
+        {this.renderSocialItem(
+          'twitter',
+          'https://twitter.com/wetrustplatform',
+        )}
         {this.renderSocialItem('github', 'https://github.com/wetrustplatform')}
         {this.renderSocialItem('medium', 'https://medium.com/wetrust-blog')}
       </Grid>

@@ -8,15 +8,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Icon from '@material-ui/core/Icon';
 import eth from '../images/eth-icon.svg';
-import {
-  trst,
-  networkName,
-} from '../formatter';
-import {
-  validateNetworkId,
-} from '../utils';
+import { trst, networkName } from '../formatter';
+import { validateNetworkId } from '../utils';
 
-const styles = theme => ({
+const styles = (theme) => ({
   warning: {
     backgroundColor: '#F6A623',
   },
@@ -28,7 +23,6 @@ const styles = theme => ({
   },
 });
 
-
 class Web3Account extends React.Component {
   renderNoWeb3(props) {
     return (
@@ -38,9 +32,7 @@ class Web3Account extends React.Component {
             <Icon>error_outlined</Icon>
           </Avatar>
         </ListItemAvatar>
-        <ListItemText
-          secondary="Please install MetaMask"
-        />
+        <ListItemText secondary="Please install MetaMask" />
       </ListItem>
     );
   }
@@ -59,41 +51,29 @@ class Web3Account extends React.Component {
             <Icon>warning</Icon>
           </Avatar>
         </ListItemAvatar>
-        <ListItemText
-          secondary={errorMessage}
-        />
+        <ListItemText secondary={errorMessage} />
       </ListItem>
     );
   }
 
   renderAccount(props) {
-    const {
-      account, networkId, trstBalance, classes,
-    } = props;
+    const { account, networkId, trstBalance, classes } = props;
     const network = validateNetworkId(networkId) || networkName(networkId);
+
+    const getSecondaryText = () => (
+      <div>
+        <span className={classes.accountText}>{account}</span>
+        <br />
+        {`Network: ${network} - TRST: ${trst(trstBalance)}`}
+      </div>
+    );
 
     return (
       <ListItem>
         <ListItemAvatar>
           <Avatar src={eth} />
         </ListItemAvatar>
-        <ListItemText
-          secondary={(
-            <div>
-              <span className={classes.accountText}>
-                {account}
-              </span>
-              <br />
-              Network:
-              {' '}
-              {network}
-              {' '}
-              - TRST:
-              {' '}
-              {trst(trstBalance)}
-            </div>
-)}
-        />
+        <ListItemText secondary={getSecondaryText()} />
       </ListItem>
     );
   }
@@ -111,7 +91,7 @@ class Web3Account extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   web3: state.web3,
   account: state.account,
   networkId: state.networkId,

@@ -15,7 +15,8 @@ import {
 import TimeLockedStaking from './contracts/TimeLockedStaking.json';
 import TRST from './contracts/TRST.json';
 
-const initWeb3 = () => new Web3(Web3.givenProvider || configs.WEB3_FALLBACK_PROVIDER);
+const initWeb3 = () =>
+  new Web3(Web3.givenProvider || configs.WEB3_FALLBACK_PROVIDER);
 
 const initNetworkId = async (web3, expectedNetwork = configs.NETWORK_ID) => {
   const id = String(await web3.eth.net.getId());
@@ -25,7 +26,10 @@ const initNetworkId = async (web3, expectedNetwork = configs.NETWORK_ID) => {
   return id;
 };
 
-const initContracts = async (web3, rawContracts = { TimeLockedStaking, TRST }) => {
+const initContracts = async (
+  web3,
+  rawContracts = { TimeLockedStaking, TRST },
+) => {
   // assume the networkId is valid
   const networkId = await initNetworkId(web3);
   const web3Contracts = {};
@@ -39,7 +43,9 @@ const initContracts = async (web3, rawContracts = { TimeLockedStaking, TRST }) =
         deployInfo.address,
       );
       // Store deployedAt to make the filter events faster
-      web3Contracts[contractName].deployedAt = deployInfo.deployedAt ? deployInfo.deployedAt : 0;
+      web3Contracts[contractName].deployedAt = deployInfo.deployedAt
+        ? deployInfo.deployedAt
+        : 0;
     } else {
       hasError = true;
     }
@@ -85,9 +91,7 @@ const onNewNetworkId = async (dispatch, web3, networkId) => {
 
 const initWeb3OnUpdateListener = async (store) => {
   const { dispatch } = store;
-  const {
-    web3, account, networkId, contracts,
-  } = store.getState();
+  const { web3, account, networkId, contracts } = store.getState();
 
   const { publicConfigStore } = web3.currentProvider;
 
@@ -99,7 +103,9 @@ const initWeb3OnUpdateListener = async (store) => {
         return;
       }
 
-      if (String(account).toLowerCase() !== String(selectedAddress).toLowerCase()) {
+      if (
+        String(account).toLowerCase() !== String(selectedAddress).toLowerCase()
+      ) {
         onNewAccount(dispatch, selectedAddress, contracts);
       }
 

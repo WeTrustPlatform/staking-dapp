@@ -6,7 +6,6 @@ export const status = {
   FAILURE: 'FAILURE',
 };
 
-
 // Wrapper arround this.setState for blockchain transactions
 // Goal: To avoid calling this.setState for each tx
 // Usage: this.state = { blockchainTx: init(this, 'name of this tx') }
@@ -50,13 +49,15 @@ const stateHelper = {
     };
     const setFailure = (message) => {
       setStatus(status.FAILURE);
-      context.setErrorMessage(message || `Error while executing ${name} transaction.`);
+      context.setErrorMessage(
+        message || `Error while executing ${name} transaction.`,
+      );
     };
     const setSuccess = () => {
       setStatus(status.SUCCESS);
     };
 
-    return ({
+    return {
       getTxStatus,
       getTxHash,
       getInitialState,
@@ -66,7 +67,7 @@ const stateHelper = {
       setPending,
       setFailure,
       setSuccess,
-    });
+    };
   },
 };
 
