@@ -5,6 +5,7 @@ import FAQSection from './FAQSection';
 import Footer from './Footer';
 import ActivitiesSection from './ActivitiesSection';
 import TopSection from './TopSection';
+import WhyStakingSection from './WhyStakingSection';
 
 class HomePage extends React.Component {
   render() {
@@ -12,9 +13,10 @@ class HomePage extends React.Component {
       <div>
         <Navbar />
         <TopSection color="light" />
-        <MainSection color="dark" />
-        <ActivitiesSection color="light" />
-        <FAQSection color="dark" />
+        <WhyStakingSection color="dark" />
+        <MainSection color="light" />
+        <ActivitiesSection color="dark" />
+        <FAQSection color="light" />
         <Footer color="light" />
       </div>
     );
