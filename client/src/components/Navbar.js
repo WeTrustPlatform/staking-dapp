@@ -27,7 +27,6 @@ class Navbar extends React.Component {
             <Web3Account />
           </Toolbar>
         </AppBar>
-
       </div>
     );
   }

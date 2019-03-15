@@ -14,9 +14,7 @@ import {
   findAccountActivities,
   findOverallStats,
 } from './actions';
-import {
-  trstInBN, trst, numberString, bigNumber, currency,
-} from './formatter';
+import { trstInBN, trst, numberString, bigNumber, currency } from './formatter';
 
 // TODO pull events signature from abi
 // const STAKE_TOPIC = '0xc65e53b88159e7d2c0fc12a0600072e28ae53ff73b4c1715369c30f160935142';
@@ -24,7 +22,9 @@ import {
 // const TOPICS = [STAKE_TOPIC, UNSTAKE_TOPIC];
 
 export const dispatchAccountActivities = (
-  dispatch, TimeLockedStaking, account,
+  dispatch,
+  TimeLockedStaking,
+  account,
 ) => {
   // Reducer to consolidate multiple staked and unstaked events
   // per stake data.
@@ -48,31 +48,34 @@ export const dispatchAccountActivities = (
   //
   // Note: Use Object.assign on accumulator. Hence, no nested fields.
   const eventsReducer = (accumulator, currentEvent) => {
-    const {
-      id, transactionHash, returnValues, event,
-    } = currentEvent;
+    const { id, transactionHash, returnValues, event } = currentEvent;
     const { amount, data, user } = returnValues;
 
     // filter { user: account } does not work because we use 'allEvents'
     // TODO use TOPIC
-    if ((user.toLowerCase() !== account.toLowerCase())
-        || (event !== 'Staked' && event !== 'Unstaked')) {
+    if (
+      user.toLowerCase() !== account.toLowerCase() ||
+      (event !== 'Staked' && event !== 'Unstaked')
+    ) {
       return accumulator;
     }
 
     const updatedValue = {
-      id, transactionHash,
+      id,
+      transactionHash,
     };
 
     if (accumulator[data]) {
       // data exist
       const { rawAmount } = accumulator[data];
-      updatedValue.rawAmount = event === 'Staked'
-        ? rawAmount.add(bigNumber(amount)) : rawAmount.sub(bigNumber(amount));
+      updatedValue.rawAmount =
+        event === 'Staked'
+          ? rawAmount.add(bigNumber(amount))
+          : rawAmount.sub(bigNumber(amount));
     } else {
       const { stakingId, unlockedAtInPayload } = parseStakePayload(data);
-      const rawAmount = event === 'Staked'
-        ? bigNumber(amount) : bigNumber(amount).neg();
+      const rawAmount =
+        event === 'Staked' ? bigNumber(amount) : bigNumber(amount).neg();
 
       accumulator[data] = {
         stakingId,
@@ -92,42 +95,54 @@ export const dispatchAccountActivities = (
   };
 
   // Get all the Staked events related to the current account
-  TimeLockedStaking.getPastEvents('allEvents', {
-    fromBlock: TimeLockedStaking.deployedAt || 0,
-    toBlock: 'latest',
-    // topics: TOPICS,
-  }, (err, events) => {
-    const aggregatedEvents = events.reduce(eventsReducer, {});
+  TimeLockedStaking.getPastEvents(
+    'allEvents',
+    {
+      fromBlock: TimeLockedStaking.deployedAt || 0,
+      toBlock: 'latest',
+      // topics: TOPICS,
+    },
+    (err, events) => {
+      const aggregatedEvents = events.reduce(eventsReducer, {});
 
-    // key is the original stake's payload data field
-    const populatedStakeRecordTasks = Object.keys(aggregatedEvents).map(async (key) => {
-      const data = aggregatedEvents[key];
-      const name = await getNameFromCMS(data.stakingId);
-      let unlockedAt = await getUnlockedAtFromBlockchain(account, key, TimeLockedStaking);
-      // Infura is too slow on rinkeby and mainnet
-      // if blockchain.unlockedAt = 0, then it means infura has not seen the new contract state
-      if (unlockedAt.getTime() === new Date(0).getTime()) {
-        unlockedAt = data.unlockedAtInPayload;
-      }
+      // key is the original stake's payload data field
+      const populatedStakeRecordTasks = Object.keys(aggregatedEvents).map(
+        async (key) => {
+          const data = aggregatedEvents[key];
+          const name = await getNameFromCMS(data.stakingId);
+          let unlockedAt = await getUnlockedAtFromBlockchain(
+            account,
+            key,
+            TimeLockedStaking,
+          );
+          // Infura is too slow on rinkeby and mainnet
+          // if blockchain.unlockedAt = 0, then it means infura has not seen the new contract state
+          if (unlockedAt.getTime() === new Date(0).getTime()) {
+            unlockedAt = data.unlockedAtInPayload;
+          }
 
-      const canUnstake = determineCanUnstake(
-        unlockedAt,
-        data.rawAmount,
+          const canUnstake = determineCanUnstake(unlockedAt, data.rawAmount);
+
+          return Object.assign(data, {
+            name,
+            unlockedAt,
+            canUnstake,
+            stakeData: key,
+          });
+        },
       );
 
-      return Object.assign(data, {
-        name, unlockedAt, canUnstake, stakeData: key,
+      Promise.all(populatedStakeRecordTasks).then((completed) => {
+        dispatch(findAccountActivities(completed));
       });
-    });
-
-    Promise.all(populatedStakeRecordTasks).then((completed) => {
-      dispatch(findAccountActivities(completed));
-    });
-  });
+    },
+  );
 };
 
 export const dispatchTRSTBalance = (dispatch, TRST, account) => {
-  TRST.methods.balanceOf(account).call()
+  TRST.methods
+    .balanceOf(account)
+    .call()
     .then((trstBalance) => {
       dispatch(findTrstBalance(trstBalance));
     });
@@ -166,8 +181,10 @@ export const dispatchOverallStats = (dispatch, TimeLockedStaking) => {
     }
 
     // first record or found a later blocknumber
-    if (!accumulator[user]
-        || bigNumber(blockNumber).gt(accumulator[user].blockNumber)) {
+    if (
+      !accumulator[user] ||
+      bigNumber(blockNumber).gt(accumulator[user].blockNumber)
+    ) {
       accumulator[user] = {
         total: bigNumber(total),
         blockNumber: bigNumber(blockNumber),
@@ -187,33 +204,42 @@ export const dispatchOverallStats = (dispatch, TimeLockedStaking) => {
     return accumulator;
   };
 
-  TimeLockedStaking.getPastEvents('allEvents', {
-    fromBlock: TimeLockedStaking.deployedAt || 0,
-    toBlock: 'latest',
-    // topics: TOPICS,
-  }, (err, events) => {
-    if (err || !events) {
-      // TODO send log
-      return;
-    }
+  TimeLockedStaking.getPastEvents(
+    'allEvents',
+    {
+      fromBlock: TimeLockedStaking.deployedAt || 0,
+      toBlock: 'latest',
+      // topics: TOPICS,
+    },
+    (err, events) => {
+      if (err || !events) {
+        // TODO send log
+        return;
+      }
 
-    const userStats = events.reduce(userStatsReducer, {});
+      const userStats = events.reduce(userStatsReducer, {});
 
-    const overallStats = Object.values(userStats).reduce(overallStatsReducer, {
-      total: bigNumber(0),
-      count: 0,
-    });
+      const overallStats = Object.values(userStats).reduce(
+        overallStatsReducer,
+        {
+          total: bigNumber(0),
+          count: 0,
+        },
+      );
 
-    const { total, count } = overallStats;
-    const average = total.div(bigNumber(count || 1));
-    // TODO fetch TRST price
-    const averageInUSD = trstInBN(average).toNumber() * 0.02;
+      const { total, count } = overallStats;
+      const average = total.div(bigNumber(count || 1));
+      // TODO fetch TRST price
+      const averageInUSD = trstInBN(average).toNumber() * 0.02;
 
-    dispatch(findOverallStats({
-      currentStakes: trst(total),
-      currentStakers: numberString(count),
-      averageStakes: trst(average),
-      averageStakesInUSD: currency(averageInUSD),
-    }));
-  });
+      dispatch(
+        findOverallStats({
+          currentStakes: trst(total),
+          currentStakers: numberString(count),
+          averageStakes: trst(average),
+          averageStakesInUSD: currency(averageInUSD),
+        }),
+      );
+    },
+  );
 };

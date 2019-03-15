@@ -37,19 +37,16 @@ class StakeDurationInput extends React.Component {
           }}
           InputProps={{
             disableUnderline: true,
-            startAdornment: <InputAdornment position="start">Duration</InputAdornment>,
+            startAdornment: (
+              <InputAdornment position="start">Duration</InputAdornment>
+            ),
           }}
         >
-          {
-            durations.map(options => (
-              <option
-                key={options.value}
-                value={options.value}
-              >
-                {options.label}
-              </option>
-            ))
-          }
+          {durations.map((options) => (
+            <option key={options.value} value={options.value}>
+              {options.label}
+            </option>
+          ))}
         </TextField>
       </div>
     );

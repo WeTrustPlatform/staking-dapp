@@ -15,11 +15,7 @@ class OrgInfo extends React.Component {
   }
 
   render501c3(data) {
-    return (
-      <p>
-        {this.render501c3Info(data)}
-      </p>
-    );
+    return <p>{this.render501c3Info(data)}</p>;
   }
 
   renderSpringCause(data) {
@@ -31,7 +27,7 @@ class OrgInfo extends React.Component {
           target="_blank"
           rel="noopener noreferrer"
         >
-            spring.wetrust.io
+          spring.wetrust.io
         </a>
         <br />
         {data.is501c3 && this.render501c3Info(data)}
@@ -41,7 +37,9 @@ class OrgInfo extends React.Component {
   }
 
   renderDetails(data) {
-    return data.isOnSpring ? this.renderSpringCause(data) : this.render501c3(data);
+    return data.isOnSpring
+      ? this.renderSpringCause(data)
+      : this.render501c3(data);
   }
 
   render() {
@@ -49,10 +47,7 @@ class OrgInfo extends React.Component {
     return (
       <List>
         <ListItem>
-          <ListItemText primary={
-              this.renderDetails(data)
-            }
-          />
+          <ListItemText primary={this.renderDetails(data)} />
         </ListItem>
       </List>
     );

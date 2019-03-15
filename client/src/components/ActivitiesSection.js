@@ -13,12 +13,9 @@ import Section from './Section';
 import SectionHeader from './SectionHeader';
 import { txLink } from '../formatter';
 import { validateNetworkId } from '../utils';
-import {
-  dispatchAccountActivities,
-  dispatchOverallStats,
-} from '../dispatch';
+import { dispatchAccountActivities, dispatchOverallStats } from '../dispatch';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     width: '100%',
     overflowX: 'auto',
@@ -38,10 +35,8 @@ const styles = theme => ({
     padding: theme.mixins.toolbar.minHeight,
     textAlign: 'center',
   },
-  unstake: {
-  },
+  unstake: {},
 });
-
 
 class ActivitiesSection extends React.Component {
   constructor(props) {
@@ -58,7 +53,8 @@ class ActivitiesSection extends React.Component {
     });
 
     TimeLockedStaking.methods
-      .unstake(amount, stakeData).send({ from: account })
+      .unstake(amount, stakeData)
+      .send({ from: account })
       .finally(() => {
         this.setState({
           isUnstaking: false,
@@ -71,7 +67,8 @@ class ActivitiesSection extends React.Component {
     const { classes, networkId } = this.props;
     const { isUnstaking } = this.state;
     const { canUnstake, rawAmount, stakeData } = event;
-    const isEnabled = canUnstake && !isUnstaking && !validateNetworkId(networkId);
+    const isEnabled =
+      canUnstake && !isUnstaking && !validateNetworkId(networkId);
     return (
       <div className={classes.unstake}>
         <Button
@@ -92,10 +89,11 @@ class ActivitiesSection extends React.Component {
       <TableRow>
         <TableCell colSpan={5}>
           <div className={classes.noActivities}>
-            It looks so empty.
-            {' '}
+            {'It looks so empty. '}
             <Link
-              scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'end' })}
+              scroll={(el) =>
+                el.scrollIntoView({ behavior: 'smooth', block: 'end' })
+              }
               to="#main-section"
             >
               Please stake!
@@ -108,43 +106,30 @@ class ActivitiesSection extends React.Component {
 
   renderActivities() {
     const { classes, accountActivities } = this.props;
-    return (
-      accountActivities.map((event) => {
-        const {
-          id, name, amount, unlockedAt, transactionHash,
-        } = event;
-        return (
-          <TableRow key={id}>
-            <TableCell>
-              {name}
-            </TableCell>
-            <TableCell>
-              {amount}
-            </TableCell>
-            <TableCell>
-              {unlockedAt.toLocaleString()}
-            </TableCell>
-            <TableCell>
-              {this.renderUnstake(event)}
-            </TableCell>
-            <TableCell className={classes.txHashCell}>
-              <a
-                href={txLink(transactionHash)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {transactionHash}
-              </a>
-            </TableCell>
-          </TableRow>
-        );
-      }));
+    return accountActivities.map((event) => {
+      const { id, name, amount, unlockedAt, transactionHash } = event;
+      return (
+        <TableRow key={id}>
+          <TableCell>{name}</TableCell>
+          <TableCell>{amount}</TableCell>
+          <TableCell>{unlockedAt.toLocaleString()}</TableCell>
+          <TableCell>{this.renderUnstake(event)}</TableCell>
+          <TableCell className={classes.txHashCell}>
+            <a
+              href={txLink(transactionHash)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {transactionHash}
+            </a>
+          </TableCell>
+        </TableRow>
+      );
+    });
   }
 
   render() {
-    const {
-      classes, color, accountActivities: activities,
-    } = this.props;
+    const { classes, color, accountActivities: activities } = this.props;
 
     return (
       <Section id="activities-section" color={color}>
@@ -153,21 +138,11 @@ class ActivitiesSection extends React.Component {
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
-                <TableCell>
-                  NPO Name
-                </TableCell>
-                <TableCell>
-                  Amount
-                </TableCell>
-                <TableCell>
-                  Locked Until
-                </TableCell>
-                <TableCell>
-                  Action
-                </TableCell>
-                <TableCell>
-                  Transaction Hash
-                </TableCell>
+                <TableCell>NPO Name</TableCell>
+                <TableCell>Amount</TableCell>
+                <TableCell>Locked Until</TableCell>
+                <TableCell>Action</TableCell>
+                <TableCell>Transaction Hash</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -181,18 +156,21 @@ class ActivitiesSection extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   account: state.account,
   networkId: state.networkId,
   accountActivities: state.accountActivities || [],
   TimeLockedStaking: state.contracts.TimeLockedStaking,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   refreshStats: (account, TimeLockedStaking) => {
     dispatchAccountActivities(dispatch, TimeLockedStaking, account);
     dispatchOverallStats(dispatch, TimeLockedStaking);
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ActivitiesSection));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withStyles(styles)(ActivitiesSection));

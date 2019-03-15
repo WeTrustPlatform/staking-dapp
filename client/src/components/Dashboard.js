@@ -11,11 +11,14 @@ const styles = {
   },
 };
 
-
 class Dashboard extends React.Component {
   render() {
     const {
-      classes, currentStakes, averageStakes, averageStakesInUSD, currentStakers,
+      classes,
+      currentStakes,
+      averageStakes,
+      averageStakesInUSD,
+      currentStakers,
     } = this.props;
     return (
       <div className={classes.root}>
@@ -40,7 +43,7 @@ class Dashboard extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   currentStakes: state.overallStats.currentStakes,
   averageStakes: state.overallStats.averageStakes,
   averageStakesInUSD: state.overallStats.averageStakesInUSD,

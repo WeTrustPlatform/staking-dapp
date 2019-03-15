@@ -4,9 +4,7 @@ import axios from 'axios';
 import { prefix0x, networkName } from './formatter';
 import configs from './configs';
 
-const {
-  toBN, padRight, toHex, padLeft, hexToBytes, bytesToHex,
-} = web3.utils;
+const { toBN, padRight, toHex, padLeft, hexToBytes, bytesToHex } = web3.utils;
 
 const paddedBytes = (numberString) => {
   const hex = toHex(numberString);
@@ -32,8 +30,10 @@ export function getStakePayload(durationInDays, npo) {
   assert(npo.stakingId.length > 0, 'stakingId not found.');
   // blockchain uses timestamp in seconds
   // for manual testing on dev
-  const durationInSeconds = configs.NODE_ENV === 'development'
-    ? Number(durationInDays) : Number(durationInDays) * 24 * 60 * 60;
+  const durationInSeconds =
+    configs.NODE_ENV === 'development'
+      ? Number(durationInDays)
+      : Number(durationInDays) * 24 * 60 * 60;
   const lockedUntil = Math.floor(Date.now() / 1000) + durationInSeconds;
   const payload = buildBytesInput(lockedUntil, npo.stakingId);
   return payload;
@@ -74,7 +74,6 @@ export const validateNetworkId = (networkId) => {
   return null;
 };
 
-
 // TODO get other info as well, maybe cacheing
 // Call CMS to get organization details like name and address
 export const getNameFromCMS = async (stakingId) => {
@@ -88,9 +87,7 @@ export const getNameFromCMS = async (stakingId) => {
     // Some EIN starts with 0, make sure staking_id has at least 9 digits
     //
     const padded = padLeft(stakingId, 9);
-    res = await axios.get(
-      `${configs.CMS_URL}/charities?staking_id=${padded}`,
-    );
+    res = await axios.get(`${configs.CMS_URL}/charities?staking_id=${padded}`);
   } catch (e) {
     console.log(e);
   }
@@ -101,12 +98,16 @@ export const getNameFromCMS = async (stakingId) => {
 };
 
 // Call staking contract to get the unlockedAt
-export const getUnlockedAtFromBlockchain = async (user, stakeData, TimeLockedStaking) => {
+export const getUnlockedAtFromBlockchain = async (
+  user,
+  stakeData,
+  TimeLockedStaking,
+) => {
   // get the real unlockedAt in seconds
   // set by the contract
-  const realUnlockedAt = await TimeLockedStaking.methods.getStakeRecordUnlockedAt(
-    user, stakeData,
-  ).call();
+  const realUnlockedAt = await TimeLockedStaking.methods
+    .getStakeRecordUnlockedAt(user, stakeData)
+    .call();
   const realUnlockedAtDate = new Date(realUnlockedAt * 1000);
   return realUnlockedAtDate;
 };
@@ -120,6 +121,7 @@ export const determineCanUnstake = (unlockedAt, rawAmount) => {
   return isBeforeNow && hasBalance;
 };
 
-export const delay = milliseconds => new Promise((resolve) => {
-  setTimeout(resolve, milliseconds);
-});
+export const delay = (milliseconds) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, milliseconds);
+  });

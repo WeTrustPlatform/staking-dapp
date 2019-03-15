@@ -5,7 +5,7 @@ import Dashboard from './Dashboard';
 import Section from './Section';
 import StakeNow from './StakeNow';
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     width: 'auto',
     margin: 'auto',
@@ -17,15 +17,8 @@ class MainSection extends React.Component {
   render() {
     const { classes, color } = this.props;
     return (
-      <Section
-        id="main-section"
-        color={color}
-      >
-        <Grid
-          container
-          className={classes.container}
-          justify="center"
-        >
+      <Section id="main-section" color={color}>
+        <Grid container className={classes.container} justify="center">
           <Grid item xs={12} sm={12} md={12} lg={8}>
             <StakeNow />
           </Grid>
