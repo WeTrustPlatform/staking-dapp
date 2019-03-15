@@ -21,6 +21,7 @@ const titleFont = {
 };
 
 const fontSize = 16;
+const borderLine = `1px solid ${darkGrey}`;
 
 const theme = createMuiTheme({
   palette: {
@@ -80,14 +81,19 @@ const theme = createMuiTheme({
       },
     },
     MuiTableCell: {
-      head: {
-        fontSize,
-        fontFamily: jubilat,
-        fontWeight: 'bold',
+      root: {
+        border: borderLine,
       },
-      body: {
+      head: {
         fontSize: '1.125rem',
-        borderBottom: 'none',
+        fontFamily: jubilat,
+        fontWeight: 600,
+        backgroundColor: grey,
+      },
+    },
+    MuiTable: {
+      root: {
+        borderStyle: 'hidden',
       },
     },
     MuiInputLabel: {
@@ -142,7 +148,7 @@ const theme = createMuiTheme({
       },
       elevation2: {
         boxShadow: undefined,
-        border: `1px solid ${darkGrey}`,
+        border: borderLine,
         borderRadius: 3,
       },
     },
