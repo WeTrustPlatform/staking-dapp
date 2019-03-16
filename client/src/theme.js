@@ -9,6 +9,8 @@ const darkGrey = '#D8D8D8';
 const brownGrey = '#7E7E7E';
 const greyBlue = '#67C6BB';
 const white = '#FFFFFF';
+const orange = '#F3B058';
+const darkOrange = '#F09A2A';
 
 const proximaNova = ['proxima-nova', 'Arial', 'Helvectica', 'sans-serif'].join(
   ',',
@@ -40,6 +42,7 @@ const theme = createMuiTheme({
     text: {
       primary: brownGrey,
       secondary: teal,
+      disabled: orange,
       fontSize,
     },
   },
@@ -68,16 +71,24 @@ const theme = createMuiTheme({
   overrides: {
     MuiButton: {
       root: {
-        borderRadius: 4,
+        textTransform: undefined,
       },
       sizeLarge: {
         fontSize,
         fontWeight: 'bold',
         height: '3rem',
-        color: grey,
+      },
+      sizeSmall: {
+        fontWeight: 600,
+      },
+      contained: {
+        boxShadow: undefined,
       },
       containedPrimary: {
-        backgroundColor: '#F3B058',
+        backgroundColor: orange,
+        '&:hover': {
+          backgroundColor: darkOrange,
+        },
       },
     },
     MuiTableCell: {

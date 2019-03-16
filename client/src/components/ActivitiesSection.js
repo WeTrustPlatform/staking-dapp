@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { HashLink as Link } from 'react-router-hash-link';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
@@ -29,13 +30,16 @@ const styles = (theme) => ({
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    maxWidth: theme.breakpoints.values.lg / 5,
+    maxWidth: theme.breakpoints.values.lg / 6,
   },
   noActivities: {
     padding: theme.mixins.toolbar.minHeight,
     textAlign: 'center',
   },
-  unstake: {},
+  statusLocked: {
+    fontWeight: 600,
+    color: theme.palette.text.disabled,
+  },
 });
 
 class ActivitiesSection extends React.Component {
@@ -71,14 +75,19 @@ class ActivitiesSection extends React.Component {
       canUnstake && !isUnstaking && !validateNetworkId(networkId);
     return (
       <div className={classes.unstake}>
-        <Button
-          color="primary"
-          variant="contained"
-          disabled={!isEnabled}
-          onClick={() => this.handleUnstake(rawAmount.toString(), stakeData)}
-        >
-          Unstake
-        </Button>
+        {canUnstake && (
+          <Button
+            color="primary"
+            variant="contained"
+            disabled={!isEnabled}
+            onClick={() => this.handleUnstake(rawAmount.toString(), stakeData)}
+          >
+            Claim TRST
+          </Button>
+        )}
+        {!canUnstake && (
+          <Typography className={classes.statusLocked}>Locked</Typography>
+        )}
       </div>
     );
   }
@@ -111,9 +120,9 @@ class ActivitiesSection extends React.Component {
       return (
         <TableRow key={id}>
           <TableCell>{name}</TableCell>
-          <TableCell>{amount}</TableCell>
-          <TableCell>{unlockedAt.toLocaleString()}</TableCell>
-          <TableCell>{this.renderUnstake(event)}</TableCell>
+          <TableCell align="right">{`${amount} TRST`}</TableCell>
+          <TableCell align="center">{unlockedAt.toLocaleString()}</TableCell>
+          <TableCell align="center">{this.renderUnstake(event)}</TableCell>
           <TableCell className={classes.txHashCell}>
             <a
               href={txLink(transactionHash)}
@@ -135,14 +144,14 @@ class ActivitiesSection extends React.Component {
       <Section id="activities-section" color={color}>
         <SectionHeader>Your Stakes</SectionHeader>
         <Paper className={classes.root}>
-          <Table className={classes.table}>
+          <Table className={classes.table} padding="dense">
             <TableHead>
               <TableRow>
-                <TableCell>NPO Name</TableCell>
-                <TableCell>Amount</TableCell>
-                <TableCell>Locked Until</TableCell>
-                <TableCell>Action</TableCell>
-                <TableCell>Transaction Hash</TableCell>
+                <TableCell align="center">Cause name</TableCell>
+                <TableCell align="center">Stake amount</TableCell>
+                <TableCell align="center">Locked until</TableCell>
+                <TableCell align="center">Status</TableCell>
+                <TableCell align="center">Tx hash</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
