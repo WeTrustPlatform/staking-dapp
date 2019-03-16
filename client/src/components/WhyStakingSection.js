@@ -19,6 +19,10 @@ const styles = (theme) => ({
   midItem: {
     borderRight: `1px solid ${theme.palette.primary.dark}`,
     borderLeft: `1px solid ${theme.palette.primary.dark}`,
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.mixins.toolbar.minHeight,
+      marginBottom: theme.mixins.toolbar.minHeight,
+    },
   },
 });
 
@@ -28,13 +32,13 @@ class WhyStakingSection extends React.Component {
     return (
       <Section color={color}>
         <Grid container className={classes.container} justify="center">
-          <Grid item xs={12} sm={4} className={classes.gridItem}>
+          <Grid item xs={12} sm={12} md={4} className={classes.gridItem}>
             <Typography variant="h5">
               Increase your Rank on the SPRING directory
             </Typography>
             <br />
             <Typography variant="h6">
-              Stake your Trustcoins to help your favorite Cause more visible on
+              Stake your Trustcoin to help your favorite Cause more visible on
               SPRING. Causes with the most stake assigned to them will receive
               higher ranking on SPRING.
             </Typography>
@@ -42,7 +46,8 @@ class WhyStakingSection extends React.Component {
           <Grid
             item
             xs={12}
-            sm={4}
+            sm={12}
+            md={4}
             className={cx(classes.gridItem, classes.midItem)}
           >
             <Typography variant="h5">How to get Trustcoin</Typography>
@@ -51,14 +56,13 @@ class WhyStakingSection extends React.Component {
               Please visit the following to obtain Trustcoin.
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={4} className={classes.gridItem}>
+          <Grid item xs={12} sm={12} md={4} className={classes.gridItem}>
             <Typography variant="h5">Nominate any organization</Typography>
             <br />
             <Typography variant="h6">
-              Stake your Trustcoins to nominate and reserve the top spot for
-              your favorite Cause. Nominated Causes that have assigned
-              Trustcoins will automatically receive preferential placement upon
-              joining.
+              Stake your Trustcoin to nominate and reserve the top spot for your
+              favorite Cause. Nominated Causes that have assigned Trustcoins
+              will automatically receive preferential placement upon joining.
             </Typography>
           </Grid>
         </Grid>
