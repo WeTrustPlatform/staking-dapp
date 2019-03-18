@@ -331,21 +331,27 @@ class StakeNow extends React.Component {
     return (
       <div className={classes.root}>
         <SearchInput onSelected={this.onSelectedNpo} />
-        {npo.name && <OrgInfo data={npo} />}
-
-        <Grid container justify="center">
-          {this.renderGridItem(
-            this.props,
-            <StakeAmountInput amount={amount} onChange={this.onChangeAmount} />,
-          )}
-          {this.renderGridItem(
-            this.props,
-            <StakeDurationInput
-              duration={durationInDays}
-              onChange={this.onChangeDuration}
-            />,
-          )}
-        </Grid>
+        {npo.name && (
+          <div>
+            <OrgInfo data={npo} />
+            <Grid container justify="center">
+              {this.renderGridItem(
+                this.props,
+                <StakeAmountInput
+                  amount={amount}
+                  onChange={this.onChangeAmount}
+                />,
+              )}
+              {this.renderGridItem(
+                this.props,
+                <StakeDurationInput
+                  duration={durationInDays}
+                  onChange={this.onChangeDuration}
+                />,
+              )}
+            </Grid>
+          </div>
+        )}
 
         <Grid container justify="center" className={classes.gridRowButton}>
           {isStaking && this.renderStakingSteps()}

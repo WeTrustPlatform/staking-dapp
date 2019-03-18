@@ -27,7 +27,7 @@ class StakeDurationInput extends React.Component {
           select
           value={duration}
           onChange={onChange}
-          label="3. Select a lock-up duration"
+          label="Select a lock-up duration"
           margin="normal"
           SelectProps={{
             native: true,
