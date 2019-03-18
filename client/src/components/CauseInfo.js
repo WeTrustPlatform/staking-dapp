@@ -20,7 +20,7 @@ const styles = (theme) => {
   };
 };
 
-class OrgInfo extends React.Component {
+class CauseInfo extends React.Component {
   render501c3Info(data) {
     return (
       <span>
@@ -82,4 +82,4 @@ class OrgInfo extends React.Component {
   }
 }
 
-export default withStyles(styles)(OrgInfo);
+export default withStyles(styles)(CauseInfo);

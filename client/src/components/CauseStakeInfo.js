@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import StakeAmountInput from './StakeAmountInput';
 import StakeDurationInput from './StakeDurationInput';
-import OrgInfo from './OrgInfo';
+import CauseInfo from './CauseInfo';
 import CauseNewRank from './CauseNewRank';
 
 const styles = (theme) => ({
@@ -27,7 +27,7 @@ class CauseStakeInfo extends React.Component {
     const { cause } = this.props;
     return (
       <Paper>
-        <OrgInfo data={cause} />
+        <CauseInfo data={cause} />
         <Grid container justify="center">
           {this.renderGridItem(
             <div>
