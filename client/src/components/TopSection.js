@@ -9,7 +9,7 @@ const styles = (theme) => {
   const navHeight = theme.mixins.toolbar.minHeight;
   return {
     root: {
-      marginTop: navHeight,
+      marginTop: navHeight * 1.5,
     },
     container: {
       margin: 'auto',
