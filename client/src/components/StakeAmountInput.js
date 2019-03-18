@@ -9,7 +9,7 @@ class StakeAmountInput extends React.Component {
       <div>
         <TextField
           fullWidth
-          label="2. Enter an amount"
+          label="Enter an amount"
           onChange={onChange}
           value={amount}
           type="number"
