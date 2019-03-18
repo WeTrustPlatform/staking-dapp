@@ -10,9 +10,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '@material-ui/core/Icon';
 import SearchInput from './SearchInput';
-import StakeAmountInput from './StakeAmountInput';
-import StakeDurationInput from './StakeDurationInput';
-import OrgInfo from './OrgInfo';
+import CauseStakeInfo from './CauseStakeInfo';
 import { getStakePayload, validateNetworkId, delay } from '../utils';
 import stateHelper, { status } from './stateHelper';
 import { txLink } from '../formatter';
@@ -22,12 +20,6 @@ const styles = (theme) => ({
   root: {
     margin: `${theme.mixins.toolbar.minHeight}px auto`,
     maxWidth: theme.breakpoints.values.md,
-  },
-  gridRowItems: {
-    padding: theme.spacing.unit * 2,
-  },
-  link: {
-    color: theme.palette.secondary.main,
   },
   gridRowButton: {
     marginTop: theme.mixins.toolbar.minHeight,
@@ -220,15 +212,6 @@ class StakeNow extends React.Component {
     return null;
   }
 
-  renderGridItem(props, child) {
-    const { classes } = props;
-    return (
-      <Grid item className={classes.gridRowItems} xs={12} sm={12} md={6}>
-        {child}
-      </Grid>
-    );
-  }
-
   renderButton(props, text) {
     const { color, component, onClick } = props;
     return (
@@ -331,27 +314,7 @@ class StakeNow extends React.Component {
     return (
       <div className={classes.root}>
         <SearchInput onSelected={this.onSelectedNpo} />
-        {npo.name && (
-          <div>
-            <OrgInfo data={npo} />
-            <Grid container justify="center">
-              {this.renderGridItem(
-                this.props,
-                <StakeAmountInput
-                  amount={amount}
-                  onChange={this.onChangeAmount}
-                />,
-              )}
-              {this.renderGridItem(
-                this.props,
-                <StakeDurationInput
-                  duration={durationInDays}
-                  onChange={this.onChangeDuration}
-                />,
-              )}
-            </Grid>
-          </div>
-        )}
+        {npo.name && <CauseStakeInfo cause={npo} />}
 
         <Grid container justify="center" className={classes.gridRowButton}>
           {isStaking && this.renderStakingSteps()}
