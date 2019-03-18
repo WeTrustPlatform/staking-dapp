@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
+import CauseRankTable from './CauseRankTable';
 
 const styles = (theme) => {
   const spacing = theme.spacing.unit;
@@ -61,7 +62,7 @@ class OrgInfo extends React.Component {
   render() {
     const { data, classes } = this.props;
     return (
-      <Grid container spacing={12} className={classes.root}>
+      <Grid container className={classes.root}>
         <Grid item xs={12} className={classes.row}>
           <Typography variant="h5" color="secondary">
             {data.name}
@@ -72,6 +73,9 @@ class OrgInfo extends React.Component {
         </Grid>
         <Grid item xs={12} className={classes.row}>
           {this.renderDetails(data)}
+        </Grid>
+        <Grid item xs={12} className={classes.row}>
+          <CauseRankTable />
         </Grid>
       </Grid>
     );
