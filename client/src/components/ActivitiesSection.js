@@ -119,11 +119,11 @@ class ActivitiesSection extends React.Component {
       const { id, name, amount, unlockedAt, transactionHash } = event;
       return (
         <TableRow key={id}>
-          <TableCell>{name}</TableCell>
+          <TableCell align="left">{name}</TableCell>
           <TableCell align="right">{`${amount} TRST`}</TableCell>
-          <TableCell align="center">{unlockedAt.toLocaleString()}</TableCell>
-          <TableCell align="center">{this.renderUnstake(event)}</TableCell>
-          <TableCell className={classes.txHashCell}>
+          <TableCell>{unlockedAt.toLocaleString()}</TableCell>
+          <TableCell>{this.renderUnstake(event)}</TableCell>
+          <TableCell align="left" className={classes.txHashCell}>
             <a
               href={txLink(transactionHash)}
               target="_blank"
@@ -147,11 +147,11 @@ class ActivitiesSection extends React.Component {
           <Table className={classes.table} padding="dense">
             <TableHead>
               <TableRow>
-                <TableCell align="center">Cause name</TableCell>
-                <TableCell align="center">Stake amount</TableCell>
-                <TableCell align="center">Locked until</TableCell>
-                <TableCell align="center">Status</TableCell>
-                <TableCell align="center">Tx hash</TableCell>
+                <TableCell>Cause name</TableCell>
+                <TableCell>Stake amount</TableCell>
+                <TableCell>Locked until</TableCell>
+                <TableCell>Status</TableCell>
+                <TableCell>Tx hash</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
