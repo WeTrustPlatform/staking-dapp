@@ -314,7 +314,16 @@ class StakeNow extends React.Component {
     return (
       <div className={classes.root}>
         <SearchInput onSelected={this.onSelectedNpo} />
-        {npo.name && <CauseStakeInfo cause={npo} />}
+        {true && (
+          <CauseStakeInfo
+            cause={{
+              name: 'Lava Mae',
+              stakingId: '810832318',
+              is501c3: true,
+              isOnSpring: true,
+            }}
+          />
+        )}
 
         <Grid container justify="center" className={classes.gridRowButton}>
           {isStaking && this.renderStakingSteps()}

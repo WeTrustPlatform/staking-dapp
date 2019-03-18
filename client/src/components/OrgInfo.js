@@ -1,26 +1,42 @@
 import React from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
+
+const styles = (theme) => {
+  const spacing = theme.spacing.unit;
+  return {
+    root: {
+      paddingTop: spacing,
+    },
+    row: {
+      padding: spacing * 2,
+    },
+    divider: {
+      padding: `0px ${spacing * 2}px`,
+    },
+  };
+};
 
 class OrgInfo extends React.Component {
   render501c3Info(data) {
     return (
       <span>
-        {`EIN: ${data.stakingId}`}
-        <br />
-        {`Location: ${data.city}, ${data.state}, ${data.country}`}
+        {`EIN: ${data.stakingId}. Location: ${data.city}, ${data.state}, ${
+          data.country
+        }`}
       </span>
     );
   }
 
   render501c3(data) {
-    return <p>{this.render501c3Info(data)}</p>;
+    return <Typography>{this.render501c3Info(data)}</Typography>;
   }
 
   renderSpringCause(data) {
     return (
-      <p>
+      <Typography>
         {`${data.name} is on `}
         <a
           href="https://spring.wetrust.io"
@@ -32,7 +48,7 @@ class OrgInfo extends React.Component {
         <br />
         {data.is501c3 && this.render501c3Info(data)}
         {!data.is501c3 && `Staking ID: ${data.stakingId}`}
-      </p>
+      </Typography>
     );
   }
 
@@ -43,15 +59,23 @@ class OrgInfo extends React.Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, classes } = this.props;
     return (
-      <List>
-        <ListItem>
-          <ListItemText primary={this.renderDetails(data)} />
-        </ListItem>
-      </List>
+      <Grid container spacing={12} className={classes.root}>
+        <Grid item xs={12} className={classes.row}>
+          <Typography variant="h5" color="secondary">
+            {data.name}
+          </Typography>
+        </Grid>
+        <Grid item xs={12} className={classes.divider}>
+          <Divider />
+        </Grid>
+        <Grid item xs={12} className={classes.row}>
+          {this.renderDetails(data)}
+        </Grid>
+      </Grid>
     );
   }
 }
 
-export default OrgInfo;
+export default withStyles(styles)(OrgInfo);
