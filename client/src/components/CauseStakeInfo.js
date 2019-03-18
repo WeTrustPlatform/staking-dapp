@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import StakeAmountInput from './StakeAmountInput';
 import StakeDurationInput from './StakeDurationInput';
 import OrgInfo from './OrgInfo';
+import CauseNewRank from './CauseNewRank';
 
 const styles = (theme) => ({
   gridRowItems: {
@@ -28,7 +29,12 @@ class CauseStakeInfo extends React.Component {
       <Paper>
         <OrgInfo data={cause} />
         <Grid container justify="center">
-          {this.renderGridItem(<StakeAmountInput />)}
+          {this.renderGridItem(
+            <div>
+              <StakeAmountInput />
+              <CauseNewRank />
+            </div>,
+          )}
           {this.renderGridItem(<StakeDurationInput />)}
         </Grid>
       </Paper>
