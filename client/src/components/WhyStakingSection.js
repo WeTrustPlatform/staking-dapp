@@ -4,6 +4,10 @@ import cx from 'classnames';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Section from './Section';
+import IconIncreaseRank from '../images/icon-increase-rank.svg';
+import IconBuyTRST from '../images/icon-buy-trst.svg';
+import IconNominate from '../images/icon-nominate.svg';
+import BancorLogo from '../images/bancor.png';
 
 const styles = (theme) => ({
   container: {
@@ -33,6 +37,10 @@ class WhyStakingSection extends React.Component {
       <Section color={color}>
         <Grid container className={classes.container} justify="center">
           <Grid item xs={12} sm={12} md={4} className={classes.gridItem}>
+            <div>
+              <img src={IconIncreaseRank} alt="increase-your-rank" />
+            </div>
+            <br />
             <Typography variant="h5">
               Increase your Rank on the SPRING directory
             </Typography>
@@ -50,13 +58,31 @@ class WhyStakingSection extends React.Component {
             md={4}
             className={cx(classes.gridItem, classes.midItem)}
           >
+            <div>
+              <img src={IconBuyTRST} alt="buy-trst" />
+            </div>
+            <br />
             <Typography variant="h5">How to get Trustcoin</Typography>
             <br />
             <Typography variant="h6">
               Please visit the following to obtain Trustcoin.
             </Typography>
+            <br />
+            <div>
+              <a
+                href="https://www.bancor.network/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={BancorLogo} alt="bancor" />
+              </a>
+            </div>
           </Grid>
           <Grid item xs={12} sm={12} md={4} className={classes.gridItem}>
+            <div>
+              <img src={IconNominate} alt="nominate" />
+            </div>
+            <br />
             <Typography variant="h5">Nominate any organization</Typography>
             <br />
             <Typography variant="h6">
