@@ -4,8 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
   root: {
-    paddingTop: theme.mixins.toolbar.minHeight * 2,
-    paddingBottom: theme.mixins.toolbar.minHeight * 2,
+    paddingTop: theme.mixins.toolbar.minHeight,
+    paddingBottom: theme.mixins.toolbar.minHeight,
   },
   dark: {
     backgroundColor: theme.palette.primary.main,
