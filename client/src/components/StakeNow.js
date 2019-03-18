@@ -247,36 +247,6 @@ class StakeNow extends React.Component {
     );
   }
 
-  renderSpringLinks(props) {
-    const { classes } = props;
-    return (
-      <Grid container justify="center">
-        <Typography variant="h6">
-          View the list of&nbsp;
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://spring.wetrust.io/causes"
-            className={classes.link}
-          >
-            SPRING Causes
-          </a>
-        </Typography>
-        <Typography variant="h6">
-          &nbsp;or&nbsp;
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://airtable.com/shr1OLs5qiOloUceT"
-            className={classes.link}
-          >
-            nominate a NPO.
-          </a>
-        </Typography>
-      </Grid>
-    );
-  }
-
   renderErrorMessage(errorMessage) {
     return (
       <Grid container justify="center">
@@ -389,8 +359,6 @@ class StakeNow extends React.Component {
             'Stake Now',
           )}
         </Grid>
-
-        <Grid container>{this.renderSpringLinks(this.props)}</Grid>
       </div>
     );
   }

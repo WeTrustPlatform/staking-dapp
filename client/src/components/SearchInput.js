@@ -9,9 +9,7 @@ import axios from 'axios';
 import configs from '../configs';
 
 const styles = (theme) => ({
-  container: {
-    padding: theme.spacing.unit * 2,
-  },
+  container: {},
   results: {
     marginTop: theme.spacing.unit,
   },
@@ -100,7 +98,7 @@ class SearchInput extends React.Component {
           <div className={classes.container}>
             <TextField
               fullWidth
-              label="1. Enter non-profit's name"
+              placeholder="Search cause name"
               type="search"
               margin="normal"
               InputLabelProps={{
