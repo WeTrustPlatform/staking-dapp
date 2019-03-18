@@ -94,6 +94,7 @@ const theme = createMuiTheme({
     MuiTableCell: {
       root: {
         border: borderLine,
+        textAlign: 'center',
       },
       head: {
         fontSize: '1.125rem',
