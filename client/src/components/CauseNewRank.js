@@ -1,7 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Badge from '@material-ui/core/Badge';
 
 const styles = (theme) => ({
   root: {
@@ -11,12 +10,13 @@ const styles = (theme) => ({
     flexGrow: 1,
   },
   right: {
-    marginRight: theme.spacing.unit * 2,
-  },
-  badge: {
-    boxSizing: 'inherit',
+    color: theme.palette.primary.light,
+    backgroundColor: theme.palette.secondary.main,
+    borderRadius: 12,
+    minWidth: 48,
   },
 });
+
 class CauseNewRank extends React.Component {
   render() {
     const { classes } = this.props;
@@ -26,13 +26,9 @@ class CauseNewRank extends React.Component {
           <Typography>New Rank: 20/40</Typography>
         </div>
         <div className={classes.right}>
-          <Badge
-            classes={{
-              badge: classes.badge,
-            }}
-            badgeContent=" + 2 "
-            color="secondary"
-          />
+          <Typography align="center" color="inherit">
+            + 2
+          </Typography>
         </div>
       </div>
     );
