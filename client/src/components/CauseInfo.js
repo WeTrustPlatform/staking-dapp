@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import CauseRankTable from './CauseRankTable';
+import HrefLink from './HrefLink';
 
 const styles = (theme) => {
   const spacing = theme.spacing.unit;
@@ -39,13 +40,7 @@ class CauseInfo extends React.Component {
     return (
       <Typography>
         {`${data.name} is on `}
-        <a
-          href="https://spring.wetrust.io"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          spring.wetrust.io
-        </a>
+        <HrefLink href="https://spring.wetrust.io">SPRING</HrefLink>
         <br />
         {data.is501c3 && this.render501c3Info(data)}
         {!data.is501c3 && `Staking ID: ${data.stakingId}`}
