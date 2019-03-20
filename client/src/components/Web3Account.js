@@ -1,17 +1,14 @@
-import Avatar from '@material-ui/core/Avatar';
-import Icon from '@material-ui/core/Icon';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import configs from '../configs';
 import { trst } from '../formatter';
+import metamaskIcon from '../images/meta-mask-logo.png';
 import accountIcon from '../images/metamask-account-icon.svg';
-import { trim, validateNetworkId } from '../utils';
+import { trim } from '../utils';
 
 const styles = (theme) => ({
   warning: {
@@ -49,36 +46,37 @@ const styles = (theme) => ({
   },
 });
 
-class Web3Account extends React.Component {
-  renderNoWeb3(props) {
-    return (
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar className={props.classes.error}>
-            <Icon>error_outlined</Icon>
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText secondary="Please install MetaMask" />
-      </ListItem>
-    );
-  }
+const NETWORK_MAP = {
+  '1': 'MainNet',
+  '2': 'Morden',
+  '3': 'Ropsten',
+  '4': 'Rinkeby',
+  '5': 'Goerli',
+  '42': 'Kovan',
+};
 
+const networkName = NETWORK_MAP[configs.NETWORK_ID] || 'Custom network';
+
+class Web3Account extends React.Component {
   renderNoAccount(props) {
-    const { networkId } = props;
-    const networkError = validateNetworkId(networkId);
-    // we can't find account because
-    // either they're on wrong network
-    // or haven't unlocked account
-    const errorMessage = networkError || 'Please log in Metamask';
+    const { classes } = props;
+
     return (
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar className={props.classes.warning}>
-            <Icon>warning</Icon>
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText secondary={errorMessage} />
-      </ListItem>
+      <div className={classes.accountContainer}>
+        <div className={classes.accountImageWrapper}>
+          <img
+            width={21}
+            height={21}
+            src={metamaskIcon}
+            alt="metamask fox icon"
+          />
+        </div>
+        <div>
+          <Typography className={classes.accountText}>
+            {`Connect to ${networkName}`}
+          </Typography>
+        </div>
+      </div>
     );
   }
 
@@ -119,11 +117,13 @@ class Web3Account extends React.Component {
   render() {
     const { web3, account } = this.props;
     const hasWeb3Browser = web3 && web3.givenProvider;
+    const isConnected = hasWeb3Browser && account;
+
     return (
       <List>
-        {!hasWeb3Browser && this.renderNoWeb3(this.props)}
-        {hasWeb3Browser && !account && this.renderNoAccount(this.props)}
-        {hasWeb3Browser && account && this.renderAccount(this.props)}
+        {isConnected
+          ? this.renderAccount(this.props)
+          : this.renderNoAccount(this.props)}
       </List>
     );
   }
