@@ -7,6 +7,8 @@ import {
   WEB3_ACCOUNT_ACTIVITIES,
   WEB3_OVERALL_STATS,
   WEB3_CONTRACTS,
+  WEB3_USERS_STATS,
+  WEB3_CAUSES_STATS,
 } from './actions';
 
 const initialState = {
@@ -22,6 +24,8 @@ const initialState = {
     currentStakers: '0',
   },
   contracts: {},
+  usersStats: {},
+  causesStats: {},
 };
 
 function reducers(state = initialState, action) {
@@ -57,6 +61,14 @@ function reducers(state = initialState, action) {
     case WEB3_CONTRACTS:
       return Object.assign({}, state, {
         contracts: action.contracts,
+      });
+    case WEB3_CAUSES_STATS:
+      return Object.assign({}, state, {
+        causesStats: action.causesStats,
+      });
+    case WEB3_USERS_STATS:
+      return Object.assign({}, state, {
+        usersStats: action.usersStats,
       });
     default:
       return state;
