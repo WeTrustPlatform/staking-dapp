@@ -35,7 +35,7 @@ const styles = (theme) => ({
   },
 });
 
-export const Footer = (props) => {
+const Footer = (props) => {
   const { classes } = props;
   const currentYear = new Date().getFullYear();
   const copyrightText = `© ${currentYear} WeTrustPlatform - All rights reserved`;
