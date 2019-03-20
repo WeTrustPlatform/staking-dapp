@@ -75,9 +75,14 @@ export const validateNetworkId = (networkId) => {
   return null;
 };
 
-// TODO get other info as well, maybe cacheing
-// Call CMS to get organization details like name and address
+// TODO this is here for backward compatibility. Refactor needed
 export const getNameFromCMS = async (stakingId) => {
+  const cause = await getCauseFromCMS(stakingId);
+  return (cause && cause.name) || 'Unknown';
+};
+
+// Call CMS to get organization details like name and address
+export const getCauseFromCMS = async (stakingId) => {
   let res;
   try {
     // Users may pass in any stakingId when they stake via
@@ -93,9 +98,9 @@ export const getNameFromCMS = async (stakingId) => {
     console.log(e);
   }
 
-  const npo = res && res.data;
+  const cause = res && res.data;
 
-  return (npo && npo.name) || 'Unknown';
+  return cause;
 };
 
 // Call staking contract to get the unlockedAt
