@@ -1,8 +1,9 @@
 import assert from 'assert';
-import web3 from 'web3';
 import axios from 'axios';
-import { prefix0x, networkName } from './formatter';
+import web3 from 'web3';
+
 import configs from './configs';
+import { networkName, prefix0x } from './formatter';
 
 const { toBN, padRight, toHex, padLeft, hexToBytes, bytesToHex } = web3.utils;
 
@@ -125,3 +126,15 @@ export const delay = (milliseconds) =>
   new Promise((resolve) => {
     setTimeout(resolve, milliseconds);
   });
+
+/**
+ * Trims the string removing the middle part
+ * @param {string} str Any text, e.g. Ethereum Address
+ * @param {number} front Number of characters to take from the front of the string
+ * @param {number} end Number of characters to take from the end of the string
+ */
+export const trim = (str, front = 6, end = 4) => {
+  const endString = str.substring(str.length - end);
+  const startString = str.substring(0, front);
+  return `${startString}...${endString}`;
+};

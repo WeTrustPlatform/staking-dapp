@@ -1,15 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
+import Icon from '@material-ui/core/Icon';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import Icon from '@material-ui/core/Icon';
-import eth from '../images/eth-icon.svg';
-import { trst, networkName } from '../formatter';
-import { validateNetworkId } from '../utils';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import React from 'react';
+import { connect } from 'react-redux';
+
+import { trst } from '../formatter';
+import accountIcon from '../images/metamask-account-icon.svg';
+import { trim, validateNetworkId } from '../utils';
 
 const styles = (theme) => ({
   warning: {
@@ -20,6 +22,30 @@ const styles = (theme) => ({
   },
   accountText: {
     color: theme.palette.text.primary,
+    fontSize: 14,
+    display: 'inline',
+    lineHeight: '16px',
+  },
+  trstLabel: {
+    color: theme.palette.text.muted,
+    fontSize: 12,
+    display: 'inline',
+    lineHeight: '16px',
+  },
+  accountContainer: {
+    alignItems: 'center',
+    borderWidth: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    height: 48,
+    justifyContent: 'center',
+    paddingLeft: 16,
+    paddingRight: 16,
+    border: `1px solid #cfcfcf`,
+    borderRadius: 4,
+  },
+  accountImageWrapper: {
+    paddingRight: 16,
   },
 });
 
@@ -57,24 +83,36 @@ class Web3Account extends React.Component {
   }
 
   renderAccount(props) {
-    const { account, networkId, trstBalance, classes } = props;
-    const network = validateNetworkId(networkId) || networkName(networkId);
-
-    const getSecondaryText = () => (
-      <div>
-        <span className={classes.accountText}>{account}</span>
-        <br />
-        {`Network: ${network} - TRST: ${trst(trstBalance)}`}
-      </div>
-    );
+    const { account, trstBalance, classes } = props;
 
     return (
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar src={eth} />
-        </ListItemAvatar>
-        <ListItemText secondary={getSecondaryText()} />
-      </ListItem>
+      <div className={classes.accountContainer}>
+        <div className={classes.accountImageWrapper}>
+          <img
+            width={21}
+            height={21}
+            src={accountIcon}
+            alt="metamask account icon"
+          />
+        </div>
+        <div>
+          <Typography className={classes.accountText}>
+            {trim(account)}
+          </Typography>
+          <div>
+            <Typography
+              component="span"
+              className={`${classes.accountText} ${classes.trstLabel}`}
+            >
+              TRST:
+            </Typography>
+            <Typography component="span" className={classes.accountText}>
+              {' '}
+              {trst(trstBalance)}
+            </Typography>
+          </div>
+        </div>
+      </div>
     );
   }
 

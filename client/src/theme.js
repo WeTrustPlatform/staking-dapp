@@ -7,6 +7,7 @@ const teal = '#3FA296';
 const grey = '#FAFAFA';
 const darkGrey = '#D8D8D8';
 const brownGrey = '#7E7E7E';
+const lightGrey = '#9e9e9e';
 const greyBlue = '#67C6BB';
 const white = '#FFFFFF';
 const orange = '#F3B058';
@@ -43,6 +44,7 @@ const theme = createMuiTheme({
       primary: brownGrey,
       secondary: teal,
       disabled: orange,
+      muted: lightGrey,
       fontSize,
     },
   },
