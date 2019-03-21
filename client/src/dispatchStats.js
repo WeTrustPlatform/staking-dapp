@@ -1,11 +1,60 @@
 import { bigNumber } from './formatter';
-import { parseStakePayload, getCauseFromCMS } from './utils';
+import {
+  parseStakePayload,
+  getCauseFromCMS,
+  getUnlockedAtFromBlockchain,
+  determineCanUnstake,
+} from './utils';
 import { findUsersStats, findCausesStats } from './actions';
 
-const getUsersStats = (eventData, causesInfo) => {};
+const getUsersStats = async (eventData, causesInfo, TimeLockedStaking) => {
+  const usersStats = {};
+  for (const key of Object.keys(eventData)) {
+    const {
+      user,
+      amount,
+      stakingId,
+      unlockedAtInPayload,
+      data,
+      transactions,
+    } = eventData[key];
+
+    if (!usersStats[user]) {
+      usersStats[user] = {
+        yourStakes: [],
+      };
+    }
+
+    let unlockedAt = await getUnlockedAtFromBlockchain(
+      user,
+      data,
+      TimeLockedStaking,
+    );
+
+    // Infura is too slow on rinkeby and mainnet
+    // if blockchain.unlockedAt = 0, then it means infura has not seen the new contract state
+    if (unlockedAt.getTime() === new Date(0).getTime()) {
+      unlockedAt = unlockedAtInPayload;
+    }
+
+    const activity = {
+      amount,
+      data,
+      cause: causesInfo[stakingId],
+      canUnstake: determineCanUnstake(unlockedAt, amount),
+      unlockedAtInPayload,
+      unlockedAtInContract: unlockedAt,
+      transactions,
+    };
+
+    usersStats[user].yourStakes.push(activity);
+  }
+  return usersStats;
+};
 
 const getCausesStats = (eventData, causesInfo) => {};
 
+// assume (user, stake data) is unique
 const mapEventData = (events) => {
   const temp = {};
   for (const e of events) {
@@ -16,27 +65,29 @@ const mapEventData = (events) => {
 
     const { amount, data, user } = returnValues;
 
-    if (!temp[data]) {
+    const key = `${user}-${data}`;
+    if (!temp[key]) {
       const { stakingId, unlockedAtInPayload } = parseStakePayload(data);
-      temp[data] = {
+      temp[key] = {
         amount: bigNumber(0),
+        data,
         user: user.toLowerCase(),
         stakingId,
         unlockedAtInPayload,
-        activities: [],
+        transactions: [],
       };
     }
 
-    const currentAmount = temp[data].amount;
+    const currentAmount = temp[key].amount;
     if (event === 'Staked') {
-      temp[data].amount = bigNumber(amount).add(currentAmount);
+      temp[key].amount = bigNumber(amount).add(currentAmount);
     }
 
     if (event === 'Unstaked') {
-      temp[data].amount = currentAmount.sub(bigNumber(amount));
+      temp[key].amount = currentAmount.sub(bigNumber(amount));
     }
 
-    temp[data].activities.push({
+    temp[key].transactions.push({
       transactionHash,
       event,
     });
@@ -87,7 +138,11 @@ export default (dispatch, TimeLockedStaking) => {
       const stakingIds = getStakingIdSet(eventData);
       const causesInfo = await getCausesInfo(stakingIds);
 
-      const usersStats = getUsersStats(eventData, causesInfo);
+      const usersStats = await getUsersStats(
+        eventData,
+        causesInfo,
+        TimeLockedStaking,
+      );
       const causesStats = getCausesStats(eventData, causesInfo);
       dispatch(findUsersStats(usersStats));
       dispatch(findCausesStats(causesStats));
