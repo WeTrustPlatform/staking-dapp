@@ -12,6 +12,7 @@ import { trst } from '../formatter';
 
 const styles = (theme) => {
   const lineHeight = 24;
+  const maxWidth = theme.breakpoints.values.lg / 2;
   return {
     subtitle: {
       margin: 'auto',
@@ -26,14 +27,30 @@ const styles = (theme) => {
       paddingTop: lineHeight,
     },
     name: {
-      minWidth: '30%',
+      paddingRight: theme.spacing.unit,
+      paddingLeft: theme.spacing.unit,
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      maxWidth: maxWidth / 4,
     },
     stakedAmount: {
-      minWidth: '30%',
+      minWidth: maxWidth / 5,
     },
     loading: {
       padding: theme.mixins.toolbar.minHeight,
       textAlign: 'center',
+    },
+    tableBody: {
+      height: 96,
+      tableLayout: 'fixed',
+      overflow: 'auto',
+    },
+    row: {
+      '&:nth-of-type(even)': {
+        backgroundColor: theme.palette.primary.main,
+      },
+      borderBottomStyle: 'hidden',
     },
   };
 };
@@ -55,18 +72,25 @@ class LeaderBoard extends React.Component {
     const orderedCauses = Object.values(causesStats).sort(
       (a, b) => a.rank - b.rank,
     );
-    return orderedCauses.map((c) => {
-      return (
-        <TableRow>
+
+    const rows = [];
+    for (let i = 0; i < 5; i += 1) {
+      const c = orderedCauses[i] || {
+        rank: '',
+        name: '',
+      };
+      rows.push(
+        <TableRow className={classes.row}>
           <TableCell>{c.rank}</TableCell>
           <TableCell className={classes.name}>{c.name}</TableCell>
           <TableCell className={classes.stakedAmount}>
-            {`${trst(c.amount)} TRST`}
+            {c.amount ? `${trst(c.amount)} TRST` : ''}
           </TableCell>
-          <TableCell>{c.stakers.size}</TableCell>
-        </TableRow>
+          <TableCell>{(c.stakers && c.stakers.size) || ''}</TableCell>
+        </TableRow>,
       );
-    });
+    }
+    return rows;
   }
 
   render() {
@@ -81,7 +105,7 @@ class LeaderBoard extends React.Component {
         </div>
         <div className={classes.causesStats}>
           <Paper>
-            <Table padding="dense">
+            <Table padding="none">
               <TableHead>
                 <TableRow>
                   <TableCell>Rank</TableCell>
@@ -90,7 +114,9 @@ class LeaderBoard extends React.Component {
                   <TableCell>Stakers</TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>{this.renderStats(causesStats)}</TableBody>
+              <TableBody className={classes.tableBody}>
+                {this.renderStats(causesStats)}
+              </TableBody>
             </Table>
           </Paper>
         </div>
