@@ -19,9 +19,8 @@ import dispatchStats from '../dispatchStats';
 const styles = (theme) => {
   const maxWidth = theme.breakpoints.values.lg;
   return {
-    root: {
+    paper: {
       width: '100%',
-      overflowX: 'auto',
       maxWidth,
       margin: 'auto',
     },
@@ -165,7 +164,7 @@ class YourStakesSection extends React.Component {
     return (
       <Section id="activities-section" color={color}>
         <SectionHeader>Your Stakes</SectionHeader>
-        <Paper className={classes.root}>
+        <Paper className={classes.paper}>
           <Table className={classes.table} padding="dense">
             <TableHead>
               <TableRow>

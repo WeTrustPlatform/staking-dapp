@@ -11,9 +11,6 @@ import { trst } from '../formatter';
 import { getDefaultSpringRank } from '../utils';
 
 const styles = (theme) => ({
-  root: {
-    overflowX: 'auto',
-  },
   table: {
     tableLayout: 'fixed',
   },
@@ -44,7 +41,7 @@ class CauseRankTable extends React.Component {
     const { classes, cause, causesStats } = this.props;
     const stats = causesStats[cause.stakingId] || {};
     return (
-      <Paper className={classes.root}>
+      <Paper>
         <Table className={classes.table} padding="dense">
           <TableHead>
             <TableRow>

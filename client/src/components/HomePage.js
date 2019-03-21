@@ -5,6 +5,7 @@ import FAQSection from './FAQSection';
 import Footer from './Footer';
 import YourStakesSection from './YourStakesSection';
 import TopSection from './TopSection';
+import RankingSection from './RankingSection';
 import WhyStakingSection from './WhyStakingSection';
 
 class HomePage extends React.Component {
@@ -16,7 +17,8 @@ class HomePage extends React.Component {
         <WhyStakingSection color="dark" />
         <MainSection color="light" />
         <YourStakesSection color="dark" />
-        <FAQSection color="light" />
+        <RankingSection color="light" />
+        <FAQSection color="dark" />
         <Footer color="light" />
       </div>
     );

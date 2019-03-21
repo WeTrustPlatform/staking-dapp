@@ -173,6 +173,7 @@ const theme = createMuiTheme({
         boxShadow: undefined,
         border: borderLine,
         borderRadius: 3,
+        overflowX: 'auto',
       },
     },
   },
