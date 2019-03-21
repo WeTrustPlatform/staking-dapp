@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -7,6 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import Paper from '@material-ui/core/Paper';
 import { trst } from '../formatter';
+import { getDefaultSpringRank } from '../utils';
 
 const styles = (theme) => ({
   root: {
@@ -19,16 +21,35 @@ const styles = (theme) => ({
     color: theme.palette.text.primary,
   },
 });
+
 class CauseRankTable extends React.Component {
+  getRankHeader(cause) {
+    return cause.isOnSpring ? 'Spring rank' : 'Nomination Rank';
+  }
+
+  getRank(cause, causesStats) {
+    const stats = causesStats[cause.stakingId] || {};
+    if (stats.rank) {
+      return stats.rank;
+    }
+
+    if (cause.isOnSpring) {
+      return getDefaultSpringRank(causesStats);
+    }
+
+    return 'N/A';
+  }
+
   render() {
-    const { classes, stats } = this.props;
+    const { classes, cause, causesStats } = this.props;
+    const stats = causesStats[cause.stakingId] || {};
     return (
       <Paper className={classes.root}>
         <Table className={classes.table} padding="dense">
           <TableHead>
             <TableRow>
               <TableCell classes={{ head: classes.header }}>
-                Current rank
+                {this.getRankHeader(cause)}
               </TableCell>
               <TableCell classes={{ head: classes.header }}>
                 Staked amount
@@ -38,7 +59,7 @@ class CauseRankTable extends React.Component {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell>{stats.rank || 0}</TableCell>
+              <TableCell>{this.getRank(cause, causesStats)}</TableCell>
               <TableCell>{`${trst(stats.amount || 0)} TRST`}</TableCell>
               <TableCell>
                 {(stats.stakers && stats.stakers.size) || 0}
@@ -51,4 +72,8 @@ class CauseRankTable extends React.Component {
   }
 }
 
-export default withStyles(styles)(CauseRankTable);
+const mapStateToProps = (state) => ({
+  causesStats: state.causesStats,
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(CauseRankTable));

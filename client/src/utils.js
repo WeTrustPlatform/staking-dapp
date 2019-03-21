@@ -158,3 +158,21 @@ export const mapCMSCause = (r) => ({
   state: r.state,
   country: r.country,
 });
+
+/**
+ * Determine the causes on Spring which don't have any stakes
+ * @param { isOnSpring, rank } causesStats
+ * @return default rank
+ */
+export const getDefaultSpringRank = (causesStats) => {
+  let lowestRank = 0;
+  for (const value of Object.values(causesStats)) {
+    const { isOnSpring, rank } = value;
+    if (isOnSpring) {
+      if (rank > lowestRank) {
+        lowestRank = rank;
+      }
+    }
+  }
+  return lowestRank + 1;
+};

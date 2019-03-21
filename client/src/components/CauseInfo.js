@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -56,7 +55,7 @@ class CauseInfo extends React.Component {
   }
 
   render() {
-    const { cause, classes, causesStats } = this.props;
+    const { cause, classes } = this.props;
     return (
       <Grid container className={classes.root}>
         <Grid item xs={12} className={classes.row}>
@@ -71,15 +70,11 @@ class CauseInfo extends React.Component {
           {this.renderDetails(cause)}
         </Grid>
         <Grid item xs={12} className={classes.row}>
-          <CauseRankTable stats={causesStats[cause.stakingId] || {}} />
+          <CauseRankTable cause={cause} />
         </Grid>
       </Grid>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  causesStats: state.causesStats,
-});
-
-export default connect(mapStateToProps)(withStyles(styles)(CauseInfo));
+export default withStyles(styles)(CauseInfo);
