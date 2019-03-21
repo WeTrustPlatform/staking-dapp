@@ -27,7 +27,7 @@ class CauseStakeInfo extends React.Component {
     const { cause } = this.props;
     return (
       <Paper>
-        <CauseInfo data={cause} />
+        <CauseInfo cause={cause} />
         <Grid container justify="center">
           {this.renderGridItem(
             <div>

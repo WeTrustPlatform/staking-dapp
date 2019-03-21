@@ -11,7 +11,7 @@ import configs from '../configs';
 const styles = (theme) => ({
   container: {},
   results: {
-    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
   },
 });
 

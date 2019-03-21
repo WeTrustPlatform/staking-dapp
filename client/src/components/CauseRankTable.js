@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import Paper from '@material-ui/core/Paper';
+import { trst } from '../formatter';
 
 const styles = (theme) => ({
   root: {
@@ -20,7 +21,7 @@ const styles = (theme) => ({
 });
 class CauseRankTable extends React.Component {
   render() {
-    const { classes } = this.props;
+    const { classes, stats } = this.props;
     return (
       <Paper className={classes.root}>
         <Table className={classes.table} padding="dense">
@@ -37,9 +38,11 @@ class CauseRankTable extends React.Component {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell>1</TableCell>
-              <TableCell>1 TRST</TableCell>
-              <TableCell>1</TableCell>
+              <TableCell>{stats.rank || 0}</TableCell>
+              <TableCell>{`${trst(stats.amount || 0)} TRST`}</TableCell>
+              <TableCell>
+                {(stats.stakers && stats.stakers.size) || 0}
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>
