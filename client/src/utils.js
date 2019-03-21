@@ -143,3 +143,18 @@ export const trim = (str, front = 6, end = 4) => {
   const startString = str.substring(0, front);
   return `${startString}...${endString}`;
 };
+
+/**
+ * Transform CMS result to cause info
+ * @param {Object} result from calling CMS
+ * @return {Object} cause info
+ */
+export const mapCMSCause = (r) => ({
+  name: r.name,
+  stakingId: r.staking_id,
+  isOnSpring: r.is_on_spring,
+  is501c3: r.is_501c3,
+  city: r.city,
+  state: r.state,
+  country: r.country,
+});

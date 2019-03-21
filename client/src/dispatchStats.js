@@ -5,6 +5,7 @@ import {
   getCauseFromCMS,
   getUnlockedAtFromBlockchain,
   determineCanUnstake,
+  mapCMSCause,
 } from './utils';
 import { findUsersStats, findCausesStats } from './actions';
 
@@ -60,9 +61,9 @@ const getRanks = (causesStats) => {
   // a > b then a is sorted before b
   const sortedAmounts = amounts.sort((a, b) => (a.gt(b) ? -1 : 1));
 
-  for (const key of Object.keys(causesStats)) {
-    const { amount, stakingId } = causesStats[key];
-    ranks[stakingId] = sortedAmounts.findIndex((e) => e.eq(amount));
+  for (const stakingId of Object.keys(causesStats)) {
+    const { amount } = causesStats[stakingId];
+    ranks[stakingId] = sortedAmounts.findIndex((e) => e.eq(amount)) + 1;
   }
   return ranks;
 };
@@ -91,15 +92,13 @@ const getCausesStats = (eventData, causesInfo) => {
 
   const causesOnSpring = pickBy(causesStats, (v) => v.isOnSpring);
   const ranksOnSpring = getRanks(causesOnSpring);
-  for (const key of Object.keys(causesOnSpring)) {
-    const { stakingId } = causesOnSpring[key];
+  for (const stakingId of Object.keys(causesOnSpring)) {
     causesStats[stakingId].rank = ranksOnSpring[stakingId];
   }
 
   const causesNotOnSpring = pickBy(causesStats, (v) => !v.isOnSpring);
   const ranksNotOnSpring = getRanks(causesNotOnSpring);
-  for (const key of Object.keys(causesNotOnSpring)) {
-    const { stakingId } = causesNotOnSpring[key];
+  for (const stakingId of Object.keys(causesNotOnSpring)) {
     causesStats[stakingId].rank = ranksNotOnSpring[stakingId];
   }
 
@@ -149,28 +148,30 @@ const mapEventData = (events) => {
 
 const getStakingIdSet = (eventData) => {
   const uniqStakingIds = new Set();
-  for (const data of Object.keys(eventData)) {
-    uniqStakingIds.add(eventData[data].stakingId);
+  for (const key of Object.keys(eventData)) {
+    uniqStakingIds.add(eventData[key].stakingId);
   }
   return uniqStakingIds;
 };
 
 const getCausesInfo = async (stakingIdSet) => {
+  const causes = Object.assign({}, window.localStorage.getItem('causes'));
   const iterator = stakingIdSet.entries();
   for (const entry of iterator) {
     const stakingId = entry[0];
-    const cache =
-      window.localStorage.causes && window.localStorage.causes[stakingId];
+    const cache = causes[stakingId];
     // 20 minutes cache
     if (!cache || cache.lastFetch - Date.now() > 20 * 60 * 1000) {
-      const cause = await getCauseFromCMS();
-      window.localStorage.causes[stakingId] = {
+      const cause = await getCauseFromCMS(stakingId);
+      causes[stakingId] = {
         lastFetch: Date.now(),
-        ...cause,
+        ...mapCMSCause(cause),
       };
     }
   }
-  return window.localStorage.causes;
+
+  window.localStorage.setItem('causes', causes);
+  return causes;
 };
 
 export default (dispatch, TimeLockedStaking) => {

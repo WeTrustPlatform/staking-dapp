@@ -24,18 +24,29 @@ class CauseStakeInfo extends React.Component {
   }
 
   render() {
-    const { cause } = this.props;
+    const {
+      cause,
+      amount,
+      onChangeAmount,
+      duration,
+      onChangeDuration,
+    } = this.props;
     return (
       <Paper>
         <CauseInfo cause={cause} />
         <Grid container justify="center">
           {this.renderGridItem(
             <div>
-              <StakeAmountInput />
+              <StakeAmountInput amount={amount} onChange={onChangeAmount} />
               <CauseNewRank />
             </div>,
           )}
-          {this.renderGridItem(<StakeDurationInput />)}
+          {this.renderGridItem(
+            <StakeDurationInput
+              duration={duration}
+              onChange={onChangeDuration}
+            />,
+          )}
         </Grid>
       </Paper>
     );

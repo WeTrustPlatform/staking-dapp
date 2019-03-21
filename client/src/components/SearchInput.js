@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Downshift from 'downshift';
 import debounce from 'lodash.debounce';
 import axios from 'axios';
+import { mapCMSCause } from '../utils';
 import configs from '../configs';
 
 const styles = (theme) => ({
@@ -45,15 +46,7 @@ class SearchInput extends React.Component {
         `${configs.CMS_URL}/charities?search=${window.encodeURIComponent(s)}`,
       )
       .then((res) => {
-        const charities = res.data.records.map((r) => ({
-          name: r.name,
-          stakingId: r.staking_id,
-          isOnSpring: r.is_on_spring,
-          is501c3: r.is_501c3,
-          city: r.city,
-          state: r.state,
-          country: r.country,
-        }));
+        const charities = res.data.records.map(mapCMSCause);
         this.setState({ charities });
       });
   }

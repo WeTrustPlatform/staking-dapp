@@ -14,7 +14,7 @@ import CauseStakeInfo from './CauseStakeInfo';
 import { getStakePayload, validateNetworkId, delay } from '../utils';
 import stateHelper, { status } from './stateHelper';
 import { txLink } from '../formatter';
-import { dispatchAccountActivities, dispatchOverallStats } from '../dispatch';
+import dispatchStats from '../dispatchStats';
 
 const styles = (theme) => ({
   root: {
@@ -314,7 +314,15 @@ class StakeNow extends React.Component {
     return (
       <div className={classes.root}>
         <SearchInput onSelected={this.onSelectedNpo} />
-        {npo.name && <CauseStakeInfo cause={npo} />}
+        {npo.name && (
+          <CauseStakeInfo
+            cause={npo}
+            amount={amount}
+            onChangeAmount={this.onChangeAmount}
+            duration={durationInDays}
+            onChangeDuration={this.onChangeDuration}
+          />
+        )}
 
         <Grid container justify="center" className={classes.gridRowButton}>
           {isStaking && this.renderStakingSteps()}
@@ -343,10 +351,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  refreshStats: (account, TimeLockedStaking) => {
-    // call helper
-    dispatchAccountActivities(dispatch, TimeLockedStaking, account);
-    dispatchOverallStats(dispatch, TimeLockedStaking);
+  refreshStats: (TimeLockedStaking) => {
+    dispatchStats(dispatch, TimeLockedStaking);
   },
 });
 
