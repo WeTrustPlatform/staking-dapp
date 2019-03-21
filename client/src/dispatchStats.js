@@ -38,8 +38,9 @@ const getUsersStats = async (eventData, causesInfo, TimeLockedStaking) => {
     }
 
     const activity = {
+      id: key,
       amount,
-      data,
+      stakeData: data,
       cause: causesInfo[stakingId],
       canUnstake: determineCanUnstake(unlockedAt, amount),
       unlockedAtInPayload,

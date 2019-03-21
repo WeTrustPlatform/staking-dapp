@@ -7,11 +7,8 @@ import {
   unlockAccount,
   findContracts,
 } from './actions';
-import {
-  dispatchAccountActivities,
-  dispatchTRSTBalance,
-  dispatchOverallStats,
-} from './dispatch';
+import { dispatchTRSTBalance } from './dispatch';
+import dispatchStats from './dispatchStats';
 import TimeLockedStaking from './contracts/TimeLockedStaking.json';
 import TRST from './contracts/TRST.json';
 
@@ -62,7 +59,7 @@ const initAccount = async (web3) => {
 
 const onNewAccount = (dispatch, account, contracts) => {
   dispatch(unlockAccount(account));
-  dispatchAccountActivities(dispatch, contracts.TimeLockedStaking, account);
+  dispatchStats(dispatch, contracts.TimeLockedStaking);
   dispatchTRSTBalance(dispatch, contracts.TRST, account);
 };
 
@@ -73,7 +70,7 @@ const onNewNetworkId = async (dispatch, web3, networkId) => {
     if (web3Contracts) {
       dispatch(findContracts(web3Contracts));
 
-      await dispatchOverallStats(dispatch, web3Contracts.TimeLockedStaking);
+      await dispatchStats(dispatch, web3Contracts.TimeLockedStaking);
 
       const account = await initAccount(web3);
       if (account) {

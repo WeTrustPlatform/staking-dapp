@@ -14,7 +14,7 @@ import Section from './Section';
 import SectionHeader from './SectionHeader';
 import { txLink } from '../formatter';
 import { validateNetworkId } from '../utils';
-import { dispatchAccountActivities, dispatchOverallStats } from '../dispatch';
+import dispatchStats from '../dispatchStats';
 
 const styles = (theme) => ({
   root: {
@@ -63,14 +63,14 @@ class YourStakesSection extends React.Component {
         this.setState({
           isUnstaking: false,
         });
-        refreshStats(account, TimeLockedStaking);
+        refreshStats(TimeLockedStaking);
       });
   }
 
-  renderUnstake(event) {
+  renderUnstake(activity) {
     const { classes, networkId } = this.props;
     const { isUnstaking } = this.state;
-    const { canUnstake, rawAmount, stakeData } = event;
+    const { canUnstake, amount, stakeData } = activity;
     const isEnabled =
       canUnstake && !isUnstaking && !validateNetworkId(networkId);
     return (
@@ -80,7 +80,7 @@ class YourStakesSection extends React.Component {
             color="primary"
             variant="contained"
             disabled={!isEnabled}
-            onClick={() => this.handleUnstake(rawAmount.toString(), stakeData)}
+            onClick={() => this.handleUnstake(amount.toString(), stakeData)}
           >
             Claim TRST
           </Button>
@@ -114,22 +114,29 @@ class YourStakesSection extends React.Component {
   }
 
   renderActivities() {
-    const { classes, accountActivities } = this.props;
-    return accountActivities.map((event) => {
-      const { id, name, amount, unlockedAt, transactionHash } = event;
+    const { classes, yourStakes } = this.props;
+    return yourStakes.map((activity) => {
+      const {
+        id,
+        cause,
+        amount,
+        unlockedAtInContract,
+        transactions,
+      } = activity;
+      const firstStakeTx = transactions.filter((t) => t.event === 'Staked')[0];
       return (
         <TableRow key={id}>
-          <TableCell align="left">{name}</TableCell>
+          <TableCell align="left">{cause.name || 'Unknown'}</TableCell>
           <TableCell align="right">{`${amount} TRST`}</TableCell>
-          <TableCell>{unlockedAt.toLocaleString()}</TableCell>
-          <TableCell>{this.renderUnstake(event)}</TableCell>
+          <TableCell>{unlockedAtInContract.toLocaleString()}</TableCell>
+          <TableCell>{this.renderUnstake(activity)}</TableCell>
           <TableCell align="left" className={classes.txHashCell}>
             <a
-              href={txLink(transactionHash)}
+              href={txLink(firstStakeTx)}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {transactionHash}
+              {firstStakeTx}
             </a>
           </TableCell>
         </TableRow>
@@ -138,7 +145,7 @@ class YourStakesSection extends React.Component {
   }
 
   render() {
-    const { classes, color, accountActivities: activities } = this.props;
+    const { classes, color, yourStakes: activities } = this.props;
 
     return (
       <Section id="activities-section" color={color}>
@@ -169,13 +176,13 @@ const mapStateToProps = (state) => ({
   account: state.account,
   networkId: state.networkId,
   accountActivities: state.accountActivities || [],
+  yourStakes: (state.usersStats && state.usersStats.yourStakes) || [],
   TimeLockedStaking: state.contracts.TimeLockedStaking,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  refreshStats: (account, TimeLockedStaking) => {
-    dispatchAccountActivities(dispatch, TimeLockedStaking, account);
-    dispatchOverallStats(dispatch, TimeLockedStaking);
+  refreshStats: (TimeLockedStaking) => {
+    dispatchStats(dispatch, TimeLockedStaking);
   },
 });
 
