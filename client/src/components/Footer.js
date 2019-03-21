@@ -43,11 +43,7 @@ const Footer = (props) => {
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
-        <Typography
-          component="a"
-          className={classes.link}
-          href="https://spring.wetrust.io"
-        >
+        <Typography component="a" className={classes.link} href="/">
           Home
         </Typography>
         <Typography
@@ -72,6 +68,7 @@ const Footer = (props) => {
           Terms and Conditions
         </Typography>
         <Typography
+          component="a"
           className={classes.link}
           href="https://github.com/WeTrustPlatform/documents/blob/master/FinclusionLabs_PrivacyPolicy_October92018_GDPRCompliant.pdf"
         >

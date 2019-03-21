@@ -627,7 +627,7 @@ exports[`tests snapshot 1`] = `
               <h5
                 className="MuiTypography-root-402 MuiTypography-h5-418"
               >
-                What does 'staking TRST' mean?
+                General overview of Staking TRST
               </h5>
             </div>
             <div
@@ -664,7 +664,44 @@ exports[`tests snapshot 1`] = `
               <h5
                 className="MuiTypography-root-402 MuiTypography-h5-418"
               >
-                Why would I stake TRST?
+                What does staking TRST token enable?
+              </h5>
+            </div>
+            <div
+              className="MuiGrid-item-445 MuiGrid-grid-xs-2-474 FAQItem-gridIcon-668"
+            >
+              <span
+                aria-hidden="true"
+                className="material-icons MuiIcon-root-671"
+              >
+                add
+              </span>
+            </div>
+          </div>
+        </div>
+        <br />
+        <hr
+          className="MuiDivider-root-680 FAQItem-divider-667"
+        />
+      </div>
+      <div
+        className="FAQItem-root-666"
+      >
+        <div
+          className="FAQItem-question-669"
+          onClick={[Function]}
+          role="presentation"
+        >
+          <div
+            className="MuiGrid-container-444"
+          >
+            <div
+              className="MuiGrid-item-445 MuiGrid-grid-xs-10-482"
+            >
+              <h5
+                className="MuiTypography-root-402 MuiTypography-h5-418"
+              >
+                What is the benefit for staking TRST and why would I stake TRST?
               </h5>
             </div>
             <div
@@ -758,6 +795,80 @@ exports[`tests snapshot 1`] = `
           className="MuiDivider-root-680 FAQItem-divider-667"
         />
       </div>
+      <div
+        className="FAQItem-root-666"
+      >
+        <div
+          className="FAQItem-question-669"
+          onClick={[Function]}
+          role="presentation"
+        >
+          <div
+            className="MuiGrid-container-444"
+          >
+            <div
+              className="MuiGrid-item-445 MuiGrid-grid-xs-10-482"
+            >
+              <h5
+                className="MuiTypography-root-402 MuiTypography-h5-418"
+              >
+                What's next after this?
+              </h5>
+            </div>
+            <div
+              className="MuiGrid-item-445 MuiGrid-grid-xs-2-474 FAQItem-gridIcon-668"
+            >
+              <span
+                aria-hidden="true"
+                className="material-icons MuiIcon-root-671"
+              >
+                add
+              </span>
+            </div>
+          </div>
+        </div>
+        <br />
+        <hr
+          className="MuiDivider-root-680 FAQItem-divider-667"
+        />
+      </div>
+      <div
+        className="FAQItem-root-666"
+      >
+        <div
+          className="FAQItem-question-669"
+          onClick={[Function]}
+          role="presentation"
+        >
+          <div
+            className="MuiGrid-container-444"
+          >
+            <div
+              className="MuiGrid-item-445 MuiGrid-grid-xs-10-482"
+            >
+              <h5
+                className="MuiTypography-root-402 MuiTypography-h5-418"
+              >
+                What is TRST and where can I obtain TRST tokens so I can stake?
+              </h5>
+            </div>
+            <div
+              className="MuiGrid-item-445 MuiGrid-grid-xs-2-474 FAQItem-gridIcon-668"
+            >
+              <span
+                aria-hidden="true"
+                className="material-icons MuiIcon-root-671"
+              >
+                add
+              </span>
+            </div>
+          </div>
+        </div>
+        <br />
+        <hr
+          className="MuiDivider-root-680 FAQItem-divider-667"
+        />
+      </div>
     </div>
   </div>
   <div
@@ -768,7 +879,7 @@ exports[`tests snapshot 1`] = `
     >
       <a
         className="MuiTypography-root-402 MuiTypography-body1-411 Footer-link-686"
-        href="https://spring.wetrust.io"
+        href="/"
       >
         Home
       </a>
@@ -790,12 +901,12 @@ exports[`tests snapshot 1`] = `
       >
         Terms and Conditions
       </a>
-      <p
+      <a
         className="MuiTypography-root-402 MuiTypography-body1-411 Footer-link-686"
         href="https://github.com/WeTrustPlatform/documents/blob/master/FinclusionLabs_PrivacyPolicy_October92018_GDPRCompliant.pdf"
       >
         Privacy Policy
-      </p>
+      </a>
     </div>
     <div
       className="Footer-wrapper-688"
