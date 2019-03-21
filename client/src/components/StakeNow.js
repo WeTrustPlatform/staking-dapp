@@ -13,6 +13,7 @@ import stateHelper, { status } from './stateHelper';
 import dispatchStats from '../dispatchStats';
 import checkMark from '../images/check-mark.svg';
 import errorMark from '../images/error-mark.svg';
+import EmailSubscription from './EmailSubscription';
 
 const styles = (theme) => ({
   root: {
@@ -48,6 +49,7 @@ class StakeNow extends React.Component {
       errorMessage: null,
       successMessage: null,
       isStaking: false,
+      isSubscribing: false,
       approveTRST: stateHelper.init(this, stateHelper.tx.approveTRST),
       stakeTRST: stateHelper.init(this, stateHelper.tx.stakeTRST),
     };
@@ -183,6 +185,11 @@ class StakeNow extends React.Component {
         return delay(1000);
       })
       .then(() => {
+        if (!npo.isOnSpring) {
+          this.setState({
+            isSubscribing: true,
+          });
+        }
         refreshStats(TimeLockedStaking);
       })
       .catch((err) => {
@@ -318,6 +325,7 @@ class StakeNow extends React.Component {
       errorMessage,
       successMessage,
       isStaking,
+      isSubscribing,
     } = this.state;
     return (
       <div className={classes.root}>
@@ -345,6 +353,10 @@ class StakeNow extends React.Component {
             'Stake Now',
           )}
         </Grid>
+        <EmailSubscription
+          open={isSubscribing}
+          onClose={() => this.setState({ isSubscribing: false })}
+        />
       </div>
     );
   }

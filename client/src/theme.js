@@ -116,10 +116,14 @@ const theme = createMuiTheme({
     MuiInputLabel: {
       root: {
         fontWeight: 'bold',
-        fontSize,
+        fontSize: 18,
+        color: brownGrey,
       },
       shrink: {
         transform: 'translate(0, -1rem)',
+      },
+      focused: {
+        color: `${brownGrey} !important`,
       },
     },
     MuiInputBase: {
