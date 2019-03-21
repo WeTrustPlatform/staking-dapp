@@ -8,6 +8,7 @@ import IconIncreaseRank from '../images/icon-increase-rank.svg';
 import IconBuyTRST from '../images/icon-buy-trst.svg';
 import IconNominate from '../images/icon-nominate.svg';
 import BancorLogo from '../images/bancor.png';
+import UniswapLogo from '../images/uniswap.png';
 
 const styles = (theme) => ({
   container: {
@@ -27,6 +28,14 @@ const styles = (theme) => ({
       marginTop: theme.mixins.toolbar.minHeight,
       marginBottom: theme.mixins.toolbar.minHeight,
     },
+  },
+  row: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItem: 'center',
+  },
+  rowItem: {
+    padding: theme.spacing.unit * 2,
   },
 });
 
@@ -68,14 +77,37 @@ class WhyStakingSection extends React.Component {
               Please visit the following to obtain Trustcoin.
             </Typography>
             <br />
-            <div>
-              <a
-                href="https://www.bancor.network/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={BancorLogo} alt="bancor" />
-              </a>
+            <div className={classes.row}>
+              <div className={classes.rowItem}>
+                <a
+                  href="https://www.bancor.network/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={BancorLogo}
+                    className={classes.image}
+                    alt="bancor"
+                    height="54"
+                    width="38"
+                  />
+                </a>
+              </div>
+              <div className={classes.rowItem}>
+                <a
+                  href="https://uniswap.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={UniswapLogo}
+                    className={classes.image}
+                    alt="uniswap"
+                    height="42"
+                    width="98"
+                  />
+                </a>
+              </div>
             </div>
           </Grid>
           <Grid item xs={12} sm={12} md={4} className={classes.gridItem}>
