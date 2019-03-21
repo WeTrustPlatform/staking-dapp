@@ -1,7 +1,7 @@
 import assert from 'assert';
 import axios from 'axios';
 import web3 from 'web3';
-
+import pickBy from 'lodash.pickby';
 import configs from './configs';
 import { networkName, prefix0x } from './formatter';
 
@@ -160,19 +160,67 @@ export const mapCMSCause = (r) => ({
 });
 
 /**
- * Determine the causes on Spring which don't have any stakes
- * @param { isOnSpring, rank } causesStats
+ * Determine the cause default rank which don't have any stakes
+ * @param { stakingId: rank} ranking map
  * @return default rank
  */
-export const getDefaultSpringRank = (causesStats) => {
-  let lowestRank = 0;
-  for (const value of Object.values(causesStats)) {
-    const { isOnSpring, rank } = value;
-    if (isOnSpring) {
-      if (rank > lowestRank) {
-        lowestRank = rank;
-      }
-    }
+export const getDefaultRank = (ranks) => {
+  const maxRank = Math.max(...Object.values(ranks));
+  return maxRank + 1;
+};
+
+/**
+ * Get the ranking map giving all causes' stats
+ * @param { stakeId: { amount } } causesStats should be already filtered
+ * @return { stakeId: rank }
+ */
+const getRanks = (filteredCausesStats) => {
+  const ranks = {};
+  const amounts = Object.values(filteredCausesStats).map((s) => s.amount);
+  // a > b then a is sorted before b
+  const sortedAmounts = amounts.sort((a, b) => (a.gt(b) ? -1 : 1));
+
+  for (const stakingId of Object.keys(filteredCausesStats)) {
+    const { amount } = filteredCausesStats[stakingId];
+    ranks[stakingId] = sortedAmounts.findIndex((e) => e.eq(amount)) + 1;
   }
-  return lowestRank + 1;
+  return ranks;
+};
+
+/**
+ * Get the ranking map of Spring causes
+ * @param { stakeId: { amount } } causesStats from store
+ * @return { stakeId: rank }
+ */
+export const getSpringRanks = (causesStats) => {
+  const filtered = pickBy(causesStats, (v) => !!v.isOnSpring);
+  return getRanks(filtered);
+};
+
+/**
+ * Get the ranking map of non-Spring causes
+ * @param { stakeId: { amount } } causesStats from store
+ * @return { stakeId: rank }
+ */
+export const getNonSpringRanks = (causesStats) => {
+  const filtered = pickBy(causesStats, (v) => !v.isOnSpring);
+  return getRanks(filtered);
+};
+
+/**
+ * Get rank of given cause based on the whole causesStats
+ * @param { isOnSpring, stakeId }
+ * @param { stakeId: { amount } } causesStats from store
+ * @return rank
+ */
+export const getCauseRank = (cause, causesStats) => {
+  if (!cause.stakingId) {
+    return 0;
+  }
+
+  const ranks = cause.isOnSpring
+    ? getSpringRanks(causesStats)
+    : getNonSpringRanks(causesStats);
+
+  return ranks[cause.stakingId] || getDefaultRank(ranks);
 };

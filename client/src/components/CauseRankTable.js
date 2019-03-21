@@ -8,7 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import Paper from '@material-ui/core/Paper';
 import { trst } from '../formatter';
-import { getDefaultSpringRank } from '../utils';
+import { getCauseRank } from '../utils';
 
 const styles = (theme) => ({
   table: {
@@ -22,19 +22,6 @@ const styles = (theme) => ({
 class CauseRankTable extends React.Component {
   getRankHeader(cause) {
     return cause.isOnSpring ? 'Spring rank' : 'Nomination Rank';
-  }
-
-  getRank(cause, causesStats) {
-    const stats = causesStats[cause.stakingId] || {};
-    if (stats.rank) {
-      return stats.rank;
-    }
-
-    if (cause.isOnSpring) {
-      return getDefaultSpringRank(causesStats);
-    }
-
-    return 'N/A';
   }
 
   render() {
@@ -56,7 +43,7 @@ class CauseRankTable extends React.Component {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell>{this.getRank(cause, causesStats)}</TableCell>
+              <TableCell>{getCauseRank(cause, causesStats)}</TableCell>
               <TableCell>{`${trst(stats.amount || 0)} TRST`}</TableCell>
               <TableCell>
                 {(stats.stakers && stats.stakers.size) || 0}

@@ -12,6 +12,7 @@ import TableBody from '@material-ui/core/TableBody';
 import Paper from '@material-ui/core/Paper';
 import Section from './Section';
 import SectionHeader from './SectionHeader';
+import HrefLink from './HrefLink';
 import { txLink, trst } from '../formatter';
 import { validateNetworkId } from '../utils';
 import dispatchStats from '../dispatchStats';
@@ -150,13 +151,9 @@ class YourStakesSection extends React.Component {
             {this.renderUnstake(activity)}
           </TableCell>
           <TableCell align="left" className={classes.txHashCell}>
-            <a
-              href={txLink(firstStakeTx.transactionHash)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <HrefLink href={txLink(firstStakeTx.transactionHash)}>
               {firstStakeTx.transactionHash}
-            </a>
+            </HrefLink>
           </TableCell>
         </TableRow>
       );

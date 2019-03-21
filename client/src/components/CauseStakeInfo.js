@@ -38,7 +38,7 @@ class CauseStakeInfo extends React.Component {
           {this.renderGridItem(
             <div>
               <StakeAmountInput amount={amount} onChange={onChangeAmount} />
-              <CauseNewRank />
+              <CauseNewRank amount={amount} cause={cause} />
             </div>,
           )}
           {this.renderGridItem(
