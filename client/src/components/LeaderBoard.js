@@ -80,7 +80,7 @@ class LeaderBoard extends React.Component {
         name: '',
       };
       rows.push(
-        <TableRow className={classes.row}>
+        <TableRow key={i} className={classes.row}>
           <TableCell>{c.rank}</TableCell>
           <TableCell className={classes.name}>{c.name}</TableCell>
           <TableCell className={classes.stakedAmount}>

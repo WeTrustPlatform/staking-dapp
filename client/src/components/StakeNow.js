@@ -26,8 +26,11 @@ const styles = (theme) => ({
   step: {
     display: 'flex',
     marginBottom: 12,
+    justifyContent: 'flex-start',
   },
   stepIcon: {
+    display: 'flex',
+    alignSelf: 'center',
     paddingRight: 12,
   },
   button: {
