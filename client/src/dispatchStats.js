@@ -52,7 +52,9 @@ const getUsersStats = async (eventData, causesInfo, TimeLockedStaking) => {
   return usersStats;
 };
 
-const getCausesStats = (eventData, causesInfo) => {};
+const getCausesStats = (eventData, causesInfo) => {
+  return {};
+};
 
 // assume (user, stake data) is unique
 const mapEventData = (events) => {

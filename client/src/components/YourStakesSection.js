@@ -42,7 +42,7 @@ const styles = (theme) => ({
   },
 });
 
-class ActivitiesSection extends React.Component {
+class YourStakesSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -182,4 +182,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withStyles(styles)(ActivitiesSection));
+)(withStyles(styles)(YourStakesSection));
