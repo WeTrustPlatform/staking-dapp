@@ -267,7 +267,9 @@ class StakeNow extends React.Component {
         children = <img src={errorMark} alt="error-mark" />;
         break;
       default:
-        children = <CircularProgress color="secondary" size={18} />;
+        children = (
+          <CircularProgress color="secondary" thickness={8} size={18} />
+        );
     }
 
     return children;

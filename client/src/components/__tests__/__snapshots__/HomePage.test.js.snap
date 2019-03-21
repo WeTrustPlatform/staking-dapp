@@ -468,8 +468,8 @@ exports[`tests snapshot 1`] = `
                               cx={44}
                               cy={44}
                               fill="none"
-                              r={20.2}
-                              strokeWidth={3.6}
+                              r={19}
+                              strokeWidth={6}
                               style={Object {}}
                             />
                           </svg>
@@ -581,8 +581,8 @@ exports[`tests snapshot 1`] = `
                               cx={44}
                               cy={44}
                               fill="none"
-                              r={20.2}
-                              strokeWidth={3.6}
+                              r={19}
+                              strokeWidth={6}
                               style={Object {}}
                             />
                           </svg>

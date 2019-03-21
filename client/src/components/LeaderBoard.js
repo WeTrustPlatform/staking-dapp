@@ -63,7 +63,7 @@ class LeaderBoard extends React.Component {
         <TableRow>
           <TableCell colSpan={4}>
             <div className={classes.loading}>
-              <CircularProgress color="secondary" />
+              <CircularProgress thickness={6} color="secondary" />
             </div>
           </TableCell>
         </TableRow>
