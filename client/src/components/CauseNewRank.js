@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -13,10 +14,16 @@ const styles = (theme) => ({
     flexGrow: 1,
   },
   right: {
+    backgroundColor: theme.palette.primary.dark,
     color: theme.palette.primary.light,
-    backgroundColor: theme.palette.secondary.main,
     borderRadius: 12,
     minWidth: 48,
+  },
+  notEnough: {
+    color: theme.palette.text.disabled,
+  },
+  increased: {
+    backgroundColor: theme.palette.secondary.main,
   },
 });
 
@@ -44,7 +51,12 @@ class CauseNewRank extends React.Component {
           <div className={classes.left}>
             <Typography>{`New Rank: ${newRank}`}</Typography>
           </div>
-          <div className={classes.right}>
+          <div
+            className={cx(
+              classes.right,
+              increased > 0 ? classes.increased : null,
+            )}
+          >
             <Typography align="center" color="inherit">
               {`+ ${increased}`}
             </Typography>
@@ -52,7 +64,7 @@ class CauseNewRank extends React.Component {
         </div>
         {currentRank > 1 && increased === 0 && (
           <div className={classes.row}>
-            <Typography>
+            <Typography className={classes.notEnough}>
               {"Not enough TRST to push cause's rank. Please stake more."}
             </Typography>
           </div>
