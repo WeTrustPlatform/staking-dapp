@@ -1,3 +1,4 @@
+import pickBy from 'lodash.pickby';
 import { bigNumber } from './formatter';
 import {
   parseStakePayload,
@@ -53,8 +54,56 @@ const getUsersStats = async (eventData, causesInfo, TimeLockedStaking) => {
   return usersStats;
 };
 
+const getRanks = (causesStats) => {
+  const ranks = {};
+  const amounts = Object.values(causesStats).map((s) => s.amount);
+  // a > b then a is sorted before b
+  const sortedAmounts = amounts.sort((a, b) => (a.gt(b) ? -1 : 1));
+
+  for (const key of Object.keys(causesStats)) {
+    const { amount, stakingId } = causesStats[key];
+    ranks[stakingId] = sortedAmounts.findIndex((e) => e.eq(amount));
+  }
+  return ranks;
+};
+
 const getCausesStats = (eventData, causesInfo) => {
-  return {};
+  const causesStats = {};
+  for (const key of Object.keys(eventData)) {
+    const { user, amount, stakingId } = eventData[key];
+
+    if (!causesStats[stakingId]) {
+      causesStats[stakingId] = {
+        amount: bigNumber(0),
+        stakers: new Set(),
+        rank: 0,
+        name: causesInfo[stakingId].name,
+        isOnSpring: !!causesInfo[stakingId].isOnSpring,
+      };
+    }
+
+    const stats = causesStats[stakingId];
+    if (amount.gt(bigNumber(0))) {
+      stats.amount = amount.add(stats.amount);
+      stats.stakers.add(user);
+    }
+  }
+
+  const causesOnSpring = pickBy(causesStats, (v) => v.isOnSpring);
+  const ranksOnSpring = getRanks(causesOnSpring);
+  for (const key of Object.keys(causesOnSpring)) {
+    const { stakingId } = causesOnSpring[key];
+    causesStats[stakingId].rank = ranksOnSpring[stakingId];
+  }
+
+  const causesNotOnSpring = pickBy(causesStats, (v) => !v.isOnSpring);
+  const ranksNotOnSpring = getRanks(causesNotOnSpring);
+  for (const key of Object.keys(causesNotOnSpring)) {
+    const { stakingId } = causesNotOnSpring[key];
+    causesStats[stakingId].rank = ranksNotOnSpring[stakingId];
+  }
+
+  return causesStats;
 };
 
 // assume (user, stake data) is unique
