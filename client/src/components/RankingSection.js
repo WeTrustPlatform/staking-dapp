@@ -1,4 +1,5 @@
 import React from 'react';
+import pickBy from 'lodash.pickby';
 import cx from 'classnames';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
@@ -34,7 +35,7 @@ class RankingSection extends React.Component {
             <LeaderBoard
               title="Most staked Causes"
               subtitle="The following causes have been granted higher ranking by Trustcoin holders."
-              causesStats={causesStats}
+              causesStats={pickBy(causesStats, (v) => v.isOnSpring)}
             />
           </Grid>
           <Grid
@@ -47,7 +48,7 @@ class RankingSection extends React.Component {
             <LeaderBoard
               title="Nominated Causes"
               subtitle="The following causes have been nominated by Trustcoin holders."
-              causesStats={causesStats}
+              causesStats={pickBy(causesStats, (v) => !v.isOnSpring)}
             />
           </Grid>
         </Grid>

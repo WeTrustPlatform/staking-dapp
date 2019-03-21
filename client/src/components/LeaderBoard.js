@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -24,11 +25,33 @@ const styles = (theme) => {
     causesStats: {
       paddingTop: lineHeight,
     },
+    name: {
+      minWidth: '30%',
+    },
+    stakedAmount: {
+      minWidth: '30%',
+    },
+    loading: {
+      padding: theme.mixins.toolbar.minHeight,
+      textAlign: 'center',
+    },
   };
 };
 
 class LeaderBoard extends React.Component {
   renderStats(causesStats) {
+    const { classes } = this.props;
+    if (Object.keys(causesStats).length === 0) {
+      return (
+        <TableRow>
+          <TableCell colSpan={4}>
+            <div className={classes.loading}>
+              <CircularProgress color="secondary" />
+            </div>
+          </TableCell>
+        </TableRow>
+      );
+    }
     const orderedCauses = Object.values(causesStats).sort(
       (a, b) => a.rank - b.rank,
     );
@@ -36,8 +59,10 @@ class LeaderBoard extends React.Component {
       return (
         <TableRow>
           <TableCell>{c.rank}</TableCell>
-          <TableCell>{c.name}</TableCell>
-          <TableCell>{`${trst(c.amount)} TRST`}</TableCell>
+          <TableCell className={classes.name}>{c.name}</TableCell>
+          <TableCell className={classes.stakedAmount}>
+            {`${trst(c.amount)} TRST`}
+          </TableCell>
           <TableCell>{c.stakers.size}</TableCell>
         </TableRow>
       );
