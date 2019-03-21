@@ -1,18 +1,30 @@
 [
   {
-    "question": "What does 'staking TRST' mean?",
-    "answer": "To stake TRST means to lock up TRST coin for a certain period of time, for the benefit of a cause that you support. After that period of time has passed, you can retrieve the token using the original ethereum address used to lock up the TRST."
+  "question": "General overview of Staking TRST",
+    "answer": "<a href='https://medium.com/@burningw0rds/1a7f42ac2680' target='_blank'>https://medium.com/@burningw0rds/1a7f42ac2680</a>"
   },
   {
-    "question": "Why would I stake TRST?",
-    "answer": "By staking TRST on Spring platform to a cause, you are signalling your appreciation for that particular organization, thereby increasing their visibility on Spring. All organizations on the platform must have a minimum of 5,000 TRST staked to their name in order to activate their profile on the platform. Activation allows for editing of their profile, making community updates, beyond the generic information found online. Any TRST holder can sponsor an organization to reach the threshold. In the initial period, organization's will communicate directly with the team to build out their profile. As new organizations are openly added to the platform, anyone can stake TRST to sponsor this new organization. However, if an added organization has an invalid receiving ETH address, or is in violation of the WeTrust ToS, the initial staking amount can be challenged."
+    "question": "What does staking TRST token enable?",
+    "answer": "To stake TRST means to lock up TRST coin for a certain period of time, for the benefit of a cause that you support. After that period of time has passed, you can retrieve the token using the original ethereum address used to lock up the TRST (don’t lose your private key, as you can only retrieve with your original contributing address!)"
+  },
+  {
+    "question": "What is the benefit for staking TRST and why would I stake TRST?",
+    "answer": "Trustcoins (TRST) are utility tokens created on the ERC20 standard to facilitate the coordination of multiple parties through incentives on the WeTrust Platform. By staking TRST to a cause, you are signalling your appreciation for that particular organization, thereby increasing their visibility on WeTrust Spring. You can stake to organizations already on Spring, or stake to those not yet on Spring which increases their visibility in the ‘nominations’ list.<br/><br/>All organizations on the platform must have a minimum amount of TRST staked to their name in order to activate their membership on the platform (currently set at 5,000 TRST). Activation allows the organization to further customize their profile, make community updates, create campaigns on CryptoUnlocked, and other premium features not available to inactive profiles. Any TRST holder can sponsor an organization to reach the minimum staking threshold so that they can become a member. Anyone can stake TRST to further increase the visibility of the sponsored organization."
   },
   {
     "question": "How does my stake benefit the organization or the crypto ecosystem?",
-    "answer": "For organizations on the platform, they will have improved visibilty. There is a \"People's Choice\" ranking of organizations, which is determined by the amount of TRST staked to their name. <br/>For organizations that are not yet familiar with cryptocurrency, staking will also likely increase their curiousity and awareness of this technology, thereby helping to spur further interest and adoption."
+    "answer": "For organizations on the platform, they will have improved visibility. Our v0 ranking algorithm will be determined by the amount staked and amount of donations the organization has received. Future ranking algorithm may also include social reputation signals as a third ingredient to the ranking methodology.<br/><br/>We believe that it is crucial to help onboard additional organizations, because for organizations that are not yet familiar with cryptocurrency, staking will increase their curiosity and awareness of this new technology, thereby helping to spur further interest and adoption."
   },
   {
     "question": "When can I unstake?",
     "answer": "When you stake TRST, it will be locked for a specified period of time. Once that time period has elapsed, you will be able to unstake and withdraw the coins."
+  },
+  {
+    "question": "What's next after this?",
+    "answer": "Depending on user feedback, we will incorporate TRST staking wherever."
+  },
+  {
+    "question": "What is TRST and where can I obtain TRST tokens so I can stake?",
+    "answer": "Trustcoins (TRST) are utility tokens created on the ERC20 standard to facilitate the coordination of multiple parties through incentives on the WeTrust Platform.<br/><br/>If you don’t currently own TRST tokens and would like to stake, you can obtain them by swapping other cryptocurrency you may own at <a href='https://bancor.network/' target='_blank'>Bancor</a>."
   }
 ]
