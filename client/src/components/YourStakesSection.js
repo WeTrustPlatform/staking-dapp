@@ -44,6 +44,12 @@ const styles = (theme) => {
       fontWeight: 600,
       color: theme.palette.text.disabled,
     },
+    row: {
+      '&:nth-of-type(even)': {
+        backgroundColor: theme.palette.primary.main,
+      },
+      borderBottomStyle: 'hidden',
+    },
     unstakeButton: {
       fontWeight: 600,
       minWidth: maxWidth / 7.5,
@@ -136,7 +142,7 @@ class YourStakesSection extends React.Component {
       } = activity;
       const firstStakeTx = transactions.filter((t) => t.event === 'Staked')[0];
       return (
-        <TableRow key={id}>
+        <TableRow key={id} className={classes.row}>
           <TableCell align="left">{cause.name || 'Unknown'}</TableCell>
           <TableCell align="right">{`${trst(amount)} TRST`}</TableCell>
           <TableCell>{unlockedAtInContract.toLocaleString()}</TableCell>
