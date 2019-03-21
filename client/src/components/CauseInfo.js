@@ -39,7 +39,7 @@ class CauseInfo extends React.Component {
   renderSpringCause(data) {
     return (
       <Typography>
-        {`${data.name} is on `}
+        {'This cause is currently on '}
         <HrefLink href="https://spring.wetrust.io">SPRING</HrefLink>
         <br />
         {data.is501c3 && this.render501c3Info(data)}
@@ -48,10 +48,22 @@ class CauseInfo extends React.Component {
     );
   }
 
+  renderNonSpringCause(data) {
+    return (
+      <Typography>
+        {'This cause is not on '}
+        <HrefLink href="https://spring.wetrust.io">SPRING</HrefLink>
+        {'. Nominate this cause to the top spot by staking TRST.'}
+        <br />
+        {this.render501c3Info(data)}
+      </Typography>
+    );
+  }
+
   renderDetails(data) {
     return data.isOnSpring
       ? this.renderSpringCause(data)
-      : this.render501c3(data);
+      : this.renderNonSpringCause(data);
   }
 
   render() {
