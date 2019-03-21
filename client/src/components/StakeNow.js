@@ -1,29 +1,37 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Icon from '@material-ui/core/Icon';
 import SearchInput from './SearchInput';
 import CauseStakeInfo from './CauseStakeInfo';
 import { getStakePayload, validateNetworkId, delay } from '../utils';
 import stateHelper, { status } from './stateHelper';
-import { txLink } from '../formatter';
 import dispatchStats from '../dispatchStats';
+import checkMark from '../images/check-mark.svg';
+import errorMark from '../images/error-mark.svg';
 
 const styles = (theme) => ({
   root: {
     margin: `${theme.mixins.toolbar.minHeight}px auto`,
     maxWidth: theme.breakpoints.values.md,
   },
-  gridRowButton: {
-    marginTop: theme.mixins.toolbar.minHeight,
-    marginBottom: theme.mixins.toolbar.minHeight,
+  stake: {
+    marginTop: theme.mixins.toolbar.minHeight / 2,
+    marginBottom: theme.mixins.toolbar.minHeight / 2,
+  },
+  step: {
+    display: 'flex',
+    marginBottom: 12,
+  },
+  stepIcon: {
+    paddingRight: 12,
+  },
+  button: {
+    marginTop: 24,
   },
 });
 
@@ -35,6 +43,7 @@ class StakeNow extends React.Component {
       durationInDays: 30,
       amount: 100,
       errorMessage: null,
+      successMessage: null,
       isStaking: false,
       approveTRST: stateHelper.init(this, stateHelper.tx.approveTRST),
       stakeTRST: stateHelper.init(this, stateHelper.tx.stakeTRST),
@@ -83,6 +92,7 @@ class StakeNow extends React.Component {
   startStaking() {
     this.setState({
       isStaking: true,
+      successMessage: null,
     });
     const { approveTRST, stakeTRST } = this.state;
     approveTRST.setPending();
@@ -130,7 +140,7 @@ class StakeNow extends React.Component {
                   // metamask will display error
                   // even though the error message
                   // can be ignored
-                  delay(5000).then(resolve);
+                  delay(3000).then(resolve);
                 })
                 .on('receipt', () => {
                   approveTRST.setSuccess();
@@ -150,7 +160,7 @@ class StakeNow extends React.Component {
         const stakePayload = getStakePayload(durationInDays, npo);
         return TimeLockedStaking.methods
           .stake(stakeAmount, stakePayload)
-          .send({ from: account, gasPrice, gas: 150000 })
+          .send({ from: account, gasPrice, gas: 200000 })
           .once('transactionHash', (stakeTxHash) => {
             stakeTRST.setTriggered(stakeTxHash);
           })
@@ -160,13 +170,17 @@ class StakeNow extends React.Component {
       })
       .then(() => {
         stakeTRST.setSuccess();
+        this.setState({
+          successMessage:
+            'Staking succeeded. Please check Your Stakes to view transaction hash.',
+        });
         // Delay X seconds (arbitrary number) so that state is updated
         // infura is slow!!!
         // Otherwise, the realUnlockedAt is 0
         return delay(1000);
       })
       .then(() => {
-        refreshStats(account, TimeLockedStaking);
+        refreshStats(TimeLockedStaking);
       })
       .catch((err) => {
         this.setErrorMessage(err.message);
@@ -213,9 +227,9 @@ class StakeNow extends React.Component {
   }
 
   renderButton(props, text) {
-    const { color, component, onClick } = props;
+    const { color, component, onClick, classes } = props;
     return (
-      <Grid item xs={10} sm={8} md={4}>
+      <Grid item xs={10} sm={8} md={4} className={classes.button}>
         <Button
           fullWidth
           color={color}
@@ -230,59 +244,43 @@ class StakeNow extends React.Component {
     );
   }
 
-  renderErrorMessage(errorMessage) {
+  renderMessage(message, isError) {
     return (
       <Grid container justify="center">
-        <Typography color="error" noWrap>
-          {errorMessage}
+        <Typography color={isError ? 'error' : 'secondary'} noWrap>
+          {message}
         </Typography>
       </Grid>
     );
   }
 
   renderStatusIcon(currentStatus) {
-    let className;
+    let children;
     switch (currentStatus) {
       case status.SUCCESS:
-        className = 'fa fa-check-circle';
+        children = <img src={checkMark} alt="check-mark" />;
         break;
       case status.FAILURE:
-        className = 'fa fa-exclamation-circle';
-        break;
-      case status.NOT_STARTED:
-        className = 'fa fa-circle';
+        children = <img src={errorMark} alt="error-mark" />;
         break;
       default:
-        className = 'fas fa-spinner fa-pulse';
+        children = <CircularProgress color="secondary" size={18} />;
     }
 
-    return (
-      <ListItemIcon>
-        <Icon className={className} />
-      </ListItemIcon>
-    );
+    return children;
   }
 
-  renderTxLink(txHash) {
+  renderStep(number, text, currentStatus) {
+    const { classes } = this.props;
     return (
-      <a href={txLink(txHash)} target="_blank" rel="noopener noreferrer">
-        <ListItemText secondary="view transaction hash" />
-      </a>
-    );
-  }
-
-  renderStep(number, text, currentStatus, txHash) {
-    return (
-      <ListItem>
-        <ListItemText
-          primary={`Step ${number}: ${text}`}
-          primaryTypographyProps={{
-            variant: 'subtitle1',
-          }}
-        />
-        {txHash && this.renderTxLink(txHash)}
-        {this.renderStatusIcon(currentStatus)}
-      </ListItem>
+      <div className={classes.step}>
+        <div className={classes.stepIcon}>
+          {this.renderStatusIcon(currentStatus)}
+        </div>
+        <div className={classes.stepMessage}>
+          <Typography>{`Step ${number}: ${text}`}</Typography>
+        </div>
+      </div>
     );
   }
 
@@ -295,13 +293,11 @@ class StakeNow extends React.Component {
             1,
             'Approving TRST transfer.',
             approveTRST.getTxStatus(),
-            approveTRST.getTxHash(),
           )}
           {this.renderStep(
             2,
             'Calling Stake contract.',
             stakeTRST.getTxStatus(),
-            stakeTRST.getTxHash(),
           )}
         </List>
       </Grid>
@@ -310,7 +306,14 @@ class StakeNow extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { npo, amount, durationInDays, errorMessage, isStaking } = this.state;
+    const {
+      npo,
+      amount,
+      durationInDays,
+      errorMessage,
+      successMessage,
+      isStaking,
+    } = this.state;
     return (
       <div className={classes.root}>
         <SearchInput onSelected={this.onSelectedNpo} />
@@ -324,9 +327,10 @@ class StakeNow extends React.Component {
           />
         )}
 
-        <Grid container justify="center" className={classes.gridRowButton}>
+        <Grid container justify="center" className={classes.stake}>
           {isStaking && this.renderStakingSteps()}
-          {errorMessage && this.renderErrorMessage(errorMessage)}
+          {errorMessage && this.renderMessage(errorMessage, true)}
+          {successMessage && this.renderMessage(successMessage, false)}
           {this.renderButton(
             {
               ...this.props,
