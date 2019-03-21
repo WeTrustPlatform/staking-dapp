@@ -104,6 +104,15 @@ const theme = createMuiTheme({
         fontWeight: 600,
         backgroundColor: grey,
       },
+      body: {
+        fontSize,
+      },
+    },
+    MuiTableRow: {
+      '&:nth-of-type(even)': {
+        backgroundColor: grey,
+      },
+      borderBottomStyle: 'hidden',
     },
     MuiTable: {
       root: {

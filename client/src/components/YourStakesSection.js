@@ -12,35 +12,46 @@ import TableBody from '@material-ui/core/TableBody';
 import Paper from '@material-ui/core/Paper';
 import Section from './Section';
 import SectionHeader from './SectionHeader';
-import { txLink } from '../formatter';
+import { txLink, trst } from '../formatter';
 import { validateNetworkId } from '../utils';
 import dispatchStats from '../dispatchStats';
 
-const styles = (theme) => ({
-  root: {
-    width: '100%',
-    overflowX: 'auto',
-    maxWidth: theme.breakpoints.values.lg,
-    margin: 'auto',
-  },
-  table: {
-    minWidth: 700,
-  },
-  txHashCell: {
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    maxWidth: theme.breakpoints.values.lg / 6,
-  },
-  noActivities: {
-    padding: theme.mixins.toolbar.minHeight,
-    textAlign: 'center',
-  },
-  statusLocked: {
-    fontWeight: 600,
-    color: theme.palette.text.disabled,
-  },
-});
+const styles = (theme) => {
+  const maxWidth = theme.breakpoints.values.lg;
+  return {
+    root: {
+      width: '100%',
+      overflowX: 'auto',
+      maxWidth,
+      margin: 'auto',
+    },
+    table: {
+      minWidth: 700,
+    },
+    txHashCell: {
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      maxWidth: maxWidth / 10,
+    },
+    statusCell: {
+      minWidth: maxWidth / 5,
+    },
+    noActivities: {
+      padding: theme.mixins.toolbar.minHeight,
+      textAlign: 'center',
+    },
+    statusLocked: {
+      fontWeight: 600,
+      color: theme.palette.text.disabled,
+    },
+    unstakeButton: {
+      fontWeight: 600,
+      minWidth: maxWidth / 7.5,
+      height: 32,
+    },
+  };
+};
 
 class YourStakesSection extends React.Component {
   constructor(props) {
@@ -80,6 +91,7 @@ class YourStakesSection extends React.Component {
             color="primary"
             variant="contained"
             disabled={!isEnabled}
+            className={classes.unstakeButton}
             onClick={() => this.handleUnstake(amount.toString(), stakeData)}
           >
             Claim TRST
@@ -113,9 +125,9 @@ class YourStakesSection extends React.Component {
     );
   }
 
-  renderActivities() {
-    const { classes, yourStakes } = this.props;
-    return yourStakes.map((activity) => {
+  renderActivities(activities) {
+    const { classes } = this.props;
+    return activities.map((activity) => {
       const {
         id,
         cause,
@@ -127,16 +139,18 @@ class YourStakesSection extends React.Component {
       return (
         <TableRow key={id}>
           <TableCell align="left">{cause.name || 'Unknown'}</TableCell>
-          <TableCell align="right">{`${amount} TRST`}</TableCell>
+          <TableCell align="right">{`${trst(amount)} TRST`}</TableCell>
           <TableCell>{unlockedAtInContract.toLocaleString()}</TableCell>
-          <TableCell>{this.renderUnstake(activity)}</TableCell>
+          <TableCell className={classes.statusCell}>
+            {this.renderUnstake(activity)}
+          </TableCell>
           <TableCell align="left" className={classes.txHashCell}>
             <a
-              href={txLink(firstStakeTx)}
+              href={txLink(firstStakeTx.transactionHash)}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {firstStakeTx}
+              {firstStakeTx.transactionHash}
             </a>
           </TableCell>
         </TableRow>
@@ -145,7 +159,8 @@ class YourStakesSection extends React.Component {
   }
 
   render() {
-    const { classes, color, yourStakes: activities } = this.props;
+    const { classes, color, userStats } = this.props;
+    const activities = userStats.yourStakes || [];
 
     return (
       <Section id="activities-section" color={color}>
@@ -163,7 +178,7 @@ class YourStakesSection extends React.Component {
             </TableHead>
             <TableBody>
               {activities.length === 0 && this.renderNoActivities()}
-              {activities.length > 0 && this.renderActivities()}
+              {activities.length > 0 && this.renderActivities(activities)}
             </TableBody>
           </Table>
         </Paper>
@@ -176,7 +191,8 @@ const mapStateToProps = (state) => ({
   account: state.account,
   networkId: state.networkId,
   accountActivities: state.accountActivities || [],
-  yourStakes: (state.usersStats && state.usersStats.yourStakes) || [],
+  userStats:
+    state.usersStats[state.account && state.account.toLowerCase()] || {},
   TimeLockedStaking: state.contracts.TimeLockedStaking,
 });
 
