@@ -9,6 +9,7 @@ import {
   WEB3_CONTRACTS,
   WEB3_USERS_STATS,
   WEB3_CAUSES_STATS,
+  UNSTAKE_EXIT,
   UNSTAKE_WARNING,
   UNSTAKE_PENDING,
   UNSTAKE_FAILURE,
@@ -30,7 +31,7 @@ const initialState = {
   contracts: {},
   usersStats: {}, // {<user>: {yourStakes: []}}
   causesStats: {}, // {<stakingId>:{amount, stakers, rank, name, isOnSpring}}
-  unstake: {}, // {<activityId>: step}
+  unstakeProcess: {}, // { step, activityId }
 };
 
 function reducers(state = initialState, action) {
@@ -75,11 +76,15 @@ function reducers(state = initialState, action) {
       return Object.assign({}, state, {
         usersStats: action.usersStats,
       });
+    case UNSTAKE_EXIT:
+      return Object.assign({}, state, {
+        unstakeProcess: {},
+      });
     case (UNSTAKE_WARNING, UNSTAKE_PENDING, UNSTAKE_FAILURE, UNSTAKE_SUCCESS):
       return Object.assign({}, state, {
-        unstake: {
-          [action.activityId]: action.type,
-          ...state.unstake,
+        unstakeProcess: {
+          step: action.type,
+          activityId: action.activityId,
         },
       });
     default:

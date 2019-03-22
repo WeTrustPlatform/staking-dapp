@@ -22,7 +22,7 @@ class UnstakeProcessBase extends React.Component {
       classes,
       stepIcon,
       stepMessage,
-      result,
+      children,
       onSubmit,
     } = this.props;
     return (
@@ -37,7 +37,7 @@ class UnstakeProcessBase extends React.Component {
           <div className={classes.stepIcon}>{stepIcon}</div>
           <div className={classes.stepMessage}>{stepMessage}</div>
         </div>
-        <div>{result}</div>
+        {children}
       </DialogBase>
     );
   }

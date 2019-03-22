@@ -4,14 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { validateNetworkId } from '../utils';
-import {
-  UNSTAKE_WARNING,
-  UNSTAKE_PENDING,
-  UNSTAKE_SUCCESS,
-  UNSTAKE_FAILURE,
-  unstake,
-} from '../actions';
-import dispatchStats from '../dispatchStats';
+import { UNSTAKE_WARNING, unstake } from '../actions';
 
 const styles = (theme) => {
   const maxWidth = theme.breakpoints.values.lg;
@@ -29,36 +22,11 @@ const styles = (theme) => {
 };
 
 class UnstakeStatus extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isUnstaking: false,
-    };
-  }
-
-  handleUnstake(amount, stakeData) {
-    const { TimeLockedStaking, account, refreshStats } = this.props;
-    this.setState({
-      isUnstaking: true,
-    });
-
-    TimeLockedStaking.methods
-      .unstake(amount, stakeData)
-      .send({ from: account })
-      .finally(() => {
-        this.setState({
-          isUnstaking: false,
-        });
-        refreshStats(TimeLockedStaking);
-      });
-  }
-
   render() {
-    const { classes, networkId, activity } = this.props;
-    const { isUnstaking } = this.state;
-    const { canUnstake, amount, stakeData } = activity;
+    const { classes, networkId, activity, unstakeProcess, warn } = this.props;
+    const { canUnstake, id } = activity;
     const isEnabled =
-      canUnstake && !isUnstaking && !validateNetworkId(networkId);
+      canUnstake && unstakeProcess.step && !validateNetworkId(networkId);
     return (
       <div>
         {canUnstake && (
@@ -67,7 +35,7 @@ class UnstakeStatus extends React.Component {
             variant="contained"
             disabled={!isEnabled}
             className={classes.button}
-            onClick={() => this.handleUnstake(amount.toString(), stakeData)}
+            onClick={() => warn(id)}
           >
             Claim TRST
           </Button>
@@ -81,23 +49,11 @@ class UnstakeStatus extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  networkId: state.networkId,
-  unstake: state.unstake,
-  TimeLockedStaking: state.contracts.TimeLockedStaking,
+  unstakeProcess: state.unstakeProcess,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  unstakeWarning: (activityId) =>
-    dispatch(unstake(UNSTAKE_WARNING, activityId)),
-  unstakePending: (activityId) =>
-    dispatch(unstake(UNSTAKE_PENDING, activityId)),
-  unstakeSuccess: (activityId) =>
-    dispatch(unstake(UNSTAKE_SUCCESS, activityId)),
-  unstakeFailure: (activityId) =>
-    dispatch(unstake(UNSTAKE_FAILURE, activityId)),
-  refreshStats: (TimeLockedStaking) => {
-    dispatchStats(dispatch, TimeLockedStaking);
-  },
+  warn: (activityId) => dispatch(unstake(UNSTAKE_WARNING, activityId)),
 });
 
 export default connect(
