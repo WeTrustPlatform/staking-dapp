@@ -1,21 +1,11 @@
 import React from 'react';
-import cx from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import HrefLink from '../HrefLink';
-import CloseIcon from './CloseIcon';
+import DialogBase from './DialogBase';
 
 const styles = (theme) => ({
-  root: {
-    maxWidth: theme.breakpoints.values.sm,
-    margin: 'auto',
-    textAlign: 'center',
-  },
   subtitle: {
     marginBottom: theme.typography.h5.lineHeight,
   },
@@ -65,53 +55,41 @@ class EmailSubscription extends React.Component {
     const { open, onClose, classes } = this.props;
     const { errorMessage, email } = this.state;
     return (
-      <Dialog open={open} onClose={onClose} className={classes.root}>
-        <CloseIcon onClick={onClose} />
-        <DialogTitle>
-          <Typography variant="h5">
-            Sign up to receive updates of your favorite Cause
-          </Typography>
-        </DialogTitle>
-        <DialogContent>
-          <Typography className={classes.subtitle}>
-            We will send you an email to inform when your nominated Cause is
-            available on
-            <HrefLink href="https://spring.wetrust.io"> SPRING.</HrefLink>
-          </Typography>
-          <TextField
-            autoFocus
-            margin="normal"
-            label="Email"
-            type="email"
-            value={email}
-            onChange={(event) =>
-              this.setState({
-                email: event.target.value,
-              })
-            }
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-            }}
-            InputProps={{
-              disableUnderline: true,
-            }}
-          />
-          <div className={cx(classes.errorMessage, { hidden: !errorMessage })}>
-            <Typography color="error">{errorMessage}</Typography>
-          </div>
-          <Button
-            className={classes.subscribe}
-            fullWidth
-            onClick={this.onValidate}
-            color="primary"
-            variant="contained"
-            size="large"
-          >
-            Subscribe
-          </Button>
-        </DialogContent>
-      </Dialog>
+      <DialogBase
+        open={open}
+        onClose={onClose}
+        title="Sign up to receive updates of your favorite Cause"
+        onSubmit={this.onValidate}
+        action="Subscribe"
+      >
+        <Typography className={classes.subtitle}>
+          We will send you an email to inform when your nominated Cause is
+          available on
+          <HrefLink href="https://spring.wetrust.io"> SPRING.</HrefLink>
+        </Typography>
+        <TextField
+          autoFocus
+          margin="normal"
+          label="Email"
+          type="email"
+          value={email}
+          onChange={(event) =>
+            this.setState({
+              email: event.target.value,
+            })
+          }
+          fullWidth
+          InputLabelProps={{
+            shrink: true,
+          }}
+          InputProps={{
+            disableUnderline: true,
+          }}
+        />
+        <div className={classes.errorMessage}>
+          <Typography color="error">{errorMessage}</Typography>
+        </div>
+      </DialogBase>
     );
   }
 }
