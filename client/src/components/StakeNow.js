@@ -13,7 +13,7 @@ import stateHelper, { status } from './stateHelper';
 import dispatchStats from '../dispatchStats';
 import checkMark from '../images/check-mark.svg';
 import errorMark from '../images/error-mark.svg';
-import EmailSubscription from './EmailSubscription';
+import EmailSubscription from './modals/EmailSubscription';
 import { trstInBN, bigNumber } from '../formatter';
 
 const styles = (theme) => ({
