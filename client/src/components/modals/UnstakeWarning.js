@@ -20,7 +20,7 @@ class UnstakeWarning extends React.Component {
       refreshStats,
       onSuccess,
       onFailure,
-      onSubmit,
+      onStake,
       unstakeProcess,
     } = this.props;
     const { activity } = unstakeProcess;
@@ -37,7 +37,7 @@ class UnstakeWarning extends React.Component {
         onFailure(activity);
       });
 
-    onSubmit(activity);
+    onStake(activity);
   }
 
   render() {
@@ -66,7 +66,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onClose: () => dispatch(unstakeExit()),
-  onSubmit: (activity) => dispatch(unstake(UNSTAKE_PENDING, activity)),
+  onStake: (activity) => dispatch(unstake(UNSTAKE_PENDING, activity)),
   onSuccess: (activity) => dispatch(unstake(UNSTAKE_SUCCESS, activity)),
   onFailure: (activity) => dispatch(unstake(UNSTAKE_FAILURE, activity)),
   refreshStats: (TimeLockedStaking) =>

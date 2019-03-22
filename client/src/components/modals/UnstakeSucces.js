@@ -3,15 +3,18 @@ import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import UnstakeProcessBase from './UnstakeProcessBase';
 import checkMark from '../../images/check-mark.svg';
-import { UNSTAKE_SUCCESS } from '../../actions';
+import { UNSTAKE_SUCCESS, unstakeExit } from '../../actions';
 
 class UnstakeSuccess extends React.Component {
   render() {
-    const { unstakeProcess } = this.props;
+    const { unstakeProcess, onClose } = this.props;
     const { step } = unstakeProcess;
     return (
       <UnstakeProcessBase
         open={step === UNSTAKE_SUCCESS}
+        onClose={onClose}
+        onSubmit={onClose}
+        action="Back to Staking site"
         stepIcon={<img src={checkMark} alt="check-mark" />}
         stepMessage="Claimed 3,300 TRST"
       >
@@ -27,4 +30,11 @@ const mapStateToProps = (state) => ({
   unstakeProcess: state.unstakeProcess || {},
 });
 
-export default connect(mapStateToProps)(UnstakeSuccess);
+const mapDispatchToProps = (dispatch) => ({
+  onClose: () => dispatch(unstakeExit()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(UnstakeSuccess);

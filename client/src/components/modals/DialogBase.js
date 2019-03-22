@@ -28,21 +28,23 @@ class DialogBase extends React.Component {
     } = this.props;
     return (
       <Dialog open={open} onClose={onClose} className={classes.root}>
-        <CloseIcon onClick={onClose} />
+        {!!onClose && <CloseIcon onClick={onClose} />}
         <DialogTitle>
           <Typography variant="h5">{title}</Typography>
         </DialogTitle>
         <DialogContent>
           {children}
-          <Button
-            fullWidth
-            onClick={onSubmit}
-            color="primary"
-            variant="contained"
-            size="large"
-          >
-            {action}
-          </Button>
+          {!!action && (
+            <Button
+              fullWidth
+              onClick={onSubmit}
+              color="primary"
+              variant="contained"
+              size="large"
+            >
+              {action}
+            </Button>
+          )}
         </DialogContent>
       </Dialog>
     );

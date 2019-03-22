@@ -19,11 +19,12 @@ class UnstakeProcessBase extends React.Component {
     const {
       open,
       onClose,
-      classes,
+      onSubmit,
+      action,
       stepIcon,
       stepMessage,
       children,
-      onSubmit,
+      classes,
     } = this.props;
     return (
       <DialogBase
@@ -31,7 +32,7 @@ class UnstakeProcessBase extends React.Component {
         onClose={onClose}
         title="Processing"
         onSubmit={onSubmit}
-        action="Back to Staking site"
+        action={action}
       >
         <div className={classes.step}>
           <div className={classes.stepIcon}>{stepIcon}</div>
