@@ -4,13 +4,13 @@ import DialogBase from './DialogBase';
 
 class UnstakeWarning extends React.Component {
   render() {
-    const { open, onClose } = this.props;
+    const { open, onClose, onSubmit } = this.props;
     return (
       <DialogBase
         open={open}
         onClose={onClose}
         title="The current rank of your favorite Cause will drop"
-        onSubmit={() => {}}
+        onSubmit={onSubmit}
         action="Continue"
       >
         <Typography>

@@ -8,6 +8,10 @@ export const WEB3_OVERALL_STATS = 'WEB3_OVERALL_STATS';
 export const WEB3_CONTRACTS = 'WEB3_CONTRACTS';
 export const WEB3_USERS_STATS = 'WEB3_USERS_STATS';
 export const WEB3_CAUSES_STATS = 'WEB3_CAUSES_STATS';
+export const UNSTAKE_WARNING = 'UNSTAKE_WARNING';
+export const UNSTAKE_PENDING = 'UNSTAKE_PENDING';
+export const UNSTAKE_SUCCESS = 'UNSTAKE_SUCCESS';
+export const UNSTAKE_FAILURE = 'UNSTAKE_FAILURE';
 
 export function unlockAccount(account) {
   return { type: WEB3_UNLOCK_ACCOUNT, account };
@@ -47,4 +51,8 @@ export function findUsersStats(usersStats) {
 
 export function findCausesStats(causesStats) {
   return { type: WEB3_CAUSES_STATS, causesStats };
+}
+
+export function unstake(step, activityId) {
+  return { type: step, activityId };
 }

@@ -33,16 +33,29 @@ class Unstake extends React.Component {
   }
 
   renderWarning() {
-    const { open, onClose } = this.props;
-    return <UnstakeWarning open={open} onClose={onClose} />;
+    const { onClose } = this.props;
+    const { step } = this.state;
+    return (
+      <UnstakeWarning
+        open={step === STEP_WARNING}
+        onClose={onClose}
+        onSubmit={() =>
+          this.setState({
+            step: STEP_PENDING,
+          })
+        }
+      />
+    );
   }
 
   renderPending() {
-    const { open, onClose } = this.props;
+    const { onClose } = this.props;
+    const { step } = this.state;
     return (
       <UnstakeProcessBase
-        open={open}
+        open={step === STEP_PENDING}
         onClose={onClose}
+        onSubmit={onClose}
         stepIcon={
           <CircularProgress color="secondary" thickness={8} size={18} />
         }
@@ -53,11 +66,13 @@ class Unstake extends React.Component {
   }
 
   renderSuccess() {
-    const { open, onClose } = this.props;
+    const { onClose } = this.props;
+    const { step } = this.state;
     return (
       <UnstakeProcessBase
-        open={open}
+        open={step === STEP_SUCCESS}
         onClose={onClose}
+        onSubmit={onClose}
         stepIcon={<img src={checkMark} alt="check-mark" />}
         stepMessage={this.renderText('Claimed 3,300 TRST')}
         result={this.renderText(
@@ -69,11 +84,13 @@ class Unstake extends React.Component {
   }
 
   renderFailure() {
-    const { open, onClose } = this.props;
+    const { onClose } = this.props;
+    const { step } = this.state;
     return (
       <UnstakeProcessBase
-        open={open}
+        open={step === STEP_FAILURE}
         onClose={onClose}
+        onSubmit={onClose}
         stepIcon={<img src={errorMark} alt="error-mark" />}
         stepMessage={this.renderText('Claiming 3,300 TRST')}
         result={this.renderText(
@@ -85,13 +102,14 @@ class Unstake extends React.Component {
   }
 
   render() {
+    const { open } = this.props;
     const { step } = this.state;
     return (
       <div>
-        {step === STEP_WARNING && this.renderWarning()}
-        {step === STEP_PENDING && this.renderPending()}
-        {step === STEP_SUCCESS && this.renderSuccess()}
-        {step === STEP_FAILURE && this.renderFailure()}
+        {open && step === STEP_WARNING && this.renderWarning()}
+        {open && step === STEP_PENDING && this.renderPending()}
+        {open && step === STEP_SUCCESS && this.renderSuccess()}
+        {open && step === STEP_FAILURE && this.renderFailure()}
       </div>
     );
   }

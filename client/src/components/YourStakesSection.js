@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { HashLink as Link } from 'react-router-hash-link';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,8 +12,7 @@ import Section from './Section';
 import SectionHeader from './SectionHeader';
 import HrefLink from './HrefLink';
 import { txLink, trst } from '../formatter';
-import { validateNetworkId } from '../utils';
-import dispatchStats from '../dispatchStats';
+import UnstakeStatus from './UnstakeStatus';
 
 const styles = (theme) => {
   const maxWidth = theme.breakpoints.values.lg;
@@ -41,75 +38,16 @@ const styles = (theme) => {
       padding: theme.mixins.toolbar.minHeight,
       textAlign: 'center',
     },
-    statusLocked: {
-      fontWeight: 600,
-      color: theme.palette.text.disabled,
-    },
     row: {
       '&:nth-of-type(even)': {
         backgroundColor: theme.palette.primary.main,
       },
       borderBottomStyle: 'hidden',
     },
-    unstakeButton: {
-      fontWeight: 600,
-      minWidth: maxWidth / 7.5,
-      height: 32,
-    },
   };
 };
 
 class YourStakesSection extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isUnstaking: false,
-    };
-  }
-
-  handleUnstake(amount, stakeData) {
-    const { TimeLockedStaking, account, refreshStats } = this.props;
-    this.setState({
-      isUnstaking: true,
-    });
-
-    TimeLockedStaking.methods
-      .unstake(amount, stakeData)
-      .send({ from: account })
-      .finally(() => {
-        this.setState({
-          isUnstaking: false,
-        });
-        refreshStats(TimeLockedStaking);
-      });
-  }
-
-  renderUnstake(activity) {
-    const { classes, networkId } = this.props;
-    const { isUnstaking } = this.state;
-    const { canUnstake, amount, stakeData } = activity;
-    const isEnabled =
-      canUnstake && !isUnstaking && !validateNetworkId(networkId);
-    return (
-      <div className={classes.unstake}>
-        {canUnstake && (
-          <Button
-            color="primary"
-            variant="contained"
-            disabled={!isEnabled}
-            className={classes.unstakeButton}
-            onClick={() => this.handleUnstake(amount.toString(), stakeData)}
-          >
-            Claim TRST
-          </Button>
-        )}
-        {!canUnstake && (
-          <Typography className={classes.statusLocked}>Locked</Typography>
-        )}
-      </div>
-    );
-  }
-
   renderNoActivities() {
     const { classes } = this.props;
     return (
@@ -148,7 +86,7 @@ class YourStakesSection extends React.Component {
           <TableCell align="right">{`${trst(amount)} TRST`}</TableCell>
           <TableCell>{unlockedAtInContract.toLocaleString()}</TableCell>
           <TableCell className={classes.statusCell}>
-            {this.renderUnstake(activity)}
+            <UnstakeStatus activity={activity} />
           </TableCell>
           <TableCell align="left" className={classes.txHashCell}>
             <HrefLink href={txLink(firstStakeTx.transactionHash)}>
@@ -190,21 +128,8 @@ class YourStakesSection extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  account: state.account,
-  networkId: state.networkId,
-  accountActivities: state.accountActivities || [],
   userStats:
     state.usersStats[state.account && state.account.toLowerCase()] || {},
-  TimeLockedStaking: state.contracts.TimeLockedStaking,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  refreshStats: (TimeLockedStaking) => {
-    dispatchStats(dispatch, TimeLockedStaking);
-  },
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withStyles(styles)(YourStakesSection));
+export default connect(mapStateToProps)(withStyles(styles)(YourStakesSection));
