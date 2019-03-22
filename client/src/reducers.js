@@ -84,7 +84,7 @@ function reducers(state = initialState, action) {
       return Object.assign({}, state, {
         unstakeProcess: {
           step: action.type,
-          activityId: action.activityId,
+          activity: action.activity,
         },
       });
     default:

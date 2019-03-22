@@ -24,7 +24,7 @@ const styles = (theme) => {
 class UnstakeStatus extends React.Component {
   render() {
     const { classes, networkId, activity, unstakeProcess, warn } = this.props;
-    const { canUnstake, id } = activity;
+    const { canUnstake } = activity;
     const isEnabled =
       canUnstake && unstakeProcess.step && !validateNetworkId(networkId);
     return (
@@ -35,7 +35,7 @@ class UnstakeStatus extends React.Component {
             variant="contained"
             disabled={!isEnabled}
             className={classes.button}
-            onClick={() => warn(id)}
+            onClick={() => warn(activity)}
           >
             Claim TRST
           </Button>
@@ -53,7 +53,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  warn: (activityId) => dispatch(unstake(UNSTAKE_WARNING, activityId)),
+  warn: (activity) => dispatch(unstake(UNSTAKE_WARNING, activity)),
 });
 
 export default connect(

@@ -54,8 +54,8 @@ export function findCausesStats(causesStats) {
   return { type: WEB3_CAUSES_STATS, causesStats };
 }
 
-export function unstake(step, activityId) {
-  return { type: step, activityId };
+export function unstake(step, activity) {
+  return { type: step, activity };
 }
 
 export function unstakeExit() {

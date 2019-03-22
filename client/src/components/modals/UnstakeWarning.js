@@ -18,32 +18,36 @@ class UnstakeWarning extends React.Component {
       TimeLockedStaking,
       account,
       refreshStats,
-      activity,
       onSuccess,
       onFailure,
+      onSubmit,
+      unstakeProcess,
     } = this.props;
-    const { stakeData, amount, id } = activity;
+    const { activity } = unstakeProcess;
+    const { stakeData, amount } = activity;
 
     TimeLockedStaking.methods
       .unstake(amount.toString(), stakeData)
       .send({ from: account })
       .then(() => {
-        onSuccess(id);
+        onSuccess(activity);
         refreshStats(TimeLockedStaking);
       })
       .catch(() => {
-        onFailure(id);
+        onFailure(activity);
       });
+
+    onSubmit(activity);
   }
 
   render() {
-    const { onClose, onSubmit, unstakeProcess } = this.props;
+    const { onClose, unstakeProcess } = this.props;
     return (
       <DialogBase
         open={unstakeProcess.step === UNSTAKE_WARNING}
         onClose={onClose}
         title="The current rank of your favorite Cause will drop"
-        onSubmit={() => onSubmit(unstakeProcess.activityId)}
+        onSubmit={() => this.handleUnstake()}
         action="Continue"
       >
         <Typography>
@@ -56,16 +60,15 @@ class UnstakeWarning extends React.Component {
 
 const mapStateToProps = (state) => ({
   account: state.account,
-  networkId: state.networkId,
   unstakeProcess: state.unstakeProcess,
   TimeLockedStaking: state.contracts.TimeLockedStaking,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onClose: () => dispatch(unstakeExit()),
-  onSubmit: (activityId) => dispatch(unstake(UNSTAKE_PENDING, activityId)),
-  onSuccess: (activityId) => dispatch(unstake(UNSTAKE_SUCCESS, activityId)),
-  onFailure: (activityId) => dispatch(unstake(UNSTAKE_FAILURE, activityId)),
+  onSubmit: (activity) => dispatch(unstake(UNSTAKE_PENDING, activity)),
+  onSuccess: (activity) => dispatch(unstake(UNSTAKE_SUCCESS, activity)),
+  onFailure: (activity) => dispatch(unstake(UNSTAKE_FAILURE, activity)),
   refreshStats: (TimeLockedStaking) =>
     dispatchStats(dispatch, TimeLockedStaking),
 });
