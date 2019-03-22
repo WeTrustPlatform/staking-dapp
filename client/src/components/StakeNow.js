@@ -14,6 +14,7 @@ import dispatchStats from '../dispatchStats';
 import checkMark from '../images/check-mark.svg';
 import errorMark from '../images/error-mark.svg';
 import EmailSubscription from './EmailSubscription';
+import { trstInBN, bigNumber } from '../formatter';
 
 const styles = (theme) => ({
   root: {
@@ -214,10 +215,10 @@ class StakeNow extends React.Component {
       return networkError;
     }
 
-    const { BN } = web3.utils;
     const { amount, npo, durationInDays } = state;
-    const trstBalanceBN = new BN(trstBalance);
-    const amountBN = new BN(amount);
+    const trstBalanceBN = trstInBN(trstBalance);
+    const amountBN = bigNumber(amount);
+
     if (amountBN.lte(0)) {
       return 'Amount must be positive.';
     }
