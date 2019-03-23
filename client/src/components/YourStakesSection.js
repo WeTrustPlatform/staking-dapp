@@ -22,12 +22,10 @@ const styles = (theme) => {
   const maxWidth = theme.breakpoints.values.lg;
   return {
     paper: {
-      width: '100%',
       maxWidth,
       margin: 'auto',
     },
     table: {
-      minWidth: maxWidth,
       whiteSpace: 'nowrap',
     },
     nameCell: {
@@ -41,7 +39,7 @@ const styles = (theme) => {
       maxWidth: maxWidth / 10,
     },
     statusCell: {
-      minWidth: maxWidth / 5,
+      maxWidth: maxWidth / 5,
     },
     noActivities: {
       padding: theme.mixins.toolbar.minHeight,
@@ -81,27 +79,27 @@ class YourStakesSection extends React.Component {
   renderActivities(activities) {
     const { classes } = this.props;
     return activities.map((activity) => {
-      const {
-        id,
-        cause,
-        amount,
-        unlockedAtInContract,
-        transactions,
-      } = activity;
-      const firstStakeTx = transactions.filter((t) => t.event === 'Staked')[0];
+      const { id, cause, unlockedAtInContract, transactions } = activity;
+      // assume users only use our UI for staking and unstaking
+      // if they use other means, then there could be multiple stakedTx
+      // but we only show the first one
+      const firstStakedTx = transactions.filter((t) => t.event === 'Staked')[0];
+      // activity.amount is a net value
+      // need to find the original staked amount
+      const stakedAmount = firstStakedTx.amount;
       return (
         <TableRow key={id} className={classes.row}>
           <TableCell align="left" className={classes.nameCell}>
             {cause.name || 'Unknown'}
           </TableCell>
-          <TableCell align="right">{`${trst(amount)} TRST`}</TableCell>
+          <TableCell align="right">{`${trst(stakedAmount)} TRST`}</TableCell>
           <TableCell>{unlockedAtInContract.toLocaleString()}</TableCell>
           <TableCell className={classes.statusCell}>
             <UnstakeStatus activity={activity} />
           </TableCell>
           <TableCell align="left" className={classes.txHashCell}>
-            <HrefLink href={txLink(firstStakeTx.transactionHash)}>
-              {firstStakeTx.transactionHash}
+            <HrefLink href={txLink(firstStakedTx.transactionHash)}>
+              {firstStakedTx.transactionHash}
             </HrefLink>
           </TableCell>
         </TableRow>

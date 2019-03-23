@@ -92,7 +92,7 @@ const mapDispatchToProps = (dispatch) => ({
   onStake: (activity) => dispatch(unstake(UNSTAKE_PENDING, activity)),
   onSuccess: (activity) => dispatch(unstake(UNSTAKE_SUCCESS, activity)),
   onFailure: (activity) => dispatch(unstake(UNSTAKE_FAILURE, activity)),
-  refreshStats: (TimeLockedStaking, TRST, account) => {
+  refreshStates: (TimeLockedStaking, TRST, account) => {
     dispatchStats(dispatch, TimeLockedStaking);
     dispatchTRSTBalance(dispatch, TRST, account);
   },

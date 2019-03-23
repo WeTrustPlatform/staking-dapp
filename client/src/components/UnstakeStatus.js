@@ -5,7 +5,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import StepStatus from './StepStatus';
-import { trst } from '../formatter';
+import HrefLink from './HrefLink';
+import { trst, txLink, bigNumber } from '../formatter';
 import { validateNetworkId } from '../utils';
 import {
   UNSTAKE_PENDING_BACKGROUND,
@@ -29,6 +30,28 @@ const styles = (theme) => {
 };
 
 class UnstakeStatus extends React.Component {
+  renderClaimed() {
+    const { activity } = this.props;
+    // assume users only use our UI for staking and unstaking
+    const unstakeTx =
+      activity &&
+      activity.transactions &&
+      activity.transactions.filter((t) => t.event === 'Unstaked')[0];
+    const balanceZero =
+      activity && activity.amount && bigNumber(0).eq(activity.amount);
+    return (
+      balanceZero &&
+      unstakeTx && (
+        <Typography noWrap>
+          <strong>Claimed - </strong>
+          <HrefLink href={txLink(unstakeTx.transactionHash)}>
+            {unstakeTx.transactionHash}
+          </HrefLink>
+        </Typography>
+      )
+    );
+  }
+
   renderProcessing() {
     const { unstakeProcess, activity } = this.props;
     const { step, activity: processing } = unstakeProcess;
@@ -67,9 +90,10 @@ class UnstakeStatus extends React.Component {
               Claim TRST
             </Button>
           ))}
-        {!canUnstake && (
-          <Typography className={classes.locked}>Locked</Typography>
-        )}
+        {!canUnstake &&
+          (this.renderClaimed() || (
+            <Typography className={classes.locked}>Locked</Typography>
+          ))}
       </div>
     );
   }

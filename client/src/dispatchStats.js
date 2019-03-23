@@ -94,7 +94,7 @@ const getCausesStats = (eventData, causesInfo) => {
 const mapEventData = (events) => {
   const temp = {};
   for (const e of events) {
-    const { transactionHash, returnValues, event } = e;
+    const { transactionHash, returnValues, event, blockNumber } = e;
     if (event !== 'Staked' && event !== 'Unstaked') {
       continue;
     }
@@ -105,7 +105,7 @@ const mapEventData = (events) => {
     if (!temp[key]) {
       const { stakingId, unlockedAtInPayload } = parseStakePayload(data);
       temp[key] = {
-        amount: bigNumber(0),
+        amount: bigNumber(0), // net value
         data,
         user: user.toLowerCase(),
         stakingId,
@@ -114,6 +114,10 @@ const mapEventData = (events) => {
       };
     }
 
+    // calculating net amount
+    // + on staked event
+    // - on unstaked event
+    //
     const currentAmount = temp[key].amount;
     if (event === 'Staked') {
       temp[key].amount = bigNumber(amount).add(currentAmount);
@@ -125,6 +129,8 @@ const mapEventData = (events) => {
 
     temp[key].transactions.push({
       transactionHash,
+      blockNumber,
+      amount: bigNumber(amount),
       event,
     });
   }
