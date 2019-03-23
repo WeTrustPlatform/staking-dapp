@@ -40,6 +40,11 @@ class UnstakeWarning extends React.Component {
     onStake(activity);
   }
 
+  mockUnstake() {
+    const { onStake, unstakeProcess } = this.props;
+    onStake(unstakeProcess.activity);
+  }
+
   render() {
     const { onClose, unstakeProcess } = this.props;
     return (
@@ -47,7 +52,7 @@ class UnstakeWarning extends React.Component {
         open={unstakeProcess.step === UNSTAKE_WARNING}
         onClose={onClose}
         title="The current rank of your favorite Cause will drop"
-        onSubmit={() => this.handleUnstake()}
+        onSubmit={() => this.mockUnstake()}
         action="Continue"
       >
         <Typography>
@@ -60,7 +65,7 @@ class UnstakeWarning extends React.Component {
 
 const mapStateToProps = (state) => ({
   account: state.account,
-  unstakeProcess: state.unstakeProcess,
+  unstakeProcess: state.unstakeProcess || {},
   TimeLockedStaking: state.contracts.TimeLockedStaking,
 });
 

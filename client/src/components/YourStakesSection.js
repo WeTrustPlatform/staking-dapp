@@ -13,6 +13,10 @@ import SectionHeader from './SectionHeader';
 import HrefLink from './HrefLink';
 import { txLink, trst } from '../formatter';
 import UnstakeStatus from './UnstakeStatus';
+import UnstakeWarning from './modals/UnstakeWarning';
+import UnstakePending from './modals/UnstakePending';
+import UnstakeSuccess from './modals/UnstakeSuccess';
+import UnstakeFailure from './modals/UnstakeFailure';
 
 const styles = (theme) => {
   const maxWidth = theme.breakpoints.values.lg;
@@ -122,6 +126,10 @@ class YourStakesSection extends React.Component {
             </TableBody>
           </Table>
         </Paper>
+        <UnstakeWarning />
+        <UnstakePending />
+        <UnstakeSuccess />
+        <UnstakeFailure />
       </Section>
     );
   }

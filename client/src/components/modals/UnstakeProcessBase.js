@@ -1,16 +1,21 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import DialogBase from './DialogBase';
 
 const styles = (theme) => ({
   step: {
+    margin: 'auto',
     display: 'flex',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
   stepIcon: {
     display: 'flex',
     alignSelf: 'center',
     paddingRight: 12,
+  },
+  children: {
+    margin: theme.spacing.unit * 2,
   },
 });
 
@@ -36,9 +41,11 @@ class UnstakeProcessBase extends React.Component {
       >
         <div className={classes.step}>
           <div className={classes.stepIcon}>{stepIcon}</div>
-          <div className={classes.stepMessage}>{stepMessage}</div>
+          <div className={classes.stepMessage}>
+            <Typography>{stepMessage}</Typography>
+          </div>
         </div>
-        {children}
+        <div className={classes.children}>{children}</div>
       </DialogBase>
     );
   }

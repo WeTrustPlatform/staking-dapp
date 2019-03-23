@@ -80,7 +80,10 @@ function reducers(state = initialState, action) {
       return Object.assign({}, state, {
         unstakeProcess: {},
       });
-    case (UNSTAKE_WARNING, UNSTAKE_PENDING, UNSTAKE_FAILURE, UNSTAKE_SUCCESS):
+    case UNSTAKE_PENDING:
+    case UNSTAKE_FAILURE:
+    case UNSTAKE_SUCCESS:
+    case UNSTAKE_WARNING:
       return Object.assign({}, state, {
         unstakeProcess: {
           step: action.type,

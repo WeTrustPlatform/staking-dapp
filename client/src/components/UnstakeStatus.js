@@ -14,7 +14,7 @@ const styles = (theme) => {
       minWidth: maxWidth / 7.5,
       height: 32,
     },
-    statusLocked: {
+    locked: {
       fontWeight: 600,
       color: theme.palette.text.disabled,
     },
@@ -26,7 +26,7 @@ class UnstakeStatus extends React.Component {
     const { classes, networkId, activity, unstakeProcess, warn } = this.props;
     const { canUnstake } = activity;
     const isEnabled =
-      canUnstake && unstakeProcess.step && !validateNetworkId(networkId);
+      canUnstake && !unstakeProcess.step && !validateNetworkId(networkId);
     return (
       <div>
         {canUnstake && (
@@ -41,7 +41,7 @@ class UnstakeStatus extends React.Component {
           </Button>
         )}
         {!canUnstake && (
-          <Typography className={classes.statusLocked}>Locked</Typography>
+          <Typography className={classes.locked}>Locked</Typography>
         )}
       </div>
     );

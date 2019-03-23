@@ -9,10 +9,6 @@ const styles = (theme) => ({
   subtitle: {
     marginBottom: theme.typography.h5.lineHeight,
   },
-  errorMessage: {
-    margin: theme.spacing.unit * 2,
-    minHeight: theme.spacing.unit * 3,
-  },
 });
 
 const isValidEmail = (email) => {
@@ -86,7 +82,7 @@ class EmailSubscription extends React.Component {
             disableUnderline: true,
           }}
         />
-        <div className={classes.errorMessage}>
+        <div>
           <Typography color="error">{errorMessage}</Typography>
         </div>
       </DialogBase>

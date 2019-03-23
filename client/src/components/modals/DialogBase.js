@@ -13,6 +13,13 @@ const styles = (theme) => ({
     margin: 'auto',
     textAlign: 'center',
   },
+  children: {
+    margin: theme.spacing.unit * 2,
+    minHeight: theme.spacing.unit * 4,
+  },
+  action: {
+    margin: theme.spacing.unit * 2,
+  },
 });
 
 class DialogBase extends React.Component {
@@ -29,22 +36,24 @@ class DialogBase extends React.Component {
     return (
       <Dialog open={open} onClose={onClose} className={classes.root}>
         {!!onClose && <CloseIcon onClick={onClose} />}
-        <DialogTitle>
+        <DialogTitle disableTypography>
           <Typography variant="h5">{title}</Typography>
         </DialogTitle>
         <DialogContent>
-          {children}
-          {!!action && (
-            <Button
-              fullWidth
-              onClick={onSubmit}
-              color="primary"
-              variant="contained"
-              size="large"
-            >
-              {action}
-            </Button>
-          )}
+          <div className={classes.children}>{children}</div>
+          <div className={classes.action}>
+            {!!action && (
+              <Button
+                fullWidth
+                onClick={onSubmit}
+                color="primary"
+                variant="contained"
+                size="large"
+              >
+                {action}
+              </Button>
+            )}
+          </div>
         </DialogContent>
       </Dialog>
     );
