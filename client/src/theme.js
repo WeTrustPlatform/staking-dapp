@@ -118,12 +118,12 @@ const theme = createMuiTheme({
         fontWeight: 'bold',
         fontSize: 18,
         color: brownGrey,
+        '&$focused': {
+          color: brownGrey,
+        },
       },
       shrink: {
         transform: 'translate(0, -1rem)',
-      },
-      focused: {
-        color: `${brownGrey} !important`,
       },
     },
     MuiInputBase: {
@@ -138,16 +138,17 @@ const theme = createMuiTheme({
       fullWidth: {
         width: 'auto',
       },
-      focused: {
-        borderColor: greyBlue,
-      },
     },
     MuiListItem: {
-      selected: {
-        // the framework selector is more specific than a single
-        // MuiListItem-selected
-        color: `${white} !important`,
-        backgroundColor: `${greyBlue} !important`,
+      root: {
+        '&$selected': {
+          color: white,
+          // the framework selector is more specific than a single
+          // MuiListItem-selected
+          '&:hover': {
+            backgroundColor: greyBlue,
+          },
+        },
       },
     },
     MuiListItemText: {
