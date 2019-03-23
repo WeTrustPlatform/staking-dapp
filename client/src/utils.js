@@ -160,13 +160,13 @@ export const mapCMSCause = (r) => ({
 });
 
 /**
- * Determine the cause default rank which don't have any stakes
+ * Determine the rank of causes that haven't had any stakes
  * @param { stakingId: rank} ranking map
  * @return default rank
  */
 export const getDefaultRank = (ranks) => {
-  const maxRank = Math.max(...Object.values(ranks));
-  return maxRank + 1;
+  const collection = Object.values(ranks);
+  return collection.length + 1;
 };
 
 /**
@@ -215,7 +215,8 @@ export const getNonSpringRanks = (causesStats) => {
  */
 export const getCauseRank = (cause, causesStats) => {
   if (!cause.stakingId) {
-    return 0;
+    // fail silently
+    return 999999;
   }
 
   const ranks = cause.isOnSpring

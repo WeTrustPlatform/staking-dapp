@@ -28,14 +28,14 @@ const styles = (theme) => ({
 });
 
 class CauseNewRank extends React.Component {
-  render() {
-    const { classes, amount, causesStats, cause } = this.props;
+  getNewRank() {
+    const { amount, causesStats, cause } = this.props;
     const stats = causesStats[cause.stakingId] || {};
     const currentStakedAmount = stats.amount || bigNumber(0);
-    const currentRank = getCauseRank(cause, causesStats);
 
-    const amountInSmallestUnit = bigNumber(amount).mul(bigNumber(1e6));
-    const newStakedAmount = currentStakedAmount.add(amountInSmallestUnit);
+    const creditingAmount = bigNumber(amount).mul(bigNumber(1e6));
+    const newStakedAmount = currentStakedAmount.add(creditingAmount);
+
     const newCausesStats = Object.assign({}, causesStats, {
       [cause.stakingId]: {
         amount: newStakedAmount,
@@ -44,25 +44,35 @@ class CauseNewRank extends React.Component {
       },
     });
     const newRank = getCauseRank(cause, newCausesStats);
+    return newRank;
+  }
+
+  render() {
+    const { classes, causesStats, cause } = this.props;
+    const currentRank = getCauseRank(cause, causesStats);
+    const newRank = this.getNewRank();
     const increased = currentRank - newRank;
+    const hasStakedBefore = !!causesStats[cause.stakingId];
     return (
       <div>
         <div className={classes.row}>
           <div className={classes.left}>
             <Typography>{`New Rank: ${newRank}`}</Typography>
           </div>
-          <div
-            className={cx(
-              classes.right,
-              increased > 0 ? classes.increased : null,
-            )}
-          >
-            <Typography align="center" color="inherit">
-              {`+ ${increased}`}
-            </Typography>
-          </div>
+          {hasStakedBefore && (
+            <div
+              className={cx(
+                classes.right,
+                increased > 0 ? classes.increased : null,
+              )}
+            >
+              <Typography align="center" color="inherit">
+                {`+ ${increased}`}
+              </Typography>
+            </div>
+          )}
         </div>
-        {currentRank > 1 && increased === 0 && (
+        {currentRank > 1 && hasStakedBefore && increased === 0 && (
           <div className={classes.row}>
             <Typography className={classes.notEnough}>
               {"Not enough TRST to push cause's rank. Please stake more."}

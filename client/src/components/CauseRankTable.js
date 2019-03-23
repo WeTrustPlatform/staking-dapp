@@ -24,9 +24,13 @@ class CauseRankTable extends React.Component {
     return cause.isOnSpring ? 'Spring rank' : 'Nomination Rank';
   }
 
+  getRank;
+
   render() {
     const { classes, cause, causesStats } = this.props;
     const stats = causesStats[cause.stakingId] || {};
+    // if no one has staked for this cause, rank should be N/A
+    const numberOfStakers = (stats.stakers && stats.stakers.size) || 0;
     return (
       <Paper>
         <Table className={classes.table} padding="dense">
@@ -43,11 +47,11 @@ class CauseRankTable extends React.Component {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell>{getCauseRank(cause, causesStats)}</TableCell>
-              <TableCell>{`${trst(stats.amount || 0)} TRST`}</TableCell>
               <TableCell>
-                {(stats.stakers && stats.stakers.size) || 0}
+                {numberOfStakers ? getCauseRank(cause, causesStats) : 'N/A'}
               </TableCell>
+              <TableCell>{`${trst(stats.amount || 0)} TRST`}</TableCell>
+              <TableCell>{numberOfStakers}</TableCell>
             </TableRow>
           </TableBody>
         </Table>
