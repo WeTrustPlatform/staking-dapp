@@ -4,6 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import UnstakeProcessBase from './UnstakeProcessBase';
 import { UNSTAKE_PENDING } from '../../actions';
+import theme from '../../theme';
 
 class UnstakePending extends React.Component {
   render() {
@@ -17,7 +18,9 @@ class UnstakePending extends React.Component {
         }
         stepMessage="Claiming 3,300 TRST"
       >
-        <Typography color="disabled">Please confirm MetaMask!</Typography>
+        <Typography style={{ color: theme.palette.text.disabled }}>
+          Please confirm MetaMask!
+        </Typography>
       </UnstakeProcessBase>
     );
   }

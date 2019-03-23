@@ -27,12 +27,17 @@ const styles = (theme) => {
       margin: 'auto',
     },
     table: {
-      minWidth: 700,
+      minWidth: maxWidth,
+      whiteSpace: 'nowrap',
+    },
+    nameCell: {
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      maxWidth: maxWidth / 6,
     },
     txHashCell: {
-      whiteSpace: 'nowrap',
-      textOverflow: 'ellipsis',
       overflow: 'hidden',
+      textOverflow: 'ellipsis',
       maxWidth: maxWidth / 10,
     },
     statusCell: {
@@ -86,7 +91,9 @@ class YourStakesSection extends React.Component {
       const firstStakeTx = transactions.filter((t) => t.event === 'Staked')[0];
       return (
         <TableRow key={id} className={classes.row}>
-          <TableCell align="left">{cause.name || 'Unknown'}</TableCell>
+          <TableCell align="left" className={classes.nameCell}>
+            {cause.name || 'Unknown'}
+          </TableCell>
           <TableCell align="right">{`${trst(amount)} TRST`}</TableCell>
           <TableCell>{unlockedAtInContract.toLocaleString()}</TableCell>
           <TableCell className={classes.statusCell}>

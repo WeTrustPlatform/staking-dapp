@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import DialogBase from './DialogBase';
+import { unstakeExit } from '../../actions';
 
 const styles = (theme) => ({
   step: {
@@ -14,8 +16,8 @@ const styles = (theme) => ({
     alignSelf: 'center',
     paddingRight: 12,
   },
-  children: {
-    margin: theme.spacing.unit * 2,
+  message: {
+    marginTop: theme.spacing.unit * 3,
   },
 });
 
@@ -23,21 +25,19 @@ class UnstakeProcessBase extends React.Component {
   render() {
     const {
       open,
-      onClose,
-      onSubmit,
-      action,
       stepIcon,
       stepMessage,
       children,
       classes,
+      onClose,
     } = this.props;
     return (
       <DialogBase
         open={open}
         onClose={onClose}
+        onSubmit={onClose}
         title="Processing"
-        onSubmit={onSubmit}
-        action={action}
+        action="Back to Staking site"
       >
         <div className={classes.step}>
           <div className={classes.stepIcon}>{stepIcon}</div>
@@ -45,10 +45,17 @@ class UnstakeProcessBase extends React.Component {
             <Typography>{stepMessage}</Typography>
           </div>
         </div>
-        <div className={classes.children}>{children}</div>
+        <div className={classes.message}>{children}</div>
       </DialogBase>
     );
   }
 }
 
-export default withStyles(styles)(UnstakeProcessBase);
+const mapDispatchToProps = (dispatch) => ({
+  onClose: () => dispatch(unstakeExit()),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(withStyles(styles)(UnstakeProcessBase));

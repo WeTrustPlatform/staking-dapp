@@ -9,16 +9,15 @@ import CloseIcon from './CloseIcon';
 
 const styles = (theme) => ({
   root: {
-    maxWidth: theme.breakpoints.values.sm,
     margin: 'auto',
     textAlign: 'center',
   },
-  children: {
+  content: {
     margin: theme.spacing.unit * 2,
-    minHeight: theme.spacing.unit * 4,
   },
   action: {
     margin: theme.spacing.unit * 2,
+    marginTop: theme.mixins.toolbar.minHeight,
   },
 });
 
@@ -34,13 +33,19 @@ class DialogBase extends React.Component {
       classes,
     } = this.props;
     return (
-      <Dialog open={open} onClose={onClose} className={classes.root}>
+      <Dialog
+        open={open}
+        onClose={onClose}
+        className={classes.root}
+        maxWidth="sm"
+        fullWidth
+      >
         {!!onClose && <CloseIcon onClick={onClose} />}
         <DialogTitle disableTypography>
           <Typography variant="h5">{title}</Typography>
         </DialogTitle>
         <DialogContent>
-          <div className={classes.children}>{children}</div>
+          <div className={classes.content}>{children}</div>
           <div className={classes.action}>
             {!!action && (
               <Button
