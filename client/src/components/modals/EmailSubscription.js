@@ -2,6 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import jsonp from 'jsonp';
 import HrefLink from '../HrefLink';
 import DialogBase from './DialogBase';
 
@@ -20,7 +21,7 @@ class EmailSubscription extends React.Component {
     super(props);
     this.state = {
       errorMessage: null,
-      email: null,
+      email: '',
     };
     this.onSubscribe = this.onSubscribe.bind(this);
     this.onValidate = this.onValidate.bind(this);
@@ -44,7 +45,26 @@ class EmailSubscription extends React.Component {
       errorMessage: null,
     });
     const { onClose } = this.props;
-    onClose();
+    const { email } = this.state;
+    jsonp(
+      `https://wetrust.us14.list-manage.com/subscribe/post-json?u=118cc8927f2584d76237cb8b9&amp;id=19f2388189&EMAIL=${email}`,
+      { param: 'c' },
+      (err, data) => {
+        if (err) {
+          // not able to reach here
+          console.log(err);
+        }
+
+        if (data && data.result === 'error') {
+          this.setState({
+            errorMessage: data && data.msg,
+          });
+          return;
+        }
+
+        onClose();
+      },
+    );
   }
 
   render() {
@@ -83,7 +103,10 @@ class EmailSubscription extends React.Component {
           }}
         />
         <div>
-          <Typography color="error">{errorMessage}</Typography>
+          <Typography
+            color="error"
+            dangerouslySetInnerHTML={{ __html: errorMessage }}
+          />
         </div>
       </DialogBase>
     );
