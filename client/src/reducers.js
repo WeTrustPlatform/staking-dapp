@@ -12,6 +12,7 @@ import {
   UNSTAKE_EXIT,
   UNSTAKE_WARNING,
   UNSTAKE_PENDING,
+  UNSTAKE_PENDING_BACKGROUND,
   UNSTAKE_FAILURE,
   UNSTAKE_SUCCESS,
 } from './actions';
@@ -81,6 +82,7 @@ function reducers(state = initialState, action) {
         unstakeProcess: {},
       });
     case UNSTAKE_PENDING:
+    case UNSTAKE_PENDING_BACKGROUND:
     case UNSTAKE_FAILURE:
     case UNSTAKE_SUCCESS:
     case UNSTAKE_WARNING:

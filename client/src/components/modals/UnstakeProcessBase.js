@@ -1,21 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import DialogBase from './DialogBase';
-import { unstakeExit } from '../../actions';
+import {
+  UNSTAKE_PENDING_BACKGROUND,
+  UNSTAKE_PENDING,
+  unstake,
+  unstakeExit,
+} from '../../actions';
+import StepStatus from '../StepStatus';
 
 const styles = (theme) => ({
-  step: {
-    margin: 'auto',
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  stepIcon: {
-    display: 'flex',
-    alignSelf: 'center',
-    paddingRight: 12,
-  },
   message: {
     marginTop: theme.spacing.unit * 3,
   },
@@ -29,8 +24,19 @@ class UnstakeProcessBase extends React.Component {
       stepMessage,
       children,
       classes,
-      onClose,
+      unstakeProcess,
+      exit,
+      sendToBackground,
     } = this.props;
+
+    const { step, activity } = unstakeProcess;
+
+    // determine close behavior
+    const onClose =
+      step !== UNSTAKE_PENDING_BACKGROUND && step !== UNSTAKE_PENDING
+        ? exit
+        : () => sendToBackground(activity);
+
     return (
       <DialogBase
         open={open}
@@ -39,23 +45,24 @@ class UnstakeProcessBase extends React.Component {
         title="Processing"
         action="Back to Staking site"
       >
-        <div className={classes.step}>
-          <div className={classes.stepIcon}>{stepIcon}</div>
-          <div className={classes.stepMessage}>
-            <Typography>{stepMessage}</Typography>
-          </div>
-        </div>
+        <StepStatus stepIcon={stepIcon} stepMessage={stepMessage} />
         <div className={classes.message}>{children}</div>
       </DialogBase>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  unstakeProcess: state.unstakeProcess,
+});
+
 const mapDispatchToProps = (dispatch) => ({
-  onClose: () => dispatch(unstakeExit()),
+  exit: () => dispatch(unstakeExit()),
+  sendToBackground: (activity) =>
+    dispatch(unstake(UNSTAKE_PENDING_BACKGROUND, activity)),
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(withStyles(styles)(UnstakeProcessBase));
