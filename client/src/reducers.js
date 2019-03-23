@@ -4,8 +4,6 @@ import {
   WEB3_UNLOCK_ACCOUNT,
   WEB3_LOCK_ACCOUNT,
   WEB3_TRST_BALANCE,
-  WEB3_ACCOUNT_ACTIVITIES,
-  WEB3_OVERALL_STATS,
   WEB3_CONTRACTS,
   WEB3_USERS_STATS,
   WEB3_CAUSES_STATS,
@@ -22,13 +20,6 @@ const initialState = {
   account: null,
   web3: null,
   trstBalance: '0',
-  accountActivities: [],
-  overallStats: {
-    currentStakes: '0',
-    averageStakes: '0',
-    averageStakeInUSD: '0',
-    currentStakers: '0',
-  },
   contracts: {},
   usersStats: {}, // {<user>: {yourStakes: []}}
   causesStats: {}, // {<stakingId>:{amount, stakers, rank, name, isOnSpring}}
@@ -56,14 +47,6 @@ function reducers(state = initialState, action) {
     case WEB3_TRST_BALANCE:
       return Object.assign({}, state, {
         trstBalance: action.trstBalance,
-      });
-    case WEB3_ACCOUNT_ACTIVITIES:
-      return Object.assign({}, state, {
-        accountActivities: action.accountActivities,
-      });
-    case WEB3_OVERALL_STATS:
-      return Object.assign({}, state, {
-        overallStats: action.overallStats,
       });
     case WEB3_CONTRACTS:
       return Object.assign({}, state, {
