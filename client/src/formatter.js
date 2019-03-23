@@ -28,3 +28,15 @@ export const networkName = (networkId) => {
   };
   return nameMapping[networkId] || `Privatenet-${networkId}`;
 };
+
+/**
+ * Trims the string removing the middle part
+ * @param {string} str Any text, e.g. Ethereum Address
+ * @param {number} front Number of characters to take from the front of the string
+ * @param {number} end Number of characters to take from the end of the string
+ */
+export const trim = (str, front = 6, end = 4) => {
+  const endString = str.substring(str.length - end);
+  const startString = str.substring(0, front);
+  return `${startString}...${endString}`;
+};

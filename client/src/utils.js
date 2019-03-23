@@ -67,6 +67,8 @@ export function parseStakePayload(payload) {
   };
 }
 
+// returns null if network is correct
+// otherwise returns error message
 export const validateNetworkId = (networkId) => {
   if (networkId === 'invalid') {
     return `Please switch to ${networkName(configs.NETWORK_ID)}`;
@@ -131,18 +133,6 @@ export const delay = (milliseconds) =>
   new Promise((resolve) => {
     setTimeout(resolve, milliseconds);
   });
-
-/**
- * Trims the string removing the middle part
- * @param {string} str Any text, e.g. Ethereum Address
- * @param {number} front Number of characters to take from the front of the string
- * @param {number} end Number of characters to take from the end of the string
- */
-export const trim = (str, front = 6, end = 4) => {
-  const endString = str.substring(str.length - end);
-  const startString = str.substring(0, front);
-  return `${startString}...${endString}`;
-};
 
 /**
  * Transform CMS result to cause info

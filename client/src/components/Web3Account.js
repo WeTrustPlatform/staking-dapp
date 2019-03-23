@@ -3,12 +3,11 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { connect } from 'react-redux';
-
 import configs from '../configs';
-import { trst } from '../formatter';
+import { trst, networkName, trim } from '../formatter';
 import metamaskIcon from '../images/meta-mask-logo.png';
 import accountIcon from '../images/metamask-account-icon.svg';
-import { trim } from '../utils';
+import { validateNetworkId } from '../utils';
 
 const styles = (theme) => ({
   warning: {
@@ -46,17 +45,6 @@ const styles = (theme) => ({
   },
 });
 
-const NETWORK_MAP = {
-  '1': 'MainNet',
-  '2': 'Morden',
-  '3': 'Ropsten',
-  '4': 'Rinkeby',
-  '5': 'Goerli',
-  '42': 'Kovan',
-};
-
-const networkName = NETWORK_MAP[configs.NETWORK_ID] || 'Custom network';
-
 class Web3Account extends React.Component {
   renderNoAccount(props) {
     const { classes } = props;
@@ -73,7 +61,7 @@ class Web3Account extends React.Component {
         </div>
         <div>
           <Typography className={classes.accountText}>
-            {`Connect to ${networkName}`}
+            {`Connect to ${networkName(configs.NETWORK_ID)}`}
           </Typography>
         </div>
       </div>
@@ -115,9 +103,10 @@ class Web3Account extends React.Component {
   }
 
   render() {
-    const { web3, account } = this.props;
+    const { web3, account, networkId } = this.props;
     const hasWeb3Browser = web3 && web3.givenProvider;
-    const isConnected = hasWeb3Browser && account;
+    const isConnected =
+      hasWeb3Browser && account && !validateNetworkId(networkId);
 
     return (
       <List>
