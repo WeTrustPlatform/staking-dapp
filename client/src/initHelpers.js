@@ -64,6 +64,7 @@ const onNewAccount = (dispatch, account, contracts) => {
 };
 
 const onNewNetworkId = async (dispatch, web3, networkId) => {
+  dispatch(findNetworkId(networkId));
   if (networkId !== 'invalid') {
     const web3Contracts = await initContracts(web3);
 
@@ -119,11 +120,11 @@ const initWeb3OnUpdateListener = async (store) => {
 
 const initBlockchainState = async (store) => {
   const { dispatch } = store;
+
   const web3 = initWeb3();
   dispatch(findWeb3(web3));
 
   const networkId = await initNetworkId(web3);
-  dispatch(findNetworkId(networkId));
   await onNewNetworkId(dispatch, web3, networkId);
 
   await initWeb3OnUpdateListener(store);
