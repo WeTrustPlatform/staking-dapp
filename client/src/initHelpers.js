@@ -7,8 +7,8 @@ import {
   unlockAccount,
   findContracts,
 } from './actions';
-import { dispatchTRSTBalance } from './dispatch';
 import dispatchStats from './dispatchStats';
+import dispatchTRSTBalance from './dispatchTRSTBalance';
 import TimeLockedStaking from './contracts/TimeLockedStaking.json';
 import TRST from './contracts/TRST.json';
 

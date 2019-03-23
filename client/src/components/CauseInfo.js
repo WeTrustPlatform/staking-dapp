@@ -40,7 +40,7 @@ class CauseInfo extends React.Component {
     return (
       <Typography>
         {'This cause is currently on '}
-        <HrefLink href="https://spring.wetrust.io">SPRING</HrefLink>
+        <HrefLink href="https://spring.wetrust.io">SPRING.</HrefLink>
         <br />
         {data.is501c3 && this.render501c3Info(data)}
         {!data.is501c3 && `Staking ID: ${data.stakingId}`}

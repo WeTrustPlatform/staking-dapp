@@ -6,11 +6,12 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
+import dispatchStats from '../dispatchStats';
+import dispatchTRSTBalance from '../dispatchTRSTBalance';
 import SearchInput from './SearchInput';
 import CauseStakeInfo from './CauseStakeInfo';
 import { getStakePayload, validateNetworkId, delay } from '../utils';
 import stateHelper, { status } from './stateHelper';
-import dispatchStats from '../dispatchStats';
 import checkMark from '../images/check-mark.svg';
 import errorMark from '../images/error-mark.svg';
 import EmailSubscription from './modals/EmailSubscription';
@@ -118,7 +119,13 @@ class StakeNow extends React.Component {
 
     const { amount, npo, durationInDays, approveTRST, stakeTRST } = this.state;
 
-    const { web3, refreshStats, account, TRST, TimeLockedStaking } = this.props;
+    const {
+      web3,
+      refreshStates,
+      account,
+      TRST,
+      TimeLockedStaking,
+    } = this.props;
 
     const { toBN, toWei } = web3.utils;
     const stakeAmount = toWei(amount.toString(), 'mwei');
@@ -191,7 +198,7 @@ class StakeNow extends React.Component {
             isSubscribing: true,
           });
         }
-        refreshStats(TimeLockedStaking);
+        refreshStates(TimeLockedStaking, TRST, account);
       })
       .catch((err) => {
         this.setErrorMessage(err.message);
@@ -373,8 +380,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  refreshStats: (TimeLockedStaking) => {
+  refreshStates: (TimeLockedStaking, TRST, account) => {
     dispatchStats(dispatch, TimeLockedStaking);
+    dispatchTRSTBalance(dispatch, TRST, account);
   },
 });
 

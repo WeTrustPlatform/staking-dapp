@@ -11,6 +11,7 @@ import {
   unstakeExit,
 } from '../../actions';
 import dispatchStats from '../../dispatchStats';
+import dispatchTRSTBalance from '../../dispatchTRSTBalance';
 import { trst, bigNumber } from '../../formatter';
 import { getNewRank } from '../../utils';
 
@@ -18,8 +19,9 @@ class UnstakeWarning extends React.Component {
   handleUnstake() {
     const {
       TimeLockedStaking,
+      TRST,
       account,
-      refreshStats,
+      refreshStates,
       onSuccess,
       onFailure,
       onStake,
@@ -33,7 +35,7 @@ class UnstakeWarning extends React.Component {
       .send({ from: account })
       .then(() => {
         onSuccess(activity);
-        refreshStats(TimeLockedStaking);
+        refreshStates(TimeLockedStaking, TRST, account);
       })
       .catch(() => {
         onFailure(activity);
@@ -42,6 +44,7 @@ class UnstakeWarning extends React.Component {
     onStake(activity);
   }
 
+  // This method is for manual testing modals
   mockUnstake() {
     const { onStake, unstakeProcess } = this.props;
     onStake(unstakeProcess.activity);
@@ -62,7 +65,7 @@ class UnstakeWarning extends React.Component {
         open={step === UNSTAKE_WARNING}
         onClose={onClose}
         title="The current rank of your favorite Cause will drop"
-        onSubmit={() => this.mockUnstake()}
+        onSubmit={() => this.handleUnstake()}
         action="Continue"
       >
         <Typography>
@@ -81,6 +84,7 @@ const mapStateToProps = (state) => ({
   causesStats: state.causesStats,
   unstakeProcess: state.unstakeProcess,
   TimeLockedStaking: state.contracts.TimeLockedStaking,
+  TRST: state.contracts.TRST,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -88,8 +92,10 @@ const mapDispatchToProps = (dispatch) => ({
   onStake: (activity) => dispatch(unstake(UNSTAKE_PENDING, activity)),
   onSuccess: (activity) => dispatch(unstake(UNSTAKE_SUCCESS, activity)),
   onFailure: (activity) => dispatch(unstake(UNSTAKE_FAILURE, activity)),
-  refreshStats: (TimeLockedStaking) =>
-    dispatchStats(dispatch, TimeLockedStaking),
+  refreshStats: (TimeLockedStaking, TRST, account) => {
+    dispatchStats(dispatch, TimeLockedStaking);
+    dispatchTRSTBalance(dispatch, TRST, account);
+  },
 });
 
 export default connect(

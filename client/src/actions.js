@@ -23,7 +23,7 @@ export function lockAccount() {
   return { type: WEB3_LOCK_ACCOUNT };
 }
 
-export function findTrstBalance(trstBalance) {
+export function findTRSTBalance(trstBalance) {
   return { type: WEB3_TRST_BALANCE, trstBalance };
 }
 
