@@ -4,16 +4,19 @@ import Typography from '@material-ui/core/Typography';
 import UnstakeProcessBase from './UnstakeProcessBase';
 import checkMark from '../../images/check-mark.svg';
 import { UNSTAKE_SUCCESS } from '../../actions';
+import { trst } from '../../formatter';
 
 class UnstakeSuccess extends React.Component {
   render() {
     const { unstakeProcess } = this.props;
-    const { step } = unstakeProcess;
+    const { step, activity } = unstakeProcess;
     return (
       <UnstakeProcessBase
         open={step === UNSTAKE_SUCCESS}
         stepIcon={<img src={checkMark} alt="check-mark" />}
-        stepMessage="Claimed 3,300 TRST"
+        stepMessage={`Claiming ${trst(
+          (activity && activity.amount) || 0,
+        )} TRST`}
       >
         <Typography color="secondary">
           Please check Your Stakes to view transaction hash.
@@ -24,7 +27,7 @@ class UnstakeSuccess extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  unstakeProcess: state.unstakeProcess || {},
+  unstakeProcess: state.unstakeProcess,
 });
 
 export default connect(mapStateToProps)(UnstakeSuccess);

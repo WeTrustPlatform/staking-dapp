@@ -4,16 +4,19 @@ import Typography from '@material-ui/core/Typography';
 import UnstakeProcessBase from './UnstakeProcessBase';
 import errorMark from '../../images/error-mark.svg';
 import { UNSTAKE_FAILURE } from '../../actions';
+import { trst } from '../../formatter';
 
 class UnstakeFailure extends React.Component {
   render() {
     const { unstakeProcess } = this.props;
-    const { step } = unstakeProcess;
+    const { step, activity } = unstakeProcess;
     return (
       <UnstakeProcessBase
         open={step === UNSTAKE_FAILURE}
         stepIcon={<img src={errorMark} alt="error-mark" />}
-        stepMessage="Claiming 3,300 TRST"
+        stepMessage={`Claiming ${trst(
+          (activity && activity.amount) || 0,
+        )} TRST`}
       >
         <Typography color="error">
           Claiming failed. Please try again.
@@ -24,7 +27,7 @@ class UnstakeFailure extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  unstakeProcess: state.unstakeProcess || {},
+  unstakeProcess: state.unstakeProcess,
 });
 
 export default connect(mapStateToProps)(UnstakeFailure);

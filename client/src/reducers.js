@@ -32,7 +32,7 @@ const initialState = {
   contracts: {},
   usersStats: {}, // {<user>: {yourStakes: []}}
   causesStats: {}, // {<stakingId>:{amount, stakers, rank, name, isOnSpring}}
-  unstakeProcess: {}, // { step, activityId }
+  unstakeProcess: { activity: {} }, // { step, activity }
 };
 
 function reducers(state = initialState, action) {
@@ -79,7 +79,7 @@ function reducers(state = initialState, action) {
       });
     case UNSTAKE_EXIT:
       return Object.assign({}, state, {
-        unstakeProcess: {},
+        unstakeProcess: { activity: {} },
       });
     case UNSTAKE_PENDING:
     case UNSTAKE_PENDING_BACKGROUND:

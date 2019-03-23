@@ -5,18 +5,21 @@ import Typography from '@material-ui/core/Typography';
 import UnstakeProcessBase from './UnstakeProcessBase';
 import { UNSTAKE_PENDING } from '../../actions';
 import theme from '../../theme';
+import { trst } from '../../formatter';
 
 class UnstakePending extends React.Component {
   render() {
     const { unstakeProcess } = this.props;
-    const { step } = unstakeProcess;
+    const { step, activity } = unstakeProcess;
     return (
       <UnstakeProcessBase
         open={step === UNSTAKE_PENDING}
         stepIcon={
           <CircularProgress color="secondary" thickness={8} size={18} />
         }
-        stepMessage="Claiming 3,300 TRST"
+        stepMessage={`Claiming ${trst(
+          (activity && activity.amount) || 0,
+        )} TRST`}
       >
         <Typography style={{ color: theme.palette.text.disabled }}>
           Please confirm MetaMask!
@@ -27,7 +30,7 @@ class UnstakePending extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  unstakeProcess: state.unstakeProcess || {},
+  unstakeProcess: state.unstakeProcess,
 });
 
 export default connect(mapStateToProps)(UnstakePending);

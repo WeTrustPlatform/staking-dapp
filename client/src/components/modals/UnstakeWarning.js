@@ -65,7 +65,7 @@ class UnstakeWarning extends React.Component {
 
 const mapStateToProps = (state) => ({
   account: state.account,
-  unstakeProcess: state.unstakeProcess || {},
+  unstakeProcess: state.unstakeProcess,
   TimeLockedStaking: state.contracts.TimeLockedStaking,
 });
 
