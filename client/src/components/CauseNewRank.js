@@ -3,7 +3,7 @@ import cx from 'classnames';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { getCauseRank } from '../utils';
+import { getCauseRank, getNewRank } from '../utils';
 import { bigNumber } from '../formatter';
 
 const styles = (theme) => ({
@@ -28,29 +28,14 @@ const styles = (theme) => ({
 });
 
 class CauseNewRank extends React.Component {
-  getNewRank() {
-    const { amount, causesStats, cause } = this.props;
-    const stats = causesStats[cause.stakingId] || {};
-    const currentStakedAmount = stats.amount || bigNumber(0);
-
-    const creditingAmount = bigNumber(amount).mul(bigNumber(1e6));
-    const newStakedAmount = currentStakedAmount.add(creditingAmount);
-
-    const newCausesStats = Object.assign({}, causesStats, {
-      [cause.stakingId]: {
-        amount: newStakedAmount,
-        rank: 0,
-        isOnSpring: !!cause.isOnSpring,
-      },
-    });
-    const newRank = getCauseRank(cause, newCausesStats);
-    return newRank;
-  }
-
   render() {
-    const { classes, causesStats, cause } = this.props;
+    const { classes, causesStats, cause, amount } = this.props;
     const currentRank = getCauseRank(cause, causesStats);
-    const newRank = this.getNewRank();
+    const newRank = getNewRank(
+      cause,
+      causesStats,
+      bigNumber(amount).mul(bigNumber(1e6)),
+    );
     const increased = currentRank - newRank;
     const hasStakedBefore = !!causesStats[cause.stakingId];
     return (

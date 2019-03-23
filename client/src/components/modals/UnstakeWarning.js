@@ -11,6 +11,8 @@ import {
   unstakeExit,
 } from '../../actions';
 import dispatchStats from '../../dispatchStats';
+import { trst, bigNumber } from '../../formatter';
+import { getNewRank } from '../../utils';
 
 class UnstakeWarning extends React.Component {
   handleUnstake() {
@@ -46,17 +48,28 @@ class UnstakeWarning extends React.Component {
   }
 
   render() {
-    const { onClose, unstakeProcess } = this.props;
+    const { onClose, unstakeProcess, causesStats } = this.props;
+    const { step, activity } = unstakeProcess;
+    const newRank =
+      activity &&
+      getNewRank(
+        activity.cause,
+        causesStats,
+        bigNumber(activity.amount || 0).neg(),
+      );
     return (
       <DialogBase
-        open={unstakeProcess.step === UNSTAKE_WARNING}
+        open={step === UNSTAKE_WARNING}
         onClose={onClose}
         title="The current rank of your favorite Cause will drop"
         onSubmit={() => this.mockUnstake()}
         action="Continue"
       >
         <Typography>
-          By claiming back 3,000 TRST, Lava Mae rank will drop to 23.
+          {`By claiming back ${trst(
+            activity.amount || 0,
+          )} TRST, the ${activity.cause &&
+            activity.cause.name}'s rank will drop to ${newRank}.`}
         </Typography>
       </DialogBase>
     );
@@ -65,6 +78,7 @@ class UnstakeWarning extends React.Component {
 
 const mapStateToProps = (state) => ({
   account: state.account,
+  causesStats: state.causesStats,
   unstakeProcess: state.unstakeProcess,
   TimeLockedStaking: state.contracts.TimeLockedStaking,
 });

@@ -3,7 +3,7 @@ import axios from 'axios';
 import web3 from 'web3';
 import pickBy from 'lodash.pickby';
 import configs from './configs';
-import { networkName, prefix0x } from './formatter';
+import { networkName, prefix0x, bigNumber } from './formatter';
 
 const { toBN, padRight, toHex, padLeft, hexToBytes, bytesToHex } = web3.utils;
 
@@ -189,7 +189,7 @@ const getRanks = (filteredCausesStats) => {
 
 /**
  * Get the ranking map of Spring causes
- * @param { stakeId: { amount } } causesStats from store
+ * @param { stakeId: { amount, isOnSpring } } causesStats from store
  * @return { stakeId: rank }
  */
 export const getSpringRanks = (causesStats) => {
@@ -199,7 +199,7 @@ export const getSpringRanks = (causesStats) => {
 
 /**
  * Get the ranking map of non-Spring causes
- * @param { stakeId: { amount } } causesStats from store
+ * @param { stakeId: { amount, isOnSpring } } causesStats from store
  * @return { stakeId: rank }
  */
 export const getNonSpringRanks = (causesStats) => {
@@ -214,7 +214,7 @@ export const getNonSpringRanks = (causesStats) => {
  * @return rank
  */
 export const getCauseRank = (cause, causesStats) => {
-  if (!cause.stakingId) {
+  if (!cause || !cause.stakingId) {
     // fail silently
     return 999999;
   }
@@ -224,4 +224,30 @@ export const getCauseRank = (cause, causesStats) => {
     : getNonSpringRanks(causesStats);
 
   return ranks[cause.stakingId] || getDefaultRank(ranks);
+};
+
+/**
+ * Get new rank based on the delta amount added
+ * @param { isOnSpring, stakingId }
+ * @param { stakeId: { amount } }
+ * @param delta BigNumber could be positive or negative
+ * @return new rank
+ */
+export const getNewRank = (cause, causesStats, delta) => {
+  if (!cause || !cause.stakingId) {
+    // fail silently
+    return 999999;
+  }
+  const stats = causesStats[cause.stakingId] || {};
+  const currentStakedAmount = stats.amount || bigNumber(0);
+  const newStakedAmount = currentStakedAmount.add(delta);
+
+  const newCausesStats = Object.assign({}, causesStats, {
+    [cause.stakingId]: {
+      amount: newStakedAmount,
+      isOnSpring: !!cause.isOnSpring,
+    },
+  });
+  const newRank = getCauseRank(cause, newCausesStats);
+  return newRank;
 };
