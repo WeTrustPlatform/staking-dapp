@@ -79,6 +79,8 @@ class LeaderBoard extends React.Component {
         rank: '',
         name: '',
       };
+      // c.amount is a bigNumber and bigNumber(0) is truthy
+      // i.e. !c.amount then line is empty
       rows.push(
         <TableRow key={i} className={classes.row}>
           <TableCell>{c.rank}</TableCell>
@@ -86,7 +88,7 @@ class LeaderBoard extends React.Component {
           <TableCell className={classes.stakedAmount}>
             {c.amount ? `${trst(c.amount)} TRST` : ''}
           </TableCell>
-          <TableCell>{(c.stakers && c.stakers.size) || ''}</TableCell>
+          <TableCell>{c.amount ? c.stakers && c.stakers.size : ''}</TableCell>
         </TableRow>,
       );
     }
