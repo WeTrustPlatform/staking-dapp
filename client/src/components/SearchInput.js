@@ -58,7 +58,7 @@ class SearchInput extends React.Component {
     return (
       <MenuItem
         {...itemProps}
-        key={item.id}
+        key={item.stakingId}
         selected={isHighlighted}
         component="div"
         style={{
