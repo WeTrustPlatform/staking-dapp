@@ -38,7 +38,7 @@ exports[`tests snapshot 1`] = `
               <p
                 className="MuiTypography-root-422 MuiTypography-body1-431 Web3Account-accountText-414"
               >
-                Connect to Custom network
+                Connect to Privatenet-5777
               </p>
             </div>
           </div>

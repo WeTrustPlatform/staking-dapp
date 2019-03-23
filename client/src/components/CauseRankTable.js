@@ -28,9 +28,12 @@ class CauseRankTable extends React.Component {
 
   render() {
     const { classes, cause, causesStats } = this.props;
-    const stats = causesStats[cause.stakingId] || {};
-    // if no one has staked for this cause, rank should be N/A
-    const numberOfStakers = (stats.stakers && stats.stakers.size) || 0;
+    // if no stats then show rank N/A
+    // i.e. no one has staked for this cause
+    const stats = causesStats[cause.stakingId];
+    const rank = stats ? getCauseRank(cause, causesStats) : 'N/A';
+    const numberOfStakers = (stats && stats.stakers && stats.stakers.size) || 0;
+    const amount = (stats && stats.amount) || 0;
     return (
       <Paper>
         <Table className={classes.table} padding="dense">
@@ -47,10 +50,8 @@ class CauseRankTable extends React.Component {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell>
-                {numberOfStakers ? getCauseRank(cause, causesStats) : 'N/A'}
-              </TableCell>
-              <TableCell>{`${trst(stats.amount || 0)} TRST`}</TableCell>
+              <TableCell>{rank}</TableCell>
+              <TableCell>{`${trst(amount)} TRST`}</TableCell>
               <TableCell>{numberOfStakers}</TableCell>
             </TableRow>
           </TableBody>
