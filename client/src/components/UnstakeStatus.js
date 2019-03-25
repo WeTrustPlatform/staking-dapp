@@ -30,6 +30,15 @@ const styles = (theme) => {
 };
 
 class UnstakeStatus extends React.Component {
+  renderClaimedMessage(txHash) {
+    return (
+      <Typography noWrap>
+        <strong>Claimed - </strong>
+        <HrefLink href={txLink(txHash)}>{txHash}</HrefLink>
+      </Typography>
+    );
+  }
+
   renderClaimed() {
     const { activity } = this.props;
     // assume users only use our UI for staking and unstaking
@@ -41,14 +50,20 @@ class UnstakeStatus extends React.Component {
       activity && activity.amount && bigNumber(0).eq(activity.amount);
     return (
       balanceZero &&
-      unstakeTx && (
-        <Typography noWrap>
-          <strong>Claimed - </strong>
-          <HrefLink href={txLink(unstakeTx.transactionHash)}>
-            {unstakeTx.transactionHash}
-          </HrefLink>
-        </Typography>
-      )
+      unstakeTx &&
+      this.renderClaimedMessage(unstakeTx.transactionHash)
+    );
+  }
+
+  // render this if there's a successful tx that is cached
+  // because `refreshStates` may takes a while to pick up new transaction
+  renderSuccess() {
+    const { unstakeSuccessCache, activity } = this.props;
+    const { txHash, activityId } = unstakeSuccessCache;
+    return (
+      activity &&
+      activityId === activity.id &&
+      this.renderClaimedMessage(txHash)
     );
   }
 
@@ -79,7 +94,7 @@ class UnstakeStatus extends React.Component {
     return (
       <div>
         {canUnstake &&
-          (this.renderProcessing() || (
+          (this.renderProcessing() || this.renderSuccess() || (
             <Button
               color="primary"
               variant="contained"
@@ -101,6 +116,7 @@ class UnstakeStatus extends React.Component {
 
 const mapStateToProps = (state) => ({
   unstakeProcess: state.unstakeProcess,
+  unstakeSuccessCache: state.unstakeSuccessCache,
 });
 
 const mapDispatchToProps = (dispatch) => ({

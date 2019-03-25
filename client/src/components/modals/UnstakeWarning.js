@@ -9,11 +9,12 @@ import {
   UNSTAKE_FAILURE,
   unstake,
   unstakeExit,
+  unstakeCache,
 } from '../../actions';
 import dispatchStats from '../../dispatchStats';
 import dispatchTRSTBalance from '../../dispatchTRSTBalance';
 import { trst, bigNumber } from '../../formatter';
-import { getNewRank } from '../../utils';
+import { getNewRank, delay } from '../../utils';
 
 class UnstakeWarning extends React.Component {
   handleUnstake() {
@@ -33,8 +34,13 @@ class UnstakeWarning extends React.Component {
     TimeLockedStaking.methods
       .unstake(amount.toString(), stakeData)
       .send({ from: account })
+      .then((r) => {
+        onSuccess(activity, r.transactionHash);
+      })
       .then(() => {
-        onSuccess(activity);
+        delay(2000);
+      })
+      .then(() => {
         refreshStates(TimeLockedStaking, TRST, account);
       })
       .catch(() => {
@@ -90,7 +96,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onClose: () => dispatch(unstakeExit()),
   onStake: (activity) => dispatch(unstake(UNSTAKE_PENDING, activity)),
-  onSuccess: (activity) => dispatch(unstake(UNSTAKE_SUCCESS, activity)),
+  onSuccess: (activity, txHash) => {
+    dispatch(unstake(UNSTAKE_SUCCESS, activity));
+    dispatch(unstakeCache(activity.id, txHash));
+  },
   onFailure: (activity) => dispatch(unstake(UNSTAKE_FAILURE, activity)),
   refreshStates: (TimeLockedStaking, TRST, account) => {
     dispatchStats(dispatch, TimeLockedStaking);

@@ -11,6 +11,7 @@ import {
   UNSTAKE_WARNING,
   UNSTAKE_PENDING,
   UNSTAKE_PENDING_BACKGROUND,
+  UNSTAKE_SUCCESS_CACHE,
   UNSTAKE_FAILURE,
   UNSTAKE_SUCCESS,
 } from './actions';
@@ -24,6 +25,7 @@ const initialState = {
   usersStats: {}, // {<user>: {yourStakes: []}}
   causesStats: {}, // {<stakingId>:{amount, stakers, rank, name, isOnSpring}}
   unstakeProcess: { activity: {} }, // { step, activity }
+  unstakeSuccessCache: {}, // { activityId, txHash }
 };
 
 function reducers(state = initialState, action) {
@@ -63,6 +65,13 @@ function reducers(state = initialState, action) {
     case UNSTAKE_EXIT:
       return Object.assign({}, state, {
         unstakeProcess: { activity: {} },
+      });
+    case UNSTAKE_SUCCESS_CACHE:
+      return Object.assign({}, state, {
+        unstakeSuccessCache: {
+          activityId: action.activityId,
+          txHash: action.txHash,
+        },
       });
     case UNSTAKE_PENDING:
     case UNSTAKE_PENDING_BACKGROUND:

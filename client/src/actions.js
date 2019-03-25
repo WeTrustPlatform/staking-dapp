@@ -12,6 +12,7 @@ export const UNSTAKE_PENDING = 'UNSTAKE_PENDING';
 export const UNSTAKE_PENDING_BACKGROUND = 'UNSTAKE_PENDING_BACKGROUND';
 export const UNSTAKE_SUCCESS = 'UNSTAKE_SUCCESS';
 export const UNSTAKE_FAILURE = 'UNSTAKE_FAILURE';
+export const UNSTAKE_SUCCESS_CACHE = 'UNSTAKE_SUCCESS_CACHE';
 
 export function unlockAccount(account) {
   return { type: WEB3_UNLOCK_ACCOUNT, account };
@@ -51,4 +52,8 @@ export function unstake(step, activity) {
 
 export function unstakeExit() {
   return { type: UNSTAKE_EXIT };
+}
+
+export function unstakeCache(activityId, txHash) {
+  return { type: UNSTAKE_SUCCESS_CACHE, activityId, txHash };
 }
