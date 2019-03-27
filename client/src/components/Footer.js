@@ -63,7 +63,7 @@ const Footer = (props) => {
         <Typography
           component="a"
           className={classes.link}
-          href="/_Crypto_Unlocked_Terms_and_Conditions_v1.2.pdf"
+          href="https://github.com/WeTrustPlatform/documents/blob/master/WeTrust_Spring_Staking_ToS_v1.1.pdf"
         >
           Terms and Conditions
         </Typography>
