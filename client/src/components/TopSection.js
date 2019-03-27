@@ -31,9 +31,9 @@ class TopSection extends React.Component {
           className={classes.container}
         >
           <Typography variant="h6" align="center">
-            As a decentralized donation platform, Spring allows Trustcoin token
-            holders to decide which causes are highly ranked, and a way to add
-            new causes to the platform
+            As a decentralized fundraising platform, TRST token holders decide
+            which causes should be highly ranked, and nominate new causes to
+            join the platform
           </Typography>
         </Grid>
       </Section>

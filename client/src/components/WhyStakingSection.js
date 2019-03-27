@@ -55,8 +55,8 @@ class WhyStakingSection extends React.Component {
             </Typography>
             <br />
             <Typography variant="h6">
-              Stake your Trustcoin to help your favorite Cause more visible on
-              SPRING. Causes with the most stake assigned to them will receive
+              Stake your TRST tokens to increase visibility for your favorite
+              Causes. Causes with the most stake assigned to them will receive
               higher ranking on SPRING.
             </Typography>
           </Grid>
@@ -74,7 +74,7 @@ class WhyStakingSection extends React.Component {
             <Typography variant="h5">How to get Trustcoin</Typography>
             <br />
             <Typography variant="h6">
-              Please visit the following to obtain Trustcoin.
+              You can obtain TRST tokens from the following platforms.
             </Typography>
             <br />
             <div className={classes.row}>
@@ -118,9 +118,9 @@ class WhyStakingSection extends React.Component {
             <Typography variant="h5">Nominate any organization</Typography>
             <br />
             <Typography variant="h6">
-              Stake your Trustcoin to nominate and reserve the top spot for your
-              favorite Cause. Nominated Causes that have assigned Trustcoins
-              will automatically receive preferential placement upon joining.
+              Stake TRST tokens to nominate and reserve the top spot for your
+              favorite Causes. Nominated Causes that have staked TRST will
+              receive preferential placement upon joining the platform.
             </Typography>
           </Grid>
         </Grid>
