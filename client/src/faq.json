@@ -1,7 +1,7 @@
 [
   {
-  "question": "General overview of Staking TRST",
-    "answer": "<a href='https://medium.com/@burningw0rds/1a7f42ac2680' target='_blank'>https://medium.com/@burningw0rds/1a7f42ac2680</a>"
+  "question": "General overview of Staking TRST on Spring",
+    "answer": "Please read this blog post <a href='https://medium.com/@burningw0rds/1a7f42ac2680' target='_blank'>https://medium.com/@burningw0rds/1a7f42ac2680</a>"
   },
   {
     "question": "What does staking TRST token enable?",
@@ -20,11 +20,15 @@
     "answer": "When you stake TRST, it will be locked for a specified period of time. Once that time period has elapsed, you will be able to unstake and withdraw the coins."
   },
   {
-    "question": "What's next after this?",
-    "answer": "Depending on user feedback, we will incorporate TRST staking wherever."
+    "question": "What's next for TRST token usage after this?",
+    "answer": "We will observe user interaction on the platform, and incorporate TRST in additional areas where it can improve product usability and/or increase product virality."
   },
   {
-    "question": "What is TRST and where can I obtain TRST tokens so I can stake?",
-    "answer": "Trustcoins (TRST) are utility tokens created on the ERC20 standard to facilitate the coordination of multiple parties through incentives on the WeTrust Platform.<br/><br/>If you don’t currently own TRST tokens and would like to stake, you can obtain them by swapping other cryptocurrency you may own at <a href='https://bancor.network/' target='_blank'>Bancor</a>."
+    "question": "What are TRST tokens, where can I obtain them for staking purposes?",
+    "answer": "Trustcoins (TRST) are utility tokens created on the ERC20 standard to facilitate the coordination of multiple parties through improved incentive structures on the WeTrust Platform.<br/><br/>If you don’t currently own TRST tokens and would like to stake, you can obtain them by swapping other cryptocurrency you may own at <a href='https://bancor.network/' target='_blank'>Bancor.network</a> or <a href='https://uniswap.exchange/swap' target='_blank'>Uniswap.exchange</a>."
+  },
+  {
+    "question": "How do I get my TRST tokens to show up in Metamask?",
+    "answer": "Please read this blog post to learn how to get your TRST tokens to show up in Metamask <a href='https://blog.wetrust.io/what-is-trst-and-where-can-i-obtain-trst-so-that-i-can-stake-458910b1e152' target='_blank'>https://blog.wetrust.io/what-is-trst-and-where-can-i-obtain-trst-so-that-i-can-stake-458910b1e152</a>"
   }
 ]
