@@ -61,7 +61,7 @@ exports[`tests snapshot 1`] = `
       <h6
         className="MuiTypography-root-422 MuiTypography-h6-439 MuiTypography-alignCenter-445"
       >
-        As a decentralized donation platform, Spring allows Trustcoin token holders to decide which causes are highly ranked, and a way to add new causes to the platform
+        As a decentralized fundraising platform, TRST token holders decide which causes should be highly ranked, and nominate new causes to join the platform
       </h6>
     </div>
   </div>
@@ -90,7 +90,7 @@ exports[`tests snapshot 1`] = `
         <h6
           className="MuiTypography-root-422 MuiTypography-h6-439"
         >
-          Stake your Trustcoin to help your favorite Cause more visible on SPRING. Causes with the most stake assigned to them will receive higher ranking on SPRING.
+          Stake your TRST tokens to increase visibility for your favorite Causes. Causes with the most stake assigned to them will receive higher ranking on SPRING.
         </h6>
       </div>
       <div
@@ -112,7 +112,7 @@ exports[`tests snapshot 1`] = `
         <h6
           className="MuiTypography-root-422 MuiTypography-h6-439"
         >
-          Please visit the following to obtain Trustcoin.
+          You can obtain TRST tokens from the following platforms.
         </h6>
         <br />
         <div
@@ -171,7 +171,7 @@ exports[`tests snapshot 1`] = `
         <h6
           className="MuiTypography-root-422 MuiTypography-h6-439"
         >
-          Stake your Trustcoin to nominate and reserve the top spot for your favorite Cause. Nominated Causes that have assigned Trustcoins will automatically receive preferential placement upon joining.
+          Stake TRST tokens to nominate and reserve the top spot for your favorite Causes. Nominated Causes that have staked TRST will receive preferential placement upon joining the platform.
         </h6>
       </div>
     </div>
@@ -627,7 +627,7 @@ exports[`tests snapshot 1`] = `
               <h5
                 className="MuiTypography-root-422 MuiTypography-h5-438"
               >
-                General overview of Staking TRST
+                General overview of Staking TRST on Spring
               </h5>
             </div>
             <div
@@ -812,7 +812,7 @@ exports[`tests snapshot 1`] = `
               <h5
                 className="MuiTypography-root-422 MuiTypography-h5-438"
               >
-                What's next after this?
+                What's next for TRST token usage after this?
               </h5>
             </div>
             <div
@@ -849,7 +849,44 @@ exports[`tests snapshot 1`] = `
               <h5
                 className="MuiTypography-root-422 MuiTypography-h5-438"
               >
-                What is TRST and where can I obtain TRST tokens so I can stake?
+                What are TRST tokens, where can I obtain them for staking purposes?
+              </h5>
+            </div>
+            <div
+              className="MuiGrid-item-465 MuiGrid-grid-xs-2-494 FAQItem-gridIcon-708"
+            >
+              <span
+                aria-hidden="true"
+                className="material-icons MuiIcon-root-711"
+              >
+                add
+              </span>
+            </div>
+          </div>
+        </div>
+        <br />
+        <hr
+          className="MuiDivider-root-720 FAQItem-divider-707"
+        />
+      </div>
+      <div
+        className="FAQItem-root-706"
+      >
+        <div
+          className="FAQItem-question-709"
+          onClick={[Function]}
+          role="presentation"
+        >
+          <div
+            className="MuiGrid-container-464"
+          >
+            <div
+              className="MuiGrid-item-465 MuiGrid-grid-xs-10-502"
+            >
+              <h5
+                className="MuiTypography-root-422 MuiTypography-h5-438"
+              >
+                How do I get my TRST tokens to show up in Metamask?
               </h5>
             </div>
             <div
@@ -897,7 +934,7 @@ exports[`tests snapshot 1`] = `
       </a>
       <a
         className="MuiTypography-root-422 MuiTypography-body1-431 Footer-link-726"
-        href="/_Crypto_Unlocked_Terms_and_Conditions_v1.2.pdf"
+        href="https://github.com/WeTrustPlatform/documents/blob/master/WeTrust_Spring_Staking_ToS_v1.1.pdf"
       >
         Terms and Conditions
       </a>

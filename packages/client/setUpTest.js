@@ -17,7 +17,7 @@ const createServer = () =>
       ],
     });
 
-    const port = process.env.TEST_RPC_PORT || 7546;
+    const port = process.env.TEST_RPC_PORT || 7545;
     server.listen(port, (err) => {
       if (err) throw err;
 

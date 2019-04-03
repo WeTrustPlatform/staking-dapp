@@ -23,7 +23,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "eslint 'src/**/*.js'",
-    "test": "react-scripts test --watchAll=false",
+    "test": "TEST_RPC_PORT=7546 react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
