@@ -1,4 +1,6 @@
-{
+const path = require('path');
+
+module.exports = {
   "extends": ["airbnb", "react-app", "prettier"],
   "plugins": ["prettier"],
   "env": {
@@ -18,10 +20,19 @@
     "no-await-in-loop": "off",
     "no-underscore-dangle": "off",
     "global-require": "off",
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.test.js", "**/*.spec.js"],
+        "packageDir": [
+          path.join(__dirname),
+          path.join(__dirname, '../../'),
+        ]
+      }
+    ],
     "class-methods-use-this": "off",
     "react/prop-types": "off",
     "react/jsx-filename-extension": "off",
     "react/prefer-stateless-function": "off",
   }
-}
+};
