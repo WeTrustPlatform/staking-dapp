@@ -9,6 +9,7 @@ Stake TRST for Your Favorite NPO's
 ### Smart contracts
 - Install dependencies:
 ```
+cd packages/truffle
 yarn
 ```
 
@@ -24,13 +25,9 @@ yarn deploy
 ```
 
 ### Web app
-- The web application is in `client/`  So make sure you are inside the client folder.
-```
-cd client
-```
-
 - Install dependencies:
 ```
+cd packages/client
 yarn
 ```
 
