@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "10.15.1"
 env:
-  - TEST_DIR=./
-  - TEST_DIR=./client
+  - TEST_DIR=./packages/truffle
+  - TEST_DIR=./packages/client
 script:
   - cd $TEST_DIR && yarn && yarn lint && yarn test
