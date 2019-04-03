@@ -6,13 +6,24 @@ Stake TRST for Your Favorite NPO's
 - [Yarn](https://yarnpkg.com/en/)
 - [Ganache CLI](https://github.com/trufflesuite/ganache-cli)
 
-### Smart contracts
-- Install dependencies:
+### Install dependencies
+- This will install all the dependencies of all the packages
 ```
-cd packages/truffle
 yarn
 ```
 
+- To add a new dependency in a package:
+```
+cd packages/<package-name>
+yarn add <dependency-name>
+```
+
+- To add a common devDependency:
+```
+yarn add -D <devDependency-name> -W 
+```
+
+### Smart contracts
 - Launch local blockchain testnet:
 ```
 ganache-cli -p 7545 -i 5777 -m "goat junior borrow october horse sugar enlist bomb seek box carbon fat"
@@ -25,12 +36,6 @@ yarn deploy
 ```
 
 ### Web app
-- Install dependencies:
-```
-cd packages/client
-yarn
-```
-
 - Launch the web server:
 ```
 yarn start
