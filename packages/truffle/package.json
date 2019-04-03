@@ -12,5 +12,8 @@
     "test": "truffle test --network test"
   },
   "author": "WeTrustPlatform",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "dependencies": {
+    "web3": "1.0.0-beta.37"
+  }
 }

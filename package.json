@@ -1,7 +1,9 @@
 {
   "name": "root",
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
     "babel-eslint": "9.x",
     "eslint": "^5.10.0",
@@ -20,8 +22,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^1.16.4",
     "react-test-renderer": "^16.6.3",
-    "truffle": "^5.0.0",
-    "web3": "^1.0.0-beta.37"
+    "truffle": "^5.0.0"
   },
   "dependencies": {
     "staking-dapp-client": "file:packages/client",
