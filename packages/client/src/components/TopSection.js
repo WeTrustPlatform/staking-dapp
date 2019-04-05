@@ -11,6 +11,8 @@ const styles = (theme) => {
     container: {
       margin: 'auto',
       maxWidth: theme.breakpoints.values.md,
+      paddingLeft: 12,
+      paddingRight: 12,
     },
   };
 };

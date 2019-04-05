@@ -27,6 +27,8 @@ const styles = (theme) => ({
     [theme.breakpoints.down('sm')]: {
       marginTop: theme.mixins.toolbar.minHeight,
       marginBottom: theme.mixins.toolbar.minHeight,
+      borderRight: 'none',
+      borderLeft: 'none',
     },
   },
   row: {
