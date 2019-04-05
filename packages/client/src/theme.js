@@ -55,7 +55,7 @@ const theme = createMuiTheme({
     h3: titleFont,
     h4: {
       fontSize: 36,
-      lineHeight: '32px',
+      lineHeight: '42px',
       ...titleFont,
     },
     h5: {
