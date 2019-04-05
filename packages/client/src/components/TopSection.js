@@ -6,11 +6,8 @@ import Section from './Section';
 import SectionHeader from './SectionHeader';
 
 const styles = (theme) => {
-  const navHeight = theme.mixins.toolbar.minHeight;
   return {
-    root: {
-      marginTop: navHeight * 1.5,
-    },
+    root: {},
     container: {
       margin: 'auto',
       maxWidth: theme.breakpoints.values.md,
