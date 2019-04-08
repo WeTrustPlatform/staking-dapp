@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import cx from 'classnames';
 
 const styles = (theme) => ({
   link: {
@@ -9,13 +10,13 @@ const styles = (theme) => ({
 
 class HrefLink extends React.Component {
   render() {
-    const { href, children, classes } = this.props;
+    const { href, children, classes, className } = this.props;
     return (
       <a
         target="_blank"
         rel="noopener noreferrer"
         href={href}
-        className={classes.link}
+        className={cx(classes.link, className)}
       >
         {children}
       </a>

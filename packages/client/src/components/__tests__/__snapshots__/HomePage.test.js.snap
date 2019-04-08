@@ -10,62 +10,57 @@ exports[`tests snapshot 1`] = `
         className="Navbar-universalBar-374"
       >
         <a
-          className="HrefLink-link-412"
+          className="HrefLink-link-412 Navbar-universalBarItem-375"
           href="https://wetrust.io"
           rel="noopener noreferrer"
           target="_blank"
         >
           <img
             alt="WeTrust"
-            className="Navbar-universalBarItem-375"
             src="we-trust-global-logo.svg"
           />
         </a>
         <a
-          className="HrefLink-link-412"
+          className="HrefLink-link-412 Navbar-universalBarItem-375"
           href="https://spring.wetrust.io"
           rel="noopener noreferrer"
           target="_blank"
         >
           <img
             alt="Spring"
-            className="Navbar-universalBarItem-375"
             src="spring-global-logo.svg"
           />
         </a>
         <a
-          className="HrefLink-link-412"
+          className="HrefLink-link-412 Navbar-universalBarItem-375"
           href="https://staking.wetrust.io"
           rel="noopener noreferrer"
           target="_blank"
         >
           <img
             alt="Staking"
-            className="Navbar-universalBarItem-375"
             src="staking-global-logo.svg"
           />
         </a>
         <a
-          className="HrefLink-link-412"
+          className="HrefLink-link-412 Navbar-universalBarItem-375"
           href="https://tlc.wetrust.io"
           rel="noopener noreferrer"
           target="_blank"
         >
           <img
             alt="TLC"
-            className="Navbar-universalBarItem-375"
             src="trusted-lending-circles-global-logo.svg"
           />
         </a>
         <a
-          className="HrefLink-link-412"
+          className="HrefLink-link-412 Navbar-universalBarItem-375"
           href="https://cryptounlocked.wetrust.io"
           rel="noopener noreferrer"
           target="_blank"
         >
           <img
             alt="CryptoUnlocked"
-            className="Navbar-universalBarItem-375"
             src="crypto-unlocked-global-logo.svg"
           />
         </a>

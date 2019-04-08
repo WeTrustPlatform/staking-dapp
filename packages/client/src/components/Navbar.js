@@ -32,6 +32,8 @@ const styles = (theme) => {
     },
     universalBarItem: {
       margin: 'auto 36px',
+      display: 'flex',
+      alignItems: 'center',
     },
   };
 };
@@ -43,40 +45,35 @@ class Navbar extends React.Component {
       <div>
         <AppBar position="relative">
           <div className={classes.universalBar}>
-            <HrefLink href="https://wetrust.io">
-              <img
-                className={classes.universalBarItem}
-                alt="WeTrust"
-                src={wetrustLogo}
-              />
+            <HrefLink
+              className={classes.universalBarItem}
+              href="https://wetrust.io"
+            >
+              <img alt="WeTrust" src={wetrustLogo} />
             </HrefLink>
-            <HrefLink href="https://spring.wetrust.io">
-              <img
-                className={classes.universalBarItem}
-                alt="Spring"
-                src={springLogo}
-              />
+            <HrefLink
+              className={classes.universalBarItem}
+              href="https://spring.wetrust.io"
+            >
+              <img alt="Spring" src={springLogo} />
             </HrefLink>
-            <HrefLink href="https://staking.wetrust.io">
-              <img
-                className={classes.universalBarItem}
-                alt="Staking"
-                src={stakingLogo}
-              />
+            <HrefLink
+              className={classes.universalBarItem}
+              href="https://staking.wetrust.io"
+            >
+              <img alt="Staking" src={stakingLogo} />
             </HrefLink>
-            <HrefLink href="https://tlc.wetrust.io">
-              <img
-                className={classes.universalBarItem}
-                alt="TLC"
-                src={tlcLogo}
-              />
+            <HrefLink
+              className={classes.universalBarItem}
+              href="https://tlc.wetrust.io"
+            >
+              <img alt="TLC" src={tlcLogo} />
             </HrefLink>
-            <HrefLink href="https://cryptounlocked.wetrust.io">
-              <img
-                className={classes.universalBarItem}
-                alt="CryptoUnlocked"
-                src={cuLogo}
-              />
+            <HrefLink
+              className={classes.universalBarItem}
+              href="https://cryptounlocked.wetrust.io"
+            >
+              <img alt="CryptoUnlocked" src={cuLogo} />
             </HrefLink>
           </div>
           <Toolbar>
