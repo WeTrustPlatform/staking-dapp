@@ -4,28 +4,92 @@ exports[`tests snapshot 1`] = `
 <div>
   <div>
     <header
-      className="MuiPaper-root-381 MuiPaper-elevation4-387 MuiAppBar-root-372 MuiAppBar-positionFixed-373 MuiAppBar-colorPrimary-379 mui-fixed"
+      className="MuiPaper-root-385 MuiPaper-elevation4-391 MuiAppBar-root-376 MuiAppBar-positionRelative-381 MuiAppBar-colorPrimary-383"
     >
       <div
-        className="MuiToolbar-root-408 MuiToolbar-regular-410 MuiToolbar-gutters-409"
+        className="Navbar-universalBar-374"
       >
-        <div
-          className="Navbar-grow-370"
+        <a
+          className="HrefLink-link-412"
+          href="https://wetrust.io"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           <img
             alt="WeTrust"
-            className="Navbar-brandImage-371"
+            className="Navbar-universalBarItem-375"
+            src="we-trust-global-logo.svg"
+          />
+        </a>
+        <a
+          className="HrefLink-link-412"
+          href="https://spring.wetrust.io"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img
+            alt="Spring"
+            className="Navbar-universalBarItem-375"
+            src="spring-global-logo.svg"
+          />
+        </a>
+        <a
+          className="HrefLink-link-412"
+          href="https://staking.wetrust.io"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img
+            alt="Staking"
+            className="Navbar-universalBarItem-375"
+            src="staking-global-logo.svg"
+          />
+        </a>
+        <a
+          className="HrefLink-link-412"
+          href="https://tlc.wetrust.io"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img
+            alt="TLC"
+            className="Navbar-universalBarItem-375"
+            src="trusted-lending-circles-global-logo.svg"
+          />
+        </a>
+        <a
+          className="HrefLink-link-412"
+          href="https://cryptounlocked.wetrust.io"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img
+            alt="CryptoUnlocked"
+            className="Navbar-universalBarItem-375"
+            src="crypto-unlocked-global-logo.svg"
+          />
+        </a>
+      </div>
+      <div
+        className="MuiToolbar-root-413 MuiToolbar-regular-415 MuiToolbar-gutters-414"
+      >
+        <div
+          className="Navbar-grow-372"
+        >
+          <img
+            alt="WeTrust"
+            className="Navbar-brandImage-373"
             src="wetrust-logo.svg"
           />
         </div>
         <ul
-          className="MuiList-root-418 MuiList-padding-419"
+          className="MuiList-root-423 MuiList-padding-424"
         >
           <div
-            className="Web3Account-accountContainer-416"
+            className="Web3Account-accountContainer-421"
           >
             <div
-              className="Web3Account-accountImageWrapper-417"
+              className="Web3Account-accountImageWrapper-422"
             >
               <img
                 alt="metamask fox icon"
@@ -36,7 +100,7 @@ exports[`tests snapshot 1`] = `
             </div>
             <div>
               <p
-                className="MuiTypography-root-422 MuiTypography-body1-431 Web3Account-accountText-414"
+                className="MuiTypography-root-427 MuiTypography-body1-436 Web3Account-accountText-419"
               >
                 Connect to Privatenet-5777
               </p>
@@ -47,32 +111,32 @@ exports[`tests snapshot 1`] = `
     </header>
   </div>
   <div
-    className="Section-root-460 Section-light-462 TopSection-root-458"
+    className="Section-root-465 Section-light-467 TopSection-root-463"
     id="top-section"
   >
     <h4
-      className="MuiTypography-root-422 MuiTypography-h4-437 MuiTypography-colorSecondary-453 MuiTypography-alignCenter-445 SectionHeader-container-463"
+      className="MuiTypography-root-427 MuiTypography-h4-442 MuiTypography-colorSecondary-458 MuiTypography-alignCenter-450 SectionHeader-container-468"
     >
       Help curate the SPRING directory
     </h4>
     <div
-      className="MuiGrid-container-464 MuiGrid-justify-xs-center-481 TopSection-container-459"
+      className="MuiGrid-container-469 MuiGrid-justify-xs-center-486 TopSection-container-464"
     >
       <h6
-        className="MuiTypography-root-422 MuiTypography-h6-439 MuiTypography-alignCenter-445"
+        className="MuiTypography-root-427 MuiTypography-h6-444 MuiTypography-alignCenter-450"
       >
         As a decentralized fundraising platform, TRST token holders decide which causes should be highly ranked, and nominate new causes to join the platform
       </h6>
     </div>
   </div>
   <div
-    className="Section-root-460 Section-dark-461"
+    className="Section-root-465 Section-dark-466"
   >
     <div
-      className="MuiGrid-container-464 MuiGrid-justify-xs-center-481 WhyStakingSection-container-561"
+      className="MuiGrid-container-469 MuiGrid-justify-xs-center-486 WhyStakingSection-container-566"
     >
       <div
-        className="MuiGrid-item-465 MuiGrid-grid-xs-12-504 MuiGrid-grid-sm-12-518 MuiGrid-grid-md-4-524 WhyStakingSection-gridItem-562"
+        className="MuiGrid-item-470 MuiGrid-grid-xs-12-509 MuiGrid-grid-sm-12-523 MuiGrid-grid-md-4-529 WhyStakingSection-gridItem-567"
       >
         <div>
           <img
@@ -82,19 +146,19 @@ exports[`tests snapshot 1`] = `
         </div>
         <br />
         <h5
-          className="MuiTypography-root-422 MuiTypography-h5-438"
+          className="MuiTypography-root-427 MuiTypography-h5-443"
         >
           Increase your Rank on the SPRING directory
         </h5>
         <br />
         <h6
-          className="MuiTypography-root-422 MuiTypography-h6-439"
+          className="MuiTypography-root-427 MuiTypography-h6-444"
         >
           Stake your TRST tokens to increase visibility for your favorite Causes. Causes with the most stake assigned to them will receive higher ranking on SPRING.
         </h6>
       </div>
       <div
-        className="MuiGrid-item-465 MuiGrid-grid-xs-12-504 MuiGrid-grid-sm-12-518 MuiGrid-grid-md-4-524 WhyStakingSection-gridItem-562 WhyStakingSection-midItem-563"
+        className="MuiGrid-item-470 MuiGrid-grid-xs-12-509 MuiGrid-grid-sm-12-523 MuiGrid-grid-md-4-529 WhyStakingSection-gridItem-567 WhyStakingSection-midItem-568"
       >
         <div>
           <img
@@ -104,22 +168,22 @@ exports[`tests snapshot 1`] = `
         </div>
         <br />
         <h5
-          className="MuiTypography-root-422 MuiTypography-h5-438"
+          className="MuiTypography-root-427 MuiTypography-h5-443"
         >
           How to get Trustcoin
         </h5>
         <br />
         <h6
-          className="MuiTypography-root-422 MuiTypography-h6-439"
+          className="MuiTypography-root-427 MuiTypography-h6-444"
         >
           You can obtain TRST tokens from the following platforms.
         </h6>
         <br />
         <div
-          className="WhyStakingSection-row-564"
+          className="WhyStakingSection-row-569"
         >
           <div
-            className="WhyStakingSection-rowItem-565"
+            className="WhyStakingSection-rowItem-570"
           >
             <a
               href="https://www.bancor.network/"
@@ -135,7 +199,7 @@ exports[`tests snapshot 1`] = `
             </a>
           </div>
           <div
-            className="WhyStakingSection-rowItem-565"
+            className="WhyStakingSection-rowItem-570"
           >
             <a
               href="https://uniswap.io/"
@@ -153,7 +217,7 @@ exports[`tests snapshot 1`] = `
         </div>
       </div>
       <div
-        className="MuiGrid-item-465 MuiGrid-grid-xs-12-504 MuiGrid-grid-sm-12-518 MuiGrid-grid-md-4-524 WhyStakingSection-gridItem-562"
+        className="MuiGrid-item-470 MuiGrid-grid-xs-12-509 MuiGrid-grid-sm-12-523 MuiGrid-grid-md-4-529 WhyStakingSection-gridItem-567"
       >
         <div>
           <img
@@ -163,13 +227,13 @@ exports[`tests snapshot 1`] = `
         </div>
         <br />
         <h5
-          className="MuiTypography-root-422 MuiTypography-h5-438"
+          className="MuiTypography-root-427 MuiTypography-h5-443"
         >
           Nominate any organization
         </h5>
         <br />
         <h6
-          className="MuiTypography-root-422 MuiTypography-h6-439"
+          className="MuiTypography-root-427 MuiTypography-h6-444"
         >
           Stake TRST tokens to nominate and reserve the top spot for your favorite Causes. Nominated Causes that have staked TRST will receive preferential placement upon joining the platform.
         </h6>
@@ -177,40 +241,40 @@ exports[`tests snapshot 1`] = `
     </div>
   </div>
   <div
-    className="Section-root-460 Section-light-462"
+    className="Section-root-465 Section-light-467"
     id="main-section"
   >
     <h4
-      className="MuiTypography-root-422 MuiTypography-h4-437 MuiTypography-colorSecondary-453 MuiTypography-alignCenter-445 SectionHeader-container-463"
+      className="MuiTypography-root-427 MuiTypography-h4-442 MuiTypography-colorSecondary-458 MuiTypography-alignCenter-450 SectionHeader-container-468"
     >
       Start staking
     </h4>
     <div
-      className="StakeNow-root-566"
+      className="StakeNow-root-571"
     >
       <div
         aria-expanded={false}
         aria-haspopup="listbox"
         aria-labelledby="downshift-1-label"
         aria-owns={null}
-        className="SearchInput-container-571"
+        className="SearchInput-container-576"
         role="combobox"
       >
         <div
-          className="MuiFormControl-root-573 MuiFormControl-marginNormal-574 MuiFormControl-fullWidth-576"
+          className="MuiFormControl-root-578 MuiFormControl-marginNormal-579 MuiFormControl-fullWidth-581"
         >
           <div
             aria-activedescendant={null}
             aria-autocomplete="list"
             aria-controls={null}
             aria-labelledby="downshift-1-label"
-            className="MuiInputBase-root-590 MuiInput-root-577 MuiInputBase-fullWidth-599 MuiInput-fullWidth-584 MuiInputBase-formControl-591 MuiInput-formControl-578"
+            className="MuiInputBase-root-595 MuiInput-root-582 MuiInputBase-fullWidth-604 MuiInput-fullWidth-589 MuiInputBase-formControl-596 MuiInput-formControl-583"
             onClick={[Function]}
           >
             <input
               aria-invalid={false}
               autoComplete="off"
-              className="MuiInputBase-input-600 MuiInput-input-585 MuiInputBase-inputType-603 MuiInput-inputType-588 MuiInputBase-inputTypeSearch-604 MuiInput-inputTypeSearch-589"
+              className="MuiInputBase-input-605 MuiInput-input-590 MuiInputBase-inputType-608 MuiInput-inputType-593 MuiInputBase-inputTypeSearch-609 MuiInput-inputTypeSearch-594"
               disabled={false}
               id="downshift-1-input"
               onBlur={[Function]}
@@ -226,13 +290,13 @@ exports[`tests snapshot 1`] = `
         </div>
       </div>
       <div
-        className="MuiGrid-container-464 MuiGrid-justify-xs-center-481 StakeNow-stake-567"
+        className="MuiGrid-container-469 MuiGrid-justify-xs-center-486 StakeNow-stake-572"
       >
         <div
-          className="MuiGrid-item-465 MuiGrid-grid-xs-10-502 MuiGrid-grid-sm-8-514 MuiGrid-grid-md-4-524 StakeNow-button-570"
+          className="MuiGrid-item-470 MuiGrid-grid-xs-10-507 MuiGrid-grid-sm-8-519 MuiGrid-grid-md-4-529 StakeNow-button-575"
         >
           <button
-            className="MuiButtonBase-root-633 MuiButton-root-607 MuiButton-contained-618 MuiButton-containedPrimary-619 MuiButton-raised-621 MuiButton-raisedPrimary-622 MuiButton-sizeLarge-631 MuiButton-fullWidth-632"
+            className="MuiButtonBase-root-638 MuiButton-root-612 MuiButton-contained-623 MuiButton-containedPrimary-624 MuiButton-raised-626 MuiButton-raisedPrimary-627 MuiButton-sizeLarge-636 MuiButton-fullWidth-637"
             disabled={false}
             onBlur={[Function]}
             onClick={[Function]}
@@ -250,25 +314,25 @@ exports[`tests snapshot 1`] = `
             type="button"
           >
             <span
-              className="MuiButton-label-608"
+              className="MuiButton-label-613"
             >
               Stake Now
             </span>
             <span
-              className="MuiTouchRipple-root-732"
+              className="MuiTouchRipple-root-736"
             />
           </button>
         </div>
       </div>
     </div>
     <div
-      className="MuiGrid-container-464 MuiGrid-justify-xs-center-481"
+      className="MuiGrid-container-469 MuiGrid-justify-xs-center-486"
     >
       <h6
-        className="MuiTypography-root-422 MuiTypography-h6-439"
+        className="MuiTypography-root-427 MuiTypography-h6-444"
       >
         <a
-          className="HrefLink-link-656"
+          className="HrefLink-link-412"
           href="https://www.bancor.network/"
           rel="noopener noreferrer"
           target="_blank"
@@ -279,57 +343,57 @@ exports[`tests snapshot 1`] = `
     </div>
   </div>
   <div
-    className="Section-root-460 Section-dark-461"
+    className="Section-root-465 Section-dark-466"
     id="activities-section"
   >
     <h4
-      className="MuiTypography-root-422 MuiTypography-h4-437 MuiTypography-colorSecondary-453 MuiTypography-alignCenter-445 SectionHeader-container-463"
+      className="MuiTypography-root-427 MuiTypography-h4-442 MuiTypography-colorSecondary-458 MuiTypography-alignCenter-450 SectionHeader-container-468"
     >
       Your Stakes
     </h4>
     <div
-      className="MuiPaper-root-381 MuiPaper-elevation2-385 MuiPaper-rounded-382 YourStakesSection-paper-657"
+      className="MuiPaper-root-385 MuiPaper-elevation2-389 MuiPaper-rounded-386 YourStakesSection-paper-661"
     >
       <table
-        className="MuiTable-root-664 YourStakesSection-table-658"
+        className="MuiTable-root-668 YourStakesSection-table-662"
       >
         <thead
-          className="MuiTableHead-root-665"
+          className="MuiTableHead-root-669"
         >
           <tr
-            className="MuiTableRow-root-666 MuiTableRow-head-669"
+            className="MuiTableRow-root-670 MuiTableRow-head-673"
           >
             <th
               aria-sort={null}
-              className="MuiTableCell-root-671 MuiTableCell-head-672 MuiTableCell-paddingDense-676"
+              className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingDense-680"
               scope="col"
             >
               Cause name
             </th>
             <th
               aria-sort={null}
-              className="MuiTableCell-root-671 MuiTableCell-head-672 MuiTableCell-paddingDense-676"
+              className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingDense-680"
               scope="col"
             >
               Stake amount
             </th>
             <th
               aria-sort={null}
-              className="MuiTableCell-root-671 MuiTableCell-head-672 MuiTableCell-paddingDense-676"
+              className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingDense-680"
               scope="col"
             >
               Locked until
             </th>
             <th
               aria-sort={null}
-              className="MuiTableCell-root-671 MuiTableCell-head-672 MuiTableCell-paddingDense-676"
+              className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingDense-680"
               scope="col"
             >
               Status
             </th>
             <th
               aria-sort={null}
-              className="MuiTableCell-root-671 MuiTableCell-head-672 MuiTableCell-paddingDense-676"
+              className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingDense-680"
               scope="col"
             >
               Tx hash
@@ -337,18 +401,18 @@ exports[`tests snapshot 1`] = `
           </tr>
         </thead>
         <tbody
-          className="MuiTableBody-root-683"
+          className="MuiTableBody-root-687"
         >
           <tr
-            className="MuiTableRow-root-666"
+            className="MuiTableRow-root-670"
           >
             <td
               aria-sort={null}
-              className="MuiTableCell-root-671 MuiTableCell-body-673 MuiTableCell-paddingDense-676"
+              className="MuiTableCell-root-675 MuiTableCell-body-677 MuiTableCell-paddingDense-680"
               colSpan={5}
             >
               <div
-                className="YourStakesSection-noActivities-662"
+                className="YourStakesSection-noActivities-666"
               >
                 You have 0 transaction in Your Stakes history. 
                 <a
@@ -365,70 +429,70 @@ exports[`tests snapshot 1`] = `
     </div>
   </div>
   <div
-    className="Section-root-460 Section-light-462"
+    className="Section-root-465 Section-light-467"
   >
     <div
-      className="MuiGrid-container-464 MuiGrid-justify-xs-center-481 RankingSection-container-685"
+      className="MuiGrid-container-469 MuiGrid-justify-xs-center-486 RankingSection-container-689"
     >
       <div
-        className="MuiGrid-item-465 MuiGrid-grid-xs-12-504 MuiGrid-grid-sm-12-518 MuiGrid-grid-md-6-526 RankingSection-gridItem-686"
+        className="MuiGrid-item-470 MuiGrid-grid-xs-12-509 MuiGrid-grid-sm-12-523 MuiGrid-grid-md-6-531 RankingSection-gridItem-690"
       >
         <div>
           <div>
             <h5
-              className="MuiTypography-root-422 MuiTypography-h5-438"
+              className="MuiTypography-root-427 MuiTypography-h5-443"
             >
               Most staked Causes
             </h5>
           </div>
           <div
-            className="LeaderBoard-subtitle-688"
+            className="LeaderBoard-subtitle-692"
           >
             <h6
-              className="MuiTypography-root-422 MuiTypography-h6-439"
+              className="MuiTypography-root-427 MuiTypography-h6-444"
             >
               The following causes have been granted higher ranking by Trustcoin holders.
             </h6>
           </div>
           <div
-            className="LeaderBoard-causesStats-689"
+            className="LeaderBoard-causesStats-693"
           >
             <div
-              className="MuiPaper-root-381 MuiPaper-elevation2-385 MuiPaper-rounded-382"
+              className="MuiPaper-root-385 MuiPaper-elevation2-389 MuiPaper-rounded-386"
             >
               <table
-                className="MuiTable-root-664"
+                className="MuiTable-root-668"
               >
                 <thead
-                  className="MuiTableHead-root-665"
+                  className="MuiTableHead-root-669"
                 >
                   <tr
-                    className="MuiTableRow-root-666 MuiTableRow-head-669"
+                    className="MuiTableRow-root-670 MuiTableRow-head-673"
                   >
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-671 MuiTableCell-head-672 MuiTableCell-paddingNone-678"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
                       scope="col"
                     >
                       Rank
                     </th>
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-671 MuiTableCell-head-672 MuiTableCell-paddingNone-678"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
                       scope="col"
                     >
                       Cause name
                     </th>
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-671 MuiTableCell-head-672 MuiTableCell-paddingNone-678"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
                       scope="col"
                     >
                       Staked amount
                     </th>
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-671 MuiTableCell-head-672 MuiTableCell-paddingNone-678"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
                       scope="col"
                     >
                       Stakers
@@ -436,21 +500,21 @@ exports[`tests snapshot 1`] = `
                   </tr>
                 </thead>
                 <tbody
-                  className="MuiTableBody-root-683 LeaderBoard-tableBody-693"
+                  className="MuiTableBody-root-687 LeaderBoard-tableBody-697"
                 >
                   <tr
-                    className="MuiTableRow-root-666"
+                    className="MuiTableRow-root-670"
                   >
                     <td
                       aria-sort={null}
-                      className="MuiTableCell-root-671 MuiTableCell-body-673 MuiTableCell-paddingNone-678"
+                      className="MuiTableCell-root-675 MuiTableCell-body-677 MuiTableCell-paddingNone-682"
                       colSpan={4}
                     >
                       <div
-                        className="LeaderBoard-loading-692"
+                        className="LeaderBoard-loading-696"
                       >
                         <div
-                          className="MuiCircularProgress-root-695 MuiCircularProgress-colorSecondary-699 MuiCircularProgress-indeterminate-697"
+                          className="MuiCircularProgress-root-699 MuiCircularProgress-colorSecondary-703 MuiCircularProgress-indeterminate-701"
                           role="progressbar"
                           style={
                             Object {
@@ -460,11 +524,11 @@ exports[`tests snapshot 1`] = `
                           }
                         >
                           <svg
-                            className="MuiCircularProgress-svg-700"
+                            className="MuiCircularProgress-svg-704"
                             viewBox="22 22 44 44"
                           >
                             <circle
-                              className="MuiCircularProgress-circle-701 MuiCircularProgress-circleIndeterminate-703"
+                              className="MuiCircularProgress-circle-705 MuiCircularProgress-circleIndeterminate-707"
                               cx={44}
                               cy={44}
                               fill="none"
@@ -484,64 +548,64 @@ exports[`tests snapshot 1`] = `
         </div>
       </div>
       <div
-        className="MuiGrid-item-465 MuiGrid-grid-xs-12-504 MuiGrid-grid-sm-12-518 MuiGrid-grid-md-6-526 RankingSection-gridItem-686 RankingSection-bottomItem-687"
+        className="MuiGrid-item-470 MuiGrid-grid-xs-12-509 MuiGrid-grid-sm-12-523 MuiGrid-grid-md-6-531 RankingSection-gridItem-690 RankingSection-bottomItem-691"
       >
         <div>
           <div>
             <h5
-              className="MuiTypography-root-422 MuiTypography-h5-438"
+              className="MuiTypography-root-427 MuiTypography-h5-443"
             >
               Nominated Causes
             </h5>
           </div>
           <div
-            className="LeaderBoard-subtitle-688"
+            className="LeaderBoard-subtitle-692"
           >
             <h6
-              className="MuiTypography-root-422 MuiTypography-h6-439"
+              className="MuiTypography-root-427 MuiTypography-h6-444"
             >
               The following causes have been nominated by Trustcoin holders.
             </h6>
           </div>
           <div
-            className="LeaderBoard-causesStats-689"
+            className="LeaderBoard-causesStats-693"
           >
             <div
-              className="MuiPaper-root-381 MuiPaper-elevation2-385 MuiPaper-rounded-382"
+              className="MuiPaper-root-385 MuiPaper-elevation2-389 MuiPaper-rounded-386"
             >
               <table
-                className="MuiTable-root-664"
+                className="MuiTable-root-668"
               >
                 <thead
-                  className="MuiTableHead-root-665"
+                  className="MuiTableHead-root-669"
                 >
                   <tr
-                    className="MuiTableRow-root-666 MuiTableRow-head-669"
+                    className="MuiTableRow-root-670 MuiTableRow-head-673"
                   >
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-671 MuiTableCell-head-672 MuiTableCell-paddingNone-678"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
                       scope="col"
                     >
                       Rank
                     </th>
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-671 MuiTableCell-head-672 MuiTableCell-paddingNone-678"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
                       scope="col"
                     >
                       Cause name
                     </th>
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-671 MuiTableCell-head-672 MuiTableCell-paddingNone-678"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
                       scope="col"
                     >
                       Staked amount
                     </th>
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-671 MuiTableCell-head-672 MuiTableCell-paddingNone-678"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
                       scope="col"
                     >
                       Stakers
@@ -549,21 +613,21 @@ exports[`tests snapshot 1`] = `
                   </tr>
                 </thead>
                 <tbody
-                  className="MuiTableBody-root-683 LeaderBoard-tableBody-693"
+                  className="MuiTableBody-root-687 LeaderBoard-tableBody-697"
                 >
                   <tr
-                    className="MuiTableRow-root-666"
+                    className="MuiTableRow-root-670"
                   >
                     <td
                       aria-sort={null}
-                      className="MuiTableCell-root-671 MuiTableCell-body-673 MuiTableCell-paddingNone-678"
+                      className="MuiTableCell-root-675 MuiTableCell-body-677 MuiTableCell-paddingNone-682"
                       colSpan={4}
                     >
                       <div
-                        className="LeaderBoard-loading-692"
+                        className="LeaderBoard-loading-696"
                       >
                         <div
-                          className="MuiCircularProgress-root-695 MuiCircularProgress-colorSecondary-699 MuiCircularProgress-indeterminate-697"
+                          className="MuiCircularProgress-root-699 MuiCircularProgress-colorSecondary-703 MuiCircularProgress-indeterminate-701"
                           role="progressbar"
                           style={
                             Object {
@@ -573,11 +637,11 @@ exports[`tests snapshot 1`] = `
                           }
                         >
                           <svg
-                            className="MuiCircularProgress-svg-700"
+                            className="MuiCircularProgress-svg-704"
                             viewBox="22 22 44 44"
                           >
                             <circle
-                              className="MuiCircularProgress-circle-701 MuiCircularProgress-circleIndeterminate-703"
+                              className="MuiCircularProgress-circle-705 MuiCircularProgress-circleIndeterminate-707"
                               cx={44}
                               cy={44}
                               fill="none"
@@ -599,43 +663,43 @@ exports[`tests snapshot 1`] = `
     </div>
   </div>
   <div
-    className="Section-root-460 Section-dark-461"
+    className="Section-root-465 Section-dark-466"
     id="faq-section"
   >
     <h4
-      className="MuiTypography-root-422 MuiTypography-h4-437 MuiTypography-colorSecondary-453 MuiTypography-alignCenter-445 SectionHeader-container-463"
+      className="MuiTypography-root-427 MuiTypography-h4-442 MuiTypography-colorSecondary-458 MuiTypography-alignCenter-450 SectionHeader-container-468"
     >
       FAQ
     </h4>
     <div
-      className="FAQSection-container-705"
+      className="FAQSection-container-709"
     >
       <div
-        className="FAQItem-root-706"
+        className="FAQItem-root-710"
       >
         <div
-          className="FAQItem-question-709"
+          className="FAQItem-question-713"
           onClick={[Function]}
           role="presentation"
         >
           <div
-            className="MuiGrid-container-464"
+            className="MuiGrid-container-469"
           >
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-10-502"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-10-507"
             >
               <h5
-                className="MuiTypography-root-422 MuiTypography-h5-438"
+                className="MuiTypography-root-427 MuiTypography-h5-443"
               >
                 General overview of Staking TRST on Spring
               </h5>
             </div>
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-2-494 FAQItem-gridIcon-708"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-2-499 FAQItem-gridIcon-712"
             >
               <span
                 aria-hidden="true"
-                className="material-icons MuiIcon-root-711"
+                className="material-icons MuiIcon-root-715"
               >
                 add
               </span>
@@ -644,35 +708,35 @@ exports[`tests snapshot 1`] = `
         </div>
         <br />
         <hr
-          className="MuiDivider-root-720 FAQItem-divider-707"
+          className="MuiDivider-root-724 FAQItem-divider-711"
         />
       </div>
       <div
-        className="FAQItem-root-706"
+        className="FAQItem-root-710"
       >
         <div
-          className="FAQItem-question-709"
+          className="FAQItem-question-713"
           onClick={[Function]}
           role="presentation"
         >
           <div
-            className="MuiGrid-container-464"
+            className="MuiGrid-container-469"
           >
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-10-502"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-10-507"
             >
               <h5
-                className="MuiTypography-root-422 MuiTypography-h5-438"
+                className="MuiTypography-root-427 MuiTypography-h5-443"
               >
                 What does staking TRST token enable?
               </h5>
             </div>
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-2-494 FAQItem-gridIcon-708"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-2-499 FAQItem-gridIcon-712"
             >
               <span
                 aria-hidden="true"
-                className="material-icons MuiIcon-root-711"
+                className="material-icons MuiIcon-root-715"
               >
                 add
               </span>
@@ -681,35 +745,35 @@ exports[`tests snapshot 1`] = `
         </div>
         <br />
         <hr
-          className="MuiDivider-root-720 FAQItem-divider-707"
+          className="MuiDivider-root-724 FAQItem-divider-711"
         />
       </div>
       <div
-        className="FAQItem-root-706"
+        className="FAQItem-root-710"
       >
         <div
-          className="FAQItem-question-709"
+          className="FAQItem-question-713"
           onClick={[Function]}
           role="presentation"
         >
           <div
-            className="MuiGrid-container-464"
+            className="MuiGrid-container-469"
           >
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-10-502"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-10-507"
             >
               <h5
-                className="MuiTypography-root-422 MuiTypography-h5-438"
+                className="MuiTypography-root-427 MuiTypography-h5-443"
               >
                 What is the benefit for staking TRST and why would I stake TRST?
               </h5>
             </div>
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-2-494 FAQItem-gridIcon-708"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-2-499 FAQItem-gridIcon-712"
             >
               <span
                 aria-hidden="true"
-                className="material-icons MuiIcon-root-711"
+                className="material-icons MuiIcon-root-715"
               >
                 add
               </span>
@@ -718,35 +782,35 @@ exports[`tests snapshot 1`] = `
         </div>
         <br />
         <hr
-          className="MuiDivider-root-720 FAQItem-divider-707"
+          className="MuiDivider-root-724 FAQItem-divider-711"
         />
       </div>
       <div
-        className="FAQItem-root-706"
+        className="FAQItem-root-710"
       >
         <div
-          className="FAQItem-question-709"
+          className="FAQItem-question-713"
           onClick={[Function]}
           role="presentation"
         >
           <div
-            className="MuiGrid-container-464"
+            className="MuiGrid-container-469"
           >
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-10-502"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-10-507"
             >
               <h5
-                className="MuiTypography-root-422 MuiTypography-h5-438"
+                className="MuiTypography-root-427 MuiTypography-h5-443"
               >
                 How does my stake benefit the organization or the crypto ecosystem?
               </h5>
             </div>
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-2-494 FAQItem-gridIcon-708"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-2-499 FAQItem-gridIcon-712"
             >
               <span
                 aria-hidden="true"
-                className="material-icons MuiIcon-root-711"
+                className="material-icons MuiIcon-root-715"
               >
                 add
               </span>
@@ -755,35 +819,35 @@ exports[`tests snapshot 1`] = `
         </div>
         <br />
         <hr
-          className="MuiDivider-root-720 FAQItem-divider-707"
+          className="MuiDivider-root-724 FAQItem-divider-711"
         />
       </div>
       <div
-        className="FAQItem-root-706"
+        className="FAQItem-root-710"
       >
         <div
-          className="FAQItem-question-709"
+          className="FAQItem-question-713"
           onClick={[Function]}
           role="presentation"
         >
           <div
-            className="MuiGrid-container-464"
+            className="MuiGrid-container-469"
           >
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-10-502"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-10-507"
             >
               <h5
-                className="MuiTypography-root-422 MuiTypography-h5-438"
+                className="MuiTypography-root-427 MuiTypography-h5-443"
               >
                 When can I unstake?
               </h5>
             </div>
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-2-494 FAQItem-gridIcon-708"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-2-499 FAQItem-gridIcon-712"
             >
               <span
                 aria-hidden="true"
-                className="material-icons MuiIcon-root-711"
+                className="material-icons MuiIcon-root-715"
               >
                 add
               </span>
@@ -792,35 +856,35 @@ exports[`tests snapshot 1`] = `
         </div>
         <br />
         <hr
-          className="MuiDivider-root-720 FAQItem-divider-707"
+          className="MuiDivider-root-724 FAQItem-divider-711"
         />
       </div>
       <div
-        className="FAQItem-root-706"
+        className="FAQItem-root-710"
       >
         <div
-          className="FAQItem-question-709"
+          className="FAQItem-question-713"
           onClick={[Function]}
           role="presentation"
         >
           <div
-            className="MuiGrid-container-464"
+            className="MuiGrid-container-469"
           >
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-10-502"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-10-507"
             >
               <h5
-                className="MuiTypography-root-422 MuiTypography-h5-438"
+                className="MuiTypography-root-427 MuiTypography-h5-443"
               >
                 What's next for TRST token usage after this?
               </h5>
             </div>
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-2-494 FAQItem-gridIcon-708"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-2-499 FAQItem-gridIcon-712"
             >
               <span
                 aria-hidden="true"
-                className="material-icons MuiIcon-root-711"
+                className="material-icons MuiIcon-root-715"
               >
                 add
               </span>
@@ -829,35 +893,35 @@ exports[`tests snapshot 1`] = `
         </div>
         <br />
         <hr
-          className="MuiDivider-root-720 FAQItem-divider-707"
+          className="MuiDivider-root-724 FAQItem-divider-711"
         />
       </div>
       <div
-        className="FAQItem-root-706"
+        className="FAQItem-root-710"
       >
         <div
-          className="FAQItem-question-709"
+          className="FAQItem-question-713"
           onClick={[Function]}
           role="presentation"
         >
           <div
-            className="MuiGrid-container-464"
+            className="MuiGrid-container-469"
           >
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-10-502"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-10-507"
             >
               <h5
-                className="MuiTypography-root-422 MuiTypography-h5-438"
+                className="MuiTypography-root-427 MuiTypography-h5-443"
               >
                 What are TRST tokens, where can I obtain them for staking purposes?
               </h5>
             </div>
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-2-494 FAQItem-gridIcon-708"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-2-499 FAQItem-gridIcon-712"
             >
               <span
                 aria-hidden="true"
-                className="material-icons MuiIcon-root-711"
+                className="material-icons MuiIcon-root-715"
               >
                 add
               </span>
@@ -866,35 +930,35 @@ exports[`tests snapshot 1`] = `
         </div>
         <br />
         <hr
-          className="MuiDivider-root-720 FAQItem-divider-707"
+          className="MuiDivider-root-724 FAQItem-divider-711"
         />
       </div>
       <div
-        className="FAQItem-root-706"
+        className="FAQItem-root-710"
       >
         <div
-          className="FAQItem-question-709"
+          className="FAQItem-question-713"
           onClick={[Function]}
           role="presentation"
         >
           <div
-            className="MuiGrid-container-464"
+            className="MuiGrid-container-469"
           >
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-10-502"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-10-507"
             >
               <h5
-                className="MuiTypography-root-422 MuiTypography-h5-438"
+                className="MuiTypography-root-427 MuiTypography-h5-443"
               >
                 How do I get my TRST tokens to show up in Metamask?
               </h5>
             </div>
             <div
-              className="MuiGrid-item-465 MuiGrid-grid-xs-2-494 FAQItem-gridIcon-708"
+              className="MuiGrid-item-470 MuiGrid-grid-xs-2-499 FAQItem-gridIcon-712"
             >
               <span
                 aria-hidden="true"
-                className="material-icons MuiIcon-root-711"
+                className="material-icons MuiIcon-root-715"
               >
                 add
               </span>
@@ -903,75 +967,75 @@ exports[`tests snapshot 1`] = `
         </div>
         <br />
         <hr
-          className="MuiDivider-root-720 FAQItem-divider-707"
+          className="MuiDivider-root-724 FAQItem-divider-711"
         />
       </div>
     </div>
   </div>
   <div
-    className="Footer-container-727"
+    className="Footer-container-731"
   >
     <div
-      className="Footer-wrapper-728"
+      className="Footer-wrapper-732"
     >
       <a
-        className="MuiTypography-root-422 MuiTypography-body1-431 Footer-link-726"
+        className="MuiTypography-root-427 MuiTypography-body1-436 Footer-link-730"
         href="/"
       >
         Home
       </a>
       <a
-        className="MuiTypography-root-422 MuiTypography-body1-431 Footer-link-726"
+        className="MuiTypography-root-427 MuiTypography-body1-436 Footer-link-730"
         href="https://spring.wetrust.io/causes"
       >
         Causes
       </a>
       <a
-        className="MuiTypography-root-422 MuiTypography-body1-431 Footer-link-726"
+        className="MuiTypography-root-427 MuiTypography-body1-436 Footer-link-730"
         href="https://www.wetrust.io"
       >
         About us
       </a>
       <a
-        className="MuiTypography-root-422 MuiTypography-body1-431 Footer-link-726"
+        className="MuiTypography-root-427 MuiTypography-body1-436 Footer-link-730"
         href="https://github.com/WeTrustPlatform/documents/blob/master/WeTrust_Spring_Staking_ToS_v1.1.pdf"
       >
         Terms and Conditions
       </a>
       <a
-        className="MuiTypography-root-422 MuiTypography-body1-431 Footer-link-726"
+        className="MuiTypography-root-427 MuiTypography-body1-436 Footer-link-730"
         href="https://github.com/WeTrustPlatform/documents/blob/master/FinclusionLabs_PrivacyPolicy_October92018_GDPRCompliant.pdf"
       >
         Privacy Policy
       </a>
     </div>
     <div
-      className="Footer-wrapper-728"
+      className="Footer-wrapper-732"
     >
       <a
-        className="MuiTypography-root-422 MuiTypography-body1-431 Footer-link-726 Footer-facebook-729"
+        className="MuiTypography-root-427 MuiTypography-body1-436 Footer-link-730 Footer-facebook-733"
         href="https://www.facebook.com/wetrustplatform"
       >
         Facebook
       </a>
       <a
-        className="MuiTypography-root-422 MuiTypography-body1-431 Footer-link-726 Footer-twitter-730"
+        className="MuiTypography-root-427 MuiTypography-body1-436 Footer-link-730 Footer-twitter-734"
         href="https://twitter.com/wetrustplatform"
       >
         Twitter
       </a>
       <a
-        className="MuiTypography-root-422 MuiTypography-body1-431 Footer-link-726 Footer-blog-731"
+        className="MuiTypography-root-427 MuiTypography-body1-436 Footer-link-730 Footer-blog-735"
         href="https://blog.wetrust.io/"
       >
         Blog
       </a>
     </div>
     <div
-      className="Footer-wrapper-728"
+      className="Footer-wrapper-732"
     >
       <p
-        className="MuiTypography-root-422 MuiTypography-body1-431 Footer-copyright-725"
+        className="MuiTypography-root-427 MuiTypography-body1-436 Footer-copyright-729"
       >
         © 2019 WeTrustPlatform - All rights reserved
       </p>
