@@ -9,6 +9,7 @@ import wetrustLogo from '../images/we-trust-global-logo.svg';
 import springLogo from '../images/spring-global-logo.svg';
 import cuLogo from '../images/crypto-unlocked-global-logo.svg';
 import tlcLogo from '../images/trusted-lending-circles-global-logo.svg';
+import stakingLogo from '../images/staking-global-logo.svg';
 
 const styles = (theme) => {
   const navHeight = theme.mixins.toolbar.minHeight;
@@ -54,6 +55,13 @@ class Navbar extends React.Component {
                 className={classes.universalBarItem}
                 alt="Spring"
                 src={springLogo}
+              />
+            </HrefLink>
+            <HrefLink href="https://staking.wetrust.io">
+              <img
+                className={classes.universalBarItem}
+                alt="Staking"
+                src={stakingLogo}
               />
             </HrefLink>
             <HrefLink href="https://tlc.wetrust.io">
