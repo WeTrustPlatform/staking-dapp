@@ -1,7 +1,7 @@
 [
   {
   "question": "General overview of Staking TRST on Spring",
-    "answer": "Please read this blog post <a href='https://medium.com/@burningw0rds/1a7f42ac2680' target='_blank'>https://medium.com/@burningw0rds/1a7f42ac2680</a>"
+    "answer": "Please read this blog post <a href='https://blog.wetrust.io/wetrust-staking-hub-cd20cd273a26' target='_blank'>https://blog.wetrust.io/wetrust-staking-hub-cd20cd273a26</a>"
   },
   {
     "question": "What does staking TRST token enable?",
@@ -9,7 +9,7 @@
   },
   {
     "question": "What is the benefit for staking TRST and why would I stake TRST?",
-    "answer": "Trustcoins (TRST) are utility tokens created on the ERC20 standard to facilitate the coordination of multiple parties through incentives on the WeTrust Platform. By staking TRST to a cause, you are signalling your appreciation for that particular organization, thereby increasing their visibility on WeTrust Spring. You can stake to organizations already on Spring, or stake to those not yet on Spring which increases their visibility in the ‘nominations’ list.<br/><br/>All organizations on the platform must have a minimum amount of TRST staked to their name in order to activate their membership on the platform (currently set at 5,000 TRST). Activation allows the organization to further customize their profile, make community updates, create campaigns on CryptoUnlocked, and other premium features not available to inactive profiles. Any TRST holder can sponsor an organization to reach the minimum staking threshold so that they can become a member. Anyone can stake TRST to further increase the visibility of the sponsored organization."
+    "answer": "Trustcoins (TRST) are utility tokens created on the ERC20 standard to facilitate the coordination of multiple parties through incentives on the WeTrust Platform. By staking TRST to a cause, you are signalling your appreciation for that particular organization, thereby increasing their visibility on WeTrust Spring. You can stake to organizations already on Spring, or stake to those not yet on Spring which increases their visibility in the ‘nominations’ list.<br/><br/>All organizations on the platform must have a minimum amount of TRST staked to their name in order to activate their membership on the platform (currently set at 5,000 TRST). Activation allows the organization to further customize their profile, make community updates, create campaigns on CryptoUnlocked, and other premium features not available to non-membership profiles.<br/>Any TRST holder can sponsor an organization to reach the minimum staking threshold so that the organization can become a member and increase the visibility of the sponsored organization."
   },
   {
     "question": "How does my stake benefit the organization or the crypto ecosystem?",
