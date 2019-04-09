@@ -21,7 +21,7 @@ const styles = (theme) => {
       height: '1.5rem',
     },
     universalBar: {
-      minHeight: navHeight * 0.8,
+      minHeight: navHeight,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
