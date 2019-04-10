@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
@@ -9,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import Paper from '@material-ui/core/Paper';
 import { convertToWholeTRSTForView } from '../formatter';
+import { validateNetworkId } from '../utils';
 
 const styles = (theme) => {
   const lineHeight = 24;
@@ -57,13 +59,17 @@ const styles = (theme) => {
 
 class LeaderBoard extends React.Component {
   renderStats(causesStats) {
-    const { classes } = this.props;
-    if (Object.keys(causesStats).length === 0) {
+    const { classes, networkId } = this.props;
+    if (
+      Object.keys(causesStats).length === 0 &&
+      !validateNetworkId(networkId)
+    ) {
       return (
         <TableRow>
           <TableCell colSpan={4}>
             <div className={classes.loading}>
               <CircularProgress thickness={6} color="secondary" />
+              <p>This might take several minutes</p>
             </div>
           </TableCell>
         </TableRow>
@@ -127,4 +133,8 @@ class LeaderBoard extends React.Component {
   }
 }
 
-export default withStyles(styles)(LeaderBoard);
+const mapStateToProps = (state) => ({
+  networkId: state.networkId,
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(LeaderBoard));
