@@ -8,7 +8,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import Paper from '@material-ui/core/Paper';
-import { trst } from '../formatter';
+import { convertToWholeTRSTForView } from '../formatter';
 
 const styles = (theme) => {
   const lineHeight = 24;
@@ -86,7 +86,7 @@ class LeaderBoard extends React.Component {
           <TableCell>{c.rank}</TableCell>
           <TableCell className={classes.name}>{c.name}</TableCell>
           <TableCell className={classes.stakedAmount}>
-            {c.amount ? `${trst(c.amount)} TRST` : ''}
+            {c.amount ? `${convertToWholeTRSTForView(c.amount)} TRST` : ''}
           </TableCell>
           <TableCell>{c.amount ? c.stakers && c.stakers.size : ''}</TableCell>
         </TableRow>,

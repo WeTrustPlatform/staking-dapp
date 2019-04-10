@@ -15,7 +15,7 @@ import stateHelper, { status } from './stateHelper';
 import checkMark from '../images/check-mark.svg';
 import errorMark from '../images/error-mark.svg';
 import EmailSubscription from './modals/EmailSubscription';
-import { trstInBN, bigNumber } from '../formatter';
+import { bigNumber, convertAmountToSmallestTRST } from '../formatter';
 
 const styles = (theme) => ({
   root: {
@@ -71,9 +71,29 @@ class StakeNow extends React.Component {
   }
 
   onChangeAmount(event) {
+    let inputAmount = String(event.target.value);
+
+    // handle implied float number
+    if (inputAmount.startsWith('.')) {
+      inputAmount = `0${inputAmount}`;
+    }
+
     this.setState({
-      amount: event.target.value,
+      amount: inputAmount,
     });
+
+    try {
+      // try to parse to see if it throws error
+      convertAmountToSmallestTRST(inputAmount);
+      this.setState({
+        errorMessage: null,
+      });
+    } catch (e) {
+      // set error message permanent until the amount is updated
+      this.setState({
+        errorMessage: `The amount ${inputAmount} is invalid.`,
+      });
+    }
   }
 
   onChangeDuration(event) {
@@ -128,7 +148,7 @@ class StakeNow extends React.Component {
     } = this.props;
 
     const { toBN, toWei } = web3.utils;
-    const stakeAmount = toWei(amount.toString(), 'mwei');
+    const stakeAmount = convertAmountToSmallestTRST(amount).toString();
 
     // TODO HN get gasPrice from third party
     // This 'approve' tx needs to be fast so that
@@ -223,13 +243,13 @@ class StakeNow extends React.Component {
     }
 
     const { amount, npo, durationInDays } = state;
-    const trstBalanceBN = trstInBN(trstBalance);
-    const amountBN = bigNumber(amount);
+    const trstBalanceBN = bigNumber(trstBalance);
+    const amountInSmallestTRST = convertAmountToSmallestTRST(amount);
 
-    if (amountBN.lte(0)) {
+    if (amountInSmallestTRST.lte(bigNumber(0))) {
       return 'Amount must be positive.';
     }
-    if (trstBalanceBN.lt(amountBN)) {
+    if (trstBalanceBN.lt(amountInSmallestTRST)) {
       return 'Your TRST balance is not sufficient.';
     }
 
@@ -245,7 +265,7 @@ class StakeNow extends React.Component {
   }
 
   renderButton(props, text) {
-    const { color, component, onClick, classes } = props;
+    const { color, component, onClick, classes, disabled } = props;
     return (
       <Grid item xs={10} sm={8} md={4} className={classes.button}>
         <Button
@@ -255,6 +275,7 @@ class StakeNow extends React.Component {
           component={component}
           variant="contained"
           size="large"
+          disabled={disabled}
         >
           {text}
         </Button>
@@ -355,6 +376,7 @@ class StakeNow extends React.Component {
           {this.renderButton(
             {
               ...this.props,
+              disabled: !!errorMessage,
               onClick: this.handleStakeNow,
               color: 'primary',
             },
