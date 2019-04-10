@@ -15,11 +15,23 @@ export const currency = (s) =>
     .toFixed(2)
     .toLocaleString()}`;
 
+// does not support decimal
+// used for converting all the values from blockchain
 export const bigNumber = (s) => web3.utils.toBN(s);
 
-export const trstInBN = (s) => bigNumber(s).div(bigNumber(1e6));
+// convert user input amount in string/bn/number to smallest TRST in bn
+// input 1 TRST -> output 1e6 in bigNumber
+// will throw if cannot convert
+// will throw if decimal > 6
+export const convertAmountToSmallestTRST = (s) =>
+  bigNumber(web3.utils.toWei(s.toString(), 'mwei'));
 
-export const trst = (s) => numberString(trstInBN(s));
+// convert blockchain amount in string/bn/number to wholeTRST in String
+// for view purpose only
+// because all calcuations must be done in SmallestTRST bigNumber
+// input 1e6 -> output 1 TRST
+export const convertToWholeTRSTForView = (s) =>
+  numberString(web3.utils.fromWei(s.toString(), 'mwei'));
 
 export const networkName = (networkId) => {
   const nameMapping = {

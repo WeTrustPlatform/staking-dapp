@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import StepStatus from './StepStatus';
 import HrefLink from './HrefLink';
-import { trst, txLink, bigNumber } from '../formatter';
+import { convertToWholeTRSTForView, txLink, bigNumber } from '../formatter';
 import { validateNetworkId } from '../utils';
 import {
   UNSTAKE_PENDING_BACKGROUND,
@@ -78,7 +78,7 @@ class UnstakeStatus extends React.Component {
           stepIcon={
             <CircularProgress color="secondary" thickness={8} size={18} />
           }
-          stepMessage={`Claiming ${trst(
+          stepMessage={`Claiming ${convertToWholeTRSTForView(
             activity.amount,
           )} TRST. Waiting for MetaMask.`}
         />

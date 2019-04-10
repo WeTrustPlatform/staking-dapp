@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import UnstakeProcessBase from './UnstakeProcessBase';
 import errorMark from '../../images/error-mark.svg';
 import { UNSTAKE_FAILURE } from '../../actions';
-import { trst } from '../../formatter';
+import { convertToWholeTRSTForView } from '../../formatter';
 
 class UnstakeFailure extends React.Component {
   render() {
@@ -14,7 +14,7 @@ class UnstakeFailure extends React.Component {
       <UnstakeProcessBase
         open={step === UNSTAKE_FAILURE}
         stepIcon={<img src={errorMark} alt="error-mark" />}
-        stepMessage={`Claiming ${trst(
+        stepMessage={`Claiming ${convertToWholeTRSTForView(
           (activity && activity.amount) || 0,
         )} TRST`}
       >

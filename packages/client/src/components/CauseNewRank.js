@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { getCauseRank, getNewRank } from '../utils';
-import { bigNumber } from '../formatter';
+import { convertAmountToSmallestTRST } from '../formatter';
 
 const styles = (theme) => ({
   row: {
@@ -31,11 +31,15 @@ class CauseNewRank extends React.Component {
   render() {
     const { classes, causesStats, cause, amount } = this.props;
     const currentRank = getCauseRank(cause, causesStats);
-    const newRank = getNewRank(
-      cause,
-      causesStats,
-      bigNumber(amount).mul(bigNumber(1e6)),
-    );
+    // check if amount is valid
+    let amountToStake;
+    try {
+      amountToStake = convertAmountToSmallestTRST(amount);
+    } catch {
+      // don't render
+      return null;
+    }
+    const newRank = getNewRank(cause, causesStats, amountToStake);
     const increased = currentRank - newRank;
     const hasStakedBefore = !!causesStats[cause.stakingId];
     return (

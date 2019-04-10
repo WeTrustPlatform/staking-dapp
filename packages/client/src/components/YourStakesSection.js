@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Section from './Section';
 import SectionHeader from './SectionHeader';
 import HrefLink from './HrefLink';
-import { txLink, trst } from '../formatter';
+import { txLink, convertToWholeTRSTForView } from '../formatter';
 import UnstakeStatus from './UnstakeStatus';
 import UnstakeWarning from './modals/UnstakeWarning';
 import UnstakePending from './modals/UnstakePending';
@@ -92,7 +92,9 @@ class YourStakesSection extends React.Component {
           <TableCell align="left" className={classes.nameCell}>
             {cause.name || 'Unknown'}
           </TableCell>
-          <TableCell align="right">{`${trst(stakedAmount)} TRST`}</TableCell>
+          <TableCell align="right">
+            {`${convertToWholeTRSTForView(stakedAmount)} TRST`}
+          </TableCell>
           <TableCell>{unlockedAtInContract.toLocaleString()}</TableCell>
           <TableCell className={classes.statusCell}>
             <UnstakeStatus activity={activity} />

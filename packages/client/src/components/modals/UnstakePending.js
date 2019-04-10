@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import UnstakeProcessBase from './UnstakeProcessBase';
 import { UNSTAKE_PENDING } from '../../actions';
 import theme from '../../theme';
-import { trst } from '../../formatter';
+import { convertToWholeTRSTForView } from '../../formatter';
 
 class UnstakePending extends React.Component {
   render() {
@@ -17,7 +17,7 @@ class UnstakePending extends React.Component {
         stepIcon={
           <CircularProgress color="secondary" thickness={8} size={18} />
         }
-        stepMessage={`Claiming ${trst(
+        stepMessage={`Claiming ${convertToWholeTRSTForView(
           (activity && activity.amount) || 0,
         )} TRST`}
       >

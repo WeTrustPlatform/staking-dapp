@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import Paper from '@material-ui/core/Paper';
-import { trst } from '../formatter';
+import { convertToWholeTRSTForView } from '../formatter';
 import { getCauseRank } from '../utils';
 
 const styles = (theme) => ({
@@ -51,7 +51,9 @@ class CauseRankTable extends React.Component {
           <TableBody>
             <TableRow>
               <TableCell>{rank}</TableCell>
-              <TableCell>{`${trst(amount)} TRST`}</TableCell>
+              <TableCell>
+                {`${convertToWholeTRSTForView(amount)} TRST`}
+              </TableCell>
               <TableCell>{numberOfStakers}</TableCell>
             </TableRow>
           </TableBody>

@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { connect } from 'react-redux';
 import configs from '../configs';
-import { trst, networkName, trim } from '../formatter';
+import { convertToWholeTRSTForView, networkName, trim } from '../formatter';
 import metamaskIcon from '../images/meta-mask-logo.png';
 import accountIcon from '../images/metamask-account-icon.svg';
 import { validateNetworkId } from '../utils';
@@ -94,7 +94,7 @@ class Web3Account extends React.Component {
             </Typography>
             <Typography component="span" className={classes.accountText}>
               {' '}
-              {trst(trstBalance)}
+              {convertToWholeTRSTForView(trstBalance)}
             </Typography>
           </div>
         </div>

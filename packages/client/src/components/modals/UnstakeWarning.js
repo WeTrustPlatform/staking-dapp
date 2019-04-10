@@ -13,7 +13,7 @@ import {
 } from '../../actions';
 import dispatchStats from '../../dispatchStats';
 import dispatchTRSTBalance from '../../dispatchTRSTBalance';
-import { trst, bigNumber } from '../../formatter';
+import { convertToWholeTRSTForView, bigNumber } from '../../formatter';
 import { getNewRank, delay } from '../../utils';
 
 class UnstakeWarning extends React.Component {
@@ -33,7 +33,7 @@ class UnstakeWarning extends React.Component {
 
     TimeLockedStaking.methods
       .unstake(amount.toString(), stakeData)
-      .send({ from: account })
+      .send({ from: account, gas: 200000 })
       .then((r) => {
         onSuccess(activity, r.transactionHash);
       })
@@ -75,7 +75,7 @@ class UnstakeWarning extends React.Component {
         action="Continue"
       >
         <Typography>
-          {`By claiming back ${trst(
+          {`By claiming back ${convertToWholeTRSTForView(
             activity.amount || 0,
           )} TRST, the ${activity.cause &&
             activity.cause.name}'s rank will drop to ${newRank}.`}
