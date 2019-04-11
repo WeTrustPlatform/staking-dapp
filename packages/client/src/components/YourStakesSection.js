@@ -12,6 +12,7 @@ import Section from './Section';
 import SectionHeader from './SectionHeader';
 import HrefLink from './HrefLink';
 import { txLink, convertToWholeTRSTForView } from '../formatter';
+import { validateNetworkId } from '../utils';
 import Loading from './Loading';
 import UnstakeStatus from './UnstakeStatus';
 import UnstakeWarning from './modals/UnstakeWarning';
@@ -121,8 +122,9 @@ class YourStakesSection extends React.Component {
   }
 
   render() {
-    const { classes, color, userStats, hasLoaded } = this.props;
+    const { classes, color, userStats, hasLoaded, networkId } = this.props;
     const activities = userStats.yourStakes || [];
+    const isNetworkIdValid = !validateNetworkId(networkId);
 
     return (
       <Section id="activities-section" color={color}>
@@ -139,13 +141,13 @@ class YourStakesSection extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {hasLoaded &&
-                activities.length === 0 &&
-                this.renderNoActivities()}
+              {!hasLoaded && isNetworkIdValid && this.renderLoading()}
               {hasLoaded &&
                 activities.length > 0 &&
                 this.renderActivities(activities)}
-              {!hasLoaded && this.renderLoading()}
+              {((hasLoaded && activities.length === 0) || !isNetworkIdValid) &&
+                // when on the wrong network, there are no actitives
+                this.renderNoActivities()}
             </TableBody>
           </Table>
         </Paper>
@@ -161,6 +163,7 @@ class YourStakesSection extends React.Component {
 const mapStateToProps = (state) => ({
   // if there are entries in the usersStats, it means loading blockchain data is done
   hasLoaded: Object.keys(state.usersStats).length > 0,
+  networkId: state.networkId,
   userStats:
     state.usersStats[state.account && state.account.toLowerCase()] || {},
 });
