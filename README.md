@@ -32,7 +32,7 @@ Note: The front-end is configed for rpc `port` 7545 and `networkId` 5777 and con
 
 - Deploy contracts on local:
 ```
-yarn deploy
+yarn --cwd packages/truffle deploy
 ```
 
 ### Web app
