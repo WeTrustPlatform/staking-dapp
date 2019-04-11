@@ -407,15 +407,36 @@ exports[`tests snapshot 1`] = `
               colSpan={5}
             >
               <div
-                className="YourStakesSection-noActivities-666"
+                className="Loading-root-688"
               >
-                You have 0 transaction in Your Stakes history. 
-                <a
-                  href="/#main-section"
-                  onClick={[Function]}
+                <div
+                  className="MuiCircularProgress-root-689 MuiCircularProgress-colorSecondary-693 MuiCircularProgress-indeterminate-691"
+                  role="progressbar"
+                  style={
+                    Object {
+                      "height": 40,
+                      "width": 40,
+                    }
+                  }
                 >
-                  Please stake!
-                </a>
+                  <svg
+                    className="MuiCircularProgress-svg-694"
+                    viewBox="22 22 44 44"
+                  >
+                    <circle
+                      className="MuiCircularProgress-circle-695 MuiCircularProgress-circleIndeterminate-697"
+                      cx={44}
+                      cy={44}
+                      fill="none"
+                      r={19}
+                      strokeWidth={6}
+                      style={Object {}}
+                    />
+                  </svg>
+                </div>
+                <p>
+                  This might take several minutes
+                </p>
               </div>
             </td>
           </tr>
@@ -427,10 +448,10 @@ exports[`tests snapshot 1`] = `
     className="Section-root-465 Section-light-467"
   >
     <div
-      className="MuiGrid-container-469 MuiGrid-justify-xs-center-486 RankingSection-container-689"
+      className="MuiGrid-container-469 MuiGrid-justify-xs-center-486 RankingSection-container-700"
     >
       <div
-        className="MuiGrid-item-470 MuiGrid-grid-xs-12-509 MuiGrid-grid-sm-12-523 MuiGrid-grid-md-6-531 RankingSection-gridItem-690"
+        className="MuiGrid-item-470 MuiGrid-grid-xs-12-509 MuiGrid-grid-sm-12-523 MuiGrid-grid-md-6-531 RankingSection-gridItem-701"
       >
         <div>
           <div>
@@ -441,7 +462,7 @@ exports[`tests snapshot 1`] = `
             </h5>
           </div>
           <div
-            className="LeaderBoard-subtitle-692"
+            className="LeaderBoard-subtitle-703"
           >
             <h6
               className="MuiTypography-root-427 MuiTypography-h6-444"
@@ -450,7 +471,7 @@ exports[`tests snapshot 1`] = `
             </h6>
           </div>
           <div
-            className="LeaderBoard-causesStats-693"
+            className="LeaderBoard-causesStats-704"
           >
             <div
               className="MuiPaper-root-385 MuiPaper-elevation2-389 MuiPaper-rounded-386"
@@ -495,7 +516,7 @@ exports[`tests snapshot 1`] = `
                   </tr>
                 </thead>
                 <tbody
-                  className="MuiTableBody-root-687 LeaderBoard-tableBody-697"
+                  className="MuiTableBody-root-687 LeaderBoard-tableBody-707"
                 >
                   <tr
                     className="MuiTableRow-root-670"
@@ -506,10 +527,10 @@ exports[`tests snapshot 1`] = `
                       colSpan={4}
                     >
                       <div
-                        className="LeaderBoard-loading-696"
+                        className="Loading-root-688"
                       >
                         <div
-                          className="MuiCircularProgress-root-699 MuiCircularProgress-colorSecondary-703 MuiCircularProgress-indeterminate-701"
+                          className="MuiCircularProgress-root-689 MuiCircularProgress-colorSecondary-693 MuiCircularProgress-indeterminate-691"
                           role="progressbar"
                           style={
                             Object {
@@ -519,11 +540,11 @@ exports[`tests snapshot 1`] = `
                           }
                         >
                           <svg
-                            className="MuiCircularProgress-svg-704"
+                            className="MuiCircularProgress-svg-694"
                             viewBox="22 22 44 44"
                           >
                             <circle
-                              className="MuiCircularProgress-circle-705 MuiCircularProgress-circleIndeterminate-707"
+                              className="MuiCircularProgress-circle-695 MuiCircularProgress-circleIndeterminate-697"
                               cx={44}
                               cy={44}
                               fill="none"
@@ -533,6 +554,9 @@ exports[`tests snapshot 1`] = `
                             />
                           </svg>
                         </div>
+                        <p>
+                          This might take several minutes
+                        </p>
                       </div>
                     </td>
                   </tr>
@@ -543,7 +567,7 @@ exports[`tests snapshot 1`] = `
         </div>
       </div>
       <div
-        className="MuiGrid-item-470 MuiGrid-grid-xs-12-509 MuiGrid-grid-sm-12-523 MuiGrid-grid-md-6-531 RankingSection-gridItem-690 RankingSection-bottomItem-691"
+        className="MuiGrid-item-470 MuiGrid-grid-xs-12-509 MuiGrid-grid-sm-12-523 MuiGrid-grid-md-6-531 RankingSection-gridItem-701 RankingSection-bottomItem-702"
       >
         <div>
           <div>
@@ -554,7 +578,7 @@ exports[`tests snapshot 1`] = `
             </h5>
           </div>
           <div
-            className="LeaderBoard-subtitle-692"
+            className="LeaderBoard-subtitle-703"
           >
             <h6
               className="MuiTypography-root-427 MuiTypography-h6-444"
@@ -563,7 +587,7 @@ exports[`tests snapshot 1`] = `
             </h6>
           </div>
           <div
-            className="LeaderBoard-causesStats-693"
+            className="LeaderBoard-causesStats-704"
           >
             <div
               className="MuiPaper-root-385 MuiPaper-elevation2-389 MuiPaper-rounded-386"
@@ -608,7 +632,7 @@ exports[`tests snapshot 1`] = `
                   </tr>
                 </thead>
                 <tbody
-                  className="MuiTableBody-root-687 LeaderBoard-tableBody-697"
+                  className="MuiTableBody-root-687 LeaderBoard-tableBody-707"
                 >
                   <tr
                     className="MuiTableRow-root-670"
@@ -619,10 +643,10 @@ exports[`tests snapshot 1`] = `
                       colSpan={4}
                     >
                       <div
-                        className="LeaderBoard-loading-696"
+                        className="Loading-root-688"
                       >
                         <div
-                          className="MuiCircularProgress-root-699 MuiCircularProgress-colorSecondary-703 MuiCircularProgress-indeterminate-701"
+                          className="MuiCircularProgress-root-689 MuiCircularProgress-colorSecondary-693 MuiCircularProgress-indeterminate-691"
                           role="progressbar"
                           style={
                             Object {
@@ -632,11 +656,11 @@ exports[`tests snapshot 1`] = `
                           }
                         >
                           <svg
-                            className="MuiCircularProgress-svg-704"
+                            className="MuiCircularProgress-svg-694"
                             viewBox="22 22 44 44"
                           >
                             <circle
-                              className="MuiCircularProgress-circle-705 MuiCircularProgress-circleIndeterminate-707"
+                              className="MuiCircularProgress-circle-695 MuiCircularProgress-circleIndeterminate-697"
                               cx={44}
                               cy={44}
                               fill="none"
@@ -646,6 +670,9 @@ exports[`tests snapshot 1`] = `
                             />
                           </svg>
                         </div>
+                        <p>
+                          This might take several minutes
+                        </p>
                       </div>
                     </td>
                   </tr>

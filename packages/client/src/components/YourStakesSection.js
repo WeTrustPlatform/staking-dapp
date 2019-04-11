@@ -12,6 +12,7 @@ import Section from './Section';
 import SectionHeader from './SectionHeader';
 import HrefLink from './HrefLink';
 import { txLink, convertToWholeTRSTForView } from '../formatter';
+import Loading from './Loading';
 import UnstakeStatus from './UnstakeStatus';
 import UnstakeWarning from './modals/UnstakeWarning';
 import UnstakePending from './modals/UnstakePending';
@@ -55,6 +56,16 @@ const styles = (theme) => {
 };
 
 class YourStakesSection extends React.Component {
+  renderLoading() {
+    return (
+      <TableRow>
+        <TableCell colSpan={5}>
+          <Loading />
+        </TableCell>
+      </TableRow>
+    );
+  }
+
   renderNoActivities() {
     const { classes } = this.props;
     return (
@@ -110,7 +121,7 @@ class YourStakesSection extends React.Component {
   }
 
   render() {
-    const { classes, color, userStats } = this.props;
+    const { classes, color, userStats, hasLoaded } = this.props;
     const activities = userStats.yourStakes || [];
 
     return (
@@ -128,8 +139,13 @@ class YourStakesSection extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {activities.length === 0 && this.renderNoActivities()}
-              {activities.length > 0 && this.renderActivities(activities)}
+              {hasLoaded &&
+                activities.length === 0 &&
+                this.renderNoActivities()}
+              {hasLoaded &&
+                activities.length > 0 &&
+                this.renderActivities(activities)}
+              {!hasLoaded && this.renderLoading()}
             </TableBody>
           </Table>
         </Paper>
@@ -143,6 +159,8 @@ class YourStakesSection extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  // if there are entries in the usersStats, it means loading blockchain data is done
+  hasLoaded: Object.keys(state.usersStats).length > 0,
   userStats:
     state.usersStats[state.account && state.account.toLowerCase()] || {},
 });
