@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -9,6 +8,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import Paper from '@material-ui/core/Paper';
+import Loading from './Loading';
 import { convertToWholeTRSTForView } from '../formatter';
 import { validateNetworkId } from '../utils';
 
@@ -39,10 +39,6 @@ const styles = (theme) => {
     stakedAmount: {
       minWidth: maxWidth / 5,
     },
-    loading: {
-      padding: theme.mixins.toolbar.minHeight,
-      textAlign: 'center',
-    },
     tableBody: {
       height: 96,
       tableLayout: 'fixed',
@@ -67,10 +63,7 @@ class LeaderBoard extends React.Component {
       return (
         <TableRow>
           <TableCell colSpan={4}>
-            <div className={classes.loading}>
-              <CircularProgress thickness={6} color="secondary" />
-              <p>This might take several minutes</p>
-            </div>
+            <Loading />
           </TableCell>
         </TableRow>
       );
