@@ -5,11 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Web3Account from './Web3Account';
 import HrefLink from './HrefLink';
 import logo from '../images/wetrust-logo.svg';
-import wetrustLogo from '../images/we-trust-global-logo.svg';
-import springLogo from '../images/spring-global-logo.svg';
-import cuLogo from '../images/crypto-unlocked-global-logo.svg';
-import tlcLogo from '../images/trusted-lending-circles-global-logo.svg';
-import stakingLogo from '../images/staking-global-logo.svg';
 
 const styles = (theme) => {
   const navHeight = theme.mixins.toolbar.minHeight;
@@ -49,31 +44,46 @@ class Navbar extends React.Component {
               className={classes.universalBarItem}
               href="https://wetrust.io"
             >
-              <img alt="WeTrust" src={wetrustLogo} />
+              <img
+                alt="WeTrust"
+                src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/wetrust-global-logo.svg"
+              />
             </HrefLink>
             <HrefLink
               className={classes.universalBarItem}
               href="https://spring.wetrust.io"
             >
-              <img alt="Spring" src={springLogo} />
+              <img
+                alt="Spring"
+                src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/spring-global-logo.svg"
+              />
             </HrefLink>
             <HrefLink
               className={classes.universalBarItem}
               href="https://staking.wetrust.io"
             >
-              <img alt="Staking" src={stakingLogo} />
+              <img
+                alt="Staking"
+                src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/staking-global-logo.svg"
+              />
             </HrefLink>
             <HrefLink
               className={classes.universalBarItem}
               href="https://tlc.wetrust.io"
             >
-              <img alt="TLC" src={tlcLogo} />
+              <img
+                alt="TLC"
+                src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/trusted-lending-circles-global-logo.svg"
+              />
             </HrefLink>
             <HrefLink
               className={classes.universalBarItem}
               href="https://cryptounlocked.wetrust.io"
             >
-              <img alt="CryptoUnlocked" src={cuLogo} />
+              <img
+                alt="CryptoUnlocked"
+                src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/crypto-unlocked-global-logo.svg"
+              />
             </HrefLink>
           </div>
           <Toolbar>

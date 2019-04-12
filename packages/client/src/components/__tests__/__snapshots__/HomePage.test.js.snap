@@ -17,7 +17,7 @@ exports[`tests snapshot 1`] = `
         >
           <img
             alt="WeTrust"
-            src="we-trust-global-logo.svg"
+            src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/wetrust-global-logo.svg"
           />
         </a>
         <a
@@ -28,7 +28,7 @@ exports[`tests snapshot 1`] = `
         >
           <img
             alt="Spring"
-            src="spring-global-logo.svg"
+            src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/spring-global-logo.svg"
           />
         </a>
         <a
@@ -39,7 +39,7 @@ exports[`tests snapshot 1`] = `
         >
           <img
             alt="Staking"
-            src="staking-global-logo.svg"
+            src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/staking-global-logo.svg"
           />
         </a>
         <a
@@ -50,7 +50,7 @@ exports[`tests snapshot 1`] = `
         >
           <img
             alt="TLC"
-            src="trusted-lending-circles-global-logo.svg"
+            src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/trusted-lending-circles-global-logo.svg"
           />
         </a>
         <a
@@ -61,7 +61,7 @@ exports[`tests snapshot 1`] = `
         >
           <img
             alt="CryptoUnlocked"
-            src="crypto-unlocked-global-logo.svg"
+            src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/crypto-unlocked-global-logo.svg"
           />
         </a>
       </div>
