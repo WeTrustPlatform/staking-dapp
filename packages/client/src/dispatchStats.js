@@ -28,17 +28,28 @@ const getUsersStats = async (eventData, causesInfo, TimeLockedStaking) => {
       };
     }
 
-    let unlockedAt = await getUnlockedAtFromBlockchain(
-      user,
-      data,
-      TimeLockedStaking,
-    );
+    const unlockedAt = unlockedAtInPayload;
+
+    // This the culprit causing slow loading in YourStakes
+    // The case for this is to handle those users
+    // that don't stake via our client
+    // or those that purposedly change the "Duration" to
+    // be out of the pre-defined range.
+    // So, we just ignore those "hackers" and optimize
+    // for normal users
+    //
+    // let unlockedAt = await getUnlockedAtFromBlockchain(
+    // user,
+    // data,
+    // TimeLockedStaking,
+    // );
 
     // Infura is too slow on rinkeby and mainnet
     // if blockchain.unlockedAt = 0, then it means infura has not seen the new contract state
-    if (unlockedAt.getTime() === new Date(0).getTime()) {
-      unlockedAt = unlockedAtInPayload;
-    }
+    // even though the event log is emitted
+    // if (unlockedAt.getTime() === new Date(0).getTime()) {
+    // unlockedAt = unlockedAtInPayload;
+    // }
 
     const activity = {
       id: key,

@@ -22,6 +22,8 @@ const initialState = {
   web3: null,
   trstBalance: '0',
   contracts: {},
+  // Loading all stakers info for the leaderboard
+  // however, the current design does not show that info
   usersStats: {}, // {<user>: {yourStakes: []}}
   causesStats: {}, // {<stakingId>:{amount, stakers, rank, name, isOnSpring}}
   unstakeProcess: { activity: {} }, // { step, activity }
