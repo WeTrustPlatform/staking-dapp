@@ -435,7 +435,7 @@ exports[`tests snapshot 1`] = `
                   </svg>
                 </div>
                 <p>
-                  This might take several minutes
+                  Loading blockchain data. This might take couple minutes.
                 </p>
               </div>
             </td>
@@ -555,7 +555,7 @@ exports[`tests snapshot 1`] = `
                           </svg>
                         </div>
                         <p>
-                          This might take several minutes
+                          Loading blockchain data. This might take couple minutes.
                         </p>
                       </div>
                     </td>
@@ -671,7 +671,7 @@ exports[`tests snapshot 1`] = `
                           </svg>
                         </div>
                         <p>
-                          This might take several minutes
+                          Loading blockchain data. This might take couple minutes.
                         </p>
                       </div>
                     </td>
