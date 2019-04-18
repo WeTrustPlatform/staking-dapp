@@ -28,6 +28,10 @@ const styles = (theme) => {
     causesStats: {
       paddingTop: lineHeight,
     },
+    tableContainer: {
+      overflow: 'auto',
+      height: 360,
+    },
     name: {
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
@@ -72,7 +76,7 @@ class LeaderBoard extends React.Component {
     );
 
     const rows = [];
-    for (let i = 0; i < 5; i += 1) {
+    for (let i = 0; i < orderedCauses.length; i += 1) {
       const c = orderedCauses[i] || {
         rank: '',
         name: '',
@@ -104,7 +108,7 @@ class LeaderBoard extends React.Component {
           <Typography variant="h6">{subtitle}</Typography>
         </div>
         <div className={classes.causesStats}>
-          <Paper>
+          <Paper className={classes.tableContainer}>
             <Table padding="dense">
               <TableHead>
                 <TableRow>
