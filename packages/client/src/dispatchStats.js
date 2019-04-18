@@ -61,6 +61,13 @@ const getCausesStats = (eventData, causesInfo) => {
   for (const key of Object.keys(eventData)) {
     const { user, amount, stakingId } = eventData[key];
 
+    if (!causesInfo[stakingId]) {
+      // there must be either server error
+      // or unknown error in method getCausesInfo
+      // that causes info was not populated at this point
+      continue;
+    }
+
     if (!causesStats[stakingId]) {
       causesStats[stakingId] = {
         amount: bigNumber(0),
@@ -146,22 +153,36 @@ const getStakingIdSet = (eventData) => {
 };
 
 const getCausesInfo = async (stakingIdSet) => {
-  const causes = Object.assign({}, window.localStorage.getItem('causes'));
+  const cachedValue = window.localStorage.getItem('causes');
+
+  let causes;
+  try {
+    causes = JSON.parse(cachedValue) || {};
+  } catch {
+    // if cannot parse, reset cache
+    window.localStorage.setItem('causes', JSON.stringify({}));
+  }
+
   const iterator = stakingIdSet.entries();
   for (const entry of iterator) {
     const stakingId = entry[0];
     const cache = causes[stakingId];
     // 20 minutes cache
     if (!cache || cache.lastFetch - Date.now() > 20 * 60 * 1000) {
-      const cause = await getCauseFromCMS(stakingId);
-      causes[stakingId] = {
-        lastFetch: Date.now(),
-        ...mapCMSCause(cause),
-      };
+      try {
+        const cause = await getCauseFromCMS(stakingId);
+        causes[stakingId] = {
+          lastFetch: Date.now(),
+          ...mapCMSCause(cause),
+        };
+      } catch {
+        // do nothing for now
+        console.log(`Cannot fetch staking_id ${stakingId}. Server error!`);
+      }
     }
   }
 
-  window.localStorage.setItem('causes', causes);
+  window.localStorage.setItem('causes', JSON.stringify(causes));
   return causes;
 };
 
@@ -182,13 +203,13 @@ export default (dispatch, TimeLockedStaking) => {
       const stakingIds = getStakingIdSet(eventData);
       const causesInfo = await getCausesInfo(stakingIds);
 
-      const usersStats = await getUsersStats(
-        eventData,
-        causesInfo,
-        TimeLockedStaking,
+      getUsersStats(eventData, causesInfo, TimeLockedStaking).then(
+        (usersStats) => {
+          dispatch(findUsersStats(usersStats));
+        },
       );
+
       const causesStats = getCausesStats(eventData, causesInfo);
-      dispatch(findUsersStats(usersStats));
       dispatch(findCausesStats(causesStats));
     },
   );
