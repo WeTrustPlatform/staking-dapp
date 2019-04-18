@@ -107,6 +107,15 @@ const theme = createMuiTheme({
       body: {
         fontSize,
       },
+      paddingDense: {
+        paddingLeft: 8,
+        paddingRight: 8,
+        // for some reasons, material-ui has special
+        // paddingRight for last child of table cell
+        '&:last-child': {
+          paddingRight: 8,
+        },
+      },
     },
     MuiTable: {
       root: {

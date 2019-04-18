@@ -29,8 +29,6 @@ const styles = (theme) => {
       paddingTop: lineHeight,
     },
     name: {
-      paddingRight: theme.spacing.unit,
-      paddingLeft: theme.spacing.unit,
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
       overflow: 'hidden',
@@ -44,7 +42,7 @@ const styles = (theme) => {
       tableLayout: 'fixed',
       overflow: 'auto',
     },
-    row: {
+    rowBody: {
       '&:nth-of-type(even)': {
         backgroundColor: theme.palette.primary.main,
       },
@@ -82,7 +80,7 @@ class LeaderBoard extends React.Component {
       // c.amount is a bigNumber and bigNumber(0) is truthy
       // i.e. !c.amount then line is empty
       rows.push(
-        <TableRow key={i} className={classes.row}>
+        <TableRow key={i} className={classes.rowBody}>
           <TableCell>{c.rank}</TableCell>
           <TableCell className={classes.name}>{c.name}</TableCell>
           <TableCell className={classes.stakedAmount}>
@@ -107,7 +105,7 @@ class LeaderBoard extends React.Component {
         </div>
         <div className={classes.causesStats}>
           <Paper>
-            <Table padding="none">
+            <Table padding="dense">
               <TableHead>
                 <TableRow>
                   <TableCell>Rank</TableCell>
