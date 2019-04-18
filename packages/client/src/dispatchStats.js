@@ -167,8 +167,12 @@ const getCausesInfo = async (stakingIdSet) => {
   for (const entry of iterator) {
     const stakingId = entry[0];
     const cache = causes[stakingId];
-    // 20 minutes cache
-    if (!cache || cache.lastFetch - Date.now() > 20 * 60 * 1000) {
+    // 30-days cache
+    // because cause info is less likely to be changed
+    // TODO figure out the process to invalidate cache
+    // so that whoever update records in the backend
+    // does not forget that there're stale data in frontend
+    if (!cache || cache.lastFetch - Date.now() > 30 * 24 * 60 * 60 * 1000) {
       try {
         const cause = await getCauseFromCMS(stakingId);
         causes[stakingId] = {
