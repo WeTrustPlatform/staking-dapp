@@ -21,6 +21,11 @@ const styles = (theme) => ({
   root: {
     margin: `${theme.mixins.toolbar.minHeight}px auto`,
     maxWidth: theme.breakpoints.values.md,
+
+    [theme.breakpoints.down('md')]: {
+      paddingRight: 12,
+      paddingLeft: 12,
+    },
   },
   stake: {
     marginTop: theme.mixins.toolbar.minHeight / 2,

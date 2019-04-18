@@ -487,28 +487,28 @@ exports[`tests snapshot 1`] = `
                   >
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingDense-680"
                       scope="col"
                     >
                       Rank
                     </th>
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingDense-680"
                       scope="col"
                     >
                       Cause name
                     </th>
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingDense-680"
                       scope="col"
                     >
                       Staked amount
                     </th>
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingDense-680"
                       scope="col"
                     >
                       Stakers
@@ -523,7 +523,7 @@ exports[`tests snapshot 1`] = `
                   >
                     <td
                       aria-sort={null}
-                      className="MuiTableCell-root-675 MuiTableCell-body-677 MuiTableCell-paddingNone-682"
+                      className="MuiTableCell-root-675 MuiTableCell-body-677 MuiTableCell-paddingDense-680"
                       colSpan={4}
                     >
                       <div
@@ -603,28 +603,28 @@ exports[`tests snapshot 1`] = `
                   >
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingDense-680"
                       scope="col"
                     >
                       Rank
                     </th>
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingDense-680"
                       scope="col"
                     >
                       Cause name
                     </th>
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingDense-680"
                       scope="col"
                     >
                       Staked amount
                     </th>
                     <th
                       aria-sort={null}
-                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingNone-682"
+                      className="MuiTableCell-root-675 MuiTableCell-head-676 MuiTableCell-paddingDense-680"
                       scope="col"
                     >
                       Stakers
@@ -639,7 +639,7 @@ exports[`tests snapshot 1`] = `
                   >
                     <td
                       aria-sort={null}
-                      className="MuiTableCell-root-675 MuiTableCell-body-677 MuiTableCell-paddingNone-682"
+                      className="MuiTableCell-root-675 MuiTableCell-body-677 MuiTableCell-paddingDense-680"
                       colSpan={4}
                     >
                       <div
