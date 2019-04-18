@@ -2,7 +2,6 @@ import { bigNumber } from './formatter';
 import {
   parseStakePayload,
   getCauseFromCMS,
-  getUnlockedAtFromBlockchain,
   determineCanUnstake,
   mapCMSCause,
   getSpringRanks,
@@ -168,11 +167,13 @@ const getCausesInfo = async (stakingIdSet) => {
 
   let causes;
   try {
-    causes = JSON.parse(cachedValue) || {};
+    causes = JSON.parse(cachedValue);
   } catch {
     // if cannot parse, reset cache
     window.localStorage.setItem('causes', JSON.stringify({}));
   }
+
+  causes = causes || {};
 
   const iterator = stakingIdSet.entries();
   for (const entry of iterator) {
