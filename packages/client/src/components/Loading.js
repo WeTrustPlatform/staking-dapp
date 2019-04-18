@@ -15,7 +15,7 @@ class Loading extends React.Component {
     return (
       <div className={classes.root}>
         <CircularProgress thickness={6} color="secondary" />
-        <p>This might take several minutes</p>
+        <p>Loading blockchain data. This might take couple minutes.</p>
       </div>
     );
   }

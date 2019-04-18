@@ -68,6 +68,7 @@ class LeaderBoard extends React.Component {
         </TableRow>
       );
     }
+
     const orderedCauses = Object.values(causesStats).sort(
       (a, b) => a.rank - b.rank,
     );
