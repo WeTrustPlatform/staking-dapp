@@ -184,7 +184,11 @@ const getCausesInfo = async (stakingIdSet) => {
     // TODO figure out the process to invalidate cache
     // so that whoever update records in the backend
     // does not forget that there're stale data in frontend
-    if (!cache || cache.lastFetch - Date.now() > 30 * 24 * 60 * 60 * 1000) {
+    if (
+      !cache ||
+      Date.now() - cache.lastFetch > 30 * 24 * 60 * 60 * 1000 ||
+      !cache.name // hotfix for those causes that were not loaded correctly
+    ) {
       try {
         const cause = await getCauseFromCMS(stakingId);
         causes[stakingId] = {
