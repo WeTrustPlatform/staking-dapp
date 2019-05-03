@@ -36,10 +36,7 @@ const styles = (theme) => {
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
       overflow: 'hidden',
-      maxWidth: maxWidth / 4,
-    },
-    stakedAmount: {
-      minWidth: maxWidth / 5,
+      maxWidth: maxWidth / 2,
     },
     tableBody: {
       height: 96,
@@ -87,10 +84,9 @@ class LeaderBoard extends React.Component {
         <TableRow key={i} className={classes.rowBody}>
           <TableCell>{c.rank}</TableCell>
           <TableCell className={classes.name}>{c.name}</TableCell>
-          <TableCell className={classes.stakedAmount}>
+          <TableCell>
             {c.amount ? `${convertToWholeTRSTForView(c.amount)} TRST` : ''}
           </TableCell>
-          <TableCell>{c.amount ? c.stakers && c.stakers.size : ''}</TableCell>
         </TableRow>,
       );
     }
@@ -115,7 +111,6 @@ class LeaderBoard extends React.Component {
                   <TableCell>Rank</TableCell>
                   <TableCell>Cause name</TableCell>
                   <TableCell>Staked amount</TableCell>
-                  <TableCell>Stakers</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody className={classes.tableBody}>
