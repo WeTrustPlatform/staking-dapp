@@ -32,7 +32,6 @@ class CauseRankTable extends React.Component {
     // i.e. no one has staked for this cause
     const stats = causesStats[cause.stakingId];
     const rank = stats ? getCauseRank(cause, causesStats) : 'N/A';
-    const numberOfStakers = (stats && stats.stakers && stats.stakers.size) || 0;
     const amount = (stats && stats.amount) || 0;
     return (
       <Paper>
@@ -45,7 +44,6 @@ class CauseRankTable extends React.Component {
               <TableCell classes={{ head: classes.header }}>
                 Staked amount
               </TableCell>
-              <TableCell classes={{ head: classes.header }}>Stakers</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -54,7 +52,6 @@ class CauseRankTable extends React.Component {
               <TableCell>
                 {`${convertToWholeTRSTForView(amount)} TRST`}
               </TableCell>
-              <TableCell>{numberOfStakers}</TableCell>
             </TableRow>
           </TableBody>
         </Table>
