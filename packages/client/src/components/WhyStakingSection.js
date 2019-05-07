@@ -38,6 +38,10 @@ const styles = (theme) => ({
   },
   rowItem: {
     padding: theme.spacing.unit * 2,
+    display: 'flex',
+  },
+  image: {
+    margin: 'auto',
   },
 });
 
@@ -80,36 +84,32 @@ class WhyStakingSection extends React.Component {
             </Typography>
             <br />
             <div className={classes.row}>
-              <div className={classes.rowItem}>
-                <a
-                  href="https://www.bancor.network/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={BancorLogo}
-                    className={classes.image}
-                    alt="bancor"
-                    height="54"
-                    width="38"
-                  />
-                </a>
-              </div>
-              <div className={classes.rowItem}>
-                <a
-                  href="https://uniswap.io/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={UniswapLogo}
-                    className={classes.image}
-                    alt="uniswap"
-                    height="42"
-                    width="98"
-                  />
-                </a>
-              </div>
+              <a
+                href="https://www.bancor.network/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={classes.rowItem}
+              >
+                <img
+                  src={BancorLogo}
+                  className={classes.image}
+                  alt="bancor"
+                  height="32"
+                />
+              </a>
+              <a
+                href="https://uniswap.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={classes.rowItem}
+              >
+                <img
+                  src={UniswapLogo}
+                  className={classes.image}
+                  alt="uniswap"
+                  height="52"
+                />
+              </a>
             </div>
           </Grid>
           <Grid item xs={12} sm={12} md={4} className={classes.gridItem}>
