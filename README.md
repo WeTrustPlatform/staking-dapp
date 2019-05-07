@@ -14,8 +14,7 @@ yarn
 
 - To add a new dependency in a package:
 ```
-cd packages/<package-name>
-yarn add <dependency-name>
+yarn --cwd packages/<package-name> add <dependency-name>
 ```
 
 - To add a common devDependency:
