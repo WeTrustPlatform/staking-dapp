@@ -85,6 +85,24 @@ class Navbar extends React.Component {
                 src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/crypto-unlocked-global-logo.svg"
               />
             </HrefLink>
+            <HrefLink
+              className={classes.universalBarItem}
+              href="https://trustedoracle.wetrust.io"
+            >
+              <img
+                alt="TrustedOracle"
+                src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/trusted-oracle-global-logo.svg"
+              />
+            </HrefLink>
+            <HrefLink
+              className={classes.universalBarItem}
+              href="https://grants.wetrust.io"
+            >
+              <img
+                alt="Grants"
+                src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/wetrust-grants-global-logo.svg"
+              />
+            </HrefLink>
           </div>
           <Toolbar>
             <div className={classes.grow}>
