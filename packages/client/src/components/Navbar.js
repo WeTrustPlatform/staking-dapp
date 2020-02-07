@@ -1,9 +1,9 @@
 import React from 'react';
+import { WeTrustProductsBanner } from '@wetrustplatform/wetrust-ui/cjs/WeTrustProductsBanner';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Web3Account from './Web3Account';
-import HrefLink from './HrefLink';
 import logo from '../images/wetrust-logo.svg';
 
 const styles = (theme) => {
@@ -39,71 +39,7 @@ class Navbar extends React.Component {
     return (
       <div>
         <AppBar position="relative">
-          <div className={classes.universalBar}>
-            <HrefLink
-              className={classes.universalBarItem}
-              href="https://wetrust.io"
-            >
-              <img
-                alt="WeTrust"
-                src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/wetrust-global-logo.svg"
-              />
-            </HrefLink>
-            <HrefLink
-              className={classes.universalBarItem}
-              href="https://spring.wetrust.io"
-            >
-              <img
-                alt="Spring"
-                src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/spring-global-logo.svg"
-              />
-            </HrefLink>
-            <HrefLink
-              className={classes.universalBarItem}
-              href="https://staking.wetrust.io"
-            >
-              <img
-                alt="Staking"
-                src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/staking-global-logo.svg"
-              />
-            </HrefLink>
-            <HrefLink
-              className={classes.universalBarItem}
-              href="https://tlc.wetrust.io"
-            >
-              <img
-                alt="TLC"
-                src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/trusted-lending-circles-global-logo.svg"
-              />
-            </HrefLink>
-            <HrefLink
-              className={classes.universalBarItem}
-              href="https://cryptounlocked.wetrust.io"
-            >
-              <img
-                alt="CryptoUnlocked"
-                src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/crypto-unlocked-global-logo.svg"
-              />
-            </HrefLink>
-            <HrefLink
-              className={classes.universalBarItem}
-              href="https://trustedoracle.wetrust.io"
-            >
-              <img
-                alt="TrustedOracle"
-                src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/trusted-oracle-global-logo.svg"
-              />
-            </HrefLink>
-            <HrefLink
-              className={classes.universalBarItem}
-              href="https://grants.wetrust.io"
-            >
-              <img
-                alt="Grants"
-                src="https://d1pzjb43ehhiia.cloudfront.net/logo-images/wetrust-grants-global-logo.svg"
-              />
-            </HrefLink>
-          </div>
+          <WeTrustProductsBanner />
           <Toolbar>
             <div className={classes.grow}>
               <img src={logo} alt="WeTrust" className={classes.brandImage} />
