@@ -6,6 +6,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@material-ui/core": "3.6.2",
+    "@wetrustplatform/wetrust-ui": "1.9.3",
     "axios": "0.18.0",
     "classnames": "2.2.6",
     "downshift": "3.1.7",
