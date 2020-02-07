@@ -10,6 +10,7 @@
     "test": "lerna run test"
   },
   "devDependencies": {
+    "@wetrustplatform/wetrust-ui": "1.9.3",
     "babel-eslint": "9.x",
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "17.1.0",
