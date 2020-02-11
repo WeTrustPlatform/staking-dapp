@@ -61,5 +61,14 @@ docker run -p 8000:80 --rm wetrustplatform/staking-dapp:mainnet-latest
 
 - The app is served at `http://localhost:8000`
 
+### Release new images
+- Log in to docker on a deployment machine
+- Make sure the account has push permission to `https://hub.docker.com/repository/docker/wetrustplatform/staking-dapp`
+- Check the current release version
+- Run `./docker.sh mainnet vA.B.C ` where A.B.C is the next version
+- Push github tags `git push --tags`
+- On production server `docker pull wetrustplatform/staking-dapp:mainnet-latest
+  && ./restart-mainnet.sh`
+
 ### License
 [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.txt) &copy; WeTrustPlatform
