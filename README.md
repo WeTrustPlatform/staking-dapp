@@ -48,5 +48,18 @@ The app is served at http://localhost:3000.
 REACT_APP_NETWORK_ID=4 yarn start
 ```
 
+### Docker for local review
+- Build the image:
+```
+./docker.sh mainnet
+```
+
+- Run the container:
+```
+docker run -p 8000:80 --rm wetrustplatform/staking-dapp:mainnet-latest
+```
+
+- The app is served at `http://localhost:8000`
+
 ### License
 [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.txt) &copy; WeTrustPlatform

@@ -4,7 +4,7 @@ WORKDIR /app
 
 ARG NODE_ENV=production
 ARG REACT_APP_CMS_URL=https://staking.wetrust.io/api/v0
-ARG REACT_APP_WEB3_FALLBACK_PROVIDER=https://mainnet.infura.io/metamask
+ARG REACT_APP_WEB3_FALLBACK_PROVIDER=https://mainnet.infura.io/v3/c9052b261d234de8981c750ccc7185a7
 ARG REACT_APP_NETWORK_ID=1
 
 COPY packages/client/package.json yarn.lock ./
