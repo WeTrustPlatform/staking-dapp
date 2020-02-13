@@ -4,7 +4,7 @@ Stake TRST for Your Favorite NPO's
 
 ### Development environment
 
-- Node LTS [v10.15.1](https://nodejs.org/dist/latest-v10.x/)
+- Node LTS [v10.19.0](https://nodejs.org/dist/latest-v10.x/). Node v12 does not work because of the sha3 module used by keccakjs. Issue is tracked [here](https://github.com/axic/keccakjs/issues/10)
 - [Yarn](https://yarnpkg.com/en/)
 - [Ganache CLI](https://github.com/trufflesuite/ganache-cli)
 
